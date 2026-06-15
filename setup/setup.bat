@@ -29,19 +29,19 @@ if %errorlevel% neq 0 (
 
 echo "    -> GIT ja instalado"
 
-echo -> copiando Projeto do repositorio - https://github.com/samuelwingester/EscreveAi
+echo "-> copiando Projeto do repositorio - https://github.com/samuelwingester/EscreveAi"
 
-git copy https://github.com/samuelwingester/EscreveAi
+git clone https://github.com/samuelwingester/EscreveAi
 
 cd EscreveAi
 
-echo - Baixando Dependencias
+echo "- Baixando Dependencias"
 
 composer install
 
-echo - Criando arquivo .env
+echo "- Criando arquivo .env"
 
 copy .env.example .env
 
-echo - Setup Completo
-echo - Para rodar o projeto execute - php artisan serve
+echo "- Setup Completo"
+echo "- Para rodar o projeto execute - php artisan serve"
