@@ -31,7 +31,7 @@ echo
 
 git clone https://github.com/samuelwingester/EscreveAi
 
-cd EscreveAi
+cd EscreveAi/backend
 
 echo - Baixando Dependencias
 echo

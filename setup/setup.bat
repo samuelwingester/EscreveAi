@@ -33,7 +33,7 @@ echo "-> copiando Projeto do repositorio - https://github.com/samuelwingester/Es
 
 git clone https://github.com/samuelwingester/EscreveAi
 
-cd EscreveAi
+cd EscreveAi/backend
 
 echo "- Baixando Dependencias"
 
