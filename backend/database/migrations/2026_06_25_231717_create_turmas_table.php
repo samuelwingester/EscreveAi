@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('turmas', function (Blueprint $table) 
         {
-            $table->id('turma_id');
-            /*
-            $table->foreignId('criador_id')->constrained(
-                table:'professores', indexName:'professor_id'
-            );
-            */
-            $table->string('nome', 50);
-            $table->boolean('status')->default(true);
+            $table->id();
+            
+            $table->foreignId('criador_id')
+                  ->constrained('professores')
+                  ->cascadeOnDelete();
+            
+            $table->string('nome', 100);
+            $table->boolean('ativo')->default(true);
 
             $table->timestamps();
         });

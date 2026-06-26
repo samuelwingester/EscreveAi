@@ -3,6 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Turma;
+use App\Models\Professor;
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,17 +12,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class TurmaFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
-        
         return [
             'nome' => fake()->domainName(),
-            'status' => fake()->boolean()
+            'ativo' => fake()->boolean(),
+            'criador_id' => Professor::factory()
         ];
     }
 }

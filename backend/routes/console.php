@@ -27,7 +27,7 @@ Artisan::command('make:service {model} {name}', function (string $model, string 
         return;
     }
 
-    $dirpath = app_path() . '/Service/' . $model;
+    $dirpath = app_path() . '/Services/' . $model;
     $filepath = $dirpath . '/' . $name . $model . 'Service.php';
 
     if ( File::isFile($filepath) ){
@@ -44,7 +44,7 @@ Artisan::command('make:service {model} {name}', function (string $model, string 
         "namespace App\Services\\" . $model . ";\n\n" .
         "use App\Models\\" . $model . ";\n\n" . 
         "class " . $name . $model . "Service\n {\n" .
-        "\tpublic function execute()\n\t{\n\t\t//\n\t}\n}"
+        "\tpublic static function execute( array \$data )\n\t{\n\t\t//\n\t}\n}"
     );
 
     $this->info('Service Criado com sucesso');

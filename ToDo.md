@@ -1,6 +1,6 @@
  # To Do List
 
-### 🔹 Turmas
+### 🔹 Turmas : **Ok**
 - [x] **Banco de Dados**
   - [x] Criar Migration para a tabela relacionada
   - [x] Configurar Tabela
@@ -11,15 +11,14 @@
   - [x] Definir a propriedade `$fillable`
   - [x] Configurar com a Tabela Relacionada
 
-- [ ] **Camada Service**
+- [x] **Camada Service**
   - [x] Criar Service para Criar (`Create`)
   - [x] Criar Service para Atualizar (`Update`)
-  - [x] Criar Service para Deletar (`Delete`)
-  - [ ] Implementar logica das Services
+  - [x] Implementar logica das Services
 
-- [ ] **Camada Controller & Rotas**
+- [x] **Camada Controller & Rotas**
   - [x] Criar o Controller 
-  - [ ] Implementar as Services necessarias e funções necessarias
+  - [x] Implementar as Services necessarias e funções necessarias
   - [x] Registrar as rotas do CRUD em `routes/api.php`
   - [x] Adicionar documentação das rotas no README
 
@@ -29,87 +28,86 @@
    
  ---
 
-### 🔹 Alunos
+### 🔹 Alunos : **Ok**
 - [x] **Banco de Dados**
   - [x] Criar Migration para a tabela relacionada
   - [x] Configurar Tabela
 
-- [ ] **Camada Model**
+- [x] **Camada Model**
   - [x] Criar a Model
-  - [ ] Configurar a trait `HasFactory`
-  - [ ] Definir a propriedade `$fillable`
-  - [ ] Configurar com a tabela relacionada
+  - [x] Configurar a trait `HasFactory`
+  - [x] Definir a propriedade `$fillable`
+  - [x] Configurar com a tabela relacionada
 
-- [ ] **Camada Service**
-  - [ ] Criar Service para Criar (`Create`)
-  - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+- [x] **Camada Service**
+  - [x] Criar Service para Criar (`Create`)
+  - [x] Criar Service para Atualizar (`Update`)
 
-- [ ] **Camada Controller & Rotas**
-  - [ ] Criar o Controller 
-  - [ ] Implementar as Services necessarias
-  - [ ] Registrar as rotas do CRUD em `routes/api.php`
-  - [ ] Adicionar documentação das rotas no README
+- [x] **Camada Controller & Rotas**
+  - [x] Criar o Controller 
+  - [x] Implementar as Services necessarias
+  - [x] Registrar as rotas do CRUD em `routes/api.php`
+  - [x] Adicionar documentação das rotas no README
 
-- [ ] **Testes & Seeders**
-  - [ ] Criar a Factory 
-  - [ ] Criar o Seeder 
+- [x] **Testes & Seeders**
+  - [x] Criar a Factory 
+  - [x] Criar o Seeder 
 
  ---
 
  ### 🔹 Professores
-- [ ] **Banco de Dados**
-  - [ ] Criar Migration para a tabela relacionada
-  - [ ] Configurar Tabela
+- [x] **Banco de Dados**
+  - [x] Criar Migration para a tabela relacionada
+  - [x] Configurar Tabela
 
-- [ ] **Camada Model**
-  - [ ] Criar a Model
-  - [ ] Configurar a trait `HasFactory`
-  - [ ] Definir a propriedade `$fillable`
-  - [ ] Configurar com a tabela relacionada
+- [x] **Camada Model**
+  - [x] Criar a Model
+  - [x] Configurar a trait `HasFactory`
+  - [x] Definir a propriedade `$fillable`
+  - [x] Configurar com a tabela relacionada
 
 - [ ] **Camada Service**
   - [ ] Criar Service para Criar (`Create`)
   - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+  - [ ] Implementar logica das Services
 
 - [ ] **Camada Controller & Rotas**
-  - [ ] Criar o Controller 
+  - [x] Criar o Controller 
   - [ ] Implementar as Services necessarias
-  - [ ] Registrar as rotas do CRUD em `routes/api.php`
+  - [x] Registrar as rotas do CRUD em `routes/api.php`
   - [ ] Adicionar documentação das rotas no README
 
-- [ ] **Testes & Seeders**
-  - [ ] Criar a Factory 
-  - [ ] Criar o Seeder 
+- [x] **Testes & Seeders**
+  - [x] Criar a Factory 
+  - [x] Criar o Seeder 
 
  ---
 
  ### 🔹 Responsaveis
-- [ ] **Banco de Dados**
-  - [ ] Criar Migration para a tabela relacionada
-  - [ ] Configurar Tabela
+- [x] **Banco de Dados**
+  - [x] Criar Migration para a tabela relacionada
+  - [x] Configurar Tabela
 
-- [ ] **Camada Model**
-  - [ ] Criar a Model
-  - [ ] Configurar a trait `HasFactory`
-  - [ ] Definir a propriedade `$fillable`
-  - [ ] Configurar com a tabela relacionada
+- [x] **Camada Model**
+  - [x] Criar a Model
+  - [x] Configurar a trait `HasFactory`
+  - [x] Definir a propriedade `$fillable`
+  - [x] Configurar com a tabela relacionada
 
-- [ ] **Camada Service**
+- [x] **Camada Service**
   - [ ] Criar Service para Criar (`Create`)
   - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+  - [ ] Implementar logica das Services
 
 - [ ] **Camada Controller & Rotas**
-  - [ ] Criar o Controller 
+  - [x] Criar o Controller 
   - [ ] Implementar as Services necessarias
-  - [ ] Registrar as rotas do CRUD em `routes/api.php`
+  - [x] Registrar as rotas do CRUD em `routes/api.php`
   - [ ] Adicionar documentação das rotas no README
 
-- [ ] **Testes & Seeders**
-  - [ ] Criar a Factory 
-  - [ ] Criar o Seeder 
+- [x] **Testes & Seeders**
+  - [x] Criar a Factory 
+  - [x] Criar o Seeder 
 
  ---
 
@@ -127,7 +125,7 @@
 - [ ] **Camada Service**
   - [ ] Criar Service para Criar (`Create`)
   - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+  - [ ] Implementar logica das Services
 
 - [ ] **Camada Controller & Rotas**
   - [ ] Criar o Controller 
@@ -155,7 +153,7 @@
 - [ ] **Camada Service**
   - [ ] Criar Service para Criar (`Create`)
   - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+  - [ ] Implementar logica das Services
 
 - [ ] **Camada Controller & Rotas**
   - [ ] Criar o Controller 
@@ -183,7 +181,7 @@
 - [ ] **Camada Service**
   - [ ] Criar Service para Criar (`Create`)
   - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+  - [ ] Implementar logica das Services
 
 - [ ] **Camada Controller & Rotas**
   - [ ] Criar o Controller 
@@ -211,7 +209,7 @@
 - [ ] **Camada Service**
   - [ ] Criar Service para Criar (`Create`)
   - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Criar Service para Deletar (`Delete`)
+  - [ ] Implementar logica das Services
 
 - [ ] **Camada Controller & Rotas**
   - [ ] Criar o Controller 

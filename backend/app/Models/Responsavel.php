@@ -6,21 +6,21 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Models\Responsavel;
+use App\Models\Aluno;
 
-#[Table('alunos')]
-class Aluno extends Model
+#[Table('responsaveis')]
+class Responsavel extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'nome',
-        'data_nascimento',
-        'responsavel_id'
+        'email',
+        'senha',
     ];
 
-    public function responsavel()
+    public function filhos()
     {
-        return $this->belongsTo(Responsavel::class, 'responsavel_id');
+        return $this->hasMany(Aluno::class, 'aluno_id');
     }
 }
