@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\TurmaController;
-use App\Http\Controllers\ProfessorController;
-use App\Http\Controllers\ResponsavelController;
-use App\Http\Controllers\AlunoController;
+use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\StudentController;
 
 Route::fallback(function () 
 {
@@ -31,7 +30,6 @@ Route::get('/routes', function ()
 
 
 // Rotas basicas
-Route::apiResource('turma', TurmaController::class);
-Route::apiResource('professor', ProfessorController::class);
-Route::apiResource('responsavel', ResponsavelController::class);
-Route::apiResource('aluno', AlunoController::class);
+Route::apiResource('turma', ClassroomController::class);
+Route::apiResource('professor', TeacherController::class);
+Route::apiResource('aluno', StudentController::class);

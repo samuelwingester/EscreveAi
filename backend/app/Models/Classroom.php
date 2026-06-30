@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Models\Professor;
+use App\Models\Teacher;
 
-#[Table('turmas')]
-class Turma extends Model
+#[Table('classes')]
+class Classroom extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nome',
-        'ativo',
-        'criador_id'
+        'name',
+        'active',
+        'teacher_id'
     ];
 
     protected function casts(): array
@@ -26,8 +26,8 @@ class Turma extends Model
         ];
     }
 
-    public function criador()
+    public function teacher()
     {
-        return $this->belongsTo(Professor::class, 'criador_id');
+        return $this->belongsTo(Teacher::class, 'teacher_id');
     }
 }

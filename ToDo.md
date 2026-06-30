@@ -1,6 +1,6 @@
  # To Do List
 
-### 🔹 Turmas : **Ok**
+### 🔹 Turmas :
 - [x] **Banco de Dados**
   - [x] Criar Migration para a tabela relacionada
   - [x] Configurar Tabela
@@ -22,13 +22,13 @@
   - [x] Registrar as rotas do CRUD em `routes/api.php`
   - [x] Adicionar documentação das rotas no README
 
-- [x] **Testes & Seeders**
-  - [x] Criar a Factory 
-  - [x] Criar o Seeder 
+- [ ] **Testes & Seeders**
+  - [ ] Criar a Factory 
+  - [ ] Criar o Seeder 
    
  ---
 
-### 🔹 Alunos : **Ok**
+### 🔹 Alunos :
 - [x] **Banco de Dados**
   - [x] Criar Migration para a tabela relacionada
   - [x] Configurar Tabela
@@ -39,19 +39,19 @@
   - [x] Definir a propriedade `$fillable`
   - [x] Configurar com a tabela relacionada
 
-- [x] **Camada Service**
-  - [x] Criar Service para Criar (`Create`)
-  - [x] Criar Service para Atualizar (`Update`)
+- [ ] **Camada Service**
+  - [ ] Criar Service para Criar (`Create`)
+  - [ ] Criar Service para Atualizar (`Update`)
 
-- [x] **Camada Controller & Rotas**
+- [ ] **Camada Controller & Rotas**
   - [x] Criar o Controller 
-  - [x] Implementar as Services necessarias
+  - [ ] Implementar as Services necessarias
   - [x] Registrar as rotas do CRUD em `routes/api.php`
   - [x] Adicionar documentação das rotas no README
 
-- [x] **Testes & Seeders**
-  - [x] Criar a Factory 
-  - [x] Criar o Seeder 
+- [ ] **Testes & Seeders**
+  - [ ] Criar a Factory 
+  - [ ] Criar o Seeder 
 
  ---
 
@@ -77,37 +77,9 @@
   - [x] Registrar as rotas do CRUD em `routes/api.php`
   - [ ] Adicionar documentação das rotas no README
 
-- [x] **Testes & Seeders**
-  - [x] Criar a Factory 
-  - [x] Criar o Seeder 
-
- ---
-
- ### 🔹 Responsaveis
-- [x] **Banco de Dados**
-  - [x] Criar Migration para a tabela relacionada
-  - [x] Configurar Tabela
-
-- [x] **Camada Model**
-  - [x] Criar a Model
-  - [x] Configurar a trait `HasFactory`
-  - [x] Definir a propriedade `$fillable`
-  - [x] Configurar com a tabela relacionada
-
-- [x] **Camada Service**
-  - [ ] Criar Service para Criar (`Create`)
-  - [ ] Criar Service para Atualizar (`Update`)
-  - [ ] Implementar logica das Services
-
-- [ ] **Camada Controller & Rotas**
-  - [x] Criar o Controller 
-  - [ ] Implementar as Services necessarias
-  - [x] Registrar as rotas do CRUD em `routes/api.php`
-  - [ ] Adicionar documentação das rotas no README
-
-- [x] **Testes & Seeders**
-  - [x] Criar a Factory 
-  - [x] Criar o Seeder 
+- [ ] **Testes & Seeders**
+  - [ ] Criar a Factory 
+  - [ ] Criar o Seeder 
 
  ---
 

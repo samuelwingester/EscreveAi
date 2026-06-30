@@ -12,16 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('alunos', function (Blueprint $table) 
+        Schema::create('students', function (Blueprint $table) 
         {
             $table->id();
-            
-            $table->foreignId('responsavel_id')
-                  ->constrained('responsaveis')
+
+            $table->foreignId('user_id')
+                  ->constrained('users')
                   ->cascadeOnDelete();
             
-            $table->string("nome", 100);
-            $table->date('data_nascimento');
+            $table->string("name", 150);
+            $table->email('secondary_email')->nullable();
+            $table->date('birth_date');
             
             $table->timestamps();
         });

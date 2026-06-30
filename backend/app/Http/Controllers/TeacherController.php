@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Professor;
+use App\Models\Teacher;
 use Illuminate\Http\Request;
 
-class ProfessorController extends Controller
+class TeacherController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return Professor::all();
+        return Teacher::all();
     }
 
     /**
@@ -26,15 +26,15 @@ class ProfessorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Professor $professor)
+    public function show(Teacher $teacher)
     {
-        return $professor;
+        return $teacher;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Professor $professor)
+    public function update(Request $request, Teacher $teacher)
     {
         //
     }
@@ -42,9 +42,9 @@ class ProfessorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Professor $professor)
+    public function destroy(Teacher $teacher)
     {
-        $professor->deleteOrFail();
+        $teacher->deleteOrFail();
 
         return response()->noContent();
     }

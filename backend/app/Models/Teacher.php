@@ -6,21 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Models\Turma;
+use App\Models\Classroom;
 
-#[Table('professores')]
-class Professor extends Model
+#[Table('teachers')]
+class Teacher extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nome',
-        'email',
-        'senha',
+        'name',
+        'user_id'
     ];
 
-    public function turmas()
+    public function classes()
     {
-        return $this->hasMany(Turma::class, 'turma_id');
+        return $this->hasMany(Classroom::class, 'class_id');
     }
 }
