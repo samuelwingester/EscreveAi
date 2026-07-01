@@ -30,6 +30,6 @@ Route::get('/routes', function ()
 
 
 // Rotas basicas
-Route::apiResource('turma', ClassroomController::class);
-Route::apiResource('professor', TeacherController::class);
-Route::apiResource('aluno', StudentController::class);
+Route::apiResource( 'turma', ClassroomController::class );
+Route::apiResource( 'professor', TeacherController::class );
+Route::apiResource( 'aluno', StudentController::class );

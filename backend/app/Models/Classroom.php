@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Models\Teacher;
+use App\Models\User;
 
-#[Table('classes')]
 class Classroom extends Model
 {
     use HasFactory;
+
+    protected $table = 'classes';
 
     protected $fillable = [
         'name',
@@ -22,12 +23,13 @@ class Classroom extends Model
     protected function casts(): array
     {
         return [
-            'ativo' => 'boolean',
+            'active' => 'boolean',
+            'name' => 'string'
         ];
     }
 
     public function teacher()
     {
-        return $this->belongsTo(Teacher::class, 'teacher_id');
+        return $this->belongsTo( User::class, 'teacher_id' );
     }
 }

@@ -24,30 +24,13 @@ return new class extends Migration
 
             $table->timestamps();
         });
-
-        /*
-        Schema::create('turmas_aluno', function (Blueprint $table)
-        {
-            $table->foreignId('turma_id')
-                  ->constrained('turmas')
-                  ->cascadeOnDelete();
-
-            $table->foreignId('aluno_id')
-                  ->constrained('aluno')
-                  ->cascadeOnDelete();
-
-            $table->primary(['turma_id', 'aluno_id']);
-        });
-        */
     }
-
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('turmas');
+        Schema::dropIfExists('classes');
     }
 };

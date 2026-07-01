@@ -24,12 +24,7 @@ class ClassroomController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([ 
-            'name' => ['required', 'max:100'],
-            'teacher_id' => ['required', 'exists:professores,id']
-        ]);
 
-        return StoreClassroomService::execute( $data );      
     }
 
     /**
@@ -45,12 +40,7 @@ class ClassroomController extends Controller
      */
     public function update(Request $request, Classroom $classroom)
     {
-        $data = $request->validate([
-            'name' => ['sometimes', 'max:100'],
-            'active' => ['sometimes', 'boolean:strict']
-        ]);
 
-        return UpdateClassroomService::execute( $classroom, $data );
     }
 
     /**
@@ -60,7 +50,6 @@ class ClassroomController extends Controller
     {
         $classroom->deleteOrFail();
 
-        //Retorna 204 se não houver erros
         return response()->noContent();
     }
 }

@@ -15,7 +15,13 @@ return new class extends Migration
             $table->id();
 
             $table->string('email')->unique();
-            $table->string('passkey');
+            $table->string('password');
+            $table->string('name', 150);
+            $table->string('type', 7); # enum UserType
+            $table->date('birth_date');
+
+            $table->string('gender', 6)->nullable(); # enum Gender
+            $table->string('secondary_email')->unique()->nullable();
 
             $table->rememberToken();
 

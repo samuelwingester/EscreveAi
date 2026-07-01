@@ -3,15 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Student;
+use App\Models\Teacher;
+
+use App\Enums\UserType;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
+    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -20,8 +23,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
+        'name',
         'email',
-        'passkey',
+        'password',
+        'type'
     ];
 
     /**
@@ -30,7 +35,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $hidden = [
-        'passkey',
+        'password',
         'remember_token',
     ];
 
@@ -43,7 +48,18 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
-            'passkey' => 'hashed',
+            'password' => 'hashed',
+            'type' => UserType::class # -> enum 
         ];
+    }
+
+    public function students()
+    {
+        return $this->hasOne( Student::class );
+    }
+
+    public function teachers()
+    {
+        return $this->hasOne( Teacher::class );
     }
 }

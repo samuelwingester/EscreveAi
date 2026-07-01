@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -12,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) 
-        {
+        Schema::create('analyses', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('user_id')
-                  ->constrained('users')
+            $table->foreignId('record_id')
+                  ->constrained('records')
                   ->cascadeOnDelete();
-            
-            $table->string("name", 150);
-            $table->email('secondary_email')->nullable();
-            $table->date('birth_date');
-            
+
+            $table->text('observations');
+            $table->json('spelling_errors');
+            $table->json('mirrored_letters');
+            $table->json('learning_difficulties');
+
             $table->timestamps();
         });
     }
@@ -33,7 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('alunos');
+        Schema::dropIfExists('analyses');
     }
 };
-
