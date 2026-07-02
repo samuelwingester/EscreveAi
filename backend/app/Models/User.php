@@ -11,22 +11,22 @@ use App\Models\Student;
 use App\Models\Teacher;
 
 use App\Enums\UserType;
+use App\Enums\Gender;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
         'password',
-        'type'
+        'type',
+        'birth_date',
+        'gender',
+        'secondary_email',
     ];
 
     /**
@@ -49,7 +49,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'type' => UserType::class # -> enum 
+            'type' => UserType::class,
+            'gender' => Gender::class,
         ];
     }
 

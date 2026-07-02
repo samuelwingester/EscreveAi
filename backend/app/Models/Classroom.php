@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Attributes\Table;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-use App\Models\User;
+use App\Models\Teacher;
+use App\Models\Activity;
 
 class Classroom extends Model
 {
@@ -30,6 +30,11 @@ class Classroom extends Model
 
     public function teacher()
     {
-        return $this->belongsTo( User::class, 'teacher_id' );
+        return $this->belongsTo( Teacher::class, 'teacher_id' );
+    }
+
+    public function activities()
+    {
+        return $this->hasMany( Activity::class );
     }
 }

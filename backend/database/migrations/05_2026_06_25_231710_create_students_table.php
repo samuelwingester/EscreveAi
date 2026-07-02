@@ -24,8 +24,8 @@ return new class extends Migration
                   ->constrained('classes')
                   ->cascadeOnDelete();
 
-            $table->string('writing_level', 20); # enum WritingLevel
-            $table->text('observations');
+            $table->string('writing_level', 20)->nullable(); # enum WritingLevel
+            $table->text('observations')->nullable();
             
             $table->timestamps();
         });
