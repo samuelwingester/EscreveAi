@@ -48,4 +48,4 @@ Artisan::command('make:service {model} {name}', function (string $model, string 
     );
 
     $this->info('Service Criado com sucesso');
-})->purpose('Cria um service. requer dois parametros o nome do model e o nome do Service de fato');
+})->purpose('Create a new service class');

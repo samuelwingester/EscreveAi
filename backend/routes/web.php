@@ -3,5 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/teste', function () {
-    return view('teste');
+    return view('view::teste');
 });
+
+// Rotas basicas
