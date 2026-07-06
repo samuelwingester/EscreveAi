@@ -14,6 +14,8 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) 
         {
+            $table->engine = 'InnoDB';
+            
             $table->id();
 
             $table->foreignId('user_id')

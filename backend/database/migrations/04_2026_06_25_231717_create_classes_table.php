@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('classes', function (Blueprint $table) 
         {
+            $table->engine = 'InnoDB';
+            
             $table->id();
             
             $table->foreignId('teacher_id')

@@ -29,11 +29,11 @@ if %errorlevel% neq 0 (
 
 echo "    -> GIT ja instalado"
 
-echo "-> copiando Projeto do repositorio - https://github.com/samuelwingester/EscreveAi"
+echo "-> copiando Projeto do repositorio - ----"
 
-git clone https://github.com/samuelwingester/EscreveAi
+git clone https://github.com/user/projeto
 
-cd EscreveAi/backend
+cd projeto
 
 echo "- Baixando Dependencias"
 
