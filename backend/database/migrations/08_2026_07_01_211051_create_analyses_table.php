@@ -11,7 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('analyses', function (Blueprint $table) {
+        Schema::create('analyses', function (Blueprint $table) 
+        {
+            $table->engine = 'InnoDB';
+
             $table->id();
 
             $table->foreignId('record_id')
