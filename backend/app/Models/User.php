@@ -23,7 +23,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'type',
         'birth_date',
         'gender',
         'secondary_email',
@@ -54,12 +53,12 @@ class User extends Authenticatable
         ];
     }
 
-    public function students()
+    public function student()
     {
         return $this->hasOne( Student::class );
     }
 
-    public function teachers()
+    public function teacher()
     {
         return $this->hasOne( Teacher::class );
     }

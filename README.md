@@ -91,25 +91,3 @@ php artisan serve
  ---
 
  ### Rotas
-
-<figcaption align="top"><b>Model -> Turma | Controller -> TurmaController </b></figcaption>
-
-| Método | Rota | Service | Descrição |
-| :---: | :--- | :---: | :--- |
-| `GET` | `/api/turma` |  `Null` | Lista todas as turmas do banco de dados |
-| `GET` | `/api/turma/{id}` | `Null` | Busca uma turma por ID |
-| `POST` | `/api/turma` |  `StoreTurmaService` | Cria uma nova turma |
-| `PUT` `PATCH` | `/api/turma/{id}` | `UpdateTurmaService` | Atualiza os dados de uma turma |
-| `DELETE` | `/api/turma/{id}` | `Null` | Exclui uma turma do banco de dados |
-
- ---
-
-<figcaption align="top"><b>Model -> Aluno | Controller -> AlunoController </b></figcaption>
-
-| Método | Rota | Service | Descrição |
-| :---: | :--- | :---: | :--- |
-| `GET` | `/api/aluno` |  `Null` | Lista todos os alunos do banco de dados|
-| `GET` | `/api/aluno/{id}` | `Null` | Busca um aluno por ID |
-| `POST` | `/api/aluno` |  `StoreAlunoService` | Adiciona um novo aluno |
-| `PUT` `PATCH` | `/api/aluno/{id}` | `UpdateAlunoService` | Atualiza os dados de um aluno |
-| `DELETE` | `/api/aluno/{id}` | `Null` | Exclui um aluno do banco de dados |

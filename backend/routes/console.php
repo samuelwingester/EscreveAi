@@ -44,7 +44,7 @@ Artisan::command('make:service {model} {name}', function (string $model, string 
         "namespace App\Services\\" . $model . ";\n\n" .
         "use App\Models\\" . $model . ";\n\n" . 
         "class " . $name . $model . "Service\n {\n" .
-        "\tpublic static function execute( array \$data )\n\t{\n\t\t//\n\t}\n}"
+        "\tpublic function execute( array \$data )\n\t{\n\t\t//\n\t}\n}"
     );
 
     $this->info('Service Criado com sucesso');
