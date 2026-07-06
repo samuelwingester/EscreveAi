@@ -1,47 +1,29 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -e
 
-echo - Verificando Dependencias
+echo "Verificando dependências..."
 
-command -v php >/dev/null 2>&1 || {
-    echo "    -> ERRO: PHP nao encontrado no PATH."
-    exit 1
-}
+for cmd in php composer git npm; do
+    if ! command -v "$cmd" >/dev/null 2>&1; then
+        echo "ERRO: $cmd não encontrado no PATH."
+        exit 1
+    fi
+done
 
-echo "    -> PHP ja instalado"
-
-command -v composer >/dev/null 2>&1 || {
-    echo "    -> ERRO: Composer nao encontrado no PATH."
-    exit 1
-}
-
-echo "    -> Composer ja instalado"
-
-command -v git >/dev/null 2>&1 || {
-    echo "    -> ERRO: Git nao encontrado no PATH."
-    exit 1
-}
-
-echo "    -> GIT ja instalado"
-echo
-
-echo - copiando Projeto do repositorio - https://github.com/samuelwingester/EscreveAi
-echo
-
+echo "Clonando repositório..."
 git clone https://github.com/samuelwingester/EscreveAi
 
 cd EscreveAi/backend
 
-echo - Baixando Dependencias
-echo
+echo "Instalando dependências..."
 
 composer install
+npm install
 
-echo - Criando arquivo .env
-echo
+[ -f .env ] || cp .env.example .env
 
-cp .env.example .env
+php artisan key:generate
 
-echo - Setup Completo
-echo - Para rodar o projeto execute - php artisan serve
+echo "Setup concluído."
+echo "Execute: php artisan serve"

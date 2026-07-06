@@ -1,47 +1,67 @@
 @echo off
 
-echo - Verificando Dependencias
+echo Verificando dependencias...
 
 where php >nul 2>nul
-if %errorlevel% neq 0 (
-    echo "     -> ERRO: PHP nao encontrado no PATH."
+if errorlevel 1 (
+    echo ERRO: PHP nao encontrado.
     pause
     exit /b 1
 )
-
-echo "     -> PHP ja instalado"
 
 where composer >nul 2>nul
-if %errorlevel% neq 0 (
-    echo "    -> ERRO: Composer nao encontrado no PATH."
+if errorlevel 1 (
+    echo ERRO: Composer nao encontrado.
     pause
     exit /b 1
 )
-
-echo "    -> Composer ja instalado"
 
 where git >nul 2>nul
-if %errorlevel% neq 0 (
-    echo "    -> ERRO: Git nao encontrado no PATH."
+if errorlevel 1 (
+    echo ERRO: Git nao encontrado.
     pause
     exit /b 1
 )
 
-echo "    -> GIT ja instalado"
+where npm >nul 2>nul
+if errorlevel 1 (
+    echo ERRO: NPM nao encontrado.
+    pause
+    exit /b 1
+)
 
-echo "-> copiando Projeto do repositorio - ----"
+echo Dependencias encontradas.
 
-git clone https://github.com/user/projeto
+echo Clonando repositorio...
+git clone https://github.com/samuelwingester/EscreveAi
 
-cd projeto
+if errorlevel 1 (
+    echo Erro ao clonar o repositorio.
+    pause
+    exit /b 1
+)
 
-echo "- Baixando Dependencias"
+cd EscreveAi/backend
+
+echo Instalando dependencias...
 
 composer install
+npm install
 
-echo "- Criando arquivo .env"
+if errorlevel 1 (
+    echo Erro ao instalar as dependencias.
+    popd
+    pause
+    exit /b 1
+)
 
-copy .env.example .env
+if not exist .env (
+    copy .env.example .env >nul
+)
 
-echo "- Setup Completo"
-echo "- Para rodar o projeto execute - php artisan serve"
+php artisan key:generate
+
+echo.
+echo Setup concluido.
+echo Execute:
+echo     php artisan serve
