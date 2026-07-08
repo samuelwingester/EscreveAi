@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\Student;
+namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
 
@@ -19,9 +19,9 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::all();
+        $students = Student::with( 'users' )->get();
 
-        return view( 'view::students;index', $students );
+        return view( 'view::students;index', compact( 'students' ) );
     }
 
     /**
@@ -48,7 +48,10 @@ class StudentController extends Controller
      */
     public function show( Student $student )
     {
-        return view( 'view::students.show', $student );
+        // Carrega os dados relacionados a usuario
+        $student->load( 'user' );
+
+        return view( 'view::students.show', compact( 'student' ) );
     }
 
     /**
@@ -56,7 +59,10 @@ class StudentController extends Controller
      */
     public function edit( Student $student )
     {
-        return view( 'view::students.edit', $student );
+        // Carrega os dados relacionados a usuario
+        $student->load( 'user' );
+
+        return view( 'view::students.edit', compact( 'student' ) );
     }
 
     /**
@@ -75,7 +81,7 @@ class StudentController extends Controller
      */
     public function destroy( Student $student )
     {
-        $student->deleteOrFail();
+        $student->user()->deleteOrFail();
 
         return redirect()->route( 'view::students.index' )
                          ->with( 'success', 'Aluno deletado com sucesso' );

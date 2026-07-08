@@ -3,10 +3,8 @@
 namespace App\Services\Student;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 use App\Models\Student;
-use App\Models\User;
 
 class UpdateStudentService
  {
@@ -14,14 +12,12 @@ class UpdateStudentService
 	{
 		// Tenta atualizar as informações do usuario
 		return DB::transaction( function () use ( $data, $student ) {
-			$user = $student->user();
-
 			// Atualização do usuario
-			$user->update([
-				'secondary_email' 	=> $data['secondary_email'] ?? $user->secondary_email,
-				'name' 				=> $data['name'] ?? $user->name,
-				'gender' 			=> $data['gender'] ?? $user->gender,
-				'birth_date' 		=> $data['birth_date'] ?? $user->birth_date
+			$student->user()->update([
+				'secondary_email' 	=> $data['secondary_email'] ?? $student->secondary_email,
+				'name' 				=> $data['name'] ?? $student->name,
+				'gender' 			=> $data['gender'] ?? $student->gender,
+				'birth_date' 		=> $data['birth_date'] ?? $student->birth_date
 			]);
 			//
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 use App\Models\Classroom;
 use App\Models\User;
@@ -32,12 +33,15 @@ class Student extends Model
         ];
     }
 
+    //--------------------------------------------------------
+    // Relacionamentos
+    //--------------------------------------------------------
     public function user()
     {
         return $this->belongsTo( User::class, 'user_id' );
     }
 
-    public function class()
+    public function classroom()
     {
         return $this->belongsTo( Classroom::class, 'class_id' );
     }
@@ -51,4 +55,44 @@ class Student extends Model
     {
         return $this->hasMany( Report::class );
     }
+    //--------------------------------------------------------
+
+    //--------------------------------------------------------
+    // Acessors
+    //--------------------------------------------------------
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get : fn() => $this->user->name
+        );
+    }
+
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            get : fn() => $this->user->email
+        );
+    }
+
+    protected function birth_date(): Attribute
+    {
+        return Attribute::make(
+            get : fn() => $this->user->birth_date
+        );
+    }
+
+    public function gender(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->user->gender
+        );
+    }
+
+    protected function secondary_email(): Attribute
+    {
+        return Attribute::make(
+            get : fn() => $this->user->secondary_email
+        );
+    }
+    //--------------------------------------------------------
 }
