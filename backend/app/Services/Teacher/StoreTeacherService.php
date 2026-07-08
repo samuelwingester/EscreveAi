@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Services\Student;
+namespace App\Services\Teacher;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\User;
 
 use App\Enums\UserType;
 
-class StoreStudentService
-{
-	public function execute( array $data ) : Student
+class StoreTeacherService
+ {
+	public function execute( array $data )
 	{
 		// Tenta inserir as informações do novo usuario
 		return DB::transaction( function () use ( $data ) {
@@ -23,19 +23,13 @@ class StoreStudentService
 				'name' 			=> $data['name'],
 				'gender' 		=> $data['gender'] ?? null,
 				'birth_date' 	=> $data['birth_date'],
-				'type'			=> UserType::STUDENT
+				'type'			=> UserType::TEACHER
 			]);
 			//
 
 			// Inserção das informações especificas do tipo de usuario
-			return $user->student()->create([
-				'class_id' 		=> $data['class_id'],
-				'writing_level' => $data['writing_level'] ?? null,
-				'observations' 	=> $data['observations'] ?? null
-			]);
+			return $user->teacher()->create();
 			//
-
-			
 		}, 2);
 	}
 }
