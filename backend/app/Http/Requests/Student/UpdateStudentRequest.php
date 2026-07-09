@@ -7,6 +7,7 @@ use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
 
 use App\Enums\Gender;
 use App\Enums\WritingLevel;
@@ -22,6 +23,32 @@ class UpdateStudentRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $normalization = [];
+
+        // Optional fields normalization
+        if ( $this->filled( 'secondary_email' ) ) 
+            $normalization['secondary_email'] = Str::lower( Str::trim( $this->secondary_email ) );
+
+        if ( $this->filled( 'name' ) ) 
+            $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
+
+        if ( $this->filled( 'gender' ) ) 
+            $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
+
+        if ( $this->filled( 'writing_level' ) ) 
+            $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '_' );
+
+        if ( $this->filled( 'observations' ) )
+            $normalization['observations'] = Str::trim( $this->observations );
+
+        $this->merge( $normalization );
+    }  
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, ValidationRule|array<mixed>|string>
@@ -30,16 +57,16 @@ class UpdateStudentRequest extends FormRequest
     {
         return [
             // User Class Data
-            'secondary_email'   => ['sometimes', 'email', 'unique:users,email'],
+            'secondary_email'   => ['sometimes', 'nullable', 'email', 'unique:users,email'],
             'name'              => ['sometimes', 'string', 'max:150'],
-            'gender'            => ['sometimes', 'string', new Enum( Gender::class )],
+            'gender'            => ['sometimes', 'nullable', 'string', new Enum( Gender::class )],
             'birth_date'        => ['sometimes', Rule::date()->before(today()->subYears(4))],
             //
 
             // Student Class Data
-            'class_id'      => ['sometimes', 'exists:classes,id'],
-            'writing_level' => ['sometimes', 'string', new Enum( WritingLevel::class )],
-            'observations'  => ['sometimes', 'string']
+            'class_id'      => ['sometimes', 'integer', 'exists:classes,id'],
+            'writing_level' => ['sometimes', 'nullable', 'string', new Enum( WritingLevel::class )],
+            'observations'  => ['sometimes', 'nullable', 'string']
             //
         ];
     }
