@@ -24,4 +24,13 @@ class ClassroomFactory extends Factory
             'active' => fake()->boolean(95),
         ];
     }
+
+    public function withTeacher(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'teacher_id' => Teacher::factory()
+            ];
+        });
+    }
 }

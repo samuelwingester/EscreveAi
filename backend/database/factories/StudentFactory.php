@@ -28,4 +28,13 @@ class StudentFactory extends Factory
             'observations'  => fake()->text(),
         ];
     }
+
+    public function withClassroom(): Factory
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'class_id' => Classroom::factory()->withTeacher()
+            ];
+        });
+    }
 }
