@@ -8,10 +8,10 @@ use App\Models\Classroom;
 
 class UpdateClassroomService
  {
-	public function execute( array $data, Classroom $classroom ) : Classroom
+	public function execute( array $data, Classroom $classroom ) : bool
 	{
 		return DB::transaction( function () use( $data, $classroom ) {
-			return ([ 
+			return $classroom->update([ 
 				'name' 		=> $data['name'] ?? $classroom->name,
 				'active' 	=> $data['active'] ?? $classroom->active
 			]);

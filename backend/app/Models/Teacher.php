@@ -50,7 +50,7 @@ class Teacher extends Model
         );
     }
 
-    protected function birth_date(): Attribute
+    protected function birthDate(): Attribute
     {
         return Attribute::make(
             get : fn() => $this->user->birth_date
@@ -64,7 +64,7 @@ class Teacher extends Model
         );
     }
 
-    protected function secondary_email(): Attribute
+    protected function secondaryEmail(): Attribute
     {
         return Attribute::make(
             get : fn() => $this->user->secondary_email

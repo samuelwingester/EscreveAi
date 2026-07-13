@@ -12,6 +12,8 @@ use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Services\Student\StoreStudentService;
 use App\Services\Student\UpdateStudentService;
 
+use Illuminate\Support\Facades\Log; //temp
+
 class StudentController extends Controller
 {
     /**
@@ -21,7 +23,7 @@ class StudentController extends Controller
     {
         $students = Student::with( 'users' )->get();
 
-        return view( 'view::students.index', compact( 'students' ) );
+        return view( 'view::student.index', compact( 'students' ) );
     }
 
     /**
@@ -29,7 +31,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view( 'view::students.create' );
+        return view( 'view::student.create' );
     }
 
     /**
@@ -39,7 +41,7 @@ class StudentController extends Controller
     {
         $service->execute( $request->validated() );
 
-        return redirect()->route( 'view::students.index' )
+        return redirect()->route( 'student.index' )
                          ->with( 'success', 'Aluno criado com sucesso' );
     }
 
@@ -51,7 +53,7 @@ class StudentController extends Controller
         // Carrega os dados relacionados a usuario
         $student->load( 'user' );
 
-        return view( 'view::students.show', compact( 'student' ) );
+        return view( 'view::student.show', compact( 'student' ) );
     }
 
     /**
@@ -62,7 +64,7 @@ class StudentController extends Controller
         // Carrega os dados relacionados a usuario
         $student->load( 'user' );
 
-        return view( 'view::students.edit', compact( 'student' ) );
+        return view( 'view::student.edit', compact( 'student' ) );
     }
 
     /**
@@ -72,7 +74,7 @@ class StudentController extends Controller
     {
         $service->execute( $request->validated(), $student );
 
-        return redirect()->route( 'view::students.index' )
+        return redirect()->route( 'student.index' )
                          ->with( 'success', 'Aluno atualizado com sucesso' );
     }
 
@@ -81,9 +83,9 @@ class StudentController extends Controller
      */
     public function destroy( Student $student )
     {
-        $student->user()->deleteOrFail();
+        $student->user->deleteOrFail();
 
-        return redirect()->route( 'view::students.index' )
+        return redirect()->route( 'student.index' )
                          ->with( 'success', 'Aluno deletado com sucesso' );
     }
 }

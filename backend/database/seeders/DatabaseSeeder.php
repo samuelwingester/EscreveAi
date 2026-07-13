@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $buffer_1 = [];
         $buffer_2 = [];
 
+        //---------------------------------------------------------
+        // Teacher Seeding
         $count = fake()->numberBetween(20, 50);
 
         $this->command->info('Criando ' . $count . ' Professores');
@@ -29,7 +31,10 @@ class DatabaseSeeder extends Seeder
             $bar->advance();
         }
         $bar->finish();
+        //---------------------------------------------------------
 
+        //---------------------------------------------------------
+        // Classroom Seeding
         $count = count( $buffer_1 ) * 3;
 
         $this->command->newLine();
@@ -51,6 +56,8 @@ class DatabaseSeeder extends Seeder
             }
         }
         $bar->finish();
+        // ---------------------------------------------------------
+        // Student Seeding
 
         $count = count( $buffer_2 ) * 50;
 
@@ -73,7 +80,7 @@ class DatabaseSeeder extends Seeder
             }
         }
         $bar->finish();
-
+        // ---------------------------------------------------------
         /*
         $this->call([
             Teacher::factory()

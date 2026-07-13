@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 
 use App\Models\Classroom;
+use App\Models\Teacher;
 
 use App\Http\Requests\Classroom\StoreClassroomRequest;
 use App\Http\Requests\Classroom\UpdateClassroomRequest;
@@ -37,11 +38,11 @@ class ClassroomController extends Controller
      */
     public function store( StoreClassroomRequest $request, StoreClassroomService $service )
     {
-        $teacher = Classroom::find( $request->safe()->only( ['teacher_id'] ) );
+        $teacher = Teacher::find( $request->safe()->only( ['teacher_id'] ) )->first();
 
         $service->execute( $request->safe()->only( ['name'] ), $teacher );
         
-        return redirect()->route( 'view::classroom.index' )
+        return redirect()->route( 'classroom.index' )
                          ->with( 'success', 'turma criada com sucesso' );
     }
 
@@ -68,7 +69,7 @@ class ClassroomController extends Controller
     {
         $service->execute( $request->validated(), $classroom );
 
-        return redirect()->route( 'view::classroom.index' )
+        return redirect()->route( 'classroom.index' )
                          ->with( 'success', 'Turma atualizada com sucesso' );
     }
 
@@ -79,7 +80,7 @@ class ClassroomController extends Controller
     {
         $classroom->deleteOrFail();
 
-        return redirect()->route( 'view::classroom.index' )
+        return redirect()->route( 'classroom.index' )
                          ->with( 'success', 'Turma deletado com sucesso' );
     }
 }

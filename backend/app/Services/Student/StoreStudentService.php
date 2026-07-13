@@ -34,8 +34,6 @@ class StoreStudentService
 				'observations' 	=> $data['observations'] ?? null
 			]);
 			//
-
-			
 		}, 2);
 	}
 }

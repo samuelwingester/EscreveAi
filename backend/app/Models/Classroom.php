@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use App\Models\Teacher;
 use App\Models\Activity;
+use App\Models\Student;
 
 class Classroom extends Model
 {
@@ -36,5 +37,10 @@ class Classroom extends Model
     public function activities()
     {
         return $this->hasMany( Activity::class );
+    }
+
+    public function students()
+    {
+        return $this->hasMany( Student::class, 'class_id' );
     }
 }

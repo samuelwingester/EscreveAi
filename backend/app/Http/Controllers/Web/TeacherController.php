@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 use App\Models\Teacher;
 
@@ -12,10 +11,6 @@ use App\Http\Requests\Teacher\UpdateTeacherRequest;
 
 use App\Services\Teacher\StoreTeacherService;
 use App\Services\Teacher\UpdateTeacherService;
-
-//Temp
-use Illuminate\Support\Facades\Log;
-//
 
 class TeacherController extends Controller
 {
@@ -44,7 +39,7 @@ class TeacherController extends Controller
     {
         $service->execute( $request->validated() );
 
-        return redirect()->route( 'view::teacher.index' )
+        return redirect()->route( 'teacher.index' )
                          ->with( 'success', 'Professor criado com sucesso' );
     }
 
@@ -77,7 +72,7 @@ class TeacherController extends Controller
     {
         $service->execute( $request->validated(), $teacher );
 
-        return redirect()->route( 'view::teacher.index' )
+        return redirect()->route( 'teacher.index' )
                          ->with( 'success', 'Professor atualizado com sucesso' );
     }
 
@@ -86,9 +81,9 @@ class TeacherController extends Controller
      */
     public function destroy( Teacher $teacher )
     {
-        $teacher->user()->deleteOrFail();
+        $teacher->user->deleteOrFail();
 
-        return redirect()->route( 'view::teacher.index' )
+        return redirect()->route( 'teacher.index' )
                          ->with( 'success', 'Professor deletado com sucesso' );
     }
 }

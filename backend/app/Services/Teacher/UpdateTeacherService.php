@@ -8,7 +8,7 @@ use App\Models\Teacher;
 
 class UpdateTeacherService
  {
-	public function execute( array $data, Teacher $teacher )
+	public function execute( array $data, Teacher $teacher ): bool
 	{
 		// Tenta atualizar as informações do usuario
 		return DB::transaction( function () use ( $data, $teacher ) {

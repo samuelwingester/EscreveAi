@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::addNamespace('view', [
-            resource_path('../../frontend/views'),
+            base_path('../frontend/views'),
         ]);
     }
 }
