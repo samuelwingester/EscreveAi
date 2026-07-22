@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 use App\Models\Record;
 
 class Analysis extends Model
@@ -30,8 +32,12 @@ class Analysis extends Model
         ];
     }
 
-    public function record()
+    //--------------------------------------------------------
+    // Relacionamentos
+    //--------------------------------------------------------
+    public function record(): BelongsTo
     {
         return $this->belongsTo( Record::class, 'record_id' );
     }
+    //--------------------------------------------------------
 }
