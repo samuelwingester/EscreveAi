@@ -25,8 +25,6 @@ return new class extends Migration
                   ->constrained('teachers')
                   ->cascadeOnDelete();
 
-            $table->string('file_path');
-
             $table->date('start_date');
             $table->date('end_date');
 
