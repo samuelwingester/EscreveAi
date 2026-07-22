@@ -7,9 +7,6 @@ use Tests\TestCase;
 
 use App\Models\Teacher;
 use App\Models\Classroom;
-use App\Models\User;
-
-
 
 class ClassroomControllerTest extends TestCase
 {
@@ -19,9 +16,13 @@ class ClassroomControllerTest extends TestCase
     {
         $response = $this->get('/classroom');
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertStatus(200);
 
         $response->assertViewIs( 'view::classroom.index' );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_controller_store_success(): void
@@ -34,7 +35,9 @@ class ClassroomControllerTest extends TestCase
         ]);
 
         $classroom = Classroom::all()->first();
-
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertSessionHas('success');
 
         $response->assertRedirect();
@@ -42,6 +45,7 @@ class ClassroomControllerTest extends TestCase
         $this->assertDatabaseCount( 'classes', 1 );
 
         $this->assertEquals( $classroom->teacher_id, Teacher::all()->first()->id );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_controller_store_validation_failed(): void
@@ -51,9 +55,13 @@ class ClassroomControllerTest extends TestCase
 
         $response = $this->post( '/classroom', $data ); 
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertInvalid( array_keys( $data ) );
 
         $this->assertDatabaseCount('classes', 0);
+        //--------------------------------------------------------
     }
 
     public function test_classroom_controller_update_success()
@@ -66,11 +74,15 @@ class ClassroomControllerTest extends TestCase
 
         $classroom = Classroom::find( $classroom->id )->first();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertSessionHas('success');
 
         $response->assertRedirect();
 
         $this->assertEquals( $data['name'], $classroom->name );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_controller_update_validation_failed()
@@ -81,7 +93,11 @@ class ClassroomControllerTest extends TestCase
 
         $response = $this->put( '/classroom/' . $classroom->id , $data ); 
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertInvalid( array_keys( $data ) );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_controller_delete_success()
@@ -90,10 +106,14 @@ class ClassroomControllerTest extends TestCase
 
         $response = $this->delete('/teacher/' . $classroom->id);
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertSessionHas('success');
 
         $response->assertRedirect();
 
         $this->assertDatabaseCount('classes', 0);
+        //--------------------------------------------------------
     }    
 }

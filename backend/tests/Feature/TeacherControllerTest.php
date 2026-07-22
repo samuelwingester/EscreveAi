@@ -17,12 +17,15 @@ class TeacherControllerTest extends TestCase
 
     public function test_teacher_controller_index_sucess(): void
     {
-        $this->withoutExceptionHandling();
         $response = $this->get('/teacher');
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertStatus(200);
 
         $response->assertViewIs( 'view::teacher.index' );
+        //--------------------------------------------------------
     }
 
     public function test_teacher_controller_store_success(): void
@@ -37,6 +40,9 @@ class TeacherControllerTest extends TestCase
 
         $teacher = Teacher::all()->first();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertSessionHas('success');
 
         $response->assertRedirect();
@@ -46,6 +52,7 @@ class TeacherControllerTest extends TestCase
         $this->assertDatabaseCount('teachers', 1);
 
         $this->assertEquals( $teacher->user_id, User::all()->first()->id );
+        //--------------------------------------------------------
     }
 
     public function test_teacher_controller_store_validation_failed(): void
@@ -56,11 +63,15 @@ class TeacherControllerTest extends TestCase
 
         $response = $this->post( '/teacher', $data ); 
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertInvalid( array_keys( $data ) );
 
         $this->assertDatabaseCount('teachers', 0);
 
         $this->assertDatabaseCount('users', 0);
+        //--------------------------------------------------------
     }
 
     public function test_teacher_controller_update_success()
@@ -78,6 +89,9 @@ class TeacherControllerTest extends TestCase
 
         $teacher->load( 'user' );
         
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertSessionHas('success');
 
         $response->assertRedirect();
@@ -89,6 +103,7 @@ class TeacherControllerTest extends TestCase
         $this->assertEquals( $data['birth_date'], $teacher->birth_date );
 
         $this->assertEquals( Gender::WOMAN, $teacher->gender );
+        //--------------------------------------------------------
     }
 
     public function test_teacher_controller_update_validation_failed()
@@ -100,9 +115,13 @@ class TeacherControllerTest extends TestCase
         $data['birth_date'] = '2026-06-06';
         $data['gender'] = 'haha';
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response = $this->put('/teacher/' . $teacher->id, $data);
 
         $response->assertInvalid( array_keys( $data ) );
+        //--------------------------------------------------------
     }
 
     public function test_teacher_controller_delete_success()
@@ -111,6 +130,9 @@ class TeacherControllerTest extends TestCase
 
         $response = $this->delete('/teacher/' . $teacher->id);
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $response->assertSessionHas('success');
 
         $response->assertRedirect();
@@ -118,5 +140,6 @@ class TeacherControllerTest extends TestCase
         $this->assertDatabaseCount('teachers', 0);
 
         $this->assertDatabaseCount('users', 0);
+        //--------------------------------------------------------
     }    
 }

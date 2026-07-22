@@ -19,6 +19,9 @@ class ClassroomTest extends TestCase
 
         $classroom = Classroom::factory()->withTeacher()->create();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertDatabaseHas( 'classes', [ 'id' => $classroom->id ] );
     }
 
@@ -28,9 +31,13 @@ class ClassroomTest extends TestCase
         
         $classroom = Classroom::factory()->for( $teacher )->create();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $teacher->id, $classroom->teacher_id );
 
         $this->assertInstanceOf( Teacher::class, $classroom->teacher );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_can_be_deleted(): void 
@@ -39,9 +46,13 @@ class ClassroomTest extends TestCase
 
         $classroom->delete();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertModelMissing( $classroom );
 
         $this->assertDatabaseCount( 'classes', 0 );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_can_be_deleted_on_cascade(): void 
@@ -52,6 +63,9 @@ class ClassroomTest extends TestCase
 
         $teacher->delete();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertModelMissing( $classroom );
 
         $this->assertModelMissing( $teacher );
@@ -59,6 +73,7 @@ class ClassroomTest extends TestCase
         $this->assertDatabaseCount( 'classes', 0 );
 
         $this->assertDatabaseCount( 'teachers', 0 );
+        //--------------------------------------------------------
     }
 
     public function test_classroom_can_be_updated(): void
@@ -69,11 +84,15 @@ class ClassroomTest extends TestCase
 
         $classroom->refresh();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals('test', $classroom->name);
 
         $this->assertDatabaseHas('classes', [
             'id' => $classroom->id,
             'name' => 'test',
         ]);
+        //--------------------------------------------------------
     }
 }

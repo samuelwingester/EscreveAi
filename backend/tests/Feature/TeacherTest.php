@@ -17,7 +17,11 @@ class TeacherTest extends TestCase
     {
         $teacher = Teacher::factory()->create();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertDatabaseHas( 'teachers', [ 'id' => $teacher->id ] );
+        //--------------------------------------------------------
     }
 
     public function test_teacher_has_classroom(): void
@@ -26,9 +30,13 @@ class TeacherTest extends TestCase
         
         $classroom = Classroom::factory()->for( $teacher )->create();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $teacher->id, $classroom->teacher_id );
 
         $this->assertInstanceOf( Teacher::class, $classroom->teacher );
+        //--------------------------------------------------------
     }
 
 
@@ -38,9 +46,13 @@ class TeacherTest extends TestCase
 
         $user = $teacher->user;
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $teacher->user_id, $user->id );
 
         $this->assertDatabaseHas('teachers', [ 'user_id' => $user->id ]);
+        //--------------------------------------------------------
     }
 
     public function test_teacher_user_can_be_deleted(): void 
@@ -49,9 +61,13 @@ class TeacherTest extends TestCase
 
         $teacher->user()->delete();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertModelMissing( $teacher );
 
         $this->assertDatabaseCount( 'teachers', 0 );
+        //--------------------------------------------------------
     }
 
     public function test_teacher_can_be_updated(): void
@@ -62,12 +78,16 @@ class TeacherTest extends TestCase
 
         $teacher->refresh();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals('test', $teacher->name);
 
         $this->assertDatabaseHas('users', [
             'id' => $teacher->user_id,
             'name' => 'test',
         ]);
+        //--------------------------------------------------------
     }
 
     public  function test_teacher_acessors_work(): void
@@ -80,6 +100,9 @@ class TeacherTest extends TestCase
 
         $teacher->load( 'user' );
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $user->name, $teacher->name );
 
         $this->assertEquals( $user->email, $teacher->email );
@@ -89,5 +112,6 @@ class TeacherTest extends TestCase
         $this->assertEquals( $user->gender, $teacher->gender );
 
         $this->assertEquals( $user->secondary_email, $teacher->secondaryEmail );
+        //--------------------------------------------------------
     }
 }

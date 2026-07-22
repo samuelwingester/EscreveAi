@@ -17,7 +17,11 @@ class StudentTest extends TestCase
     {
         $student = Student::factory()->withClassroom()->create();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertDatabaseHas( 'students', [ 'id' => $student->id ] );
+        //--------------------------------------------------------
     }
 
     public function test_student_belongs_to_classroom(): void
@@ -26,11 +30,15 @@ class StudentTest extends TestCase
 
         $student = Student::factory()->for( $classroom )->create();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $student->class_id, $classroom->id );
 
         $this->assertDatabaseHas('students', [ 'class_id' => $classroom->id ]);
 
         $this->assertInstanceOf( Classroom::class, $student->classroom );
+        //--------------------------------------------------------
     }
 
 
@@ -40,9 +48,13 @@ class StudentTest extends TestCase
 
         $user = $student->user;
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $student->user_id, $user->id );
 
         $this->assertDatabaseHas('students', [ 'user_id' => $user->id ]);
+        //--------------------------------------------------------
     }
 
     public function test_student_user_can_be_deleted(): void 
@@ -51,9 +63,13 @@ class StudentTest extends TestCase
 
         $student->user()->delete();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertModelMissing( $student );
 
         $this->assertDatabaseCount( 'students', 0 );
+        //--------------------------------------------------------
     }
 
     public function test_student_can_be_updated(): void
@@ -64,15 +80,19 @@ class StudentTest extends TestCase
 
         $student->refresh();
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals('test', $student->name);
 
         $this->assertDatabaseHas('users', [
             'id' => $student->user_id,
             'name' => 'test',
         ]);
+        //--------------------------------------------------------
     }
 
-    public  function test_student_acessors_work(): void
+    public function test_student_acessors_work(): void
     {
         $user = User::factory()->student()->create();
 
@@ -82,6 +102,9 @@ class StudentTest extends TestCase
 
         $student->load( 'user' );
 
+        //--------------------------------------------------------
+        // Asserts
+        //--------------------------------------------------------
         $this->assertEquals( $user->name, $student->name );
 
         $this->assertEquals( $user->email, $student->email );
@@ -91,5 +114,6 @@ class StudentTest extends TestCase
         $this->assertEquals( $user->gender, $student->gender );
 
         $this->assertEquals( $user->secondary_email, $student->secondaryEmail );
+        //--------------------------------------------------------
     }
 }
