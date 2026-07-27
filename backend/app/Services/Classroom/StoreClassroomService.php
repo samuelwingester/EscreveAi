@@ -9,10 +9,10 @@ use App\Models\Teacher;
 
 class StoreClassroomService
  {
-	public function execute( array $data, Teacher $teacher ) : Classroom
+	public function execute( Teacher $teacher, string $name ) : Classroom
 	{
-		return DB::transaction( function () use( $data, $teacher ) {
-			return $teacher->classes()->create( [ 'name' => $data['name'] ] );
+		return DB::transaction( function () use( $name, $teacher ) {
+			return $teacher->classes()->create( [ 'name' => $name ] );
 		}, 2);
 	}
 }

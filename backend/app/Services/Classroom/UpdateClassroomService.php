@@ -8,7 +8,7 @@ use App\Models\Classroom;
 
 class UpdateClassroomService
  {
-	public function execute( array $data, Classroom $classroom ) : bool
+	public function execute( Classroom $classroom, array $data ) : bool
 	{
 		return DB::transaction( function () use( $data, $classroom ) {
 			return $classroom->update([ 
