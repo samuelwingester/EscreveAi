@@ -35,8 +35,10 @@ class TeacherController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTeacherRequest $request, StoreTeacherService $service)
-    {
+    public function store(
+        StoreTeacherRequest $request, 
+        StoreTeacherService $service
+    ){
         $service->execute( $request->validated() );
 
         return redirect()->route( 'teacher.index' )
@@ -68,8 +70,11 @@ class TeacherController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( UpdateTeacherRequest $request, UpdateTeacherService $service, Teacher $teacher )
-    {
+    public function update( 
+        UpdateTeacherRequest $request, 
+        UpdateTeacherService $service, 
+        Teacher $teacher
+    ){
         $service->execute( $request->validated(), $teacher );
 
         return redirect()->route( 'teacher.index' )

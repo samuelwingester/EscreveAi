@@ -36,11 +36,14 @@ class ClassroomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store( StoreClassroomRequest $request, StoreClassroomService $service )
-    {
-        $teacher = Teacher::find( $request->safe()->only( ['teacher_id'] ) )->first();
+    public function store( 
+        StoreClassroomRequest $request, 
+        StoreClassroomService $service 
+    ){
+        $teacher = Teacher::find( $request->validated( 'teacher_id' ), 'id' ); 
+        // Provavelmente desnecessario mudar futuramente. recurso dependente de outro
 
-        $service->execute( $request->safe()->only( ['name'] ), $teacher );
+        $service->execute( $teacher, $request->validated( 'name' ) );
         
         return redirect()->route( 'classroom.index' )
                          ->with( 'success', 'turma criada com sucesso' );
@@ -65,9 +68,12 @@ class ClassroomController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update( UpdateClassroomRequest $request, UpdateclassroomService $service , Classroom $classroom )
-    {
-        $service->execute( $request->validated(), $classroom );
+    public function update( 
+        UpdateClassroomRequest $request, 
+        UpdateclassroomService $service, 
+        Classroom $classroom 
+    ){
+        $service->execute( $classroom, $request->validated() );
 
         return redirect()->route( 'classroom.index' )
                          ->with( 'success', 'Turma atualizada com sucesso' );

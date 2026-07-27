@@ -12,8 +12,6 @@ use App\Http\Requests\Student\UpdateStudentRequest;
 use App\Services\Student\StoreStudentService;
 use App\Services\Student\UpdateStudentService;
 
-use Illuminate\Support\Facades\Log; //temp
-
 class StudentController extends Controller
 {
     /**
@@ -37,8 +35,10 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store( StoreStudentRequest $request, StoreStudentService $service )
-    {
+    public function store( 
+        StoreStudentRequest $request, 
+        StoreStudentService $service 
+    ){
         $service->execute( $request->validated() );
 
         return redirect()->route( 'student.index' )
