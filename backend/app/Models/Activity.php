@@ -28,7 +28,7 @@ class Activity extends Model
     //--------------------------------------------------------
     // Relacionamentos
     //--------------------------------------------------------
-    public function class(): BelongsTo
+    public function classroom(): BelongsTo
     {
         return $this->belongsTo( Classroom::class, 'class_id' );
     }
