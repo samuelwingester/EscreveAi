@@ -43,7 +43,7 @@ Artisan::command('make:service {model} {name}', function (string $model, string 
         "<?php\n\n" .
         "namespace App\Services\\" . $model . ";\n\n" .
         "use App\Models\\" . $model . ";\n\n" . 
-        "class " . $name . $model . "Service\n {\n" .
+        "class " . $name . $model . "Service\n{\n" .
         "\tpublic function execute( array \$data )\n\t{\n\t\t//\n\t}\n}"
     );
 
