@@ -2,12 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classroom;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-use App\Models\Teacher;
-use App\Models\Classroom;
-use App\Models\Student;
+use Database\Seeders\TeacherSeeder;
+use Database\Seeders\ClassroomSeeder;
+use Illuminate\Support\Collection;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,85 +17,70 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        $buffer_1 = [];
-        $buffer_2 = [];
-
         //---------------------------------------------------------
         // Teacher Seeding
-        $count = fake()->numberBetween(20, 50);
-
-        $this->command->info('Criando ' . $count . ' Professores');
-        $bar = $this->command->getOutput()->createProgressBar( $count );
-        $bar->start();
-        for ( $i = 0; $i < 10; $i++ ) {
-            $buffer_1[] = Teacher::factory()->create();
+        //---------------------------------------------------------
+        $count = fake()->numberBetween(20, 30);
         
-            $bar->advance();
-        }
-        $bar->finish();
+        $teachers = $this->runSeeder( 
+            'Professores', $count, 
+            fn( $bar ) => TeacherSeeder::seed( $bar, $count ) 
+        );
         //---------------------------------------------------------
 
         //---------------------------------------------------------
         // Classroom Seeding
-        $count = count( $buffer_1 ) * 3;
+        //---------------------------------------------------------
+        $count = $teachers->count() * 3;
 
-        $this->command->newLine();
-        $this->command->info('Criando ' . $count . 'Turmas');
-        $bar = $this->command->getOutput()->createProgressBar( $count );
-        $bar->start();
-        foreach ( $buffer_1 as $teacher ) {
-            $total = 0;
+        $classrooms = $this->runSeeder( 
+            'Turmas', $count, 
+            fn( $bar ) => ClassroomSeeder::seed( $bar, $count, $teachers ) 
+        ); 
+        //---------------------------------------------------------
 
-            if ( $count <= 5 ) $total = $count;
-            else $total = fake()->numberBetween(3, 5);
-
-            $count -= $total;
-
-            for ( $i = 0; $i < $total; $i++ ) { 
-                $buffer_2[] = Classroom::factory()->for( $teacher )->create();
-
-                $bar->advance();
-            }
-        }
-        $bar->finish();
-        // ---------------------------------------------------------
+        //---------------------------------------------------------
         // Student Seeding
+        //---------------------------------------------------------
+        $count = $classrooms->count() * 10;
 
-        $count = count( $buffer_2 ) * 50;
+        $this->runSeeder( 
+            'Estudantes', $count, 
+            fn( $bar ) => StudentSeeder::seed( $bar, $count, $classrooms ) 
+        ); 
+        //---------------------------------------------------------
 
+        //---------------------------------------------------------
+        // Activity Seeding
+        //---------------------------------------------------------
+        $count = $classrooms->count() * 2;
+
+        $this->runSeeder( 
+            'Atividades', $count, 
+            fn( $bar ) => ActivitySeeder::seed( $bar, $count, $classrooms ) 
+        ); 
+        //---------------------------------------------------------
+    }
+
+    private function createBar( string $name, int $count ) : ProgressBar
+    {
         $this->command->newLine();
-        $this->command->info('Criando ' . $count . 'Alunos');
-        $bar = $this->command->getOutput()->createProgressBar( $count );
+        $this->command->info( 'Criando ' . $count . ' ' . $name );
+        $this->command->newLine();
+
+        return $this->command->getOutput()->createProgressBar( $count );
+    }
+
+    private function runSeeder( string $name, int $count, callable $callback ) : mixed
+    {
+        $bar = $this->createBar( $name, $count );
+
         $bar->start();
-        foreach ( $buffer_2 as $classroom ) {
-            $total = 0;
 
-            if ( $count <= 50 ) $total = $count;
-            else $total = fake()->numberBetween(20, 50);
+        $buffer = $callback( $bar );
 
-            $count -= $total;
-
-            for ( $i = 0; $i < $total; $i++ ) { 
-                Student::factory()->for( $classroom )->create();
-
-                $bar->advance();
-            }
-        }
         $bar->finish();
-        // ---------------------------------------------------------
-        /*
-        $this->call([
-            Teacher::factory()
-                ->count( fake()->numberBetween(20, 50) )->create()
-                ->each( function ( Teacher $teacher ){
-                    Classroom::factory()
-                        ->count( fake()->numberBetween(2, 5) )->for( $teacher )->create()
-                        ->each( function ( Classroom $classroom ){
-                            Student::factory()
-                                ->count( fake()->numberBetween(20, 50) )->for( $classroom )->create();
-                        });
-                })
-        ]);
-        */
+
+        return $buffer;
     }
 }
