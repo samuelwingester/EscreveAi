@@ -2,7 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/routes', function () 
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\ActivityController;
+
+use App\Http\Controllers\AuthController;
+
+use Illuminate\Http\Request;
+
+Route::get('/', function () 
 {
     //retorna as rotas existentes da api e os metodos aceitos de cada uma
     $routes = collect(Route::getRoutes())->filter( function ($route) {
@@ -18,6 +27,28 @@ Route::get('/routes', function ()
     return response()->json($routes);
 })->name('routes');
 
+/*
+Route::apiResource( 'student', StudentController::class )->middleware( 'auth:sanctum' );
+Route::apiResource( 'teacher', TeacherController::class )->middleware( 'auth:sanctum' );
+Route::apiResource( 'classroom', ClassroomController::class )->middleware( 'auth:sanctum' );
+Route::apiResource( 'activity', ActivityController::class )->middleware( 'auth:sanctum' );
+*/
 
+// CRUD Basico
+Route::middleware( 'auth:sanctum' )->group( function () {
+    Route::apiResources([
+        'student'   => StudentController::class, 
+        'teacher'   => TeacherController::class, 
+        'classroom' => ClassroomController::class, 
+        'activity'  => ActivityController::class 
+    ]);
+});
 
-// Rotas basicas
+// Rotas de Login
+Route::controller( AuthController::class )->group( function () {
+    Route::post( '/login', 'login' );
+    Route::post( '/register', 'register' );
+    
+    Route::post( '/logout', 'logout' )->middleware( 'auth:sanctum' );
+    Route::get( '/user', 'user' )->middleware( 'auth:sanctum' );
+});

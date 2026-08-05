@@ -17,20 +17,19 @@ class TeacherControllerTest extends TestCase
 
     public function test_teacher_controller_index_sucess(): void
     {
-        $response = $this->get('/teacher');
+        $this->withoutExceptionHandling();
+        $response = $this->get('/api/teacher');
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
         $response->assertStatus(200);
-
-        $response->assertViewIs( 'view::teacher.index' );
         //--------------------------------------------------------
     }
 
     public function test_teacher_controller_store_success(): void
     {
-        $response = $this->post('/teacher', [
+        $response = $this->post('/api/teacher', [
             'email'         => fake()->email(),
             'password'      => '88888888',
             'name'          => fake()->name(),
@@ -43,9 +42,7 @@ class TeacherControllerTest extends TestCase
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
-
-        $response->assertRedirect();
+        $response->assertStatus(201);
 
         $this->assertDatabaseCount('users', 1);
 
@@ -61,11 +58,13 @@ class TeacherControllerTest extends TestCase
         $data['name'] = fake()->realTextBetween(160, 200);
         $data['birth_date'] = '2026-06-06';
 
-        $response = $this->post( '/teacher', $data ); 
+        $response = $this->post('/api/teacher', $data); 
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
+        $response->assertStatus( 422 );
+
         $response->assertInvalid( array_keys( $data ) );
 
         $this->assertDatabaseCount('teachers', 0);
@@ -83,18 +82,16 @@ class TeacherControllerTest extends TestCase
         $data['birth_date'] = '2020-06-06';
         $data['gender'] = 'woman';
 
-        $response = $this->put('/teacher/' . $teacher->id, $data);
+        $response = $this->put('/api/teacher/' . $teacher->id, $data);
 
-        $teacher = Teacher::find( $teacher->id )->first();
+        $teacher = Teacher::find( $teacher->id, 'id' )->first();
 
         $teacher->load( 'user' );
         
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
-
-        $response->assertRedirect();
+        $response->assertStatus( 204 );
 
         $this->assertEquals( $data['secondary_email'], $teacher->secondary_email );
 
@@ -115,10 +112,12 @@ class TeacherControllerTest extends TestCase
         $data['birth_date'] = '2026-06-06';
         $data['gender'] = 'haha';
 
+        $response = $this->put('/api/teacher/' . $teacher->id, $data);
+
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response = $this->put('/teacher/' . $teacher->id, $data);
+        $response->assertStatus( 422 );
 
         $response->assertInvalid( array_keys( $data ) );
         //--------------------------------------------------------
@@ -128,14 +127,12 @@ class TeacherControllerTest extends TestCase
     {
         $teacher = Teacher::factory()->create();
 
-        $response = $this->delete('/teacher/' . $teacher->id);
+        $response = $this->delete('/api/teacher/' . $teacher->id);
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
-
-        $response->assertRedirect();
+        $response->assertStatus( 204 );
 
         $this->assertDatabaseCount('teachers', 0);
 

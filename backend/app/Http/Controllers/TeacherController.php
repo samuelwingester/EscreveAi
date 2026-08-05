@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
@@ -21,15 +21,7 @@ class TeacherController extends Controller
     {
         $teachers = Teacher::with( 'user' )->get();
 
-        return view( 'view::teacher.index', compact( 'teachers' ) );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view( 'view::teacher.create' );
+        return response()->json( $teachers, 200 );
     }
 
     /**
@@ -41,8 +33,7 @@ class TeacherController extends Controller
     ){
         $service->execute( $request->validated() );
 
-        return redirect()->route( 'teacher.index' )
-                         ->with( 'success', 'Professor criado com sucesso' );
+        return response()->noContent( 201 );
     }
 
     /**
@@ -53,18 +44,7 @@ class TeacherController extends Controller
         // Carrega os dados relacionados a usuario
         $teacher->load( 'user' );
 
-        return view( 'view::teacher.show', compact( 'teacher' ) );
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit( Teacher $teacher )
-    {
-        // Carrega os dados relacionados a usuario
-        $teacher->load( 'user' );
-
-        return view( 'view::teacher.edit', compact( 'teacher' ) );
+        return response()->json( $teacher, 200 );
     }
 
     /**
@@ -77,8 +57,7 @@ class TeacherController extends Controller
     ){
         $service->execute( $request->validated(), $teacher );
 
-        return redirect()->route( 'teacher.index' )
-                         ->with( 'success', 'Professor atualizado com sucesso' );
+        return response()->noContent( 204 );
     }
 
     /**
@@ -88,7 +67,6 @@ class TeacherController extends Controller
     {
         $teacher->user->deleteOrFail();
 
-        return redirect()->route( 'teacher.index' )
-                         ->with( 'success', 'Professor deletado com sucesso' );
+        return response()->noContent( 204 );
     }
 }

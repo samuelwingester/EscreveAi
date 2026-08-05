@@ -2,14 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Classroom;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 use Database\Seeders\TeacherSeeder;
 use Database\Seeders\ClassroomSeeder;
-use Illuminate\Support\Collection;
+use Database\Seeders\StudentSeeder;
+use Database\Seeders\ActivitySeeder;
+
+use App\Services\Teacher\StoreTeacherService;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,6 +19,9 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
+        
+        $this->insertTestUser();
+
         //---------------------------------------------------------
         // Teacher Seeding
         //---------------------------------------------------------
@@ -82,5 +87,17 @@ class DatabaseSeeder extends Seeder
         $bar->finish();
 
         return $buffer;
+    }
+
+    private function insertTestUser()
+    {
+        $service = new StoreTeacherService();
+
+        $service->execute([
+            'email'         => 'teste@teste.teste',
+            'password'      => 'teste',
+            'name'          => 'teste',
+            'birth_date'    =>fake()->date()
+        ]);
     }
 }

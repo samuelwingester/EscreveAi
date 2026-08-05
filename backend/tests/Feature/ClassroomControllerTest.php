@@ -14,14 +14,12 @@ class ClassroomControllerTest extends TestCase
 
     public function test_classroom_controller_index_sucess(): void
     {
-        $response = $this->get('/classroom');
+        $response = $this->get('/api/classroom');
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
         $response->assertStatus(200);
-
-        $response->assertViewIs( 'view::classroom.index' );
         //--------------------------------------------------------
     }
 
@@ -29,7 +27,7 @@ class ClassroomControllerTest extends TestCase
     {
         $teacher = Teacher::factory()->create();
     
-        $response = $this->post('/classroom', [
+        $response = $this->post('/api/classroom', [
             'name' => 'teste',
             'teacher_id' => $teacher->id
         ]);
@@ -38,9 +36,7 @@ class ClassroomControllerTest extends TestCase
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
-
-        $response->assertRedirect();
+        $response->assertStatus( 201 );
 
         $this->assertDatabaseCount( 'classes', 1 );
 
@@ -53,11 +49,13 @@ class ClassroomControllerTest extends TestCase
         $data['name'] = fake()->realTextBetween(160, 200);
         $data['teacher_id'] = 0;
 
-        $response = $this->post( '/classroom', $data ); 
+        $response = $this->post('/api/classroom', $data); 
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
+        $response->assertStatus( 422 );
+
         $response->assertInvalid( array_keys( $data ) );
 
         $this->assertDatabaseCount('classes', 0);
@@ -70,16 +68,14 @@ class ClassroomControllerTest extends TestCase
 
         $data['name'] = 'Test';
         
-        $response = $this->put('/classroom/' . $classroom->id, $data);
+        $response = $this->put('/api/classroom/' . $classroom->id, $data);
 
-        $classroom = Classroom::find( $classroom->id )->first();
+        $classroom = Classroom::find( $classroom->id, 'id' )->first();
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
-
-        $response->assertRedirect();
+        $response->assertStatus( 204 );
 
         $this->assertEquals( $data['name'], $classroom->name );
         //--------------------------------------------------------
@@ -91,11 +87,13 @@ class ClassroomControllerTest extends TestCase
 
         $data['name'] = fake()->realTextBetween(160, 200);
 
-        $response = $this->put( '/classroom/' . $classroom->id , $data ); 
+        $response = $this->put('/api/classroom/' . $classroom->id , $data); 
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
+        $response->assertStatus( 422 );
+
         $response->assertInvalid( array_keys( $data ) );
         //--------------------------------------------------------
     }
@@ -104,14 +102,12 @@ class ClassroomControllerTest extends TestCase
     {
         $classroom = Classroom::factory()->withTeacher()->create();
 
-        $response = $this->delete('/teacher/' . $classroom->id);
+        $response = $this->delete('/api/teacher/' . $classroom->id);
 
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
-
-        $response->assertRedirect();
+        $response->assertStatus( 204 );
 
         $this->assertDatabaseCount('classes', 0);
         //--------------------------------------------------------

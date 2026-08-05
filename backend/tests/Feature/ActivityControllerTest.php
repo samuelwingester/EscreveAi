@@ -15,16 +15,12 @@ class ActivityControllerTest extends TestCase
 
     public function test_activity_controller_index_success(): void
     {
-        $response = $this->get('/activity');
+        $response = $this->get('/api/activity');
 
-        $response->assertStatus(200);
-        
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertStatus(200);
-
-        $response->assertViewIs( 'view::activity.index' );
+        $response->assertStatus( 200 );
         //--------------------------------------------------------
     }
 
@@ -34,7 +30,7 @@ class ActivityControllerTest extends TestCase
 
         $file = UploadedFile::fake()->create( 'test', 200, 'application/pdf' );
 
-        $response = $this->post('/activity', [
+        $response = $this->post('/api/activity', [
             'class_id'      => $classroom->id,
             'title'         => 'test',
             'description'   => 'test',
@@ -52,7 +48,7 @@ class ActivityControllerTest extends TestCase
         //--------------------------------------------------------
         // Asserts
         //--------------------------------------------------------
-        $response->assertSessionHas('success');
+        $response->assertStatus( 201 );
         //--------------------------------------------------------
     }
 }

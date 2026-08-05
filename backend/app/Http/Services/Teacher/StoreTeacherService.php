@@ -27,9 +27,7 @@ class StoreTeacherService
 			]);
 			//
 
-			// Inserção das informações especificas do tipo de usuario
 			return $user->teacher()->create();
-			//
 		}, 2);
 	}
 }

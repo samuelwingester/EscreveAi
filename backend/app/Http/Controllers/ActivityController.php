@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
@@ -21,15 +21,7 @@ class ActivityController extends Controller
     {
         $activities = Activity::all();
 
-        return view( 'view::activity.index', compact( 'activities' ) );
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view( 'view::activity.create' );
+        return response()->json( $activities, 200 );
     }
 
     /**
@@ -49,8 +41,7 @@ class ActivityController extends Controller
         // - Talvez fazer o servico retornar algo e passar para a resposta?
         $attachmentHandler->execute( $activity, $request->validated('attachments') );
 
-        return redirect()->route( 'activity.index' )
-                         ->with( 'success', 'atividade criada com sucesso' );
+        return response()->noContent( 201 );
     }
 
     /**
@@ -58,15 +49,7 @@ class ActivityController extends Controller
      */
     public function show( Activity $activity )
     {
-        return view( 'view::activity.show', compact( 'activity' ) );
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit( Activity $activity )
-    {
-        return view( 'view::activity.edit', compact( 'activity' ) );
+        return response()->json( $activity, 200 );
     }
 
     /**
@@ -74,7 +57,7 @@ class ActivityController extends Controller
      */
     public function update()
     {
-        // 
+        // 204
     }
 
     /**
@@ -84,7 +67,6 @@ class ActivityController extends Controller
     {
         $activity->deleteOrFail();
 
-        return redirect()->route( 'activity.index' )
-                         ->with( 'success', 'Atividade deletada com sucesso' );
+        return response()->noContent( 204 );
     }
 }
