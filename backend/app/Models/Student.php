@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 use App\Models\Classroom;
-use App\Models\User;
+# use App\Models\User;
 use App\Models\Record;
 use App\Models\Report;
 
@@ -39,10 +39,12 @@ class Student extends Model
     //--------------------------------------------------------
     // Relacionamentos
     //--------------------------------------------------------
+    /*
     public function user(): BelongsTo
     {
         return $this->belongsTo( User::class, 'user_id' );
     }
+    */
 
     public function classroom(): BelongsTo
     {
@@ -63,6 +65,7 @@ class Student extends Model
     //--------------------------------------------------------
     // Acessors
     //--------------------------------------------------------
+    /*
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -97,5 +100,6 @@ class Student extends Model
             get : fn() => $this->user->secondary_email
         );
     }
+    */
     //--------------------------------------------------------
 }

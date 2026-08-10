@@ -19,9 +19,13 @@ return new class extends Migration
             
             $table->id();
 
+            /*
             $table->foreignId('user_id')
                   ->constrained('users')
                   ->cascadeOnDelete();
+            */
+
+            // NT: Adicionar contatos depois
 
             $table->foreignId('class_id')
                   ->constrained('classes')

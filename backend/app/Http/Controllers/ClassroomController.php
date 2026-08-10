@@ -32,8 +32,8 @@ class ClassroomController extends Controller
         StoreClassroomRequest $request, 
         StoreClassroomService $service 
     ){
+        // Provavelmente desnecessario mudar futuramente. 
         $teacher = Teacher::find( $request->validated( 'teacher_id' ), 'id' ); 
-        // Provavelmente desnecessario mudar futuramente. recurso dependente de outro
 
         $service->execute( $teacher, $request->validated( 'name' ) );
         

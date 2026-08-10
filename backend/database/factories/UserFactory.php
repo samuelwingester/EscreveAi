@@ -30,7 +30,7 @@ class UserFactory extends Factory
             'birth_date' 	=> fake()->date()
         ];
     }
-
+/*
     public function student(): Factory
     {
         return $this->state(function (array $attributes) {
@@ -39,7 +39,7 @@ class UserFactory extends Factory
             ];
         });
     }
-
+*/
     public function teacher(): Factory
     {
         return $this->state(function (array $attributes) {

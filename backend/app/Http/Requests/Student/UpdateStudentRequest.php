@@ -30,14 +30,18 @@ class UpdateStudentRequest extends FormRequest
         $normalization = [];
 
         // Optional fields normalization
+        /*
         if ( $this->filled( 'secondary_email' ) ) 
             $normalization['secondary_email'] = Str::lower( Str::trim( $this->secondary_email ) );
+        */
 
         if ( $this->filled( 'name' ) ) 
             $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
 
+        /*
         if ( $this->filled( 'gender' ) ) 
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
+        */
 
         if ( $this->filled( 'writing_level' ) ) 
             $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '_' );
@@ -56,12 +60,14 @@ class UpdateStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            /*
             // User Class Data
             'secondary_email'   => ['sometimes', 'nullable', 'email', 'unique:users,email'],
             'name'              => ['sometimes', 'string', 'max:150'],
             'gender'            => ['sometimes', 'nullable', 'string', new Enum( Gender::class )],
             'birth_date'        => ['sometimes', Rule::date()->before(today()->subYears(4))],
             //
+            */
 
             // Student Class Data
             'class_id'      => ['sometimes', 'integer', 'exists:classes,id'],

@@ -29,7 +29,7 @@ class Teacher extends Model
     {
         return $this->belongsTo( User::class, 'user_id' );
     }
-
+    
     public function classes(): HasMany
     {
         return $this->hasMany( Classroom::class );

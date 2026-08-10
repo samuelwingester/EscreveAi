@@ -16,10 +16,16 @@ return new class extends Migration
             $table->engine = 'InnoDB';
             
             $table->id();
-            
+           
             $table->foreignId('teacher_id')
                   ->constrained('teachers')
                   ->cascadeOnDelete();
+
+            /*
+            $table->foreignId('teacher_id')
+                  ->constrained('users')
+                  ->cascadeOnDelete();
+            */
             
             $table->string('name', 100);
             $table->boolean('active')->default(true);

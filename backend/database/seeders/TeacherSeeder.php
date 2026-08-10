@@ -6,6 +6,7 @@ use Symfony\Component\Console\Helper\ProgressBar;
 use Illuminate\Database\Seeder;
 
 use App\Models\Teacher;
+use App\Models\User;
 use Illuminate\Support\Collection;
 
 class TeacherSeeder extends Seeder
@@ -15,7 +16,7 @@ class TeacherSeeder extends Seeder
      */
     public function run(): void
     {
-        Teacher::factory()->count(10)->create();
+        User::factory()->count(10)->create();
     }
 
     public static function seed( ProgressBar $bar, int $count ) : Collection

@@ -6,12 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\Authenticathion\LoginRequest;
 use App\Http\Requests\Authenticathion\RegisterRequest;
-
+use App\Http\Requests\Teacher\StoreTeacherRequest; // Temporario
 
 use App\Services\Authenticathion\LoginService;
 use App\Services\Teacher\StoreTeacherService;
-
-use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -19,6 +17,7 @@ class AuthController extends Controller
     {
         $user = $service->execute( $request->input( 'email' ), $request->input( 'password' ) ); 
 
+        // Talvez mover a criação de token para um service proprio
         $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );
 
         return response()->json([
@@ -31,11 +30,13 @@ class AuthController extends Controller
     }
 
     public function register( 
-        RegisterRequest $request, 
+        // RegisterRequest $request, 
+        StoreTeacherRequest $request,
         StoreTeacherService $service   
     ){
-        $user = $service->execute( $request->validated() )->user;
+        $user = $service->execute( $request->validated() );
 
+        // NT: Talvez passar para um service depois.
         $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );
 
         return response()->json([

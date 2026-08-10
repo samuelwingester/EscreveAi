@@ -5,6 +5,7 @@ namespace App\Services\Teacher;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Teacher;
+use App\Models\User;
 
 class UpdateTeacherService
  {

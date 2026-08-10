@@ -40,7 +40,7 @@ class Report extends Model
         return $this->belongsTo( Student::class, 'student_id' ); 
     }
 
-    public function analyses() // NT: Olhar com o kaique
+    public function analyses()
     {
         return; // implementar depois. um pouco mais chato
     }

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\Teacher;
 use App\Models\Activity;
 use App\Models\Student;
+# use App\Models\User;
 
 class Classroom extends Model
 {
@@ -39,6 +40,13 @@ class Classroom extends Model
     {
         return $this->belongsTo( Teacher::class, 'teacher_id' );
     }
+
+    /*
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo( User::class, 'teacher_id' );
+    }
+    */
 
     public function activities(): HasMany
     {

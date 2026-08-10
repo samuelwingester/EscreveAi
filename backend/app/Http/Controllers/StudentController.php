@@ -19,7 +19,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with( 'user' )->get();
+        $students = Student::all();
 
         return response()->json( $students, 200 );
     }
@@ -41,9 +41,6 @@ class StudentController extends Controller
      */
     public function show( Student $student )
     {
-        // Carrega os dados relacionados a usuario
-        $student->load( 'user' );
-
         return response()->json( $student, 200 );
     }
 
@@ -65,7 +62,7 @@ class StudentController extends Controller
      */
     public function destroy( Student $student )
     {
-        $student->user->deleteOrFail();
+        $student->deleteOrFail();
 
         return response()->noContent( 204 );
     }

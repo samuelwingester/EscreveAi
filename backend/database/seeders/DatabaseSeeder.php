@@ -97,7 +97,7 @@ class DatabaseSeeder extends Seeder
             'email'         => 'teste@teste.teste',
             'password'      => 'teste',
             'name'          => 'teste',
-            'birth_date'    =>fake()->date()
+            'birth_date'    => fake()->date()
         ]);
     }
 }

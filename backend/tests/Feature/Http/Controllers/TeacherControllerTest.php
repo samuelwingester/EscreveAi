@@ -17,7 +17,6 @@ class TeacherControllerTest extends TestCase
 
     public function test_teacher_controller_index_sucess(): void
     {
-        $this->withoutExceptionHandling();
         $response = $this->get('/api/teacher');
 
         //--------------------------------------------------------

@@ -16,6 +16,7 @@ class StoreStudentService
 	{
 		// Tenta inserir as informações do novo usuario
 		return DB::transaction( function () use ( $data ) {
+			/*
 			// Inserção do novo usuario
 			$user = User::create([
 				'email' 		=> $data['email'],
@@ -26,9 +27,10 @@ class StoreStudentService
 				'type'			=> UserType::STUDENT
 			]);
 			//
+			*/
 
 			// Inserção das informações especificas do tipo de usuario
-			return $user->student()->create([
+			return Student::create([
 				'class_id' 		=> $data['class_id'],
 				'writing_level' => $data['writing_level'] ?? null,
 				'observations' 	=> $data['observations'] ?? null

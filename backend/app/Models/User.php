@@ -4,13 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-use App\Models\Student;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
+# use App\Models\Student;
 use App\Models\Teacher;
 
 use App\Enums\UserType;
@@ -32,6 +34,7 @@ class User extends Authenticatable
         'type'
     ];
 
+    # Revisar depois
     protected $hidden = [
         'password',
         'remember_token',
@@ -50,14 +53,20 @@ class User extends Authenticatable
     //--------------------------------------------------------
     // Relacionamentos
     //--------------------------------------------------------
+    /*
     public function student(): HasOne
     {
         return $this->hasOne( Student::class );
     }
-
+    */
     public function teacher(): HasOne
     {
         return $this->hasOne( Teacher::class );
+    }
+
+    public function classes(): HasMany
+    {
+        return $this->hasMany( Classroom::class );
     }
     //--------------------------------------------------------
 }

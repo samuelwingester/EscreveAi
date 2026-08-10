@@ -29,13 +29,15 @@ class StoreStudentRequest extends FormRequest
     {
         // Required fields normalization
         $normalization = [
-            'email' => Str::lower( Str::trim( $this->email ) ),
+            // 'email' => Str::lower( Str::trim( $this->email ) ),
             'name'  => Str::ucwords( Str::squish( $this->name ) ),
         ];
 
         // Optional fields normalization
+        /*
         if ( $this->filled( 'gender' ) ) 
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
+        */
 
         if ( $this->filled( 'writing_level' ) ) 
             $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '_' );
@@ -54,6 +56,7 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
+            /*
             // User Class Data
             'email'         => ['required', 'email', 'unique:users,email'],
             'password'      => ['required', 'confirmed', Password::min(8)],
@@ -61,6 +64,7 @@ class StoreStudentRequest extends FormRequest
             'gender'        => ['nullable', 'string', new Enum( Gender::class )],
             'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
             //
+            */
 
             // Student Class Data
             'class_id'      => ['required', 'integer', 'exists:classes,id'],
