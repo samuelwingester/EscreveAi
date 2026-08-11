@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/login.css">
     <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/request/login.js"></script>
 </head>
 
 <body>
@@ -22,7 +24,7 @@
                 <p class="subtitle">Entre para acompanhar a evolução da escrita dos seus alunos.</p>
             </header>
 
-            <form action="">
+            <form action="" id="login-form">
                 <my-field icon="user" placeholder="Nome de Usuário ou email" stroke="6" type="email" input_id="input_user_email"></my-field>
                 <my-field icon="lock" placeholder="Digite sua senha aqui..." stroke="1.5" eye="true" type="password" input_id="input_user_password"></my-field>
 
@@ -42,8 +44,7 @@
                         <p class="body-small purple"><a href="">Esqueceu sua Senha?</a></p>
                     </div>
                 </div>
-                    <!-- NOTA: Preciso de um input type submit aqui, Resolva ISaaac --> 
-                    <input type="submit">
+                    <input type="submit" value="">
                     <div class="botao-padrao">
                         <p>Entrar</p>
                     </div>

@@ -1,50 +1,64 @@
-export function getEscreveAiApiBaseUrl(){
-    return "http://127.0.0.1:8000/api";
-}
+export class apiHelper{
 
-export function getTokenBearer( local = true ){
-    let $token = ""
-    if ( local ){ $token = localStorage.getItem( 'token-bearer' ); } 
-    else{ $token = sessionStorage.getItem( 'token-bearer' ); }
-    return $token;
-}
+    constructor (){}
 
-export function setTokenBearer( token, local = true ){
-    if ( local ){ localStorage.setItem( 'token-bearer', token ); } 
-    else{ sessionStorage.setItem( 'token-bearer', token ); }
-}
+    static getEscreveAiApiBaseUrl(){
+        return "http://127.0.0.1:8000/api";
+    }
 
-export function getDefaultAuthHeader(){
-    $token = getTokenBearer();
+    static getTokenBearer( local = true ){
+        let $token = null; 
+        if ( local ) $token = localStorage.getItem( 'token-bearer' ); 
+        else $token = sessionStorage.getItem( 'token-bearer' ); 
+        return $token;
+    }
 
-    return  {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    };
-}
+    static setTokenBearer( token, local = true ){
+        if ( local ) localStorage.setItem( 'token-bearer', token ); 
+        else sessionStorage.setItem( 'token-bearer', token );
+    }
 
-export function getDefaultHeader(){
-    return  {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    };
-}
+    static getDefaultAuthHeader(){
+        const token = apiHelper.getTokenBearer();
 
-export async function fetchApiWithAuth( route, method = "GET", body = null, header = null ){
-    const response = fetch( getEscreveAiApiBaseUrl() + route, {
-        method : method,
-        headers : !header ? getDefaultAuthHeader() : header,
-        body : !body ? "" : body
-    });
-    return response;
-}
+        if ( !token ) throw "Unable to retrieve token";
 
-export async function fetchApi( route, method = "GET", body = null, header = null ){
-    const response = fetch( getEscreveAiApiBaseUrl() + route, {
-        method : method,
-        headers : !header ? getDefaultHeader() : header,
-        body : !body ? body : ""
-    });
-    return response;
+        return  {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+    }
+
+    static getDefaultHeader(){
+        return  {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        };
+    }
+
+    static async fetchApiWithAuth( route, method = "GET", body = null, header = null ){
+        const full_route = apiHelper.getEscreveAiApiBaseUrl() + route;
+        const options = {
+            method : method,
+            headers : !header ? apiHelper.getDefaultAuthHeader() : header
+        };
+
+        if ( body ){ options.body = JSON.stringify( body ); }
+
+        return fetch( full_route, options );
+    }
+
+    static async fetchApi( route, method = "GET", body = null, header = null ){
+        const full_route = apiHelper.getEscreveAiApiBaseUrl() + route;
+        const options = {
+            method : method,
+            headers : !header ? apiHelper.getDefaultHeader() : header
+        };
+
+        if ( body ){ options.body = JSON.stringify( body ); }
+
+        return fetch( full_route, options );
+    }
+
 }

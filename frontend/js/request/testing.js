@@ -1,4 +1,4 @@
-import * as apiHelper from "./apihelper.js";
+import { apiHelper } from "./apihelper.js";
 
 // Não sei que merda e essa. codigo de ia para teste
 function syntaxHighlight(json) {
@@ -24,7 +24,9 @@ function renderJson(data) {
   document.getElementById('output').innerHTML = syntaxHighlight(data);
 }
 
-const response = await apiHelper.fetchApi('/');
+try{
+const response = await apiHelper.fetchApiWithAuth( "/user" );
 const result = await response.json();
 
 renderJson(result);
+} catch( error ) { console.log( error ) }

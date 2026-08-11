@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/register.css">
     <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/request/register.js"></script>
 </head>
 
 <body>
@@ -22,18 +24,27 @@
                 <p class="subtitle">Cadastre-se para começar a acompanhar a evolução da escrita dos seus alunos.</p>
             </header>
 
-            <form action="">
-                <my-field icon="user" placeholder="Nome Completo" stroke="6"></my-field>
-                <my-field icon="mail" placeholder="Email" stroke="1.5" ></my-field>
-                <my-field icon="calendar" placeholder="Data de Nascimento" stroke="1.5" ></my-field>
-                <my-field icon="gender" placeholder="Gênero" stroke="1.5" ></my-field>
-                <my-field icon="lock" placeholder="Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;"></my-field>
-                <my-field icon="lock" placeholder="Confirmar Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;"></my-field>
+            <form action="" id="register-form">
+                <my-field icon="user" placeholder="Nome Completo" stroke="6" type="text" input_id="input_name"></my-field>
+                <my-field icon="mail" placeholder="Email" stroke="1.5" type="email" input_id="input_email"></my-field>
+
+                <!-- <my-field icon="calendar" placeholder="Data de Nascimento" stroke="1.5" type="date" input_id="input_birth_date"></my-field> -->
+                <input type="date" name="" id="input_birth_date">
+                <!-- <my-field icon="gender" placeholder="Gênero" stroke="1.5"></my-field> -->
+
+                <select id="input_gender">
+                    <option value="man">Homem</option>
+                    <option value="woman">Mulher</option>
+                    <option value="">Prefiro Não Dizer</option>
+                </select>
+
+                <my-field icon="lock" placeholder="Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;" type="password" input_id="input_password"></my-field>
+                <my-field icon="lock" placeholder="Confirmar Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;" type="password" input_id="input_password_confirmation"></my-field>
                 
                 <div class="confirm">
                     <div class="remember">
                         <label class="custom-checkbox">
-                            <input type="checkbox" name="remember">
+                            <input type="checkbox" name="remember" id="checkbox_remember">
                             <span class="checkmark">
                                 <svg>
                                     <use href="../../assets/icons/sprite.svg#icon-check"></use>
@@ -47,6 +58,7 @@
                         <p class="body-small purple"><a href="">Esqueceu sua Senha?</a></p>
                     </div>
                 </div>
+                <input type="submit" value="">
                 <div class="botao-padrao">
                     <p>Entrar</p>
                 </div>
