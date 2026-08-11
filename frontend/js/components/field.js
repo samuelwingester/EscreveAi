@@ -13,13 +13,13 @@ export class Field extends HTMLElement {
     if (isSelect) {
       const optionsHTML = this.innerHTML.trim();
       inputControl = `
-        <select id="${id}">
+        <select id="${id}" required>
           <option value="" disabled selected hidden>${placeholder}</option>
           ${optionsHTML}
         </select>
       `;
     } else {
-      inputControl = `<input type="${type}" placeholder="${placeholder}" id="${id}">`;
+      inputControl = `<input type="${type}" placeholder="${placeholder}" id="${id}" required>`;
     }
 
     this.innerHTML = `

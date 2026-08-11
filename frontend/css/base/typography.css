@@ -96,6 +96,29 @@ input::placeholder {
     color: var(--text-secondary)
 }
 
+select {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-primary);
+    background: transparent;
+    border: 0;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+select:invalid {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--text-secondary)
+}
+
+input:invalid{
+    color: var(--text-secondary);
+}
+
 .line {
     width: 100px;
     height: 2px;
@@ -105,6 +128,7 @@ input::placeholder {
     display: flex;
     align-items: center;
     user-select: none;
+
     p {
         color: var(--gray-500);
         margin: 0px 5px;

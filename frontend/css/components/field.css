@@ -47,16 +47,11 @@
     select {
       width: 100%;
       padding: 10px 5px;
-      border: 0;
-      background: transparent;
-      font-size: inherit;
-      appearance: none;
-      cursor: pointer;
-      font-family: 'Poppins', sans-serif;
-    }
 
-    select:invalid {
-      color: var(--text-disabled);
+      option {
+        background: var(--text-white);
+        color: var(--text-primary);
+      }
     }
 
     label {
@@ -74,4 +69,5 @@
     }
   }
 }
+
 
