@@ -35,25 +35,14 @@ Route::apiResource( 'classroom', ClassroomController::class )->middleware( 'auth
 Route::apiResource( 'activity', ActivityController::class )->middleware( 'auth:sanctum' );
 */
 
-// CRUD Basico
-if ( config( 'app.bypass_auth' ) ){
+Route::middleware( 'auth:sanctum' )->group( function () {
     Route::apiResources([
         'student'   => StudentController::class, 
         'teacher'   => TeacherController::class, 
         'classroom' => ClassroomController::class, 
         'activity'  => ActivityController::class 
     ]);
-}
-else {
-    Route::middleware( 'auth:sanctum' )->group( function () {
-        Route::apiResources([
-            'student'   => StudentController::class, 
-            'teacher'   => TeacherController::class, 
-            'classroom' => ClassroomController::class, 
-            'activity'  => ActivityController::class 
-        ]);
-    });
-}
+});
 
 // Rotas de Login
 Route::controller( AuthController::class )->group( function () {

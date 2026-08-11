@@ -34,7 +34,8 @@ class AuthController extends Controller
         StoreTeacherRequest $request,
         StoreTeacherService $service   
     ){
-        $user = $service->execute( $request->validated() );
+        $teacher = $service->execute( $request->validated() );
+        $user = $teacher->user;
 
         // NT: Talvez passar para um service depois.
         $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );

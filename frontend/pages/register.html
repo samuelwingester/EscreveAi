@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí - Cadastro</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/register.css">
+    <script type="module" src="../js/components/main.js"></script>
+</head>
+
+<body>
+    <header-padrao></header-padrao>
+
+    <main>
+        <div class="container">
+            <img src="../imgs/logos/logoH.png" alt="Logo Escreve Aí">
+            
+            <header>
+                <h1>Criar Conta</h1>
+                <p class="subtitle">Cadastre-se para começar a acompanhar a evolução da escrita dos seus alunos.</p>
+            </header>
+
+            <form action="">
+                <my-field icon="user" placeholder="Nome Completo" stroke="6"></my-field>
+                <my-field icon="mail" placeholder="Email" stroke="1.5" ></my-field>
+                <my-field icon="calendar" placeholder="Data de Nascimento" stroke="1.5" ></my-field>
+                <my-field icon="gender" placeholder="Gênero" stroke="1.5" ></my-field>
+                <my-field icon="lock" placeholder="Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;"></my-field>
+                <my-field icon="lock" placeholder="Confirmar Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;"></my-field>
+                
+                <div class="confirm">
+                    <div class="remember">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="remember">
+                            <span class="checkmark">
+                                <svg>
+                                    <use href="../../assets/icons/sprite.svg#icon-check"></use>
+                                </svg>
+                            </span>
+                        </label>
+                        <p class="body-small">Lembrar de Mim</p>
+                    </div>
+
+                    <div class="forgot">
+                        <p class="body-small purple"><a href="">Esqueceu sua Senha?</a></p>
+                    </div>
+                </div>
+                <div class="botao-padrao">
+                    <p>Entrar</p>
+                </div>
+                <div class="line-between">
+                    <div class="line"></div>
+                    <p>OU</p>
+                    <div class="line"></div>
+                </div>
+                <div class="login">
+                    <p>
+                        Já possui uma conta? 
+                        <a href="login.html" class="purple">
+                            Entrar
+                            <svg>
+                                <use href="../../assets/icons/sprite.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

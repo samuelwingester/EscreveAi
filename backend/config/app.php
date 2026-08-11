@@ -129,5 +129,5 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'bypass_auth' => (bool) env( 'APP_BYPASS_AUTH', true )
+    'bypass_auth' => (bool) env( 'APP_BYPASS_AUTH', false )
 ];

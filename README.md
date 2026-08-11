@@ -78,16 +78,14 @@ php artisan serve
  ## Documentação
 
 ### Caminhos e Comandos importantes
-| Camada | Caminho | Comando `php artisan` + |
-| :---: | :--- | :--- |
-| Controllers | app/Http/Controllers/ | `make:controller {nome}` |
-| Models | app/Models | `make:model {nome}` |
-| Migrations | database/migrations/ | `make:migration {nome}` |
-| Factories | database/factories/ | `make:factory --model={model} {nome}` |
-| Seeders | database/seeders/ | `make:seeder {nome}` |
-| Services | app/Services/ | `make:service {model} {nome}` |
-| Rotas:api | routes/api.php|  |
-
- ---
+|   | Caminho | Comando `php artisan`  | Descrição |
+| :---: | :--- | :--- | :--- |
+| Controllers | app/Http/Controllers/ | `make:controller {nome}` | Cria um Controller |
+| Models | app/Models | `make:model {nome}` | Cria uma Model |
+| Migrations | database/migrations/ | `make:migration {nome}` | Cria uma Migração |
+| Factories | database/factories/ | `make:factory --model={model} {nome}` | Cria uma Factory |
+| Seeders | database/seeders/ | `make:seeder {nome}` | Cria um Seeder |
+| Services | app/Services/ | `make:service {model} {nome}` | Cria um Service para uma Model |
+| Tests | tests/Feature/ | `make:test {nome}` | Cria um Teste |
 
  ### Rotas

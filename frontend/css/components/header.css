@@ -1,0 +1,28 @@
+header-padrao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 10px 24px;
+    background-color: white;
+
+    .buttons {
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .logos{
+
+        display: flex;
+        align-items: center;
+        height: 100%;
+        img{
+            height: 100%;
+        }
+        img:nth-child(2){
+            width: auto;
+            height: 60%;
+        }
+    }
+}
