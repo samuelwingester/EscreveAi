@@ -2,8 +2,8 @@ export class HeaderPadrao extends HTMLElement {
     connectedCallback() {   
       this.innerHTML = `
           <div class="logos">
-              <img src="../../imgs/logos/logoL.png" alt="">
-              <img src="../../imgs/logos/logoH.png" alt="">
+              <img src="../imgs/logos/logoL.png" alt="">
+              <img src="../imgs/logos/logoH.png" alt="">
           </div>
           <div class="botoes">
               <button class="botao-padrao" id= "vazio">

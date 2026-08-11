@@ -2,6 +2,7 @@
   display: flex;
   align-items: stretch;
   width: 100%;
+  height: 100%;
   border: solid 1px #D9DCE8;
   border-radius: 5px;
   transition: outline 0.2s, border-color 0.2s;
@@ -43,6 +44,21 @@
       }
     }
 
+    select {
+      width: 100%;
+      padding: 10px 5px;
+      border: 0;
+      background: transparent;
+      font-size: inherit;
+      appearance: none;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    select:invalid {
+      color: var(--text-disabled);
+    }
+
     label {
       display: flex;
       align-items: center;
@@ -58,3 +74,4 @@
     }
   }
 }
+
