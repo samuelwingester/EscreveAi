@@ -56,7 +56,12 @@ cd EscreveAi/backend
 composer install
 ```
 
-**Carregar o arquivo .env**
+**Gerar Loader do php**
+```bash
+composer dump-autoload
+```
+
+**Carregar o arquivo .env** | NOTA -> *Altere de acordo com suas configurações*
 ```bash
 #Linux
 cp .env.example .env
@@ -65,9 +70,19 @@ cp .env.example .env
 copy .env.example .env
 ```
 
+**Configuração do Laravel**
+```bash
+php artisan key:generate
+```
+**Criação das Tabelas**
+```bash
+php artisan migrate
+```
 
-Alternativamente, baixe o arquivo de setup em "setup/" ( setup.sh -> linux | setup.bat -> windows )
-e o execute no terminal ou diretamente
+**Inserir Dados de Teste**
+```bash
+php artisan db:seed 
+```
 
 ### Rodando o Projeto
 
