@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí - Login</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/login.css">
+    <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/request/login.js"></script>
+</head>
+
+<body>
+    <header-padrao></header-padrao>
+
+    <main>
+        <div class="container">
+            <img src="../imgs/logos/logoH.png" alt="Logo Escreve Aí">
+            
+            <header>
+                <h1>Login</h1>
+                <p class="subtitle">Entre para acompanhar a evolução da escrita dos seus alunos.</p>
+            </header>
+
+            <form action="" id="login-form">
+                <my-field icon="user" placeholder="Nome de Usuário ou email" stroke="6" type="email" input_id="input_user_email"></my-field>
+                <my-field icon="lock" placeholder="Digite sua senha aqui..." stroke="1.5" eye="true" type="password" input_id="input_user_password"></my-field>
+
+                <div class="confirm">
+                    <div class="remember">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" name="remember" id="checkbox_remember">
+                            <span class="checkmark">
+                                <svg>
+                                    <use href="../../assets/icons/sprite.svg#icon-check"></use>
+                                </svg>
+                            </span>
+                        </label>
+                        <p class="body-small">Lembrar de Mim</p>
+                    </div>
+                    <div class="forgot">
+                        <p class="body-small purple"><a href="">Esqueceu sua Senha?</a></p>
+                    </div>
+                </div>
+                    <input type="submit" value="">
+                    <div class="botao-padrao">
+                        <p>Entrar</p>
+                    </div>
+                <div class="line-between">
+                    <div class="line"></div>
+                    <p>OU</p>
+                    <div class="line"></div>
+                </div>
+
+                <div class="register">
+                    <p>
+                        Não tem uma conta?
+                        <a href="register.html" class="purple">
+                            Cadastre-se
+                            <svg>
+                                <use href="../../assets/icons/sprite.svg#icon-arrow-right"></use>
+                            </svg>
+                        </a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>

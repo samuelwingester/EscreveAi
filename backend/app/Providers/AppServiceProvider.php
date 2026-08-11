@@ -27,9 +27,5 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('global', function (Request $request) {
             return Limit::perMinute(60);
         });
-
-        View::addNamespace('view', [
-            resource_path('../../frontend/views'),
-        ]);
     }
 }

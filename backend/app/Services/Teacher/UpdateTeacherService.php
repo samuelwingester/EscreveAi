@@ -5,10 +5,11 @@ namespace App\Services\Teacher;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Teacher;
+use App\Models\User;
 
 class UpdateTeacherService
  {
-	public function execute( array $data, Teacher $teacher )
+	public function execute( array $data, Teacher $teacher ): bool
 	{
 		// Tenta atualizar as informações do usuario
 		return DB::transaction( function () use ( $data, $teacher ) {

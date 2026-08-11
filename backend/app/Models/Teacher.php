@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use App\Models\User;
 use App\Models\Classroom;
 
@@ -22,12 +25,12 @@ class Teacher extends Model
     //--------------------------------------------------------
     // Relacionamentos
     //--------------------------------------------------------
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo( User::class, 'user_id' );
     }
-
-    public function classes()
+    
+    public function classes(): HasMany
     {
         return $this->hasMany( Classroom::class );
     }
@@ -50,7 +53,7 @@ class Teacher extends Model
         );
     }
 
-    protected function birth_date(): Attribute
+    protected function birthDate(): Attribute
     {
         return Attribute::make(
             get : fn() => $this->user->birth_date
@@ -64,7 +67,7 @@ class Teacher extends Model
         );
     }
 
-    protected function secondary_email(): Attribute
+    protected function secondaryEmail(): Attribute
     {
         return Attribute::make(
             get : fn() => $this->user->secondary_email

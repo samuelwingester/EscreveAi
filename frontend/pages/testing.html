@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JSON Viewer</title>
+<script type="module" src="../js/request/testing.js"></script>
+<style>
+  body {
+    font-family: monospace;
+    background: #1e1e1e;
+    color: #ddd;
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  #output {
+    width: 60%;
+    min-width: 320px;
+    max-width: 800px;
+    background: #2a2a2a;
+    padding: 15px;
+    border-radius: 6px;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .key { color: #9cdcfe; }
+  .string { color: #ce9178; }
+  .number { color: #b5cea8; }
+  .boolean { color: #569cd6; }
+  .null { color: #808080; }
+</style>
+</head>
+<body>
+
+<div id="output"></div>
+
+</body>
+</html>

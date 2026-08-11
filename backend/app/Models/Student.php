@@ -6,8 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 use App\Models\Classroom;
-use App\Models\User;
+# use App\Models\User;
 use App\Models\Record;
 use App\Models\Report;
 
@@ -36,22 +39,24 @@ class Student extends Model
     //--------------------------------------------------------
     // Relacionamentos
     //--------------------------------------------------------
-    public function user()
+    /*
+    public function user(): BelongsTo
     {
         return $this->belongsTo( User::class, 'user_id' );
     }
+    */
 
-    public function classroom()
+    public function classroom(): BelongsTo
     {
         return $this->belongsTo( Classroom::class, 'class_id' );
     }
 
-    public function records()
+    public function records(): HasMany
     {
         return $this->hasMany( Record::class );
     }
 
-    public function reports()
+    public function reports(): HasMany
     {
         return $this->hasMany( Report::class );
     }
@@ -60,6 +65,7 @@ class Student extends Model
     //--------------------------------------------------------
     // Acessors
     //--------------------------------------------------------
+    /*
     protected function name(): Attribute
     {
         return Attribute::make(
@@ -74,7 +80,7 @@ class Student extends Model
         );
     }
 
-    protected function birth_date(): Attribute
+    protected function birthDate(): Attribute
     {
         return Attribute::make(
             get : fn() => $this->user->birth_date
@@ -88,11 +94,12 @@ class Student extends Model
         );
     }
 
-    protected function secondary_email(): Attribute
+    protected function secondaryEmail(): Attribute
     {
         return Attribute::make(
             get : fn() => $this->user->secondary_email
         );
     }
+    */
     //--------------------------------------------------------
 }

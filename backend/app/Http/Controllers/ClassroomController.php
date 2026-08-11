@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Models\Classroom;
+use App\Models\Teacher;
+
+use App\Http\Requests\Classroom\StoreClassroomRequest;
+use App\Http\Requests\Classroom\UpdateClassroomRequest;
 
 use App\Services\Classroom\StoreClassroomService;
 use App\Services\Classroom\UpdateClassroomService;
@@ -16,40 +20,54 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        return Classroom::all();
+        $classrooms = Classroom::all();
+
+        return response()->json( $classrooms, 200 );
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store( 
+        StoreClassroomRequest $request, 
+        StoreClassroomService $service 
+    ){
+        // Provavelmente desnecessario mudar futuramente. 
+        $teacher = Teacher::find( $request->validated( 'teacher_id' ), 'id' ); 
 
+        $service->execute( $teacher, $request->validated( 'name' ) );
+        
+        return response()->noContent( 201 );
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Classroom $classroom)
+    public function show( Classroom $classroom )
     {
-        return $classroom;
+        return response()->json( $classroom, 200 );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Classroom $classroom)
-    {
+    public function update( 
+        UpdateClassroomRequest $request, 
+        UpdateclassroomService $service, 
+        Classroom $classroom 
+    ){
+        $service->execute( $classroom, $request->validated() );
 
+        return response()->noContent( 204 );
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Classroom $classroom)
+    public function destroy( Classroom $classroom )
     {
         $classroom->deleteOrFail();
 
-        return response()->noContent();
+        return response()->noContent( 204 );
     }
 }

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/home.css">
+    <script type="module" src="../js/components/main.js"></script>
+</head>
+
+<body>
+    <header-padrao></header-padrao>
+
+    <main>
+        <div class="container">
+            <div class="col">
+                <div class="text">
+                    <h1>Acompanhe a <span class="blue">evolução da escrita</span> infantil com <span
+                            class="yellow">clareza</span> e <span class="green">inteligência</span></h1>
+                    <div class="line"></div>
+                    <p>Registre atividades, analise o desenvolvimento de cada criança e gere relatórios pedagógicos em
+                        poucos cliques</p>
+                </div>
+                <div class="buttons">
+                    <button class="botao-largo">
+                        <p><a href="login.html">Começar agora</a></p>
+                        <svg>
+                            <use href="assets/icons/sprite.svg#icon-arrow-right"></use>
+                        </svg>
+                    </button>
+                    <button class="botao-largo" id="vazioBorda">
+                        <p>Ver como funciona</p>
+                        <svg>
+                            <use href="assets/icons/sprite.svg#icon-arrow-right"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <section id="funcionamento">
+        <div class="top">
+            <h2>Como Funciona</h2>
+            <div class="line"></div>
+        </div>
+        <div class="steps">
+            <my-step color="purple" icon="users" title="Cadastre Alunos"
+                description="Organize suas turmas e cadastre os alunos de forma rápida e prática"></my-step>
+            <div class="line"></div>
+            <my-step color="yellow" icon="atividades" title="Registre Atividades"
+                description="Adicione produções escritas e observações do dia a dia em poucos cliques"></my-step>
+            <div class="line"></div>
+            <my-step color="green" icon="grafevo" title="Acompanhe a Evolução"
+                description="Visualize análises, identifique avanços e gere relatórios automaticamente"></my-step>
+        </div>
+    </section>
+    <section id="beneficios">
+        <div class="top">
+            <h2>Benefícios para o seu dia a dia </h2>
+            <div class="line"></div>
+        </div>
+        <div class="benefits">
+            <my-benefit color="purple" icon="clock" title="Economize
+            Tempo"
+            description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
+            </my-benefit>
+            <my-benefit color="yellow" icon="folder" title="Organização completa"
+            description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
+            </my-benefit>
+            <my-benefit color="green" icon="graf" title="Análises Inteligentes"
+            description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
+            </my-benefit>
+            <my-benefit color="blue" icon="users" title="Compartilhe
+            fácil"
+            description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
+            </my-benefit>
+        </div>
+    </section>
+</body>
+
+</html>

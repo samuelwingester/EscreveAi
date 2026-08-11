@@ -25,8 +25,6 @@ return new class extends Migration
                   ->constrained('activities')
                   ->cascadeOnDelete();
 
-            $table->string('file_path');
-
             $table->timestamps();
         });
     }

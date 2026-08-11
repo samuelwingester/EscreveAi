@@ -1,0 +1,125 @@
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 100px);
+  background-image: url(../../imgs/home/Main.png);
+  background-position: center;
+  background-size: cover;
+
+  .container {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    width: 25%;
+    padding: 25px 20px;
+    background-color: var(--text-white);
+    border-radius: 15px;
+
+    header {
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-flow: column;
+      width: 100%;
+      padding: 15px 0;
+      gap: 10px;
+
+      .confirm {
+        display: flex;
+        justify-content: space-between;
+
+        .remember {
+          display: flex;
+          align-items: center;
+
+          gap: 5px;
+
+          .custom-checkbox {
+            display: flex;
+            cursor: pointer;
+
+            input {
+              width: 0;
+              height: 0;
+
+              &:checked+.checkmark {
+                background-color: var(--purple-dark);
+                border-color: var(--purple-dark);
+
+                svg {
+                  opacity: 1;
+                  transform: scale(0.7);
+                }
+              }
+            }
+
+            .checkmark {
+              width: 20px;
+              height: 20px;
+
+              border: 2px solid var(--gray-300);
+              border-radius: 5px;
+              transition: all 0.2s ease-in-out;
+
+              svg {
+                width: 100%;
+                height: 100%;
+
+                color: white;
+                stroke-width: 12px;
+
+                opacity: 0;
+                transform: scale(0.3);
+                transition: all 0.2s ease-in-out;
+              }
+            }
+          }
+        }
+
+
+      }
+
+      .botao-padrao {
+        border-radius: 5px;
+      }
+
+      .register {
+        display: flex;
+        justify-content: center;
+
+        p {
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+
+          a {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: transform 0.2s ease-in-out;
+
+            &:hover {
+              transform: scale(1.05);
+            }
+
+            svg {
+              width: 16px;
+              height: 16px;
+              display: inline-block;
+              vertical-align: middle;
+              stroke-width: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+img {
+  width: 30%;
+}

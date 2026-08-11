@@ -21,11 +21,10 @@ return new class extends Migration
                   ->constrained('students')
                   ->cascadeOnDelete();
 
-            $table->foreignId('teacher_id')
+            //NT: Conferir essa relação depois, talvez seja desnecessaria 
+            $table->foreignId('teacher_id') 
                   ->constrained('teachers')
                   ->cascadeOnDelete();
-
-            $table->string('file_path');
 
             $table->date('start_date');
             $table->date('end_date');

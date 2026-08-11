@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\UserType;
+use App\Enums\Gender;
+
 return new class extends Migration
 {
     /**
@@ -20,10 +23,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password', 255);
             $table->string('name', 150);
-            $table->string('type', 7); # enum UserType
+            $table->enum('type', UserType::cases()); 
             $table->date('birth_date');
 
-            $table->string('gender', 6)->nullable(); # enum Gender
+            $table->enum('gender', Gender::cases())->nullable(); 
             $table->string('secondary_email')->unique()->nullable();
 
             $table->rememberToken();

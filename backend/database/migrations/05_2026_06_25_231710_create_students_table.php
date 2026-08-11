@@ -4,6 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\WritingLevel;
 
 return new class extends Migration
 {
@@ -18,15 +19,19 @@ return new class extends Migration
             
             $table->id();
 
+            /*
             $table->foreignId('user_id')
                   ->constrained('users')
                   ->cascadeOnDelete();
+            */
+
+            // NT: Adicionar contatos depois
 
             $table->foreignId('class_id')
                   ->constrained('classes')
                   ->cascadeOnDelete();
 
-            $table->string('writing_level', 20)->nullable(); # enum WritingLevel
+            $table->enum('writing_level', WritingLevel::cases())->nullable(); 
             $table->text('observations')->nullable();
             
             $table->timestamps();
