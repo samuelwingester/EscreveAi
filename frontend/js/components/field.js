@@ -1,53 +1,56 @@
 export class Field extends HTMLElement {
   connectedCallback() {
+    const type = this.getAttribute('type') || 'text';
     const icon = this.getAttribute('icon') || 'user';
-    const placeholder = this.getAttribute('placeholder') || 'Placeholder padrão';
+    const placeholder = this.getAttribute('placeholder') || 'Selecione...';
     const stroke = this.getAttribute('stroke') || 1;
-    const eye = this.getAttribute('eye') === 'true';
-    const input_id = this.getAttribute('input_id') || '';
+    const hasEye = this.getAttribute('eye') === 'true';
+    const id = this.getAttribute('input_id') || '';
+    const isSelect = this.getAttribute('is_select') === 'true';
 
-    const inputType = eye ? 'password' : 'text';
-    const display = eye ? 'block' : 'none';
+    let inputControl = '';
+
+    if (isSelect) {
+      const optionsHTML = this.innerHTML.trim();
+      inputControl = `
+        <select id="${id}" required>
+          <option value="" disabled selected hidden>${placeholder}</option>
+          ${optionsHTML}
+        </select>
+      `;
+    } else {
+      inputControl = `<input type="${type}" placeholder="${placeholder}" id="${id}" required>`;
+    }
 
     this.innerHTML = `
       <div class="field">
         <div class="icon">
           <svg style="stroke-width: ${stroke}px;">
-            <use href="../../assets/icons/sprite.svg#icon-${icon}"></use>
+            <use href="../assets/icons/sprite.svg#icon-${icon}"></use>
           </svg>
         </div>
         <div class="text">
-          <input type="${inputType}" placeholder="${placeholder}" id="${input_id}">
-          <label class="toggle-eye" style="display: ${display}; cursor: pointer;">
-            <svg class="eye-icon" style="stroke-width: 2px;">
-              <use href="../../assets/icons/sprite.svg#icon-eye"></use>
-            </svg>
-          </label>
+          ${inputControl}
+          ${hasEye ? `
+            <label class="toggle-eye" style="cursor: pointer;">
+              <svg class="eye-icon" style="stroke-width: 2px;">
+                <use href="../assets/icons/sprite.svg#icon-eye"></use>
+              </svg>
+            </label>
+          ` : ''}
         </div>
       </div>
     `;
 
-    // Se o olho estiver habilitado, adiciona a lógica de clique
-    if (eye) {
-      this.setupEyeToggle();
+    if (hasEye) {
+      const input = this.querySelector('input');
+      const useTag = this.querySelector('.eye-icon use');
+
+      this.querySelector('.toggle-eye').addEventListener('click', () => {
+        const isOriginal = input.type === type;
+        input.type = isOriginal ? 'text' : type;
+        useTag?.setAttribute('href', `../assets/icons/sprite.svg#icon-eye${isOriginal ? '-off' : ''}`);
+      });
     }
   }
-
-  setupEyeToggle() {
-    const input = this.querySelector('input');
-    const eyeBtn = this.querySelector('.toggle-eye');
-    const eyeUseTag = this.querySelector('.eye-icon use');
-
-    eyeBtn.addEventListener('click', () => {
-      const isPassword = input.type === 'password';
-      
-      input.type = isPassword ? 'text' : 'password';
-      if (eyeUseTag) {
-        const iconName = isPassword ? 'icon-eye-off' : 'icon-eye';
-        eyeUseTag.setAttribute('href', `../../assets/icons/sprite.svg#${iconName}`);
-      }
-    });
-  }
 }
-
-// customElements.define('my-field', Field);

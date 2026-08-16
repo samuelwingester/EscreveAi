@@ -16,7 +16,9 @@ a:hover{
 input:focus{
     outline: inherit;
 }
-
+select:focus{
+    outline: inherit;
+}
 img{
     user-select: none;
 }
