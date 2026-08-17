@@ -37,6 +37,16 @@ O escreveaí é uma plataforma desenvolvida para auxiliar professores e institui
 
 **GitHub**: https://github.com/samuelwingester/EscreveAi
 
+## Containerização com docker
+
+repositorio usado de exemplo: https://github.com/dockersamples/laravel-docker-examples
+
+
+**Subir containers** - requer docker
+```bash
+docker compose -f compose.dev.yaml up -d
+```
+
 ## Como Executar o Projeto
 
 ### Instalação

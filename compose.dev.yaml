@@ -1,0 +1,60 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ./docker/common/nginx/Dockerfile
+    restart: always
+    ports:
+      - "8081:8080"
+      - "81:80"
+    networks:
+      - dev-network
+    depends_on:
+      php-fpm:
+        condition: service_started
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: ./docker/common/php-fpm/Dockerfile
+      target: development
+      args:
+        UID: ${UID:-1000}
+        GID: ${GID:-1000}
+        XDEBUG_ENABLED: ${XDEBUG_ENABLED:-true}
+        XDEBUG_MODE: develop,coverage,debug,profile
+        XDEBUG_HOST: ${XDEBUG_HOST:-host.docker.internal}
+        XDEBUG_IDE_KEY: ${XDEBUG_IDE_KEY:-DOCKER}
+        XDEBUG_LOG: /dev/stdout
+        XDEBUG_LOG_LEVEL: 0
+    env_file:
+      - ./backend/.env.example
+    user: "${UID:-1000}:${GID:-1000}"
+    volumes:
+      - ./backend/:/var/www/api
+    networks:
+      - dev-network
+    depends_on:
+      database:
+        condition: service_started  
+
+  database:
+    image: mysql:9.7
+    restart: always
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=laravel 
+    volumes:
+      - database-volume-dev:/var/lib/mysql
+    networks:
+      - dev-network
+
+volumes:
+  database-volume-dev:
+    driver: local
+    external: false
+
+networks:
+  dev-network:

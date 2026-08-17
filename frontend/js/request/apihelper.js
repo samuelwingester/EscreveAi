@@ -3,7 +3,7 @@ export class apiHelper{
     constructor (){}
 
     static getEscreveAiApiBaseUrl(){
-        return "http://127.0.0.1:8000/api";
+        return "http://127.0.0.1:8081/api";
     }
 
     static getTokenBearer( local = true ){

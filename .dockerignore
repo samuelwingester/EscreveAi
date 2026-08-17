@@ -1,0 +1,11 @@
+**/.dockerignore
+**/.env
+**/.git
+**/.gitignore
+**/.gitattributes
+**/compose.y*ml
+**/compose.*.y*ml
+**/vendor
+README.md
+.editorconfig
+tests/
