@@ -9,7 +9,7 @@ use App\Models\User;
 
 class UpdateTeacherService
  {
-	public function execute( array $data, Teacher $teacher ): bool
+	public function execute( Teacher $teacher, array $data )
 	{
 		// Tenta atualizar as informações do usuario
 		return DB::transaction( function () use ( $data, $teacher ) {
