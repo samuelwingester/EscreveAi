@@ -2,11 +2,12 @@
 
 namespace App\Repositories;
 
+use App\Repositories\Contracts\TeacherRepositoryInterface;
+
 use App\Repositories\Repository;
 use App\Models\User;
 
-// NOTA: Futuramente criar uma interface para implementar nessa classe
-class TeacherRepository extends Repository
+class TeacherRepository extends Repository implements TeacherRepositoryInterface
 {
     protected string $modelClass = User::class;
 }
