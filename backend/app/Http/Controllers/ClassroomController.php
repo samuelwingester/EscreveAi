@@ -7,17 +7,19 @@ use App\Http\Controllers\Controller;
 use App\Models\Classroom;
 use App\Models\Teacher;
 
-use App\Http\Requests\Classroom\StoreClassroomRequest;
-use App\Http\Requests\Classroom\UpdateClassroomRequest;
+use App\Http\Requests\Classroom\StoreClassroomRequest as StoreRequest;
+use App\Http\Requests\Classroom\UpdateClassroomRequest as UpdateRequest;
 
-use App\Services\Classroom\StoreClassroomService;
-use App\Services\Classroom\UpdateClassroomService;
+use App\Services\Classroom\StoreClassroomService as StoreService;
+use App\Services\Classroom\UpdateClassroomService as UpdateService;
 
 class ClassroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+        protected StoreService $storeService,
+        protected UpdateService $updateService
+    ) {}
+
     public function index()
     {
         $classrooms = Classroom::all();
@@ -25,45 +27,24 @@ class ClassroomController extends Controller
         return response()->json( $classrooms, 200 );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store( 
-        StoreClassroomRequest $request, 
-        StoreClassroomService $service 
-    ){
-        // Provavelmente desnecessario mudar futuramente. 
-        $teacher = Teacher::find( $request->validated( 'teacher_id' ), 'id' ); 
-
-        $service->execute( $teacher, $request->validated( 'name' ) );
+    public function store( StoreRequest $request ){
+        $classroom = $this->storeService->execute( $request->user, $request->validated( 'name' ) );
         
-        return response()->noContent( 201 );
+        return response()->json( $classroom, 201 );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show( Classroom $classroom )
     {
         return response()->json( $classroom, 200 );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( 
-        UpdateClassroomRequest $request, 
-        UpdateclassroomService $service, 
-        Classroom $classroom 
-    ){
-        $service->execute( $classroom, $request->validated() );
+    public function update( UpdateRequest $request, Classroom $classroom )
+    { 
+        $this->updateService->execute( $classroom, $request->validated() );
 
         return response()->noContent( 204 );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy( Classroom $classroom )
     {
         $classroom->deleteOrFail();

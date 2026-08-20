@@ -22,9 +22,7 @@ class StoreClassroomRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         // Required fields normalization
-        $this->merge([
-            'name' => Str::ucwords( Str::squish( $this->name ) ),
-        ]);
+        $this->merge([ 'name' => Str::ucwords( Str::squish( $this->name ) ) ]);
     }     
 
     /**
@@ -34,11 +32,6 @@ class StoreClassroomRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            // Possivelmente desnecessario
-            'teacher_id' => ['required', 'integer', 'exists:teachers,id'],
-            
-            'name'       => ['required', 'string', 'max:100']
-        ];
+        return [ 'name' => ['required', 'string', 'max:100'] ];
     }
 }

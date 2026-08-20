@@ -6,17 +6,19 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Student;
 
-use App\Http\Requests\Student\StoreStudentRequest;
-use App\Http\Requests\Student\UpdateStudentRequest;
+use App\Http\Requests\Student\StoreStudentRequest as StoreRequest;
+use App\Http\Requests\Student\UpdateStudentRequest as UpdateRequest;
 
-use App\Services\Student\StoreStudentService;
-use App\Services\Student\UpdateStudentService;
+use App\Services\Student\StoreStudentService as StoreService;
+use App\Services\Student\UpdateStudentService as UpdateService;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+        protected StoreService $storeService,
+        protected UpdateService $updateService
+    ) {}
+
     public function index()
     {
         $students = Student::all();
@@ -24,42 +26,23 @@ class StudentController extends Controller
         return response()->json( $students, 200 );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store( 
-        StoreStudentRequest $request, 
-        StoreStudentService $service 
-    ){
-        $service->execute( $request->validated() );
+    public function store( StoreRequest $request ){
+        $student = $this->storeService->execute( $request->validated() );
 
-        return response()->noContent( 201 );
+        return response()->json( $student, 201 );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show( Student $student )
     {
         return response()->json( $student, 200 );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( 
-        UpdateStudentRequest $request, 
-        UpdateStudentService $service, 
-        Student $student 
-    ){
-        $service->execute( $request->validated(), $student );
+    public function update( UpdateRequest $request, Student $student ){
+        $this->updateService->execute( $request->validated(), $student );
 
         return response()->noContent( 204 );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy( Student $student )
     {
         $student->deleteOrFail();

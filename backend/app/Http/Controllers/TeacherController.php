@@ -6,17 +6,19 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Teacher;
 
-use App\Http\Requests\Teacher\StoreTeacherRequest;
-use App\Http\Requests\Teacher\UpdateTeacherRequest;
+use App\Http\Requests\Teacher\StoreTeacherRequest as StoreRequest;
+use App\Http\Requests\Teacher\UpdateTeacherRequest as UpdateRequest;
 
-use App\Services\Teacher\StoreTeacherService;
-use App\Services\Teacher\UpdateTeacherService;
+use App\Services\Teacher\StoreTeacherService as StoreService;
+use App\Services\Teacher\UpdateTeacherService as UpdateService;
 
 class TeacherController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct(
+        protected StoreService $storeService,
+        protected UpdateService $updateService
+    ){}
+    
     public function index()
     {
         $teachers = Teacher::with( 'user' )->get();
@@ -24,48 +26,26 @@ class TeacherController extends Controller
         return response()->json( $teachers, 200 );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(
-        StoreTeacherRequest $request, 
-        StoreTeacherService $service
-    ){
-        $service->execute( $request->validated() );
+    public function store( StoreRequest $request ){
+        $teacher = $this->storeService->execute( $request->validated() );
 
-        return response()->noContent( 201 );
+        return response()->json( $teacher, 201 );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show( Teacher $teacher )
+    public function show( Teacher $teacher  )
     {
-        // Carrega os dados relacionados a usuario
-        $teacher->load( 'user' );
-
         return response()->json( $teacher, 200 );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( 
-        UpdateTeacherRequest $request, 
-        UpdateTeacherService $service, 
-        Teacher $teacher
-    ){
-        $service->execute( $request->validated(), $teacher );
+    public function update( UpdateRequest $request, Teacher $teacher ){
+        $this->updateService->execute( $teacher, $request->validated() );
 
         return response()->noContent( 204 );
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy( Teacher $teacher )
     {
-        $teacher->user->deleteOrFail();
+        $teacher->deleteOrFail();
 
         return response()->noContent( 204 );
     }
