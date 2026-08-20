@@ -19,21 +19,21 @@ class TeacherRepositoryTest extends RepositoryTestCase
 
     protected function getTableName(): string
     {
-        return "teachers";
+        return "users";
     }
 
     protected function getCreateData(): array
     {
-        return Teacher::factory()->make()->toArray();
+        return User::factory()->teacher()->make()->getAttributes();
     }
 
     protected function getUpdateData(): array
     {
-        return [ 'name' => 'teste' ]; //possivelmente mudar
+        return [ 'name' => 'teste' ];
     }
 
     protected function createModel(): Model
     {
-        return Teacher::factory()->create();
+        return User::factory()->teacher()->create();
     }
 }
