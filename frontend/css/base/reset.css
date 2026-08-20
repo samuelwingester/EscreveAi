@@ -18,3 +18,8 @@ select:focus{
 img{
     user-select: none;
 }
+
+body{
+    background-color: #F6F7FB;
+    overflow-x: hidden;
+}

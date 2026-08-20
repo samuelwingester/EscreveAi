@@ -20,6 +20,10 @@ main {
     header {
       text-align: center;
     }
+    
+    img{
+      width: 30%;
+    }
 
     form {
       display: flex;
@@ -118,8 +122,4 @@ main {
       }
     }
   }
-}
-
-img {
-  width: 30%;
 }

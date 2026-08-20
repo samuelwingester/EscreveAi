@@ -1,9 +1,11 @@
 import { HeaderPadrao } from './header.js';
 import { Step } from './step.js';
 import { Benefit } from './benefit.js';
-import { Field } from './field.js'
+import { Field } from './field.js';
+import { HeaderBase } from './headerBase.js';
 
 customElements.define('my-benefit', Benefit);
 customElements.define('my-field', Field);
 customElements.define('header-padrao', HeaderPadrao);  
 customElements.define('my-step', Step); 
+customElements.define('header-base', HeaderBase);

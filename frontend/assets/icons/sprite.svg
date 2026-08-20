@@ -148,4 +148,8 @@
     <path d="M0.750092 2.8501L10.2001 9.1501L19.6501 2.8501" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
 
+  <symbol id="icon-switch" viewBox="0 0 16 16" fill="none">
+    <path d="M3.19995 3.20005H13.76M11.36 5.60005L13.76 3.20005L11.36 0.800049" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12.8 12.7999H2.23999M4.63999 15.1999L2.23999 12.7999L4.63999 10.3999" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
 </svg>
