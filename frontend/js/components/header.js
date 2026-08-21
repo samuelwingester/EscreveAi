@@ -1,6 +1,6 @@
 export class HeaderPadrao extends HTMLElement {
-    connectedCallback() {   
-      this.innerHTML = `
+    connectedCallback() {
+        this.innerHTML = `
           <div class="logos">
               <img src="../imgs/logos/logoL.png" alt="">
               <a href="home.html"><img src="../imgs/logos/logoH.png" alt=""></a>
@@ -15,6 +15,6 @@ export class HeaderPadrao extends HTMLElement {
           </div>
       `;
     }
-  }
+}
 
 // customElements.define('header-padrao', HeaderPadrao);

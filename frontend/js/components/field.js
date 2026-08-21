@@ -9,33 +9,30 @@ export class Field extends HTMLElement {
     const name = this.getAttribute('name') || id;
     const isSelect = this.getAttribute('is_select') === 'true';
 
-
     const options = this.innerHTML;
-
     const inputControl = isSelect
       ? `<select id="${id}" name="${name}" required><option value="" disabled selected hidden>${placeholder}</option>${options}</select>`
       : `<input type="${type}" placeholder="${placeholder}" id="${id}" name="${name}" required>`;
-
     
     this.innerHTML = `
-      <div class="field">
-        <div class="icon">
-          <svg style="stroke-width: ${stroke}px;">
-            <use href="../assets/icons/sprite.svg#icon-${icon}"></use>
-          </svg>
+        <div class="field">
+          <div class="icon">
+            <svg style="stroke-width: ${stroke}px;">
+              <use href="../assets/icons/sprite.svg#icon-${icon}"></use>
+            </svg>
+          </div>
+          <div class="text">
+            ${inputControl}
+            ${hasEye ? `
+              <span class="toggle-eye" style="cursor: pointer;">
+                <svg class="eye-icon" style="stroke-width: 2px;">
+                  <use href="../assets/icons/spffffrite.svg#icon-eye"></use>
+                </svg>
+              </span>
+            ` : ''}
+          </div>
         </div>
-        <div class="text">
-          ${inputControl}
-          ${hasEye ? `
-            <span class="toggle-eye" style="cursor: pointer;">
-              <svg class="eye-icon" style="stroke-width: 2px;">
-                <use href="../assets/icons/sprite.svg#icon-eye"></use>
-              </svg>
-            </span>
-          ` : ''}
-        </div>
-      </div>
-    `;
+      `;
 
     if (hasEye && !isSelect) {
       const input = this.querySelector('input');

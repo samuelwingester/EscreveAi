@@ -98,8 +98,6 @@ register_form.addEventListener( "submit", async function ( e )  {
         console.log( error )
         // Tratamento de erros de requisição aqui
         if ( error.status === 422 ){
-            console.log(data)
-            console.log(data);
             let messages = "";
             if (data.errors) {
                 for (const field in data.errors) {
