@@ -1,7 +1,7 @@
 export class Base extends HTMLElement {
     connectedCallback() {
         const content = this.innerHTML;
-
+        
         this.innerHTML = `
             <header-base></header-base>
             <main>
@@ -23,11 +23,11 @@ export class Base extends HTMLElement {
                     </div>
                     <div class="line"></div>
                     <div class="menu">
-                        <menu-option title="Turmas" icon="classes" stroke="2"></menu-option>
-                        <menu-option title="Resumo" icon="dashboard" stroke="2"></menu-option>
-                        <menu-option title="Alunos" icon="users" stroke="6"></menu-option>
-                        <menu-option title="Atividades" icon="activities" stroke="2"></menu-option>
-                        <menu-option title="Configurações" icon="gear" stroke="6"></menu-option>
+                        <menu-option title="Turmas" icon="classes" stroke="2" route="classes"></menu-option>
+                        <menu-option title="Resumo" icon="dashboard" stroke="2" route="dashboard"></menu-option>
+                        <menu-option title="Alunos" icon="users" stroke="6" route="students"></menu-option>
+                        <menu-option title="Atividades" icon="activities" stroke="2" route="activities"></menu-option>
+                        <menu-option title="Configurações" icon="gear" stroke="6" route="config"></menu-option>
                     </div>
                 </aside>
                 <div class="container">
