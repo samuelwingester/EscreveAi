@@ -4,7 +4,8 @@ import { Benefit } from './benefit.js';
 import { Field } from './field.js';
 import { HeaderBase } from './headerBase.js';
 import { MenuOption } from './menuOption.js';
-import { Base } from './base.js'
+import { Base } from './base.js';
+import { Number } from './number.js';
 
 customElements.define('my-benefit', Benefit);
 customElements.define('my-field', Field);
@@ -13,3 +14,4 @@ customElements.define('my-step', Step);
 customElements.define('header-base', HeaderBase);
 customElements.define('menu-option', MenuOption);
 customElements.define('my-base', Base);
+customElements.define('my-number', Number);
