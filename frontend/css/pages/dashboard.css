@@ -27,6 +27,7 @@ my-base {
             flex-flow: column;
             height: 100%;
             gap: 10px;
+
             .numbers {
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
@@ -37,6 +38,7 @@ my-base {
                 display: flex;
                 gap: 10px;
                 height: 100%;
+
                 .graph {
                     background-color: white;
                     flex: 1;
@@ -46,6 +48,7 @@ my-base {
                     flex-flow: column;
                     gap: 10px;
                     box-shadow: 0 8px 24 0 rgb(16, 24, 40, 0.6);
+
                     header {
                         display: flex;
                         align-items: center;
@@ -69,8 +72,59 @@ my-base {
                                 color: var(--purple-dark);
                             }
                         }
-                        .subtitle{
+
+                        .subtitle {
                             color: var(--gray-300);
+                        }
+                    }
+
+                    .container {
+                        .values {
+                            .value {
+                                display: flex;
+                                padding: 0px 5px;
+
+                                .category {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    padding-right: 5px;
+
+                                    svg {
+                                        color: var(--purple-dark);
+                                    }
+                                    p{
+                                        white-space: nowrap;
+                                    }
+                                }
+
+                                .max {
+                                    width: 100%;
+                                    background-color: var(--purple-light);
+                                    border-top-right-radius: 15px;
+                                    border-bottom-right-radius: 15px;
+
+                                    .real {
+                                        width: 12%;
+                                        height: 100%;
+                                        background-color: var(--purple);
+                                        border-top-right-radius: 5px;
+                                        border-bottom-right-radius: 5px;
+                                    }
+                                }
+                                .numbers{
+                                    display: flex;
+                                    align-items: center;
+                                    padding-left: 10px;
+                                    gap: 1px;
+                                    p{
+                                        white-space: nowrap;
+                                    }
+                                    p:nth-child(2){
+                                        color: var(--gray-400);
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -78,3 +132,4 @@ my-base {
         }
     }
 }
+

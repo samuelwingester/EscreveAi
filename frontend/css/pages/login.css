@@ -7,16 +7,17 @@ main {
   background-image: url(../../imgs/home/Main.png);
   background-position: center;
   background-size: cover;
+  padding: 2.5% 0;
 
   .container {
     display: flex;
     flex-flow: column;
     align-items: center;
-    width: 25%;
+    width: 30%;
     padding: 25px 20px;
     background-color: var(--text-white);
     border-radius: 15px;
-    
+    height: max-content;
     header {
       text-align: center;
     }
