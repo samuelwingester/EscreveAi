@@ -9,10 +9,6 @@ a {
     text-decoration: none;
 }
 
-a:hover{
-    transform: scale(1.7);
-}
-
 input:focus{
     outline: inherit;
 }
@@ -21,4 +17,9 @@ select:focus{
 }
 img{
     user-select: none;
+}
+
+body{
+    background-color: #F6F7FB;
+    overflow-x: hidden;
 }

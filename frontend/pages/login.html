@@ -25,10 +25,8 @@
             </header>
 
             <form action="" id="login-form">
-                <my-field icon="user" placeholder="Nome de Usuário ou email" stroke="6" type="email"
-                    input_id="input_user_email"></my-field>
-                <my-field icon="lock" placeholder="Digite sua senha aqui..." stroke="1.5" eye="true" type="password"
-                    input_id="input_user_password"></my-field>
+                <my-field input_id="input_user_email" name="user_email" type="text" icon="user" stroke="6" placeholder="Nome de Usuário ou email"></my-field>
+                <my-field input_id="input_user_password" name="password" type="password" icon="lock" stroke="1.5" eye="true" placeholder="Digite sua senha aqui..."></my-field>
 
                 <div class="confirm">
                     <div class="remember">
@@ -36,7 +34,7 @@
                             <input type="checkbox" name="remember" id="checkbox_remember">
                             <span class="checkmark">
                                 <svg>
-                                    <use href="../../assets/icons/sprite.svg#icon-check"></use>
+                                    <use href="../assets/icons/sprite.svg#icon-check"></use>
                                 </svg>
                             </span>
                         </label>
@@ -61,7 +59,7 @@
                         <a href="register.html" class="purple">
                             Cadastre-se
                             <svg>
-                                <use href="../../assets/icons/sprite.svg#icon-arrow-right"></use>
+                                <use href="../assets/icons/sprite.svg#icon-arrow-right"></use>
                             </svg>
                         </a>
                     </p>

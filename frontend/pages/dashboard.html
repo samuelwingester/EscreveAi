@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/dashboard.css">
+    <script type="module" src="../js/components/main.js"></script>
+</head>
+
+<body>
+    <my-base active="dashboard">
+        <header>
+            <h1>Bom Dia, Professor João👋</h1>
+            <div class="summary">
+                <h3>Resumo da Turma:</h3>
+                <h2 class="turma-titulo">3º A</h2>
+            </div>
+        </header>
+        <div class="data">
+            <div class="numbers">
+                <my-number title="24" description="Alunos" color="blue"></my-number>
+                <my-number title="18" description="Atividades" color="purple"></my-number>
+                <my-number title="8" description="Relatórios" color="yellow"></my-number>
+                <my-number title="92%" description="Evoluções médias" color="green"></my-number>
+            </div>
+            <div class="graphs">
+                <div class="graph">
+                    <header>
+                        <div class="circle">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-graphbar"></use>
+                            </svg>
+                        </div>
+                        <div class="text">
+                            <h1>Evolução da Turma</h1>
+                            <p class="subtitle">Distribuição de alunos por Fase</p>
+                        </div>
+                    </header>
+                    <div class="container">
+                        <div class="values">
+                            <div class="value">
+                                <div class="category">
+                                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5" r="5" fill="#6D28D9" />
+                                    </svg>
+                                    <p>Pré silábico</p>
+                                </div>
+                                <div class="max">
+                                    <div class="real"></div>
+                                </div>
+                                <div class="numbers">
+                                    <p>4 Alunos</p>
+                                    <p class="placeholder">(12%)</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="total"></div>
+                    </div>
+                </div>
+                <div class="graph">
+                    <header>
+                        <div class="circle">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-graphbar"></use>
+                            </svg>
+                        </div>
+                        <div class="text">
+                            <h1>Evolução da Turma</h1>
+                            <p class="subtitle">Distribuição de alunos por Fase</p>
+                        </div>
+                    </header>
+                    <div class="container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </my-base>
+</body>
+
+</html>

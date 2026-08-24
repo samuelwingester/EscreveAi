@@ -7,7 +7,7 @@ main {
   background-image: url(../../imgs/home/Main.png);
   background-position: center;
   background-size: cover;
-
+  padding: 2.5% 0;
   .container {
     display: flex;
     flex-direction: column;

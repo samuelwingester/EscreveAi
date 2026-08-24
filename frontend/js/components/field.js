@@ -3,54 +3,46 @@ export class Field extends HTMLElement {
     const type = this.getAttribute('type') || 'text';
     const icon = this.getAttribute('icon') || 'user';
     const placeholder = this.getAttribute('placeholder') || 'Selecione...';
-    const stroke = this.getAttribute('stroke') || 1;
+    const stroke = this.getAttribute('stroke') || '1';
     const hasEye = this.getAttribute('eye') === 'true';
     const id = this.getAttribute('input_id') || '';
+    const name = this.getAttribute('name') || id;
     const isSelect = this.getAttribute('is_select') === 'true';
 
-    let inputControl = '';
-
-    if (isSelect) {
-      const optionsHTML = this.innerHTML.trim();
-      inputControl = `
-        <select id="${id}" required>
-          <option value="" disabled selected hidden>${placeholder}</option>
-          ${optionsHTML}
-        </select>
-      `;
-    } else {
-      inputControl = `<input type="${type}" placeholder="${placeholder}" id="${id}" required>`;
-    }
-
+    const options = this.innerHTML;
+    const inputControl = isSelect
+      ? `<select id="${id}" name="${name}" required><option value="" disabled selected hidden>${placeholder}</option>${options}</select>`
+      : `<input type="${type}" placeholder="${placeholder}" id="${id}" name="${name}" required>`;
+    
     this.innerHTML = `
-      <div class="field">
-        <div class="icon">
-          <svg style="stroke-width: ${stroke}px;">
-            <use href="../assets/icons/sprite.svg#icon-${icon}"></use>
-          </svg>
+        <div class="field">
+          <div class="icon">
+            <svg style="stroke-width: ${stroke}px;">
+              <use href="../assets/icons/sprite.svg#icon-${icon}"></use>
+            </svg>
+          </div>
+          <div class="text">
+            ${inputControl}
+            ${hasEye ? `
+              <span class="toggle-eye" style="cursor: pointer;">
+                <svg class="eye-icon" style="stroke-width: 2px;">
+                  <use href="../assets/icons/spffffrite.svg#icon-eye"></use>
+                </svg>
+              </span>
+            ` : ''}
+          </div>
         </div>
-        <div class="text">
-          ${inputControl}
-          ${hasEye ? `
-            <label class="toggle-eye" style="cursor: pointer;">
-              <svg class="eye-icon" style="stroke-width: 2px;">
-                <use href="../assets/icons/sprite.svg#icon-eye"></use>
-              </svg>
-            </label>
-          ` : ''}
-        </div>
-      </div>
-    `;
+      `;
 
-    if (hasEye) {
+    if (hasEye && !isSelect) {
       const input = this.querySelector('input');
-      const useTag = this.querySelector('.eye-icon use');
+      const use = this.querySelector('.eye-icon use');
 
-      this.querySelector('.toggle-eye').addEventListener('click', () => {
-        const isOriginal = input.type === type;
-        input.type = isOriginal ? 'text' : type;
-        useTag?.setAttribute('href', `../assets/icons/sprite.svg#icon-eye${isOriginal ? '-off' : ''}`);
-      });
+      this.querySelector('.toggle-eye').onclick = () => {
+        const isPass = input.type === 'password';
+        input.type = isPass ? 'text' : 'password';
+        use.setAttribute('href', `../assets/icons/sprite.svg#icon-eye${isPass ? '-off' : ''}`);
+      };
     }
   }
 }

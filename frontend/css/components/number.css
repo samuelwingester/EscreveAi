@@ -1,0 +1,17 @@
+.number {
+    padding: 6px 0;
+
+    .container {
+        border-radius: 15px;
+        padding: 10px;
+        box-shadow: 0 4px 20px 0 rgb(0, 0, 0, 0.1);
+        h1 {
+            font-size: 64px;
+            font-weight: 400;
+        }
+        .title {
+            font-weight: 400;
+        }
+    }
+
+}

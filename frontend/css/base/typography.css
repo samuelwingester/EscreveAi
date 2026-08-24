@@ -122,6 +122,7 @@ input:invalid{
 .line {
     width: 100px;
     height: 2px;
+    background-color: var(--gray-300);
 }
 
 .line-between {

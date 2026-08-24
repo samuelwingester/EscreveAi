@@ -1,6 +1,20 @@
 import { apiHelper } from "./apihelper.js";
 
 // Isaac preciso de uma função para mostrar erros de validação ou outros no html
+// Função para mostrar erros no HTML
+function showError(message) {
+    const errorElement = document.getElementById("error-message");
+
+    errorElement.innerHTML = message;
+    errorElement.style.color = "red";
+}
+
+// Função para limpar erros
+function clearError() {
+    const errorElement = document.getElementById("error-message");
+
+    errorElement.innerHTML = "";
+}
 
 const register_form = document.getElementById( "register-form" );
 
@@ -21,9 +35,45 @@ register_form.addEventListener( "submit", async function ( e )  {
     const date = document.getElementById( "input_birth_date" ).value;
     const gender = document.getElementById( "input_gender" ).value;
 
-    const remember = document.getElementById( "checkbox_remember" ).value;
+    const remember = document.getElementById( "checkbox_remember" ).checked; // Checkbox é com "checked", não "value", daí pode ser valor booleano
 
-    // Isaacc faça a validação aqui
+    // Valuidação
+    clearError();
+    
+    if (!email) {
+        showError("Informe seu e-mail.");
+        return;
+    }
+
+    if (!password) {
+        showError("Informe sua senha.");
+        return;
+    }
+
+    if (!password_confirmation) {
+        showError("Confirme sua senha.");
+        return;
+    }
+
+    if (password !== password_confirmation) {
+        showError("As senhas não são iguais.");
+        return;
+    }
+
+    if (!name) {
+        showError("Informe seu nome.");
+        return;
+    }
+
+    if (!date) {
+        showError("Informe sua data de nascimento.");
+        return;
+    }
+
+    if (!gender) {
+        showError("Selecione seu gênero.");
+        return;
+    }
 
     let data = null;
 
@@ -43,13 +93,24 @@ register_form.addEventListener( "submit", async function ( e )  {
 
         apiHelper.setTokenBearer( data["token"], remember ); //não sei se a checkbox funciona diretamente como booleano
 
-        window.location.href = "./testing.html"; // redireciona para a pagina de teste mudar quando tiver a page de home
+        window.location.href = "./home.html"; // redireciona para a pagina de teste mudar quando tiver a page de home
     } catch( error ){
         console.log( error )
         // Tratamento de erros de requisição aqui
         if ( error.status === 422 ){
-            console.log(data)
-            // Erros de validação - NOTA: Boa sorte com isso kkkkk
+            let messages = "";
+            if (data.errors) {
+                for (const field in data.errors) {
+                    data.errors[field].forEach(message => {
+                        messages += `<p>${message}</p>`;
+                    });
+                }
+            } else {
+                messages = `<p>${data.message}</p>`;
+            }
+            showError(messages);
+        } else {
+            showError("Ocorreu um erro ao realizar o cadastro.")
         }
     }
 });

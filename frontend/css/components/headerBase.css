@@ -1,0 +1,56 @@
+header-base {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+    padding: 10px 24px;
+    background-color: #ffffff;
+    box-sizing: border-box;
+
+    .logos {
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+
+            &:nth-child(2) {
+                height: 60%;
+            }
+        }
+    }
+
+    .professor {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 2rem;
+        cursor: pointer;
+
+        svg {
+            height: 1em;
+            width: 1em;
+            aspect-ratio: 1 / 1;
+            stroke-width: 7px;
+        }
+
+        h1 {
+            font-size: inherit;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateX(200%);
+            transition: transform 0.5s ease, opacity 0.3s ease;
+
+        }
+
+        &:hover h1{
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+}

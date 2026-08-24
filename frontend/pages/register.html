@@ -25,24 +25,16 @@
             </header>
 
             <form action="" id="register-form">
-                <my-field icon="user" placeholder="Nome Completo" stroke="6" type="text"
-                    input_id="input_name"></my-field>
-                <my-field icon="mail" placeholder="Email" stroke="1.5" type="email" input_id="input_email"></my-field>
-
-                <my-field icon="calendar" placeholder="Data de Nascimento" stroke="1.5" type="date"
-                    input_id="input_birth_date"></my-field>
-
-                <my-field icon="gender" placeholder="Gênero" stroke="1.5" input_id="input_gender" is_select="true">
-                    <option value="man"><p>Homem</p></option>
-                    <option value="woman"><p>Mulher</p></option>
-                    <option value="other"><p>Prefiro Não Dizer</p></option>
+                <my-field input_id="input_name" name="name" type="text" icon="user" stroke="6" placeholder="Nome Completo"></my-field>
+                <my-field input_id="input_gender" name="gender" is_select="true" icon="gender" stroke="1.5" placeholder="Gênero">
+                    <option value="man">Homem</option>
+                    <option value="woman">Mulher</option>
+                    <option value="other">Prefiro Não Dizer</option>
                 </my-field>
-
-                <my-field icon="lock" placeholder="Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;"
-                    type="password" input_id="input_password"></my-field>
-                <my-field icon="lock" placeholder="Confirmar Senha" stroke="1.5" eye="true" style="grid-column: 1/-1;"
-                    type="password" input_id="input_password_confirmation"></my-field>
-
+                <my-field input_id="input_email" name="email" type="email" icon="mail" stroke="1.5" placeholder="Email" style="grid-column: 1/-1;"></my-field>
+                <my-field input_id="input_password" name="password" type="password" icon="lock" stroke="1.5" eye="true" placeholder="Senha" style="grid-column: 1/-1;"></my-field>
+                <my-field input_id="input_password_confirmation" name="password_confirmation" type="password" icon="lock" stroke="1.5" eye="true" placeholder="Confirmar Senha" style="grid-column: 1/-1;"></my-field>
+                
                 <div class="confirm">
                     <div class="remember">
                         <label class="custom-checkbox">
