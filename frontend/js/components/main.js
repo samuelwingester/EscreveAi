@@ -6,6 +6,7 @@ import { HeaderBase } from './headerBase.js';
 import { MenuOption } from './menuOption.js';
 import { Base } from './base.js';
 import { Number } from './number.js';
+import { Value } from './value.js';
 
 customElements.define('my-benefit', Benefit);
 customElements.define('my-field', Field);
@@ -15,3 +16,4 @@ customElements.define('header-base', HeaderBase);
 customElements.define('menu-option', MenuOption);
 customElements.define('my-base', Base);
 customElements.define('my-number', Number);
+customElements.define('my-value', Value);

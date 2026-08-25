@@ -18,11 +18,12 @@ main {
     background-color: var(--text-white);
     border-radius: 15px;
     height: max-content;
+
     header {
       text-align: center;
     }
-    
-    img{
+
+    img {
       width: 30%;
     }
 
@@ -32,6 +33,21 @@ main {
       width: 100%;
       padding: 15px 0;
       gap: 10px;
+
+      .error-banner {
+        background-color: var(--red-light);
+        color: var(--red);
+        border: 1px solid var(--red-soft);
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 0.875rem;
+        text-align: center;
+        margin-bottom: 8px;
+
+        p {
+          color: inherit;
+        }
+      }
 
       .confirm {
         display: flex;

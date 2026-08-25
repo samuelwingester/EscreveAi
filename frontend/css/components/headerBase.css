@@ -2,7 +2,7 @@ header-base {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100px;
+    height: 80px;
     padding: 10px 24px;
     background-color: #ffffff;
     box-sizing: border-box;

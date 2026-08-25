@@ -6,79 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/pages/atividades.css">
+    <link rel="stylesheet" href="../css/pages/activities.css">
     <script type="module" src="../js/components/main.js"></script>
 </head>
 
 <body>
     <my-base active="activities">
-      <main class="atividades-page">
-
-            <h1 class="atividades-page__greeting">
-                Bom dia, Professor João <span class="atividades-page__wave">👋</span>
-            </h1>
-
-            <div class="atividades-page__header">
-                <h2 class="atividades-page__title">
-                    Atividades - Turma: <span class="atividades-page__turma-badge">3ªA</span>
-                </h2>
-                <button class="btn btn--primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                    Nova Atividade
-                </button>
+        <header>
+            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <div class="summary">
+                <h3>Resumo da Turma:</h3>
+                <h2 class="turma-titulo">3º A</h2>
             </div>
-
-            <ul class="activity-list">
-
-                <li class="activity-card">
-                    <img class="" src="" alt="">
-
-                    <div class="activity-card__info">
-                        <h3 class="activity-card__title">Nome da Atividade</h3>
-                        <p class="activity-card__desc">
-                            Os alunos escreveram os nomes das frutas observando as imagens.
-                        </p>
-                        <span class="activity-card__images">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                            8 Imagens
-                        </span>
-                    </div>
-
-                    <div class="activity-card__meta">
-                        <span class="activity-card__date">— 20 de Junho de 2026</span>
-
-                        <div class="activity-card__actions">
-                            <button class="btn btn--outline">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                    <circle cx="12" cy="12" r="3" />
-                                </svg>
-                                Ver Detalhes
-                            </button>
-                            <button class="btn btn--outline">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                                </svg>
-                                Editar
-                            </button>
-                            <button class="btn btn--icon" aria-label="Mais opções">⋮</button>
-                        </div>
-                    </div>
-                </li>
-
-              
-
-            </ul>
-
-        </main>
-
+        </header>
     </my-base>
 </body>
 
