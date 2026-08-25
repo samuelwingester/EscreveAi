@@ -10,7 +10,7 @@ export class Base extends HTMLElement {
                         <div class="class">
                             <svg><use href="../assets/icons/sprite.svg#icon-users"></use></svg>
 
-                            <h1 class="turma-titulo" id="turma-titulo">3º A</h1>
+                            <h1 class="turma-titulo" id="turma-titulo"></h1>
                         </div>
 
                         <div class="trocar-turma-wrapper">
@@ -22,10 +22,6 @@ export class Base extends HTMLElement {
 
                             <select id="select-turma-overlay" onchange="atualizarTurmas(this.value)">
                                 <option value="" disabled selected hidden></option>
-                                <option value="1º A">1º A</option>
-                                <option value="2º A">2º A</option>
-                                <option value="3º A">3º A</option>
-                                <option value="3º B">3º B</option>
                             </select>
                         </div>
                     </div>
@@ -44,8 +40,8 @@ export class Base extends HTMLElement {
             </main>
             `;
 
-        
-    } 
+
+    }
 }
 
 window.atualizarTurmas = function(novaTurma) {
