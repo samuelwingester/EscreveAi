@@ -27,7 +27,7 @@ class StoreTeacherService
 			]);
 			//
 
-			return $user->teacher()->create();
+			return $user;
 		}, 2);
 	}
 }
