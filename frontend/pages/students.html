@@ -12,7 +12,77 @@
 
 <body>
     <my-base active="students">
-    escreva o seu código aqui!
+        <div class="main">
+            <div class="lat-bar">
+                <div class="turma"></div>
+                <div class="nav-bar">
+                    <ul>
+                        <li id="li-turmas">Turmas</li>
+                        <li id="li-resumo">Resumo</li>
+                        <li id="li-alunos">Alunos</li>
+                        <li id="li-atividades">Atividades</li>
+                        <li id="li-configuracoes">Configurações</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="classroom">
+                <div class="header">
+                    <h1></h1>
+                    <h2></h2>
+                    <button class="new-aluno"></button>
+                </div>
+                <div class="search">
+                    <input type="text" class="search-aluno">
+                </div>
+                <div class="cards">
+                    <div class="card-aluno">
+                        <div class="stats-aluno">
+                            <img src="" alt="" class="img-aluno">
+                            <h3 class="nome-aluno"></h3>
+                            <h4 class="fase-aluno"></h4>
+                            <h4 class="ultima-ativ"></h4>
+                        </div>
+                        <div class="actions-aluno">
+                            <button class="relatorio"></button>
+                            <button class="editar"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="new-aluno">
+                    <form action="get">
+                        <h1>Dados pessoais</h1>
+                        <input type="image" id="form-img-aluno">
+                        <label for="form-nome-aluno">Nome Completo</label>
+                        <input type="text" name="form-nome-aluno" id="form-nome-aluno" placeholder="Digite o nome completo do aluno">
+                        <label for="form-idade-aluno">Data de nascimento</label>
+                        <input type="date" name="form-idade-aluno" id="form-idade-aluno">
+                        <label for="form-turma">Turma</label>
+                        <select name="form-turma" id="form-turma">
+                            <option value="1">Turma 1</option>
+                        </select>
+                        <label for="">Sexo</label>
+                        <div class="sexo-aluno">
+                            <label for="form-sexo-aluno">Masculino</label>
+                            <input type="radio" id="Masculino" name="form-sexo-aluno" value="Masculino">
+                            <label for="form-sexo-aluno">Feminino</label>
+                            <input type="radio" id="Feminino" name="form-sexo-aluno" value="Feminino">
+                            <label for="form-sexo-aluno">Outro</label>
+                            <input type="radio" id="Outro" name="form-sexo-aluno" value="Outro">
+                        </div>
+                        <hr>
+                        <h1>Dados Pedagógicos</h1>
+                        <label for="form-nivel-aluno">Nível Inicial da Escrita</label>
+                        <select name="form-nivel-aluno" id="form-nivel-aluno">
+                            <option value="nivel1">Nível 1</option>
+                        </select>
+                        <label for="form-obs-aluno">Observações (opcional)</label>
+                        <textarea name="form-obs-aluno" id="form-obs-aluno"></textarea>
+                        <button>Cancelar</button>
+                        <button type="submit">Salvar aluno</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </my-base>
 </body>
 
