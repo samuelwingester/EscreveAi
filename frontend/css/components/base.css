@@ -38,8 +38,8 @@ my-base {
           svg {
             width: 32px;
             height: 32px;
-            color: var(--purple);
-            stroke-width: 4px;
+            color: var(--purple-dark);
+            stroke-width: 6px;
           }
 
           h1 {

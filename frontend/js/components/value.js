@@ -13,8 +13,8 @@ export class Value extends HTMLElement {
                 </svg>
                 <p>${categoria}</p>
             </div>
-            <div class="max">
-                <div class="real" style="width: ${percentage}%; background-color: var(--${color})"></div>
+            <div class="max" style="background-color: var(--${color}-soft)">
+                <div class="real" style="width: ${percentage}%; background-color: var(--${color}-dark)"></div>
             </div>
             <div class="numbers">
                 <p>${total} alunos</p>

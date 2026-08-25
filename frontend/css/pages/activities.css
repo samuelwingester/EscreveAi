@@ -1,0 +1,27 @@
+my-base {
+  .container {
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+
+    >header {
+      display: flex;
+      flex-flow: column;
+      gap: 8px;
+
+      .summary {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        h2 {
+          color: var(--purple);
+          background-color: var(--purple-light);
+          padding: 2px 10px;
+          border-radius: 6px;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
