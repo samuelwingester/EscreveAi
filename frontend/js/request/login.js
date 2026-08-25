@@ -1,53 +1,59 @@
-import { EscreveAiApi } from "./EscreveAiApi.js";
-import * as util from "./utils.js";
+import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
+import * as util from "../helpers/utils.js";
 
 const login_form = document.getElementById( "login-form" );
 
-login_form.addEventListener( "submit", async function ( e )  {
-    debugger
-    // Necessario formulario quebra sem essa função
-    e.preventDefault();
+login_form.addEventListener( "submit", function ( e )  {
+  // Necessario formulario quebra sem essa função
+  e.preventDefault();
 
-    const formData = new FormData( login_form ); 
+  const formData = new FormData( login_form );
 
-    const email = formData.get( "email" );
-    const password = formData.get( "password" );
-    const remember = formData.get( "remember" );
+  const email = formData.get( "email" );
+  const password = formData.get( "password" );
+  const remember = (formData.get( "remember" ) !== null);
 
-    util.clearError();
+  util.clearError();
 
-    // Validação ainda necessaria
+  // Validação ainda necessaria
 
-    let data = null;
-
-    try{
-        const response = await EscreveAiApi.fetch( "/login", "POST", { "email":email, "password":password } );
-   
-        if ( !response.ok ) throw { message : "HTTP ERROR ", status : response.status};
-
-        data = await response.json();
-
-        EscreveAiApi.setTokenBearer( data["token"], true ); 
-
-        window.location.href = "./dashboard.html"; 
-    } catch( error ){
-        if ( error.status !== 422 ){
-            util.showError("Ocorreu um erro ao realizar o login.")
-            //console.error(error);
-            return;
-        }
-
-        let messages = "";
-
-        if ( !data.errors ){ messages = `<p>${data.message}</p>`; }
-        else {
-            for ( const field in data.errors ){
-                data.errors[ field ].forEach( message => {
-                    messages += `<p>${message}</p>`;
-                });
-            }
-        }
-
-        util.showError( messages );
+  EscreveAiApi.fetch( "/login", "POST", { "email":email, "password":password } )
+  .then( response => { // Verifica o status da requisição e monta o error para o catch
+    if ( !response.ok ) {
+      return response.json().then( body => {
+        const error = new Error("falha");
+        error.status = response.status;
+        error.data = body;
+        throw error;
+      });
     }
+
+    return response.json();
+  })
+  .then( data => { // Requisição foi bem sucedida
+
+    EscreveAiApi.setTokenBearer( data.token, remember );
+    util.store( "username", data.user.name, remember );
+    util.store( "remember", remember, remember ); //Verificar depois
+
+    window.location.href = "./dashboard.html";
+  })
+  .catch( error => {
+    let messages = "";
+
+    // ruim melhorar depois
+    if ( error.status === 401 ) {
+      messages = ( "Credenciais Inválidas" );
+    }
+    else if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
+      const data = error.data;
+      for ( const field in data.errors ){
+        data.errors[ field ].forEach( message => {
+          messages += `<p>${message}</p>`;
+        });
+      }
+    } else { messages = "Erro de rede"; }
+
+    util.showError( messages );
+  });
 });

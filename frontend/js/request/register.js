@@ -1,95 +1,95 @@
-import { EscreveAiApi } from "./EscreveAiApi.js";
-import "./utils.js"
+import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
+import * as util from "../helpers/utils.js";
 
 const register_form = document.getElementById( "register-form" );
 
 register_form.addEventListener( "submit", async function ( e )  {
-    // Necessario formulario quebra sem essa função
-    e.preventDefault()
+  // Necessario formulario quebra sem essa função
+  e.preventDefault()
 
-    const formData = new FormData( register_form );
+  const formData = new FormData( register_form );
 
-    const email = formData.get( "email" );
-    const password = formData.get( "password" ); 
-    const password_confirmation = formData.get( "password-confirmation" ); 
+  const email = formData.get( "email" );
+  const password = formData.get( "password" );
+  const password_confirmation = formData.get( "password-confirmation" );
 
-    const name = formData.get( "name" );
-    const date = formData.get( "date" );
+  const name = formData.get( "name" );
+  const date = formData.get( "date" );
+  let gender = formData.get( "gender" );
 
-    const remember = document.getElementById( "checkbox_remember" ).checked; 
+  if ( gender === "other" ) gender = null; // gambiarra rapida
 
-    clearError();
-    
-    if (!email) {
-        showError("Informe seu e-mail.");
-        return;
+
+  const remember = (formData.get( "remember" ) !== null);
+
+  util.clearError();
+
+  // Ta faltando verificação e coloque em funções pelo amor de deus
+  // For fazer algo faz direito. se não souber todas as validações so me perguntar
+  if (!email) {
+      util.showError("Informe seu e-mail.");
+      return;
+  }
+
+  if (!password) {
+      util.showError("Informe sua senha.");
+      return;
+  }
+
+  if (!password_confirmation) {
+      util.showError("Confirme sua senha.");
+      return;
+  }
+
+  if (password !== password_confirmation) {
+      util.showError("As senhas não são iguais.");
+      return;
+  }
+
+  if (!name) {
+      util.showError("Informe seu nome.");
+      return;
+  }
+
+  EscreveAiApi.fetchWithAuth( "/register", "POST", {
+    "email":email,
+    "password":password,
+    "password_confirmation":password_confirmation,
+    "name":name,
+    "gender":gender
+  })
+  .then( response => {
+    if ( !response.ok ){
+      return response.json().then( body => {
+          const error = new Error("falha");
+          error.status = response.status;
+          error.data = body;
+          throw error;
+      });
     }
 
-    if (!password) {
-        showError("Informe sua senha.");
-        return;
-    }
+    return response.json();
+  })
+  .then( data => { // Cadastro bem sucedido
 
-    if (!password_confirmation) {
-        showError("Confirme sua senha.");
-        return;
-    }
+    EscreveAiApi.setTokenBearer( data["token"], remember );
+    util.store( "name", data['user'][name], remember );
+    util.store( "remember", remember, remember ); //Verificar depois
 
-    if (password !== password_confirmation) {
-        showError("As senhas não são iguais.");
-        return;
-    }
+    window.location.href = "./dashboard.html";
+  })
+  .catch( error => {
+    let messages = "";
 
-    if (!name) {
-        showError("Informe seu nome.");
-        return;
-    }
+    if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
+      const data = error.data;
+      for ( const field in data.errors ){
+        data.errors[ field ].forEach( message => {
+          messages += `<p>${message}</p>`;
+        });
+      }
+    } else { messages = "Erro de rede"; }
 
-    if (!date) {
-        showError("Informe sua data de nascimento.");
-        return;
-    }
-
-    if (!gender) {
-        showError("Selecione seu gênero.");
-        return;
-    }
-
-    let data = null;
-
-    try{
-        const response = await EscreveAiApi.fetchApi( "/register", "POST", { 
-            "email":email, 
-            "password":password,
-            "password_confirmation":password_confirmation,
-            "name":name,
-            "gender":gender 
-        } );
-        
-        data = await response.json();
-
-        if ( !response.ok ) throw { message : "HTTP ERROR ", status : response.status};
-
-        EscreveAiApi.setTokenBearer( data["token"], remember );
-
-        window.location.href = "./dashboard.html"; 
-    } catch( error ){
-        if ( error.status !== 422 ){
-            showError("Ocorreu um erro ao realizar o cadastro.")
-            return;
-        }
-
-        let messages = "";
-
-        if ( !data.errors ){ messages = `<p>${data.message}</p>`; }
-        else {
-            for ( const field in data.errors ){
-                data.errors[ field ].forEach( message => {
-                    messages += `<p>${message}</p>`;
-                });
-            }
-        }
-        
-        showError( messages );
-    }
+    util.showError( messages );
+  });
 });
