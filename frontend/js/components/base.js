@@ -2,6 +2,7 @@ export class Base extends HTMLElement {
     connectedCallback() {
         const content = this.innerHTML;
         const activeRoute = this.getAttribute('active') || '';
+        
         this.innerHTML = `
             <header-base></header-base>
             <main>
@@ -9,7 +10,6 @@ export class Base extends HTMLElement {
                     <div class="atual">
                         <div class="class">
                             <svg><use href="../assets/icons/sprite.svg#icon-users"></use></svg>
-
                             <h1 class="turma-titulo" id="turma-titulo">3º A</h1>
                         </div>
 
@@ -19,8 +19,7 @@ export class Base extends HTMLElement {
                                 <p>Trocar de Turma</p>
                             </button>
 
-
-                            <select id="select-turma-overlay" onchange="atualizarTurmas(this.value)">
+                            <select id="select-turma-overlay">
                                 <option value="" disabled selected hidden></option>
                                 <option value="1º A">1º A</option>
                                 <option value="2º A">2º A</option>
@@ -39,19 +38,31 @@ export class Base extends HTMLElement {
                     </div>
                 </aside>
                 <div class="container">
-                ${content}
+                    ${content}
                 </div>
             </main>
-            `;
+        `;
 
-        
-    } 
+        const select = this.querySelector('#select-turma-overlay');
+        const aplicarTurma = (nomeTurma) => {
+            localStorage.setItem('turmaAtual', nomeTurma);
+            document.querySelectorAll('.turma-titulo').forEach(el => el.textContent = nomeTurma);
+            if (select) select.value = nomeTurma;
+        };
+        const turmaSalva = localStorage.getItem('turmaAtual') || '3º A';
+        aplicarTurma(turmaSalva);
+
+        if (select) {
+            select.addEventListener('change', (e) => aplicarTurma(e.target.value));
+        }
+    }
+
+    sincronizarTurma() {
+        const turmaSalva = localStorage.getItem('turmaAtual');
+        if (!turmaSalva) return;
+
+        document.querySelectorAll('.turma-titulo').forEach(el => {
+            el.textContent = turmaSalva;
+        });
+    }
 }
-
-window.atualizarTurmas = function(novaTurma) {
-    if (!novaTurma) return;
-    const elementosTurma = document.querySelectorAll('.turma-titulo');
-    elementosTurma.forEach(elemento => {
-        elemento.textContent = novaTurma;
-    });
-};

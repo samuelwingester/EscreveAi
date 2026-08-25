@@ -59,17 +59,3 @@ button {
 .botao-largo:hover {
     transform: scale(1.05);
 }
-
-/* Variações de botões */
-#vazio {
-    background-color: transparent;
-
-    p {
-        color: black;
-    }
-}
-
-#vazioBorda {
-    background-color: transparent;
-    border: solid 1px white;
-}

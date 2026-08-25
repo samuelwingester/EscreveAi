@@ -27,33 +27,25 @@
                 </button>
             </div>
         </header>
-        <input class="search" placeholder="Pesquisar por Aluno..."></input>
+        <input class="search" placeholder="Pesquisar por Turma..."></input>
         <div class="classes">
-            <div class="class">
-                <div class="top">
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="5" cy="5" r="5" fill="purple" />
-                    </svg>
-                    <p class="titl">3º Ano A</p>
-                </div>
-                <div class="data">
-                    <div class="students">
-                        <svg>
-                            <use href="../assets/icons/sprite.svg#icon-students"></use>
-                        </svg><p>24 Alunos</p>
-                    </div>
-                    <div class="shift">
-                        <svg>
-                            <use href="../assets/icons/sprite.svg#icon-calendar"></use>
-                        </svg><p>Manhã</p>
-                    </div>
-                </div>
-                <div class="join">
-                    <p>Entrar</p>
-                </div>
-            </div>
+            <my-class name="1º A" students="22" shift="Manhã" color="purple"></my-class>
+            <my-class name="2º A" students="25" shift="Manhã" color="green"></my-class>
+            <my-class name="3º A" students="24" shift="Manhã" color="purple"></my-class>
+            <my-class name="4º A" students="20" shift="Manhã" color="red"></my-class>
+            <my-class name="5º A" students="28" shift="Manhã" color="blue"></my-class>
+
+            <my-class name="1º B" students="19" shift="Tarde" color="yellow"></my-class>
+            <my-class name="2º B" students="18" shift="Tarde" color="blue"></my-class>
+            <my-class name="3º B" students="26" shift="Tarde" color="red"></my-class>
+            <my-class name="4º B" students="21" shift="Tarde" color="green"></my-class>
+            <my-class name="5º B" students="23" shift="Tarde" color="yellow"></my-class>
         </div>
+        <dialog id="class-modal" class="modal">
+            <div class="add"></div>
+        </dialog>
     </my-base>
+    
 </body>
 
 </html>
