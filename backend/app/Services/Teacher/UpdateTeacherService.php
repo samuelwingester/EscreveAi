@@ -17,7 +17,7 @@ class UpdateTeacherService
 				'secondary_email' 	=> $data['secondary_email'] ?? $teacher->secondary_email,
 				'name' 				=> $data['name'] ?? $teacher->name,
 				'gender' 			=> $data['gender'] ?? $teacher->gender,
-				'birth_date' 		=> $data['birth_date'] ?? $teacher->birth_date
+				//'birth_date' 		=> $data['birth_date'] ?? $teacher->birth_date
 			]);
 		}, 2);
 	}

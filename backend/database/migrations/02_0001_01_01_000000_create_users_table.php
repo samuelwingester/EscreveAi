@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->string('name', 150);
             $table->enum('type', UserType::cases()); 
-            $table->date('birth_date');
+            //$table->date('birth_date');
 
             $table->enum('gender', Gender::cases())->nullable(); 
             $table->string('secondary_email')->unique()->nullable();

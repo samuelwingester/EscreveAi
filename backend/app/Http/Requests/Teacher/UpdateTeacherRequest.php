@@ -52,7 +52,7 @@ class UpdateTeacherRequest extends FormRequest
             'secondary_email'   => ['sometimes', 'nullable', 'email', 'unique:users,email'],
             'name'              => ['sometimes', 'string', 'max:150'],
             'gender'            => ['sometimes', 'nullable', 'string', new Enum( Gender::class )],
-            'birth_date'        => ['sometimes', Rule::date()->before(today()->subYears(4))],
+            //'birth_date'        => ['sometimes', Rule::date()->before(today()->subYears(4))],
             //
         ];
     }

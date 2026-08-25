@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'password' 		=> Hash::make( fake()->password(8, 25) ),
             'name' 			=> fake()->name(),
             'gender' 		=> fake()->randomElement( Gender::class ),
-            'birth_date' 	=> fake()->date()
+            //'birth_date' 	=> fake()->date()
         ];
     }
 /*

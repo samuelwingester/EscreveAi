@@ -22,7 +22,7 @@ class StoreTeacherService
 				'password' 		=> Hash::make( $data['password'] ),
 				'name' 			=> $data['name'],
 				'gender' 		=> $data['gender'] ?? null,
-				'birth_date' 	=> $data['birth_date'],
+				//'birth_date' 	=> $data['birth_date'],
 				'type'			=> UserType::TEACHER
 			]);
 			//
