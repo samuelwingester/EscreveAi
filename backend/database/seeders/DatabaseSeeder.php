@@ -19,17 +19,15 @@ class DatabaseSeeder extends Seeder
 
     public function run(): void
     {
-        
-        $this->insertTestUser();
-
+        $this->insertTestUserData();
         //---------------------------------------------------------
         // Teacher Seeding
         //---------------------------------------------------------
         $count = fake()->numberBetween(20, 30);
-        
-        $teachers = $this->runSeeder( 
-            'Professores', $count, 
-            fn( $bar ) => TeacherSeeder::seed( $bar, $count ) 
+
+        $teachers = $this->runSeeder(
+            'Professores', $count,
+            fn( $bar ) => TeacherSeeder::seed( $bar, $count )
         );
         //---------------------------------------------------------
 
@@ -38,10 +36,10 @@ class DatabaseSeeder extends Seeder
         //---------------------------------------------------------
         $count = $teachers->count() * 3;
 
-        $classrooms = $this->runSeeder( 
-            'Turmas', $count, 
-            fn( $bar ) => ClassroomSeeder::seed( $bar, $count, $teachers ) 
-        ); 
+        $classrooms = $this->runSeeder(
+            'Turmas', $count,
+            fn( $bar ) => ClassroomSeeder::seed( $bar, $count, $teachers )
+        );
         //---------------------------------------------------------
 
         //---------------------------------------------------------
@@ -49,10 +47,10 @@ class DatabaseSeeder extends Seeder
         //---------------------------------------------------------
         $count = $classrooms->count() * 10;
 
-        $this->runSeeder( 
-            'Estudantes', $count, 
-            fn( $bar ) => StudentSeeder::seed( $bar, $count, $classrooms ) 
-        ); 
+        $this->runSeeder(
+            'Estudantes', $count,
+            fn( $bar ) => StudentSeeder::seed( $bar, $count, $classrooms )
+        );
         //---------------------------------------------------------
 
         //---------------------------------------------------------
@@ -60,10 +58,10 @@ class DatabaseSeeder extends Seeder
         //---------------------------------------------------------
         $count = $classrooms->count() * 2;
 
-        $this->runSeeder( 
-            'Atividades', $count, 
-            fn( $bar ) => ActivitySeeder::seed( $bar, $count, $classrooms ) 
-        ); 
+        $this->runSeeder(
+            'Atividades', $count,
+            fn( $bar ) => ActivitySeeder::seed( $bar, $count, $classrooms )
+        );
         //---------------------------------------------------------
     }
 
@@ -89,15 +87,25 @@ class DatabaseSeeder extends Seeder
         return $buffer;
     }
 
-    private function insertTestUser()
+    private function insertTestUserData()
     {
         $service = new StoreTeacherService();
 
-        $service->execute([
+        $testUser = $service->execute([
             'email'         => 'teste@teste.teste',
             'password'      => 'teste',
             'name'          => 'teste',
-            'birth_date'    => fake()->date()
         ]);
+
+
+        $classrooms = $this->runSeeder(
+            'Turmas Teste User', 10,
+            fn( $bar ) => ClassroomSeeder::seed( $bar, 10, collect([$testUser]) , 10, 10 )
+        );
+
+        $this->runSeeder(
+            'Estudantes Teste User', 200,
+            fn( $bar ) => StudentSeeder::seed( $bar, 200, $classrooms, 200/10, 200/10 )
+        );
     }
 }
