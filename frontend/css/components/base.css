@@ -1,22 +1,26 @@
 main {
   display: flex;
   width: 100%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 100px); 
+  overflow: hidden;
 
   aside {
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: 100%;
-    padding: 46.2px 28.8px;
-    gap: 10px;
+    height: 100%; 
+    padding: 30px 20px;
+    gap: 16px;
     background-color: var(--text-white);
+    flex-shrink: 0; 
+    box-sizing: border-box;
 
     .atual {
       display: flex;
       flex-flow: column;
-      gap: 5px;
-      padding: 10px;
+      gap: 8px;
+      padding: 12px;
+      width: 100%;
       border-radius: 15px;
       background-color: var(--purple-light);
 
@@ -31,24 +35,34 @@ main {
         gap: 10px;
 
         svg {
-          width: 40px;
-          height: 40px;
+          width: 32px;
+          height: 32px;
           color: var(--purple);
-          stroke-width: 6px;
+          stroke-width: 4px;
         }
 
         h1 {
           color: var(--purple);
+          font-size: 1.5rem;
         }
       }
 
       .trocar-turma-wrapper {
         position: relative;
+        width: 100%;
 
         button,
         .botao-largo {
           width: 100%;
           background-color: var(--text-white);
+          border: none;
+          padding: 8px 12px;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          cursor: pointer;
 
           svg {
             width: 16px;
@@ -59,6 +73,7 @@ main {
           p {
             color: var(--text-primary);
             white-space: nowrap;
+            font-size: 0.875rem;
           }
         }
 
@@ -68,8 +83,9 @@ main {
           left: 0;
           width: 100%;
           height: 100%;
-          opacity: 0; 
-          
+          opacity: 0;
+          cursor: pointer;
+
           option {
             color: var(--text-primary);
             background: var(--text-white);
@@ -80,12 +96,109 @@ main {
 
     .line {
       width: 100%;
+      height: 1px;
+      background-color: var(--gray-200, #e2e8f0);
+    }
+
+    .menu {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
   }
 
-  >.container {
+  > .container {
+    flex: 1;
     width: 100%;
     height: 100%;
-    padding: 50px;
+    padding: 25px;
+    overflow-y: auto; 
+    box-sizing: border-box;
+  }
+}
+
+
+@media (max-width: 768px) {
+  main {
+    aside {
+      padding: 20px 10px;
+      width: 72px;
+
+      .atual {
+        padding: 6px;
+        align-items: center;
+
+        p,
+        .trocar-turma-wrapper p {
+          display: none;
+        }
+
+        .class h1 {
+          font-size: 1rem;
+        }
+      }
+
+      .menu menu-option p,
+      .menu menu-option span {
+        display: none;
+      }
+    }
+
+    > .container {
+      padding: 16px;
+    }
+  }
+}
+
+/* Smartphone (<= 480px): Organiza em ordem vertical para o mobile */
+@media (max-width: 480px) {
+  main {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+
+    aside {
+      width: 100%;
+      height: auto;
+      flex-direction: column; /* Garante o alinhamento vertical */
+      align-items: stretch;
+      padding: 16px;
+      gap: 16px;
+
+      /* 1. Bloco de troca de turma no topo */
+      .atual {
+        width: 100%;
+
+        p,
+        .trocar-turma-wrapper p {
+          display: block; /* Mantém o texto visível no celular */
+        }
+      }
+
+      .line {
+        display: block; /* Exibe a linha divisória */
+        width: 100%;
+      }
+
+      /* 2. Menus de navegação em seguida */
+      .menu {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        menu-option p,
+        menu-option span {
+          display: inline-block; /* Garante que os rótulos do menu apareçam */
+        }
+      }
+    }
+
+    /* 3. Dashboard vem logo abaixo do aside */
+    > .container {
+      padding: 16px 12px;
+      overflow: visible;
+    }
   }
 }

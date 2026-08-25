@@ -1,0 +1,55 @@
+my-value {
+    display: block;
+    width: 100%;
+}
+
+.value {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+
+    .category {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 160px;
+
+        p {
+            white-space: nowrap;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+    }
+
+    .max {
+        width: 100%;
+        height: 24px;
+        background-color: var(--purple-light);
+        border-radius: 5px;
+        overflow: hidden;
+
+        .real {
+            height: 100%;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    }
+
+    .numbers {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        min-width: 120px;
+        justify-content: flex-end;
+
+        p {
+            white-space: nowrap;
+            font-size: 0.9rem;
+
+            &.placeholder {
+                color: var(--gray-400);
+            }
+        }
+    }
+}
