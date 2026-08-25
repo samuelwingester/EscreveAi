@@ -63,23 +63,31 @@ p {
 }
 
 .blue {
-    color: var(--blue);
+    color: var(--blue) !important;
 }
 
 .yellow {
-    color: var(--yellow);
+    color: var(--yellow) !important;
 }
 
 .green {
-    color: var(--green);
+    color: var(--green) !important;
 }
 
 .purple {
-    color: var(--purple);
+    color: var(--purple) !important;
 }
 
 .white {
-    color: var(--text-white);
+    color: var(--text-white) !important;
+}
+
+.black{
+    color: var(--text-primary) !important;
+}
+
+.placeholder{
+    color: var(--gray-400) !important;
 }
 
 input {
