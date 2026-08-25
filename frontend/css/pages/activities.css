@@ -60,6 +60,7 @@ my-base {
       height: 100%;
       padding: 20px;
       gap: 10px;
+      border-radius: 15px;
       display: flex;
       flex-flow: column;
     }

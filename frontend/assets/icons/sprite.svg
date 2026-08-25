@@ -181,4 +181,19 @@
     <path d="M11.55 0.75V22.35M0.75 11.55H22.35" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/>
   </symbol>
 
+  <symbol id="icon-x" viewBox="0 0 24 24">
+    <path d="M22.6 1L1 22.6M1 1L22.6 22.6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/>
+  </symbol>
+
+  <symbol id="icon-file-upload" viewBox="0 0 36 36">
+    <path d="M9.36001 1.7998H21.06L30.06 10.7998V30.5998C30.06 32.5881 28.4483 34.1998 26.46 34.1998H9.36001C7.37178 34.1998 5.76001 32.5881 5.76001 30.5998V5.3998C5.76001 3.41158 7.37178 1.7998 9.36001 1.7998ZM21.06 1.7998V10.7998H30.06M18.36 32.4001C21.3423 32.4001 23.76 29.9824 23.76 27.0001C23.76 24.0178 21.3423 21.6001 18.36 21.6001C15.3777 21.6001 12.96 24.0178 12.96 27.0001C12.96 29.9824 15.3777 32.4001 18.36 32.4001ZM18.36 29.6998V24.8398M16.2 26.9998L18.36 24.8398L20.52 26.9998" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/>
+  </symbol>
+
+  <symbol id="icon-upload" viewBox="0 0 17 18">
+    <path d="M8.06 11.3V0.5M4.28 4.28L8.05999 0.5L11.84 4.28M0.5 12.9199V14.5399C0.5 15.7329 1.46706 16.6999 2.66 16.6999H13.46C14.653 16.6999 15.62 15.7329 15.62 14.5399V12.9199" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/>
+  </symbol>
+
+  <symbol id="icon-save" viewBox="0 0 21 24">
+    <path d="M1.95 1H15.15L19.95 5.8V20.2C19.95 21.5255 18.8755 22.6 17.55 22.6H3.15C1.82452 22.6 0.75 21.5255 0.75 20.2V2.2C0.75 1.53726 1.28726 1 1.95 1ZM5.54999 1V8.2H15.15V3.4M13.95 14.1997H6.74999C6.08725 14.1997 5.54999 14.737 5.54999 15.3997V18.9997C5.54999 19.6624 6.08725 20.1997 6.74999 20.1997H13.95C14.6127 20.1997 15.15 19.6624 15.15 18.9997V15.3997C15.15 14.737 14.6127 14.1997 13.95 14.1997Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/>
+  </symbol>
 </svg>

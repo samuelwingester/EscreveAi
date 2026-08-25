@@ -55,7 +55,57 @@
         </div>
 
         <dialog id="activity-modal" class="modal">
-                <div class="add">TESTEEE</div>
+            <div class="add">
+                <header>
+                    <h3>Nova Atividade</h3>
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="forms">
+                    <div class="info">
+                        <div class="line"></div>
+                        <h2>INFORMAÇÕES DA ATIVIDADE</h2>
+                        <div class="line"></div>
+                    </div>
+                    <form action="#">
+                        <div class="field">
+                            <p>Nome da Atividade</p>
+                            <input type="text" id="form-activity-name">
+                        </div>
+                        <div class="field">
+                            <p>Descrição</p>
+                            <input type="text" id="form-activity-description">
+                        </div>
+                        <div class="upload">
+                            <div class="container">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-file-upload"></use>
+                                </svg>
+                                <p>Arraste um arquivo ou clique aqui para enviar</p>
+                                <p>PDF, JPG ou PNG • Máx. 10 MB</p>
+                                <button class="botao-largo">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                    </svg>
+                                    <p>Selecionar Arquivo</p>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="botoes">
+                        <button>Cancelar</button>
+                        <button class="botao-largo">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-calendar"></use>
+                            </svg>
+                            <p>Salvar Atividade</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            </div>
+
         </dialog>
     </my-base>
 </body>
