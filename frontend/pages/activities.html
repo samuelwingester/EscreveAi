@@ -8,15 +8,26 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/activities.css">
     <script type="module" src="../js/components/main.js"></script>
+    <script>
+
+    </script>
 </head>
 
 <body>
     <my-base active="activities">
         <header>
             <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
-            <div class="summary">
-                <h3>Resumo da Turma:</h3>
-                <h2 class="turma-titulo">3º A</h2>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Atividades - Turma:</h3>
+                    <h2 class="turma-titulo">3º A</h2>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Nova Atividade</p>
+                </button>
             </div>
         </header>
 
@@ -42,6 +53,10 @@
                 date="2 de Julho de 2025" img-src="../imgs/activities/IMG.png">
             </my-activity>
         </div>
+
+        <dialog id="activity-modal" class="modal">
+                <div class="add">TESTEEE</div>
+        </dialog>
     </my-base>
 </body>
 
