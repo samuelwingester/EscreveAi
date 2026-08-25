@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/dashboard.css">
     <script type="module" src="../js/components/main.js"></script>
+    <script type="module" src="../js/request/base.js" defer></script>
 </head>
 
 <body>
     <my-base active="dashboard">
         <header>
-            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
             <div class="summary">
                 <h3>Resumo da Turma:</h3>
                 <h2 class="turma-titulo">3º A</h2>
@@ -53,7 +54,7 @@
                             <my-value percentage="24" total="8" color="yellow" id="alfabetico">
                                 Alfabético
                             </my-value>
-                            
+
                         </div>
                         <div class="total">
                             <svg class="purple">
