@@ -1,8 +1,7 @@
-export class apiHelper{
-
+export class EscreveAiApi{
     constructor (){}
 
-    static getEscreveAiApiBaseUrl(){
+    static getBaseUrl(){
         return "http://127.0.0.1:8000/api";
     }
 
@@ -19,7 +18,7 @@ export class apiHelper{
     }
 
     static getDefaultAuthHeader(){
-        const token = apiHelper.getTokenBearer();
+        const token = EscreveAiApi.getTokenBearer();
 
         if ( !token ) throw "Unable to retrieve token";
 
@@ -37,11 +36,11 @@ export class apiHelper{
         };
     }
 
-    static async fetchApiWithAuth( route, method = "GET", body = null, header = null ){
-        const full_route = apiHelper.getEscreveAiApiBaseUrl() + route;
+    static async fetchWithAuth( route, method = "GET", body = null, header = null ){
+        const full_route = EscreveAiApi.getBaseUrl() + route;
         const options = {
             method : method,
-            headers : !header ? apiHelper.getDefaultAuthHeader() : header
+            headers : !header ? EscreveAiApi.getDefaultAuthHeader() : header
         };
 
         if ( body ){ options.body = JSON.stringify( body ); }
@@ -49,16 +48,15 @@ export class apiHelper{
         return fetch( full_route, options );
     }
 
-    static async fetchApi( route, method = "GET", body = null, header = null ){
-        const full_route = apiHelper.getEscreveAiApiBaseUrl() + route;
+    static async fetch( route, method = "GET", body = null, header = null ){
+        const full_route = EscreveAiApi.getBaseUrl() + route;
         const options = {
             method : method,
-            headers : !header ? apiHelper.getDefaultHeader() : header
+            headers : !header ? EscreveAiApi.getDefaultHeader() : header
         };
 
         if ( body ){ options.body = JSON.stringify( body ); }
 
         return fetch( full_route, options );
     }
-
 }

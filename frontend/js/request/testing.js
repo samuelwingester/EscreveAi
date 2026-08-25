@@ -1,4 +1,4 @@
-import { apiHelper } from "./apihelper.js";
+import { EscreveAiApi } from "./EscreveAiApi.js";
 
 // Não sei que merda e essa. codigo de ia para teste
 function syntaxHighlight(json) {
@@ -25,7 +25,7 @@ function renderJson(data) {
 }
 
 try{
-const response = await apiHelper.fetchApiWithAuth( "/user" );
+const response = await EscreveAiApi.fetchWithAuth( "/user" );
 const result = await response.json();
 
 renderJson(result);

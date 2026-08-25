@@ -1,42 +1,53 @@
-import { apiHelper } from "./apihelper.js";
-
-// Isaac preciso de uma função para mostrar erros de validação ou outros no html
+import { EscreveAiApi } from "./EscreveAiApi.js";
+import * as util from "./utils.js";
 
 const login_form = document.getElementById( "login-form" );
 
-// Esse e o fluxo base de uma requisição
-// NOTE: e necessario do token que e retornado na requisição de login e register 
-// para fazer requisições para o resto da aplicação
 login_form.addEventListener( "submit", async function ( e )  {
+    debugger
     // Necessario formulario quebra sem essa função
-    e.preventDefault()
+    e.preventDefault();
 
-    const email = document.getElementById( "input_user_email" ).value;
-    const password = document.getElementById( "input_user_password" ).value;
-    const remember = document.getElementById( "checkbox_remember" ).value;
+    const formData = new FormData( login_form ); 
 
-    // Isaacc faça a validação aqui -> email|password
+    const email = formData.get( "email" );
+    const password = formData.get( "password" );
+    const remember = formData.get( "remember" );
+
+    util.clearError();
+
+    // Validação ainda necessaria
 
     let data = null;
 
     try{
-        const response = await apiHelper.fetchApi( "/login", "POST", { "email":email, "password":password } );
-        
-        data = await response.json();
-
+        const response = await EscreveAiApi.fetch( "/login", "POST", { "email":email, "password":password } );
+   
         if ( !response.ok ) throw { message : "HTTP ERROR ", status : response.status};
 
-        apiHelper.setTokenBearer( data["token"], remember ); //não sei se a checkbox funciona diretamente como booleano
+        data = await response.json();
 
-        window.location.href = "./testing.html"; // redireciona para a pagina de teste mudar quando tiver a page de home
+        EscreveAiApi.setTokenBearer( data["token"], true ); 
+
+        window.location.href = "./dashboard.html"; 
     } catch( error ){
-        console.log( error )
-        // Tratamento de erros de requisição aqui
-        if ( error.status === 422 ){
-            console.log(data)
-            // Erros de validação - NOTA: Boa sorte com isso kkkkk
+        if ( error.status !== 422 ){
+            util.showError("Ocorreu um erro ao realizar o login.")
+            //console.error(error);
+            return;
         }
+
+        let messages = "";
+
+        if ( !data.errors ){ messages = `<p>${data.message}</p>`; }
+        else {
+            for ( const field in data.errors ){
+                data.errors[ field ].forEach( message => {
+                    messages += `<p>${message}</p>`;
+                });
+            }
+        }
+
+        util.showError( messages );
     }
 });
-
-
