@@ -6,7 +6,7 @@ export class Class extends HTMLElement {
         const shift = this.getAttribute('shift') || 'Turno não informado';
 
         this.innerHTML = `
-            <div class="class" style="--card-color: var(--${color});">
+            <div class="class" style="--card-color: var(--${color}); border: solid 1px var(--${color}-dark);">
                 <div class="top" style="background-color:var(--${color}-dark)">
                     <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="5" cy="5" r="5" fill="var(--${color})" />

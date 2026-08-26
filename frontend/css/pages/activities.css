@@ -7,7 +7,7 @@ my-base {
     flex-flow: column;
     gap: 10px;
 
-    >header {
+    > header {
       display: flex;
       flex-flow: column;
       gap: 10px;
@@ -15,6 +15,7 @@ my-base {
       .bottom {
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .class {
           display: flex;
@@ -39,7 +40,12 @@ my-base {
       height: 100%;
       gap: 16px;
     }
+  }
 
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--purple);
   }
 
   dialog {
@@ -47,8 +53,9 @@ my-base {
     max-width: 600px;
     min-width: 320px;
     border: none;
-    background-color: var(--text-white);
+    background-color: var(--text-white, #ffffff);
     margin: auto;
+    border-radius: 15px;
 
     &::backdrop {
       background-color: rgba(0, 0, 0, 0.4);
@@ -58,139 +65,149 @@ my-base {
     .add {
       width: 100%;
       height: 100%;
-      padding: 20px;
+      padding: 24px;
       gap: 10px;
       border-radius: 15px;
       display: flex;
       flex-flow: column;
+      background-color: var(--text-white, #ffffff);
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+
+        h3 {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+
+        svg {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+        }
+      }
+
+      .forms {
+        display: flex;
+        flex-direction: column;
+
+        .info {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 20px;
+
+          h2 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--purple);
+            white-space: nowrap;
+          }
+        }
+
+        form {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+
+          .field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+
+            input {
+              width: 100%;
+              padding: 12px 14px;
+              border-radius: 5px;
+              font-size: 0.875rem;
+              border: 1px solid var(--border-color, #d1d5db);
+              outline: none;
+            }
+          }
+        }
+
+        .upload {
+          margin-top: 10px;
+          margin-bottom: 20px;
+
+          .container {
+            border: 2px dashed var(--purple);
+            border-radius: 5px;
+            background: var(--purple-light, #faf5ff);
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            p:nth-of-type(1) {
+              font-size: 0.875rem;
+              font-weight: 500;
+              margin-bottom: 4px;
+            }
+
+            p:nth-of-type(2) {
+              font-size: 0.75rem;
+              color: var(--text-muted, #9ca3af);
+              margin-bottom: 16px;
+            }
+
+            button {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+              background: var(--text-white, #ffffff);
+              border: 1px solid var(--border-color, #d1d5db);
+              border-radius: 5px;
+              padding: 5px 10px;
+              font-size: 0.875rem;
+              font-weight: 500;
+              color: var(--purple);
+              cursor: pointer;
+
+              svg {
+                width: 16px;
+                height: 16px;
+                fill: var(--purple);
+                margin: 0;
+              }
+            }
+          }
+        }
+
+        .botoes {
+          display: flex;
+          gap: 12px;
+
+          button {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+          }
+
+          .botao-largo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--purple);
+            color: var(--text-white, #ffffff);
+
+            svg {
+              width: 16px;
+              height: 16px;
+              fill: var(--text-white, #ffffff);
+            }
+          }
+        }
+      }
     }
   }
-}
-.line{
-width:100%;
-height: 1px;
-background-color: var(--purple);
-}
-
-.forms .info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-.add {
-    width: 480px;
-    background: #ffffff;
-    border-radius: 15px;
-    padding: 24px;
-}
-
-.add header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 16px;
-}
-
-.forms .info h2 {
-    font-size: 15px;
-    font-weight: 600;
-    color: #7c3aed;
-}
-.add header h3 {
-    font-size: 24px;
-    font-weight: 700;
-}
-.add header svg {
-    width: 20px;
-    height: 20px;
-}
-
-.forms .info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.forms form .field input {
-    width: 100%;
-    padding: 12px 14px;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-
-.botoes {
-    display: flex;
-    gap: 12px;
-}
-
-.upload {
-    margin-bottom: 20px;
-}
-
-.upload .container {
-    border: 2px dashed #6F33DF;
-    border-radius: 5px;
-    background: #faf5ff;
-    padding: 30px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.upload .container button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: #fff;
-    border: 1px solid #d1d5db;
-    border-radius: 5px;
-    padding: 5px 5px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #7c3aed;
-}
-
-.upload .container button svg {
-    width: 16px;
-    height: 16px;
-    fill: #7c3aed;
-    margin: 0;
-}
-
-.upload .container p:nth-of-type(1) {
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 4px;
-}
-
-.upload .container p:nth-of-type(2) {
-    font-size: 12px;
-    color: #9ca3af;
-    margin-bottom: 16px;
-}
-
-.botoes button {
-    flex: 1;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.botoes .botao-largo svg {
-    width: 16px;
-    height: 16px;
-    fill: #fff;
-}
-
-.botoes .botao-largo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: #7c3aed;
-    color: #fff;
 }
