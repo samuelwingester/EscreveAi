@@ -11,7 +11,7 @@ use App\Http\Controllers\AuthController;
 
 use Illuminate\Http\Request;
 
-Route::get('/', function () 
+Route::get('/', function ()
 {
     //retorna as rotas existentes da api e os metodos aceitos de cada uma
     $routes = collect(Route::getRoutes())->filter( function ($route) {
@@ -37,18 +37,22 @@ Route::apiResource( 'activity', ActivityController::class )->middleware( 'auth:s
 
 Route::middleware( 'auth:sanctum' )->group( function () {
     Route::apiResources([
-        'student'   => StudentController::class, 
-        'teacher'   => TeacherController::class, 
-        'classroom' => ClassroomController::class, 
-        'activity'  => ActivityController::class 
+        'student'   => StudentController::class,
+        'teacher'   => TeacherController::class,
+        'classroom' => ClassroomController::class,
+        'activity'  => ActivityController::class
     ]);
+
+    Route::controller( ClassroomController::class )->group( function () {
+        Route::get( '/classroom/{classroom}/stats', 'stats' );
+    });
 });
 
 // Rotas de Login
 Route::controller( AuthController::class )->group( function () {
     Route::post( '/login', 'login' );
     Route::post( '/register', 'register' );
-    
+
     Route::post( '/logout', 'logout' )->middleware( 'auth:sanctum' );
     Route::get( '/user', 'user' )->middleware( 'auth:sanctum' );
 });
