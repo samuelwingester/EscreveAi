@@ -9,13 +9,53 @@
     <link rel="stylesheet" href="../css/pages/students.css">
 
     <script type="module" src="../js/components/base/load.js"></script>
-    
+    <script type="module" src="../js/components/students/load.js"></script>
+
     <script type="module" src="../js/request/base.js" defer></script>
 </head>
 
 <body>
     <base-body active="students">
-    escreva o seu código aqui!
+        <header>
+            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Atividades - Turma:</h3>
+                    <h2 class="turma-titulo">3º A</h2>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Nova Atividade</p>
+                </button>
+            </div>
+        </header>
+        <input class="search" placeholder="Pesquisar por Turma..."></input>
+        <div class="cards">
+            <student-card
+            name="JÃO"
+            phase="Silábico"
+            last-activity="25 de junho de 2026">
+            </student-card>
+            <student-card
+            name="dsagasf"
+            phase="sfqrewqf"
+            last-activity="27 de junho de 2026">
+            </student-card>
+            <student-card
+            name="qawegesdg"
+            phase="egqeafdesf"
+            last-activity="1 de junho de 2026">
+            </student-card>
+            <student-card
+            name="aaa"
+            phase="wqfeqtgweag"
+            last-activity="67 de junho de 2026">
+            </student-card>
+        </div>
+
+
     </base-body>
 </body>
 
