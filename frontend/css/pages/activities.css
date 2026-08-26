@@ -113,19 +113,8 @@ base-body {
           flex-direction: column;
           gap: 16px;
 
-          .field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-
-            input {
-              width: 100%;
-              padding: 12px 14px;
-              border-radius: 5px;
-              font-size: 0.875rem;
-              border: 1px solid var(--border-color, #d1d5db);
-              outline: none;
-            }
+          common-field {
+            width: 100%;
           }
         }
 

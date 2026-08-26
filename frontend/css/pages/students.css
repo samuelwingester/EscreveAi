@@ -53,5 +53,31 @@ base-body {
             display: flex;
             flex-flow: column;
         }
+
+        dialog {
+            width: 50%;
+            max-width: 600px;
+            min-width: 320px;
+            border: none;
+            background-color: var(--text-white, #ffffff);
+            margin: auto;
+            border-radius: 15px;
+
+            &::backdrop {
+                background-color: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(2px);
+            }
+
+            .add {
+                width: 100%;
+                height: 100%;
+                padding: 24px;
+                gap: 10px;
+                border-radius: 15px;
+                display: flex;
+                flex-flow: column;
+                background-color: var(--text-white, #ffffff);
+            }
+        }
     }
 }

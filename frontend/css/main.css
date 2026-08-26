@@ -8,7 +8,7 @@
 @import url('components/header.css');
 @import url('components/step.css');
 @import url('components/benefit.css');
-@import url('components/field.css');
+@import url('components/iconField.css');
 @import url('components/headerBase.css');
 @import url('components/base.css');
 @import url('components/option.css');
@@ -17,3 +17,4 @@
 @import url('components/activity.css');
 @import url('components/class.css');
 @import url('components/student.css');
+@import url('components/commonField.css');

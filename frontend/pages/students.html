@@ -23,11 +23,11 @@
                     <h3>Atividades - Turma:</h3>
                     <h2 class="turma-titulo">3º A</h2>
                 </div>
-                <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
+                <button class="botao-largo" onclick="document.getElementById('student-modal').showModal()">
                     <svg>
                         <use href="../assets/icons/sprite.svg#icon-plus"></use>
                     </svg>
-                    <p>Nova Atividade</p>
+                    <p>Novo Aluno</p>
                 </button>
             </div>
         </header>
@@ -54,7 +54,16 @@
             last-activity="67 de junho de 2026">
             </student-card>
         </div>
-
+        <dialog id="student-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h3>Novo Aluno</h3>
+                    <svg onclick="document.getElementById('activity-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+            </div>
+        </dialog>
 
     </base-body>
 </body>

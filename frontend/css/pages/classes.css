@@ -78,7 +78,6 @@ base-body {
                 align-items: center;
                 justify-content: space-between;
 
-
                 svg {
                     width: 20px;
                     height: 20px;
@@ -97,7 +96,7 @@ base-body {
                     align-items: center;
                     gap: 12px;
 
-                    h3{
+                    h3 {
                         white-space: nowrap;
                     }
 
@@ -113,41 +112,12 @@ base-body {
                     grid-template-columns: repeat(2, 1fr);
                     gap: 16px;
 
-                    .field {
-                        grid-column: 1 / -1;
-                        display: flex;
-                        flex-direction: column;
-                        gap: 6px;
+                    common-field {
+                        width: 100%;
+                        grid-column: span 1;
 
-                        input {
-                            width: 100%;
-                            padding: 10px 12px;
-                            border-radius: 6px;
-                            border: 1px solid var(--gray-400);
-                            outline: none;
-                            &:focus {
-                                border-color: var(--purple);
-                            }
-                        }
-                    }
-
-                    .minifield {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 6px;
-
-                        input,
-                        select {
-                            width: 100%;
-                            padding: 10px 12px;
-                            border-radius: 6px;
-                            border: 1px solid var(--gray-400);
-                            outline: none;
-                            background-color: var(--text-white);
-
-                            &:focus {
-                                border-color: var(--purple);
-                            }
+                        &[size="field"] {
+                            grid-column: 1 / -1;
                         }
                     }
 
@@ -179,7 +149,8 @@ base-body {
                             p {
                                 white-space: nowrap;
                             }
-                            svg{
+
+                            svg {
                                 width: 16px;
                                 height: 16px;
                                 stroke-width: 2px;

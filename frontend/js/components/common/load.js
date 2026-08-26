@@ -1,5 +1,7 @@
 //---------------------------------------------------
-import { Field } from "./Field.js";
+import { IconField } from "./IconField.js";
+import { CommonField } from "./Field.js";
 //---------------------------------------------------
-customElements.define( "common-field", Field );
+customElements.define( "icon-field", IconField );
+customElements.define( "common-field", CommonField );
 //---------------------------------------------------

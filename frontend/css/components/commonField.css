@@ -1,0 +1,46 @@
+common-field {
+    display: block;
+    width: 100%;
+
+    .field,
+    .minifield {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 100%;
+
+        .title {
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 0.875rem;
+            color: var(--text-color, #1f2937);
+            background-color: var(--text-white, #ffffff);
+            border: 1px solid var(--gray-200);
+            border-radius: 5px;
+            outline: none;
+
+            &:focus {
+                border-color: var(--purple);
+            }
+
+            &::placeholder {
+                color: var(--text-muted, #9ca3af);
+            }
+        }
+
+        select {
+            cursor: pointer;
+
+            &:invalid,
+            option[value=""][disabled] {
+                color: var(--text-muted, #9ca3af);
+            }
+        }
+    }
+}
