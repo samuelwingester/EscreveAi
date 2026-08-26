@@ -1,5 +1,11 @@
 export class Value extends HTMLElement {
     connectedCallback() {
+        this.render();
+        const observer = new MutationObserver(() => this.render());
+        observer.observe(this, { attributes: true });
+    }
+
+    render() {
         const color = this.getAttribute('color') || 'purple';
         const percentage = this.getAttribute('percentage') || 0;
         const total = this.getAttribute('total') || 0;
