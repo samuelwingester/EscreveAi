@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -15,11 +15,46 @@
     <my-base active="activities">
         <header>
             <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
-            <div class="summary">
-                <h3>Resumo da Turma:</h3>
-                <h2 class="turma-titulo">3º A</h2>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Atividades - Turma:</h3>
+                    <h2 class="turma-titulo">3º A</h2>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Nova Atividade</p>
+                </button>
             </div>
         </header>
+
+        <div class="activities">
+            <my-activity title="Nomaaa da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
+            </my-activity>
+            <my-activity title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="67 de Maio de 2022" img-src="../imgs/activities/IMG.png">
+            </my-activity>
+            <my-activity title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
+            </my-activity>
+            <my-activity title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="12 de Junho de 2026" img-src="../imgs/activities/IMG.png">
+            </my-activity>
+            <my-activity title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="2 de Julho de 2025" img-src="../imgs/activities/IMG.png">
+            </my-activity>
+        </div>
+
+        <dialog id="activity-modal" class="modal">
+                <div class="add">TESTEEE</div>
+        </dialog>
     </my-base>
 </body>
 
