@@ -1,10 +1,10 @@
 export class Value extends HTMLElement {
     connectedCallback() {
         const color = this.getAttribute('color') || 'purple';
-        const percentage = this.getAttribute('percentage') || 1;
-        const total = this.getAttribute('total') || 1;
+        const percentage = this.getAttribute('percentage') || 0;
+        const total = this.getAttribute('total') || 0;
         const categoria = this.innerHTML.trim();
-        
+
         this.innerHTML = `
         <div class="value">
             <div class="category">

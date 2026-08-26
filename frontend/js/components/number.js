@@ -13,5 +13,3 @@ export class Number extends HTMLElement {
       `;
     }
 }
-
-// customElements.define('my-benefit', Benefit);

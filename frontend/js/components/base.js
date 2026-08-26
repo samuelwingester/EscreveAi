@@ -10,7 +10,7 @@ export class Base extends HTMLElement {
                         <div class="class">
                             <svg><use href="../assets/icons/sprite.svg#icon-users"></use></svg>
 
-                            <h1 class="turma-titulo" id="turma-titulo"></h1>
+                            <h1 class="turma-titulo" id="turma-titulo"><span class="nome-turma"></span></h1>
                         </div>
 
                         <div class="trocar-turma-wrapper">
@@ -20,7 +20,7 @@ export class Base extends HTMLElement {
                             </button>
 
 
-                            <select id="select-turma-overlay" onchange="atualizarTurmas(this.value)">
+                            <select id="select-turma-overlay">
                                 <option value="" disabled selected hidden></option>
                             </select>
                         </div>
@@ -43,11 +43,3 @@ export class Base extends HTMLElement {
 
     }
 }
-
-window.atualizarTurmas = function(novaTurma) {
-    if (!novaTurma) return;
-    const elementosTurma = document.querySelectorAll('.turma-titulo');
-    elementosTurma.forEach(elemento => {
-        elemento.textContent = novaTurma;
-    });
-};
