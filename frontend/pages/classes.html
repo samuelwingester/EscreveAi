@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/classes.css">
+    <script type="module" src="../js/components/main.js"></script>
+</head>
+
+<body>
+    <my-base active="classes">
+        <header>
+            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Turmas -</h3>
+                    <p class="title">Gerencie todas as suas turmas cadastradas.</p>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('class-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Nova Turma</p>
+                </button>
+            </div>
+        </header>
+        <input class="search" placeholder="Pesquisar por Turma..."></input>
+        <div class="classes">
+            <my-class name="1º A" students="22" shift="Manhã" color="purple"></my-class>
+            <my-class name="2º A" students="25" shift="Manhã" color="green"></my-class>
+            <my-class name="3º A" students="24" shift="Manhã" color="purple"></my-class>
+            <my-class name="4º A" students="20" shift="Manhã" color="red"></my-class>
+            <my-class name="5º A" students="28" shift="Manhã" color="blue"></my-class>
+
+            <my-class name="1º B" students="19" shift="Tarde" color="yellow"></my-class>
+            <my-class name="2º B" students="18" shift="Tarde" color="blue"></my-class>
+            <my-class name="3º B" students="26" shift="Tarde" color="red"></my-class>
+            <my-class name="4º B" students="21" shift="Tarde" color="green"></my-class>
+            <my-class name="5º B" students="23" shift="Tarde" color="yellow"></my-class>
+        </div>
+        <dialog id="class-modal" class="modal">
+            <div class="add"></div>
+        </dialog>
+    </my-base>
+    
+</body>
+
+</html>

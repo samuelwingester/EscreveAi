@@ -8,6 +8,7 @@ import { Base } from './base.js';
 import { Number } from './number.js';
 import { Value } from './value.js';
 import { Activity } from './activity.js';
+import { Class } from './class.js';
 
 customElements.define('my-benefit', Benefit);
 customElements.define('my-field', Field);
@@ -19,3 +20,4 @@ customElements.define('my-base', Base);
 customElements.define('my-number', Number);
 customElements.define('my-value', Value);
 customElements.define('my-activity', Activity);
+customElements.define('my-class', Class);
