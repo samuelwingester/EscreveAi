@@ -7,11 +7,15 @@
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/classes.css">
-    <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/classes/load.js"></script>
+
+    <script type="module" src="../js/request/base.js"></script>
 </head>
 
 <body>
-    <my-base active="classes">
+    <base-body active="classes">
         <header>
             <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
             <div class="bottom">
@@ -29,17 +33,17 @@
         </header>
         <input class="search" placeholder="Pesquisar por Turma..."></input>
         <div class="classes">
-            <my-class name="1º A" students="22" shift="Manhã" color="purple"></my-class>
-            <my-class name="2º A" students="25" shift="Manhã" color="green"></my-class>
-            <my-class name="3º A" students="24" shift="Manhã" color="purple"></my-class>
-            <my-class name="4º A" students="20" shift="Manhã" color="red"></my-class>
-            <my-class name="5º A" students="28" shift="Manhã" color="blue"></my-class>
+            <class-card name="1º A" students="22" shift="Manhã" color="purple"></class-card>
+            <class-card name="2º A" students="25" shift="Manhã" color="green"></class-card>
+            <class-card name="3º A" students="24" shift="Manhã" color="purple"></class-card>
+            <class-card name="4º A" students="20" shift="Manhã" color="red"></class-card>
+            <class-card name="5º A" students="28" shift="Manhã" color="blue"></class-card>
 
-            <my-class name="1º B" students="19" shift="Tarde" color="yellow"></my-class>
-            <my-class name="2º B" students="18" shift="Tarde" color="blue"></my-class>
-            <my-class name="3º B" students="26" shift="Tarde" color="red"></my-class>
-            <my-class name="4º B" students="21" shift="Tarde" color="green"></my-class>
-            <my-class name="5º B" students="23" shift="Tarde" color="yellow"></my-class>
+            <class-card name="1º B" students="19" shift="Tarde" color="yellow"></class-card>
+            <class-card name="2º B" students="18" shift="Tarde" color="blue"></class-card>
+            <class-card name="3º B" students="26" shift="Tarde" color="red"></class-card>
+            <class-card name="4º B" students="21" shift="Tarde" color="green"></class-card>
+            <class-card name="5º B" students="23" shift="Tarde" color="yellow"></class-card>
         </div>
         <dialog id="class-modal" class="modal">
             <div class="add">
@@ -89,11 +93,11 @@
                             </button>
                         </div>
                     </form>
-                    
+
                 </div>
             </div>
         </dialog>
-    </my-base>
+    </base-body>
 
 </body>
 

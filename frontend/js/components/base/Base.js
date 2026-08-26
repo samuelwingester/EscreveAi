@@ -4,7 +4,7 @@ export class Base extends HTMLElement {
         const activeRoute = this.getAttribute('active') || '';
 
         this.innerHTML = `
-            <header-base></header-base>
+            <base-header></base-header>
             <main>
                 <aside>
                     <div class="atual">
@@ -26,11 +26,11 @@ export class Base extends HTMLElement {
                     </div>
                     <div class="line"></div>
                     <div class="menu">
-                        <menu-option title="Turmas" icon="classes" stroke="2" route="classes" ${activeRoute === 'classes' ? 'active' : ''}></menu-option>
-                        <menu-option title="Resumo" icon="dashboard" stroke="2" route="dashboard" ${activeRoute === 'dashboard' ? 'active' : ''}></menu-option>
-                        <menu-option title="Alunos" icon="users" stroke="6" route="students" ${activeRoute === 'students' ? 'active' : ''}></menu-option>
-                        <menu-option title="Atividades" icon="activities" stroke="2" route="activities" ${activeRoute === 'activities' ? 'active' : ''}></menu-option>
-                        <menu-option title="Configurações" icon="gear" stroke="6" route="config" ${activeRoute === 'config' ? 'active' : ''}></menu-option>
+                        <base-menu-option title="Turmas" icon="classes" stroke="2" route="classes" ${activeRoute === 'classes' ? 'active' : ''}></base-menu-option>
+                        <base-menu-option title="Resumo" icon="dashboard" stroke="2" route="dashboard" ${activeRoute === 'dashboard' ? 'active' : ''}></base-menu-option>
+                        <base-menu-option title="Alunos" icon="users" stroke="6" route="students" ${activeRoute === 'students' ? 'active' : ''}></base-menu-option>
+                        <base-menu-option title="Atividades" icon="activities" stroke="2" route="activities" ${activeRoute === 'activities' ? 'active' : ''}></base-menu-option>
+                        <base-menu-option title="Configurações" icon="gear" stroke="6" route="config" ${activeRoute === 'config' ? 'active' : ''}></base-menu-option>
                     </div>
                 </aside>
                 <div class="container">

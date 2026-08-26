@@ -20,14 +20,15 @@ const NumberStatusElements = {
 
 function buildNumbers( data ){
   Object.entries( NumberStatusElements ).forEach( ([ key, element ]) => {
-    element.title = data[key];
+    element.value = data[key];
   });
 }
 
 function buildStatus( data, total ){
   Object.entries( ValueStatusElements ).forEach( ([ key, element ]) => {
-    const percentage = ( data[key] / total ) / 100;
-    element.value = data[key];
+    let percentage = 0;
+    if ( data[key] !== 0 ) percentage = ( data[key] / total ) * 100;
+    element.total = data[key];
     element.percentage = percentage.toFixed(2);
   });
 }
@@ -50,9 +51,7 @@ selectClassroomElement.addEventListener( "change", function () {
       alunosElement.textContent = data.total.students;
 
       buildNumbers( data.total );
-      buildStatus( data.status );
-
-      console.log(data)
+      buildStatus( data.status, data.total.students );
     })
     .catch( error => {
       console.log(error);

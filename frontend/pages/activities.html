@@ -7,12 +7,15 @@
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/activities.css">
-    <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/activities/load.js"></script>
+
     <script type="module" src="../js/request/base.js" defer></script>
 </head>
 
 <body>
-    <my-base active="activities">
+    <base-body active="activities">
         <header>
             <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
             <div class="bottom">
@@ -30,26 +33,26 @@
         </header>
 
         <div class="activities">
-            <my-activity title="Nomaaa da Atividade"
+            <activity-card title="Nomaaa da Atividade"
                 description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
                 date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
-            </my-activity>
-            <my-activity title="Nome da Atividade"
+            </activity-card>
+            <activity-card title="Nome da Atividade"
                 description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
                 date="67 de Maio de 2022" img-src="../imgs/activities/IMG.png">
-            </my-activity>
-            <my-activity title="Nome da Atividade"
+            </activity-card>
+            <activity-card title="Nome da Atividade"
                 description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
                 date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
-            </my-activity>
-            <my-activity title="Nome da Atividade"
+            </activity-card>
+            <activity-card title="Nome da Atividade"
                 description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
                 date="12 de Junho de 2026" img-src="../imgs/activities/IMG.png">
-            </my-activity>
-            <my-activity title="Nome da Atividade"
+            </activity-card>
+            <activity-card title="Nome da Atividade"
                 description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
                 date="2 de Julho de 2025" img-src="../imgs/activities/IMG.png">
-            </my-activity>
+            </activity-card>
         </div>
 
         <dialog id="activity-modal" class="modal">
@@ -105,7 +108,7 @@
             </div>
 
         </dialog>
-    </my-base>
+    </base-body>
 
 </body>
 

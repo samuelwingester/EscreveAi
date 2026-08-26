@@ -7,12 +7,16 @@
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/dashboard.css">
-    <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/dashboard/load.js"></script>
+
     <script type="module" src="../js/request/base.js" defer></script>
+    <script type="module" src="../js/request/dashboard.js" defer></script>
 </head>
 
 <body>
-    <my-base active="dashboard">
+    <base-body active="dashboard">
         <header>
             <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
             <div class="summary">
@@ -22,10 +26,10 @@
         </header>
         <div class="data">
             <div class="numbers">
-                <my-number title="24" description="Alunos" color="blue"></my-number>
-                <my-number title="18" description="Atividades" color="purple"></my-number>
-                <my-number title="8" description="Relatórios" color="yellow"></my-number>
-                <my-number title="92%" description="Evoluções médias" color="green"></my-number>
+                <dashboard-number description="Alunos" color="blue" id="total-alunos-number"></dashboard-number>
+                <dashboard-number description="Atividades" color="purple" id="total-atividades-number"></dashboard-number>
+                <dashboard-number description="Relatórios" color="yellow" id="total-relatorios-number"></dashboard-number>
+                <dashboard-number description="Evoluções médias" color="green"></dashboard-number>
             </div>
             <div class="graphs">
                 <div class="graph" id="graphBarras">
@@ -42,19 +46,10 @@
                     </header>
                     <div class="container">
                         <div class="values">
-                            <my-value percentage="12" total="4" color="purple" id="pre-silabico">
-                                Pré Silábico
-                            </my-value>
-                            <my-value percentage="21" total="7" color="blue" id="silabico">
-                                Silábico
-                            </my-value>
-                            <my-value percentage="30" total="10" color="green" id="silabico-alfabetico">
-                                Silábico-Alfabético
-                            </my-value>
-                            <my-value percentage="24" total="8" color="yellow" id="alfabetico">
-                                Alfabético
-                            </my-value>
-
+                            <dashboard-value categoria="Pré Silábico" color="purple" id="pre-silabico"></dashboard-value>
+                            <dashboard-value categoria="Silábico" color="blue" id="silabico"></dashboard-value>
+                            <dashboard-value categoria="Silábico-Alfabético" color="green" id="silabico-alfabetico"></dashboard-value>
+                            <dashboard-value categoria="Alfabético" color="yellow" id="alfabetico"></dashboard-value>
                         </div>
                         <div class="total">
                             <svg class="purple">
@@ -82,7 +77,7 @@
                 </div>
             </div>
         </div>
-    </my-base>
+    </base-body>
 
 
 </body>
