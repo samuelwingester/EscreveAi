@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/pages/students.css">
 
     <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
     <script type="module" src="../js/components/students/load.js"></script>
 
     <script type="module" src="../js/request/student.js" defer></script>
@@ -20,7 +21,7 @@
             <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
             <div class="bottom">
                 <div class="class">
-                    <h3>Atividades - Turma:</h3>
+                    <h3>Alunos - Turma:</h3>
                     <h2 class="turma-titulo">3º A</h2>
                 </div>
                 <button class="botao-largo" onclick="document.getElementById('student-modal').showModal()">
@@ -34,14 +35,108 @@
         <input class="search" placeholder="Pesquisar por Turma..."></input>
         <div class="cards" id="div-student-cards">
         </div>
+
+
         <dialog id="student-modal" class="modal">
             <div class="add">
                 <header>
                     <h3>Novo Aluno</h3>
-                    <svg onclick="document.getElementById('activity-modal').close()">
+                    <svg class="icon-close" onclick="document.getElementById('student-modal').close()">
                         <use href="../assets/icons/sprite.svg#icon-x"></use>
                     </svg>
                 </header>
+
+                <div class="forms">
+                    <header>
+                        <div class="line"></div>
+                        <h3>Dados Pessoais</h3>
+                        <div class="line"></div>
+                    </header>
+
+                    <form action="#">
+                        <div class="initial">
+                            <div class="photo">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-x"></use>
+                                </svg>
+                            </div>
+                            <common-field label="Nome Completo" placeholder="Digite o nome completo do aluno..."
+                                input_id="input-form-student-name" size="field">
+                            </common-field>
+
+                            <common-field label="Data de Nascimento" placeholder="dd/mm/aaaa"
+                                input_id="input-form-birthdate" icon_id="icon-calendar" type="date" size="field">
+                            </common-field>
+                        </div>
+                        <common-field label="Turma" placeholder="Selecione a Turma" input_id="input-form-class"
+                            icon_id="icon-users" is_select="true" size="field">
+                            <option value="1a">1º A</option>
+                            <option value="2a">2º A</option>
+                            <option value="3a">3º A</option>
+                            <option value="1b">1º B</option>
+                        </common-field>
+
+                        <div class="radio-field">
+                            <h3>Sexo</h3>
+                            <div class="radio_group">
+                                <label class="radio_box">
+                                    <input type="radio" name="sexo" value="masculino" checked />
+                                    <svg class="input-icon">
+                                        <use href="../assets/icons/sprite.svg#icon-male"></use>
+                                    </svg>
+                                    <p>Masculino</p>
+                                </label>
+
+                                <label class="radio_box">
+                                    <input type="radio" name="sexo" value="feminino" />
+                                    <svg class="input-icon">
+                                        <use href="../assets/icons/sprite.svg#icon-female"></use>
+                                    </svg>
+                                    <p>Feminino</p>
+                                </label>
+
+                                <label class="radio_box">
+                                    <input type="radio" name="sexo" value="outro" />
+                                    <svg class="input-icon">
+                                        <use href="../assets/icons/sprite.svg#icon-users"></use>
+                                    </svg>
+                                    <p>Outro</p>
+                                </label>
+                            </div>
+                        </div>
+
+                        <header>
+                            <div class="line"></div>
+                            <h3>Dados Pedagógicos</h3>
+                            <div class="line"></div>
+                        </header>
+                        <common-field label="Nível Inicial da Escrita"
+                            placeholder="Selecione o nível de escrita inicial" input_id="input-form-writing-level"
+                            is_select="true" size="field">
+                            <option value="pre-silabico">Pré-Silábico</option>
+                            <option value="silabico">Silábico</option>
+                            <option value="silabico-alfabetico">Silábico-Alfabético</option>
+                            <option value="alfabetico">Alfabético</option>
+                        </common-field>
+
+                        <common-field label="Observações (opcional)"
+                            placeholder="Adicione observações pedagógicas sobre o aluno..." input_id="input-form-notes"
+                            size="field">
+                        </common-field>
+                    </form>
+
+
+                    <div class="botoes">
+                        <button type="button"
+                            onclick="document.getElementById('activity-modal').close()">Cancelar</button>
+                        <button class="botao-largo" type="submit">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-save"></use>
+                            </svg>
+                            <p>Salvar Aluno</p>
+                        </button>
+                    </div>
+                </div>
             </div>
         </dialog>
 
