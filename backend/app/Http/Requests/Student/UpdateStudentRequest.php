@@ -64,8 +64,6 @@ class UpdateStudentRequest extends FormRequest
             // User Class Data
             'secondary_email'   => ['sometimes', 'nullable', 'email', 'unique:users,email'],
             'name'              => ['sometimes', 'string', 'max:150'],
-            'gender'            => ['sometimes', 'nullable', 'string', new Enum( Gender::class )],
-            'birth_date'        => ['sometimes', Rule::date()->before(today()->subYears(4))],
             //
             */
 
@@ -73,7 +71,9 @@ class UpdateStudentRequest extends FormRequest
             'name'          => ['sometimes', 'string', 'max:150'],
             'class_id'      => ['sometimes', 'integer', 'exists:classes,id'],
             'writing_level' => ['sometimes', 'nullable', 'string', new Enum( WritingLevel::class )],
-            'observations'  => ['sometimes', 'nullable', 'string']
+            'observations'  => ['sometimes', 'nullable', 'string'],
+            'birth_date'    => ['sometimes', Rule::date()->before(today()->subYears(4))],
+            'gender'        => ['sometimes', 'nullable', 'string', new Enum( Gender::class )],
             //
         ];
     }

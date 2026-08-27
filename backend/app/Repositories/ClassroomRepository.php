@@ -13,7 +13,7 @@ class ClassroomRepository extends Repository implements ClassroomRepositoryInter
 {
     protected string $modelClass = Classroom::class;
 
-    public function getWithTeacherId( int|string $id )
+    public function getByTeacher( int|string $id )
     {
         return DB::table( 'classes' )->where( 'teacher_id', $id )->get( ['name', 'id'] );
     }
@@ -35,10 +35,5 @@ class ClassroomRepository extends Repository implements ClassroomRepositoryInter
                 LEFT JOIN reports rep ON stu.id = rep.student_id
             WHERE cla.id = ?;
         ", [ $id ]);
-    }
-
-    public function getStudents(int|string $id)
-    {
-        return DB::table( 'students' )->where( 'class_id', '=', $id )->get( [ 'id', 'name', 'writing_level' ] );
     }
 }

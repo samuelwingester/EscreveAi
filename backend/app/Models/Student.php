@@ -27,7 +27,8 @@ class Student extends Model
         'class_id',
         'writing_level',
         'observations',
-        'name'
+        'name',
+        'birth_date'
     ];
 
     protected function casts(): array

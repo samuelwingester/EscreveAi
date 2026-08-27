@@ -85,13 +85,4 @@ class ClassroomController extends Controller
             ],
         ], 200);
     }
-
-    public function students( Classroom $classroom )
-    {
-        $this->authorize( 'view', $classroom );
-
-        $data = $this->dataService->getStudents( $classroom );
-
-        return response()->json( $data, 200 );
-    }
 }

@@ -41,7 +41,7 @@ class ClassroomPolicy
     {
         return $user->id === $classroom->teacher_id
             ? Response::allow()
-            : Response::denyWithStatus(404);return false;
+            : Response::denyWithStatus(404);
     }
 
     /**
