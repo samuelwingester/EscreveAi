@@ -12,7 +12,7 @@
     <script type="module" src="../js/components/classes/load.js"></script>
     <script type="module" src="../js/components/common/load.js"></script>
 
-    <script type="module" src="../js/request/base.js"></script>
+    <script type="module" src="../js/request/classes.js"></script>
 </head>
 
 <body>
@@ -35,19 +35,7 @@
 
         <input class="search" placeholder="Pesquisar por Turma...">
 
-        <div class="classes">
-            <class-card name="1º A" students="22" shift="Manhã" color="purple"></class-card>
-            <class-card name="2º A" students="25" shift="Manhã" color="green"></class-card>
-            <class-card name="3º A" students="24" shift="Manhã" color="purple"></class-card>
-            <class-card name="4º A" students="20" shift="Manhã" color="red"></class-card>
-            <class-card name="5º A" students="28" shift="Manhã" color="blue"></class-card>
-
-            <class-card name="1º B" students="19" shift="Tarde" color="yellow"></class-card>
-            <class-card name="2º B" students="18" shift="Tarde" color="blue"></class-card>
-            <class-card name="3º B" students="26" shift="Tarde" color="red"></class-card>
-            <class-card name="4º B" students="21" shift="Tarde" color="green"></class-card>
-            <class-card name="5º B" students="23" shift="Tarde" color="yellow"></class-card>
-        </div>
+        <div class="classes" id="classes-cards"></div>
 
         <dialog id="class-modal" class="modal">
             <div class="add">
@@ -63,26 +51,31 @@
                         <h3 class="purple">INFORMAÇÕES DA TURMA</h3>
                         <div class="line"></div>
                     </div>
-                    <form action="#">
-                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-form-name" size="field">
+                    <form action="#" id="new-class-form">
+                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-form-name" size="field" name="name">
                         </common-field>
 
-                        <common-field label="Escola" placeholder="Escola Municipal João XXIII"
+                        <!--Não implementarei agora-->
+                        <!--<common-field label="Escola" placeholder="Escola Municipal João XXIII"
                             input_id="input-form-school" size="field">
-                        </common-field>
+                        </common-field>-->
 
+                        <!--Não implementarei agora-->
                         <common-field label="Série" placeholder="Escreva a Série" input_id="input-form-grade"
                             size="minifield">
                         </common-field>
 
                         <common-field label="Turno" input_id="input-form-shift" placeholder="Selecione..."
-                            is_select="true" size="minifield">
+                            is_select="true" size="minifield" name="shift">
                             <option value="manha">Manhã</option>
                             <option value="tarde">Tarde</option>
                             <option value="noite">Noite</option>
                         </common-field>
 
                         <div class="line"></div>
+
+                        <!-- Temporario, mas e necessario de um definitivo com essa mesma classe em todos os formularios se possivel -->
+                        <div id="login-error" class="error-banner" hidden></div>
 
                         <div class="botoes">
                             <button class="botao-largo" type="button"
