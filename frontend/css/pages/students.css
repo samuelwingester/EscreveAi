@@ -147,7 +147,7 @@ base-body {
 
                         .radio-field {
                             display: flex;
-                            flex-direction: column;
+                            flex-direction: column; 
                             gap: 6px;
 
                             .radio_group {
