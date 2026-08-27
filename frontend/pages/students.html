@@ -11,13 +11,13 @@
     <script type="module" src="../js/components/base/load.js"></script>
     <script type="module" src="../js/components/students/load.js"></script>
 
-    <script type="module" src="../js/request/base.js" defer></script>
+    <script type="module" src="../js/request/student.js" defer></script>
 </head>
 
 <body>
     <base-body active="students">
         <header>
-            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
             <div class="bottom">
                 <div class="class">
                     <h3>Atividades - Turma:</h3>
@@ -32,27 +32,7 @@
             </div>
         </header>
         <input class="search" placeholder="Pesquisar por Turma..."></input>
-        <div class="cards">
-            <student-card
-            name="JÃO"
-            phase="Silábico"
-            last-activity="25 de junho de 2026">
-            </student-card>
-            <student-card
-            name="dsagasf"
-            phase="sfqrewqf"
-            last-activity="27 de junho de 2026">
-            </student-card>
-            <student-card
-            name="qawegesdg"
-            phase="egqeafdesf"
-            last-activity="1 de junho de 2026">
-            </student-card>
-            <student-card
-            name="aaa"
-            phase="wqfeqtgweag"
-            last-activity="67 de junho de 2026">
-            </student-card>
+        <div class="cards" id="div-student-cards">
         </div>
         <dialog id="student-modal" class="modal">
             <div class="add">

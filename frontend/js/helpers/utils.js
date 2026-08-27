@@ -38,3 +38,17 @@ export function remove( key ) {
   localStorage.removeItem( key );
   sessionStorage.removeItem( key );
 }
+
+export function getSelectedClassroom() {
+  const selected = document.getElementById("select-turma-overlay").value;
+  const data = retrieveJSON("list-classrooms");
+
+  if ( !data ) { return null; }
+
+  const classroom = Object.entries( data ).find( ([id]) => id == selected );
+
+  if ( !classroom ) { return null; }
+  
+  const [id, name] = classroom;
+  return {id, name};
+}
