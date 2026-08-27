@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\Shift;
+
 return new class extends Migration
 {
     /**
@@ -21,12 +23,7 @@ return new class extends Migration
                   ->constrained('users')
                   ->cascadeOnDelete();
 
-            /*
-            $table->foreignId('teacher_id')
-                  ->constrained('users')
-                  ->cascadeOnDelete();
-            */
-
+            $table->enum( 'shift', Shift::cases() )->nullable();
             $table->string('name', 100);
             $table->boolean('active')->default(true);
 

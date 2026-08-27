@@ -3,40 +3,26 @@
 namespace App\Services\Student;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 use App\Models\Student;
-use App\Models\User;
 
-use App\Enums\UserType;
+use App\Repositories\Contracts\StudentRepositoryInterface;
 
 class StoreStudentService
 {
+    public function __construct(
+		protected StudentRepositoryInterface $repository
+	) {}
+
 	public function execute( array $data ) : Student
 	{
 		// Tenta inserir as informações do novo usuario
-		return DB::transaction( function () use ( $data ) {
-			/*
-			// Inserção do novo usuario
-			$user = User::create([
-				'email' 		=> $data['email'],
-				'password' 		=> Hash::make( $data['password'] ),
-				'name' 			=> $data['name'],
-				'gender' 		=> $data['gender'] ?? null,
-				'type'			=> UserType::STUDENT
-			]);
-			//
-			*/
-
-			// Inserção das informações especificas do tipo de usuario
-			return Student::create([
-                'name' 			=> $data['name'],
-				'class_id' 		=> $data['class_id'],
-				'writing_level' => $data['writing_level'] ?? null,
-				'observations' 	=> $data['observations'] ?? null,
-				'birth_date' 	=> $data['birth_date'],
-			]);
-			//
-		}, 2);
+		return $this->repository->create([
+            'name' 			=> $data['name'],
+            'class_id' 		=> $data['class_id'],
+            'writing_level' => $data['writing_level'] ?? null,
+            'observations' 	=> $data['observations'] ?? null,
+            'birth_date' 	=> $data['birth_date'],
+        ]);
 	}
 }

@@ -31,7 +31,7 @@ class ClassroomController extends Controller
     }
 
     public function store( StoreRequest $request ){
-        $classroom = $this->storeService->execute( $request->user, $request->validated( 'name' ) );
+        $classroom = $this->storeService->execute( $request->user(), $request->validated() );
 
         return response()->json( $classroom, 201 );
     }

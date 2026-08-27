@@ -15,11 +15,16 @@ class ClassroomRepository extends Repository implements ClassroomRepositoryInter
 
     public function getByTeacher( int|string $id )
     {
-        return DB::table( 'classes' )->where( 'teacher_id', $id )->get( ['name', 'id'] );
+        return DB::table('classes')
+            ->leftJoin('students', 'classes.id', '=', 'students.class_id')
+            ->where('classes.teacher_id', $id)
+            ->groupBy('classes.id', 'classes.name', 'classes.shift')
+            ->get([ 'classes.id', 'classes.name', 'classes.shift', DB::raw('COUNT(students.id) as students') ]);
     }
 
     public function getStats( int|string $id )
     {
+        // Melhorar isso depois funciona mas e feio;
         return DB::selectOne("
             SELECT
                 COUNT( DISTINCT stu.id ) as students,

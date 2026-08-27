@@ -2,9 +2,10 @@
 
 namespace App\Enums;
 
-enum Turno: string
+enum Shift: string
 {
     CASE MANHA = 'manha';
     CASE TARDE = 'tarde';
     CASE NOITE = 'noite';
+    CASE NULL = '';
 }

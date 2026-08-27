@@ -13,8 +13,12 @@ class StoreClassroomService
 		protected ClassroomRepositoryInterface $repository
 	) {}
 
-	public function execute( User $teacher, string $name ) : Classroom
+	public function execute( User $teacher, array $data ) : Classroom
 	{
-		return $this->repository->create( [ 'name' => $name, 'teacher_id' => $teacher->id ] );
+		return $this->repository->create([
+            'name'          => $data['name'],
+            'teacher_id'    => $teacher->id,
+            'shift'         => $data['shift'] ?? null
+        ]);
 	}
 }
