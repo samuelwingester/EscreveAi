@@ -60,3 +60,23 @@ button {
 .botao-largo:hover {
     transform: scale(1.05);
 }
+
+#vazio {
+    background-color: transparent;
+
+    p {
+        color: black;
+    }
+}
+
+#vazioBorda {
+    background-color: transparent;
+    border: solid 1px white;
+}
+#vazioBorda2 {
+    background-color: transparent;
+    border: solid 1px black;
+    p{
+        color: black;
+    }
+}

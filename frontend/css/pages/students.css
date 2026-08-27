@@ -225,15 +225,6 @@ base-body {
                             stroke-width: 1.5px;
                         }
                     }
-
-                    .botao-largo:first-child {
-                        background-color: transparent;
-                        border: solid 1px var(--text-primary);
-
-                        p {
-                            color: var(--text-primary);
-                        }
-                    }
                 }
             }
         }
