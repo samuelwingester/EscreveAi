@@ -12,19 +12,20 @@
     <script type="module" src="../js/components/common/load.js"></script>
     <script type="module" src="../js/components/students/load.js"></script>
 
-    <script type="module" src="../js/request/base.js" defer></script>
+    <script type="module" src="../js/request/student.js" defer></script>
 </head>
 
 <body>
     <base-body active="students">
         <header>
-            <h1>Bom Dia, Professor <p id="nome-professor">João</p>👋</h1>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
             <div class="bottom">
                 <div class="class">
                     <h3>Alunos - Turma:</h3>
-                    <h2 class="turma-titulo">3º A</h2>
+                    <h2 class="turma-titulo"></h2>
                 </div>
-                <button class="botao-largo" onclick="document.getElementById('student-modal').showModal()">
+                <!-- Mudei o evento de lugar porque eu preciso carregar dados na abertura do modal -->
+                <button class="botao-largo" id="student-modal-button" >
                     <svg>
                         <use href="../assets/icons/sprite.svg#icon-plus"></use>
                     </svg>
@@ -32,19 +33,9 @@
                 </button>
             </div>
         </header>
-        <input class="search" placeholder="Pesquisar por Turma..."></input>
-        <div class="cards">
-            <student-card name="JÃO" phase="Silábico" last-activity="25 de junho de 2026">
-            </student-card>
-            <student-card name="dsagasf" phase="sfqrewqf" last-activity="27 de junho de 2026">
-            </student-card>
-            <student-card name="qawegesdg" phase="egqeafdesf" last-activity="1 de junho de 2026">
-            </student-card>
-            <student-card name="aaa" phase="wqfeqtgweag" last-activity="67 de junho de 2026">
-            </student-card>
+        <!--<input class="search" placeholder="Pesquisar por Turma..."></input> -> acredito que seja desnecessario -->
+        <div class="cards" id="div-student-cards">
         </div>
-
-
         <dialog id="student-modal" class="modal">
             <div class="add">
                 <header>
@@ -61,7 +52,7 @@
                         <div class="line"></div>
                     </header>
 
-                    <form action="#">
+                    <form action="#" id="new-student-form">
                         <div class="initial">
                             <div class="photo">
                                 <svg>
@@ -69,26 +60,22 @@
                                 </svg>
                             </div>
                             <common-field label="Nome Completo" placeholder="Digite o nome completo do aluno..."
-                                input_id="input-form-student-name" size="field">
+                                input_id="input-form-student-name" size="field" name="name">
                             </common-field>
 
                             <common-field label="Data de Nascimento" placeholder="dd/mm/aaaa"
-                                input_id="input-form-birthdate" icon_id="icon-calendar" type="date" size="field">
+                                input_id="input-form-birthdate" icon_id="icon-calendar" type="date" size="field" name="birth-date">
                             </common-field>
                         </div>
                         <common-field label="Turma" placeholder="Selecione a Turma" input_id="input-form-class"
-                            icon_id="icon-users" is_select="true" size="field">
-                            <option value="1a">1º A</option>
-                            <option value="2a">2º A</option>
-                            <option value="3a">3º A</option>
-                            <option value="1b">1º B</option>
+                            icon_id="icon-users" is_select="true" size="field" name="classroom">
                         </common-field>
 
                         <div class="radio-field">
                             <h3>Sexo</h3>
                             <div class="radio_group">
                                 <label class="radio_box">
-                                    <input type="radio" name="sexo" value="masculino" checked />
+                                    <input type="radio" name="sexo" value="man" checked />
                                     <svg class="input-icon">
                                         <use href="../assets/icons/sprite.svg#icon-male"></use>
                                     </svg>
@@ -96,7 +83,7 @@
                                 </label>
 
                                 <label class="radio_box">
-                                    <input type="radio" name="sexo" value="feminino" />
+                                    <input type="radio" name="sexo" value="woman" />
                                     <svg class="input-icon">
                                         <use href="../assets/icons/sprite.svg#icon-female"></use>
                                     </svg>
@@ -104,7 +91,7 @@
                                 </label>
 
                                 <label class="radio_box">
-                                    <input type="radio" name="sexo" value="outro" />
+                                    <input type="radio" name="sexo" value="" />
                                     <svg class="input-icon">
                                         <use href="../assets/icons/sprite.svg#icon-users"></use>
                                     </svg>
@@ -120,7 +107,7 @@
                         </header>
                         <common-field label="Nível Inicial da Escrita"
                             placeholder="Selecione o nível de escrita inicial" input_id="input-form-writing-level"
-                            is_select="true" size="field">
+                            is_select="true" size="field" name="writing-level">
                             <option value="pre-silabico">Pré-Silábico</option>
                             <option value="silabico">Silábico</option>
                             <option value="silabico-alfabetico">Silábico-Alfabético</option>
@@ -129,21 +116,21 @@
 
                         <common-field label="Observações (opcional)"
                             placeholder="Adicione observações pedagógicas sobre o aluno..." input_id="input-form-notes"
-                            size="field">
+                            size="field" name="observations">
                         </common-field>
+                        <!-- Temporario, mas e necessario de um definitivo com essa mesma classe em todos os formularios se possivel -->
+                        <div id="login-error" class="error-banner" hidden></div>
+                        <div class="botoes">
+                            <button type="button"
+                                onclick="document.getElementById('student-modal').close()">Cancelar</button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Aluno</p>
+                            </button>
+                        </div>
                     </form>
-
-
-                    <div class="botoes">
-                        <button type="button"
-                            onclick="document.getElementById('activity-modal').close()">Cancelar</button>
-                        <button class="botao-largo" type="submit">
-                            <svg>
-                                <use href="../assets/icons/sprite.svg#icon-save"></use>
-                            </svg>
-                            <p>Salvar Aluno</p>
-                        </button>
-                    </div>
                 </div>
             </div>
         </dialog>

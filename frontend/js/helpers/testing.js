@@ -1,5 +1,4 @@
 import { EscreveAiApi } from "./EscreveAiApi.js";
-import { fetchListClassroom } from "./requests.js";
 
 // Não sei que merda e essa. codigo de ia para teste
 function syntaxHighlight(json) {
@@ -26,6 +25,16 @@ function renderJson(data) {
 }
 
 try{
-const result = await fetchListClassroom();
+const result = await EscreveAiApi.fetchWithAuth( '/classroom/' + 1 + '/student' )
+  .then( response => {
+    if ( !response.ok ) throw new Error();
+    return response.json();
+  })
+  .then( data => {
+    if ( data == null ) throw new Error();
+    return data;
+  })
+  .catch( error => { console.log( error ) } );
+
 renderJson(result);
 } catch( error ) { console.log( error ) }
