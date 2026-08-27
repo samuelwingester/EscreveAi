@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->insertTestUserData();
+        $this->command->newLine(4);
         //---------------------------------------------------------
         // Teacher Seeding
         //---------------------------------------------------------
@@ -63,13 +64,15 @@ class DatabaseSeeder extends Seeder
             fn( $bar ) => ActivitySeeder::seed( $bar, $count, $classrooms )
         );
         //---------------------------------------------------------
+
+        $this->command->newLine(5);
     }
 
     private function createBar( string $name, int $count ) : ProgressBar
     {
-        $this->command->newLine();
+        $this->command->newLine(3);
         $this->command->info( 'Criando ' . $count . ' ' . $name );
-        $this->command->newLine();
+        $this->command->newLine(1);
 
         return $this->command->getOutput()->createProgressBar( $count );
     }
