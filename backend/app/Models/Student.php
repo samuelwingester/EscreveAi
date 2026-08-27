@@ -23,10 +23,11 @@ class Student extends Model
     protected $table = 'students';
 
     protected $fillable = [
-        'user_id',
+        //'user_id',
         'class_id',
         'writing_level',
-        'observations'
+        'observations',
+        'name'
     ];
 
     protected function casts(): array

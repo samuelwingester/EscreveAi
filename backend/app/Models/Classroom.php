@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +14,9 @@ use App\Models\Activity;
 use App\Models\Student;
 use App\Models\User;
 
+use App\Policies\ClassroomPolicy;
+
+#[UsePolicy(ClassroomPolicy::class)]
 class Classroom extends Model
 {
     use HasFactory;

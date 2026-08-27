@@ -31,6 +31,7 @@ class StoreStudentService
 
 			// Inserção das informações especificas do tipo de usuario
 			return Student::create([
+                'name' 			=> $data['name'],
 				'class_id' 		=> $data['class_id'],
 				'writing_level' => $data['writing_level'] ?? null,
 				'observations' 	=> $data['observations'] ?? null
