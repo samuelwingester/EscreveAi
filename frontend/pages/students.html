@@ -7,14 +7,134 @@
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/students.css">
-    <script type="module" src="../js/components/main.js"></script>
-    <script type="module" src="../js/request/base.js" defer></script>
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
+    <script type="module" src="../js/components/students/load.js"></script>
+
+    <script type="module" src="../js/request/student.js" defer></script>
 </head>
 
 <body>
-    <my-base active="students">
-    escreva o seu código aqui!
-    </my-base>
+    <base-body active="students">
+        <header>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Alunos - Turma:</h3>
+                    <h2 class="turma-titulo"></h2>
+                </div>
+                <!-- Mudei o evento de lugar porque eu preciso carregar dados na abertura do modal -->
+                <button class="botao-largo" id="student-modal-button" >
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Novo Aluno</p>
+                </button>
+            </div>
+        </header>
+        <!--<input class="search" placeholder="Pesquisar por Turma..."></input> -> acredito que seja desnecessario -->
+        <div class="cards" id="div-student-cards">
+        </div>
+        <dialog id="student-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h3>Novo Aluno</h3>
+                    <svg class="icon-close" onclick="document.getElementById('student-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+
+                <div class="forms">
+                    <header>
+                        <div class="line"></div>
+                        <h3>Dados Pessoais</h3>
+                        <div class="line"></div>
+                    </header>
+
+                    <form action="#" id="new-student-form">
+                        <div class="initial">
+                            <div class="photo">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-camera"></use>
+                                </svg>
+                            </div>
+                            <common-field label="Nome Completo" placeholder="Digite o nome completo do aluno..."
+                                input_id="input-form-student-name" size="field" name="name">
+                            </common-field>
+
+                            <common-field label="Data de Nascimento" placeholder="dd/mm/aaaa"
+                                input_id="input-form-birthdate" icon_id="icon-calendar" type="date" size="field" name="birth-date">
+                            </common-field>
+                        </div>
+                        <common-field label="Turma" placeholder="Selecione a Turma" input_id="input-form-class"
+                            icon_id="icon-users" is_select="true" size="field" name="classroom">
+                        </common-field>
+
+                        <div class="radio-field">
+                            <h3>Sexo</h3>
+                            <div class="radio_group">
+                                <label class="radio_box">
+                                    <input type="radio" name="sexo" value="man" checked />
+                                    <svg class="input-icon">
+                                        <use href="../assets/icons/sprite.svg#icon-male"></use>
+                                    </svg>
+                                    <p>Masculino</p>
+                                </label>
+
+                                <label class="radio_box">
+                                    <input type="radio" name="sexo" value="woman" />
+                                    <svg class="input-icon">
+                                        <use href="../assets/icons/sprite.svg#icon-female"></use>
+                                    </svg>
+                                    <p>Feminino</p>
+                                </label>
+
+                                <label class="radio_box">
+                                    <input type="radio" name="sexo" value="" />
+                                    <svg class="input-icon">
+                                        <use href="../assets/icons/sprite.svg#icon-users"></use>
+                                    </svg>
+                                    <p>Outro</p>
+                                </label>
+                            </div>
+                        </div>
+
+                        <header>
+                            <div class="line"></div>
+                            <h3>Dados Pedagógicos</h3>
+                            <div class="line"></div>
+                        </header>
+                        <common-field label="Nível Inicial da Escrita"
+                            placeholder="Selecione o nível de escrita inicial" input_id="input-form-writing-level"
+                            is_select="true" size="field" name="writing-level">
+                            <option value="pre-silabico">Pré-Silábico</option>
+                            <option value="silabico">Silábico</option>
+                            <option value="silabico-alfabetico">Silábico-Alfabético</option>
+                            <option value="alfabetico">Alfabético</option>
+                        </common-field>
+
+                        <common-field label="Observações (opcional)"
+                            placeholder="Adicione observações pedagógicas sobre o aluno..." input_id="input-form-notes"
+                            size="field" name="observations">
+                        </common-field>
+                        <!-- Temporario, mas e necessario de um definitivo com essa mesma classe em todos os formularios se possivel -->
+                        <div id="login-error" class="error-banner" hidden></div>
+                        <div class="botoes">
+                            <button type="button"
+                                onclick="document.getElementById('student-modal').close()">Cancelar</button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Aluno</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </base-body>
 </body>
 
 </html>

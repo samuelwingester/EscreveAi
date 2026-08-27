@@ -1,8 +1,9 @@
 import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
 import * as util from "../helpers/utils.js";
+import * as base from "./base.js";
 
 const selectClassroomElement = document.getElementById( "select-turma-overlay" );
-const classroomElements = document.querySelectorAll( ".nome-turma" );
+const classroomElements = document.querySelectorAll( ".turma-titulo" );
 const alunosElement = document.getElementById( 'total-alunos' );
 
 const ValueStatusElements = {
@@ -20,41 +21,35 @@ const NumberStatusElements = {
 
 function buildNumbers( data ){
   Object.entries( NumberStatusElements ).forEach( ([ key, element ]) => {
-    element.title = data[key];
+    element.value = data[key];
   });
 }
 
 function buildStatus( data, total ){
   Object.entries( ValueStatusElements ).forEach( ([ key, element ]) => {
-    const percentage = ( data[key] / total ) / 100;
-    element.value = data[key];
+    let percentage = 0;
+    if ( data[key] !== 0 ) percentage = ( data[key] / total ) * 100;
+    element.total = data[key];
     element.percentage = percentage.toFixed(2);
   });
 }
 
-selectClassroomElement.addEventListener( "change", function () {
-  const newClassId = selectClassroomElement.value;
-
-  EscreveAiApi.fetchWithAuth( "/classroom/" + newClassId + "/stats" )
-    .then( response => {
-      if ( !response.ok ) throw Error();//tratar depois agora não e tão importante
-      return response.json();
-    })
+function loadClassroomStats( value ){
+  EscreveAiApi.fetchWithAuth( "/classroom/" + value + "/stats" )
+    .then( response => { if ( !response.ok ) throw Error(); return response.json(); })
+    .then( data => { if ( data === null ) throw Error(); return data; })
     .then( data => {
-      if ( data === null ) throw Error();
-      return data;
-    })
-    .then( data => {
-      classroomElements.forEach( element => element.textContent = data.name );
-
       alunosElement.textContent = data.total.students;
-
       buildNumbers( data.total );
-      buildStatus( data.status );
-
-      console.log(data)
+      buildStatus( data.status, data.total.students );
+      base.buildClassName();
     })
-    .catch( error => {
-      console.log(error);
-    });
+    .catch( error => { console.log(error); });
+}
+
+selectClassroomElement.addEventListener( "change", function () {
+  loadClassroomStats( selectClassroomElement.value );
 });
+
+base.BuildUserName();
+base.BuildSelectClassroom();

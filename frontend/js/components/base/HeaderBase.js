@@ -15,4 +15,4 @@ export class HeaderBase extends HTMLElement {
   }
 }
 
-// customElements.define('header-padrao', HeaderPadrao);
+// customElements.define('home-header', HeaderPadrao);

@@ -1,4 +1,4 @@
-my-base {
+base-body {
   height: calc(90vh - 80px);
   position: relative;
 
@@ -7,7 +7,7 @@ my-base {
     flex-flow: column;
     gap: 10px;
 
-    > header {
+    >header {
       display: flex;
       flex-flow: column;
       gap: 10px;
@@ -78,11 +78,6 @@ my-base {
         justify-content: space-between;
         margin-bottom: 16px;
 
-        h3 {
-          font-size: 1.5rem;
-          font-weight: 700;
-        }
-
         svg {
           width: 20px;
           height: 20px;
@@ -113,19 +108,8 @@ my-base {
           flex-direction: column;
           gap: 16px;
 
-          .field {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-
-            input {
-              width: 100%;
-              padding: 12px 14px;
-              border-radius: 5px;
-              font-size: 0.875rem;
-              border: 1px solid var(--border-color, #d1d5db);
-              outline: none;
-            }
+          common-field {
+            width: 100%;
           }
         }
 
@@ -181,29 +165,24 @@ my-base {
         .botoes {
           display: flex;
           gap: 12px;
-
-          button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 0.9375rem;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-          }
+          padding: 10px 0px;
+          justify-content: flex-end;
 
           .botao-largo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: var(--purple);
-            color: var(--text-white, #ffffff);
-
             svg {
               width: 16px;
               height: 16px;
-              fill: var(--text-white, #ffffff);
+              color: var(--text-white);
+              stroke-width: 1.5px;
+            }
+          }
+
+          .botao-largo:first-child {
+            background-color: transparent;
+            border: solid 1px var(--text-primary);
+
+            p {
+              color: var(--text-primary);
             }
           }
         }

@@ -32,6 +32,7 @@ button {
 .botao-largo {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 12px 16px;
     gap: 5px;
     background-color: var(--purple-dark);
