@@ -90,17 +90,36 @@ php artisan db:seed
 php artisan serve
 ```
 
- ## Documentação
+## Documentação
 
-### Caminhos e Comandos importantes
-|   | Caminho | Comando `php artisan`  | Descrição |
-| :---: | :--- | :--- | :--- |
-| Controllers | app/Http/Controllers/ | `make:controller {nome}` | Cria um Controller |
-| Models | app/Models | `make:model {nome}` | Cria uma Model |
-| Migrations | database/migrations/ | `make:migration {nome}` | Cria uma Migração |
-| Factories | database/factories/ | `make:factory --model={model} {nome}` | Cria uma Factory |
-| Seeders | database/seeders/ | `make:seeder {nome}` | Cria um Seeder |
-| Services | app/Services/ | `make:service {model} {nome}` | Cria um Service para uma Model |
-| Tests | tests/Feature/ | `make:test {nome}` | Cria um Teste |
+### Rotas
 
- ### Rotas
+<figcaption align="top"><b>Turma</b></figcaption>
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api/classroom` | Lista todas as turmas de um usuario |
+| `GET` | `/api/classroom/{classroom}` | Busca uma turma por ID |
+| `GET` | `/api/classroom/{classroom}/stats` | Retorna as estatísticas da turma |
+| `POST` | `/api/classroom` | Cria uma nova turma |
+| `PUT` / `PATCH` | `/api/classroom/{classroom}` | Atualiza os dados de uma turma |
+| `DELETE` | `/api/classroom/{classroom}` | Exclui uma turma |
+
+<figcaption align="top"><b>Alunos</b></figcaption>
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api/classroom/{classroom}/student` | Lista todos os alunos da turma |
+| `GET` | `/api/classroom/{classroom}/student/{student}` | Busca um aluno da turma por ID |
+| `POST` | `/api/classroom/{classroom}/student` | Adiciona um novo aluno à turma |
+| `PUT` / `PATCH` | `/api/classroom/{classroom}/student/{student}` | Atualiza os dados de um aluno |
+| `DELETE` | `/api/classroom/{classroom}/student/{student}` | Remove um aluno da turma |
+
+<figcaption align="top"><b>Autenticação</b></figcaption>
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `POST` | `/api/login` | Realiza o login do usuário |
+| `POST` | `/api/register` | Registra um novo usuário |
+| `POST` | `/api/logout` | Encerra a sessão do usuário autenticado |
+| `GET` | `/api/user` | Retorna os dados do usuário autenticado |
