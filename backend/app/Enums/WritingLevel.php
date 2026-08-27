@@ -4,9 +4,9 @@ namespace App\Enums;
 
 enum WritingLevel: string
 {
-    case PRE_SILABICO = 'pre_silabico';
+    case PRE_SILABICO = 'pre-silabico';
     case SILABICO = 'silabico';
-    case SILABICO_ALFABETICO = 'silabico_alfabetico';
+    case SILABICO_ALFABETICO = 'silabico-alfabetico';
     case ALFABETICO = 'alfabetico';
     case NULL = '';
 }

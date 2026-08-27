@@ -11,23 +11,34 @@ use App\Http\Requests\Student\UpdateStudentRequest as UpdateRequest;
 
 use App\Services\Student\StoreStudentService as StoreService;
 use App\Services\Student\UpdateStudentService as UpdateService;
+use App\Services\Student\DataStudentService as DataService;
+
+use App\Models\Classroom;
 
 class StudentController extends Controller
 {
     public function __construct(
         protected StoreService $storeService,
-        protected UpdateService $updateService
+        protected UpdateService $updateService,
+        protected DataService $dataService,
     ) {}
 
-    public function index()
+    public function index( Classroom $classroom )
     {
-        $students = Student::all();
+        $this->authorize( 'view', $classroom );
+
+        $students = $this->dataService->getByClassroom( $classroom->id );
 
         return response()->json( $students, 200 );
     }
 
-    public function store( StoreRequest $request ){
-        $student = $this->storeService->execute( $request->validated() );
+    public function store( Classroom $classroom, StoreRequest $request ){
+        $this->authorize( 'update', $classroom ); // Acho que essa e a autorização certa se não for mudo depois
+
+        $data = $request->validated();
+        $data['class_id'] = $classroom->id;
+
+        $student = $this->storeService->execute( $data );
 
         return response()->json( $student, 201 );
     }
