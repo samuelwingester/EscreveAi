@@ -23,7 +23,6 @@ class StoreStudentService
 				'password' 		=> Hash::make( $data['password'] ),
 				'name' 			=> $data['name'],
 				'gender' 		=> $data['gender'] ?? null,
-				'birth_date' 	=> $data['birth_date'],
 				'type'			=> UserType::STUDENT
 			]);
 			//
@@ -34,7 +33,8 @@ class StoreStudentService
                 'name' 			=> $data['name'],
 				'class_id' 		=> $data['class_id'],
 				'writing_level' => $data['writing_level'] ?? null,
-				'observations' 	=> $data['observations'] ?? null
+				'observations' 	=> $data['observations'] ?? null,
+				'birth_date' 	=> $data['birth_date'],
 			]);
 			//
 		}, 2);
