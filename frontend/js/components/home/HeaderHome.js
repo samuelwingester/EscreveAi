@@ -1,4 +1,4 @@
-export class HeaderPadrao extends HTMLElement {
+export class HeaderHome extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
           <div class="logos">
@@ -16,5 +16,3 @@ export class HeaderPadrao extends HTMLElement {
       `;
     }
 }
-
-// customElements.define('header-padrao', HeaderPadrao);

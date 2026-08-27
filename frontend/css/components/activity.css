@@ -1,86 +1,237 @@
-.activity {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex: 1;
-  min-height: 100px;
-  height: 100%;
-  padding: 16px;
-  background-color: var(--text-white, #ffffff);
-  border-radius: 12px;
-  box-shadow: 0px 4px 16px 0px rgba(16, 24, 40, 0.08);
-
-  .info {
+activity-card {
+  .activity {
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    flex: 1;
+    min-height: 100px;
     height: 100%;
-    gap: 16px;
+    padding: 16px;
+    background-color: var(--text-white, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0px 4px 16px 0px rgba(16, 24, 40, 0.08);
 
-    .image {
-      width: 287px;
+    .info {
+      display: flex;
+      align-items: center;
       height: 100%;
-      border-radius: 8px;
-      object-fit: cover;
+      gap: 16px;
+
+      .image {
+        width: 287px;
+        height: 100%;
+        border-radius: 8px;
+        object-fit: cover;
+      }
+
+      .desc {
+        display: flex;
+        flex-direction: column;
+        max-width: 40%;
+        gap: 10px;
+
+        .img-count {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          color: var(--purple-dark);
+
+          svg {
+            width: 18px;
+            aspect-ratio: 1 / 1;
+          }
+        }
+      }
     }
 
-    .desc {
+    .tools {
       display: flex;
       flex-direction: column;
-      max-width: 40%;
-      gap: 10px;
+      justify-content: space-between;
+      align-items: flex-end;
+      height: 100%;
+      padding: 8px;
 
-      .img-count {
+      .date {
         display: flex;
         align-items: center;
         gap: 6px;
-        color: var(--purple-dark);
 
         svg {
           width: 18px;
           aspect-ratio: 1 / 1;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        height: 40%;
+        gap: 10px;
+
+        .botao-largo {
+          height: 100%;
+          background-color: transparent;
+          border: 1px solid var(--purple);
+
+          p {
+            font-weight: 400;
+            white-space: nowrap;
+          }
+
+          svg {
+            width: 18px;
+            aspect-ratio: 1 / 1;
+            color: var(--purple-dark);
+          }
         }
       }
     }
   }
 
-  .tools {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-    height: 100%;
-    padding: 8px;
+  .line {
+    width: 100%;
+    height: 1px;
+    background-color: var(--purple);
+  }
 
-    .date {
+  .add {
+    width: 480px;
+    background: var(--text-white, #ffffff);
+    border-radius: 15px;
+    padding: 24px;
+
+    header {
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      h3 {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
 
       svg {
-        width: 18px;
-        aspect-ratio: 1 / 1;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
       }
     }
 
-    .buttons {
+    .forms {
       display: flex;
-      height: 40%;
-      gap: 10px;
+      flex-direction: column;
 
-      .botao-largo {
-        height: 100%;
-        background-color: transparent;
-        border: 1px solid var(--purple);
+      .info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
 
-        p {
-          font-weight: 400;
-          white-space: nowrap;
+        h2 {
+          font-size: 0.9375rem;
+          font-weight: 600;
+          color: var(--purple);
+        }
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        .field {
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          margin-bottom: 16px;
+
+          input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 5px;
+            font-size: 0.875rem;
+            box-sizing: border-box;
+            border: 1px solid var(--border-color, #d1d5db);
+            outline: none;
+          }
+        }
+      }
+
+      .upload {
+        margin-bottom: 20px;
+
+        .container {
+          border: 2px dashed var(--purple);
+          border-radius: 5px;
+          background: var(--purple-light, #faf5ff);
+          padding: 30px 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+
+          p:nth-of-type(1) {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 4px;
+          }
+
+          p:nth-of-type(2) {
+            font-size: 0.75rem;
+            color: var(--text-muted, #9ca3af);
+            margin-bottom: 16px;
+          }
+
+          button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--text-white, #ffffff);
+            border: 1px solid var(--border-color, #d1d5db);
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--purple);
+            cursor: pointer;
+
+            svg {
+              width: 16px;
+              height: 16px;
+              fill: var(--purple);
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      .botoes {
+        display: flex;
+        gap: 12px;
+
+        button {
+          flex: 1;
+          padding: 12px;
+          border-radius: 8px;
+          font-size: 0.9375rem;
+          font-weight: 600;
+          border: none;
+          cursor: pointer;
         }
 
-        svg {
-          width: 18px;
-          aspect-ratio: 1 / 1;
-          color: var(--purple-dark);
+        .botao-largo {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          background: var(--purple);
+          color: var(--text-white, #ffffff);
+
+          svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-white, #ffffff);
+          }
         }
       }
     }

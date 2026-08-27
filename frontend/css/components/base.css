@@ -1,4 +1,4 @@
-my-base {
+base-body {
   main {
     display: flex;
     width: 100%;
@@ -121,7 +121,7 @@ my-base {
 }
 
 @media (max-width: 768px) {
-  my-base {
+  base-body {
     main {
       aside {
         padding: 20px 10px;
@@ -141,8 +141,8 @@ my-base {
           }
         }
 
-        .menu menu-option p,
-        .menu menu-option span {
+        .menu base-menu-option p,
+        .menu base-menu-option span {
           display: none;
         }
       }
@@ -156,7 +156,7 @@ my-base {
 
 /* Smartphone (<= 480px): Organiza em ordem vertical para o mobile */
 @media (max-width: 480px) {
-  my-base {
+  base-body {
     main {
       flex-direction: column;
       height: auto;
@@ -195,8 +195,8 @@ my-base {
           flex-direction: column;
           gap: 8px;
 
-          menu-option p,
-          menu-option span {
+          base-menu-option p,
+          base-menu-option span {
             display: inline-block;
             /* Garante que os rótulos do menu apareçam */
           }

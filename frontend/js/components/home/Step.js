@@ -19,5 +19,3 @@ export class Step extends HTMLElement {
         `;
     }
 }
-
-// customElements.define('my-step', Step);

@@ -1,4 +1,4 @@
-export class Field extends HTMLElement {
+export class IconField extends HTMLElement {
   connectedCallback() {
     const type = this.getAttribute('type') || 'text';
     const icon = this.getAttribute('icon') || 'user';
@@ -13,7 +13,7 @@ export class Field extends HTMLElement {
     const inputControl = isSelect
       ? `<select id="${id}" name="${name}" required><option value="" disabled selected hidden>${placeholder}</option>${options}</select>`
       : `<input type="${type}" placeholder="${placeholder}" id="${id}" name="${name}" required>`;
-    
+
     this.innerHTML = `
         <div class="field">
           <div class="icon">
