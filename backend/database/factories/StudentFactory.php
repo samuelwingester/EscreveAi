@@ -26,6 +26,7 @@ class StudentFactory extends Factory
             # 'user_id' -> User::factory(),
             'writing_level' => fake()->randomElement( WritingLevel::class ),
             'observations'  => fake()->text(),
+            'name'          => fake()->name()
         ];
     }
 

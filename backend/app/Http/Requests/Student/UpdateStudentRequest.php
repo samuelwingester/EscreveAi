@@ -31,26 +31,26 @@ class UpdateStudentRequest extends FormRequest
 
         // Optional fields normalization
         /*
-        if ( $this->filled( 'secondary_email' ) ) 
+        if ( $this->filled( 'secondary_email' ) )
             $normalization['secondary_email'] = Str::lower( Str::trim( $this->secondary_email ) );
         */
 
-        if ( $this->filled( 'name' ) ) 
+        if ( $this->filled( 'name' ) )
             $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
 
         /*
-        if ( $this->filled( 'gender' ) ) 
+        if ( $this->filled( 'gender' ) )
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
         */
 
-        if ( $this->filled( 'writing_level' ) ) 
+        if ( $this->filled( 'writing_level' ) )
             $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '_' );
 
         if ( $this->filled( 'observations' ) )
             $normalization['observations'] = Str::trim( $this->observations );
 
         $this->merge( $normalization );
-    }  
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -70,6 +70,7 @@ class UpdateStudentRequest extends FormRequest
             */
 
             // Student Class Data
+            'name'          => ['sometimes', 'string', 'max:150'],
             'class_id'      => ['sometimes', 'integer', 'exists:classes,id'],
             'writing_level' => ['sometimes', 'nullable', 'string', new Enum( WritingLevel::class )],
             'observations'  => ['sometimes', 'nullable', 'string']

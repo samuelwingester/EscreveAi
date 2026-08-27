@@ -45,6 +45,7 @@ Route::middleware( 'auth:sanctum' )->group( function () {
 
     Route::controller( ClassroomController::class )->group( function () {
         Route::get( '/classroom/{classroom}/stats', 'stats' );
+        Route::get( '/classroom/{classroom}/student', 'students' );
     });
 });
 

@@ -68,21 +68,30 @@ class ClassroomController extends Controller
         $data = $this->dataService->generateStats( $classroom );
 
         return response()->json([
-        'name' => $classroom->name,
-        'id' => $classroom->id,
+            'name' => $classroom->name,
+            'id' => $classroom->id,
 
-        'status' => [
-            'pre-silabico'        => $data->pre_silabico,
-            'silabico'            => $data->silabico,
-            'silabico-alfabetico' => $data->silabico_alfabetico,
-            'alfabetico'          => $data->alfabetico,
-        ],
+            'status' => [
+                'pre-silabico'        => $data->pre_silabico,
+                'silabico'            => $data->silabico,
+                'silabico-alfabetico' => $data->silabico_alfabetico,
+                'alfabetico'          => $data->alfabetico,
+            ],
 
-        'total' => [
-            'students'   => $data->students,
-            'activities' => $data->activities,
-            'reports'    => $data->reports,
-        ],
-    ], 200);
+            'total' => [
+                'students'   => $data->students,
+                'activities' => $data->activities,
+                'reports'    => $data->reports,
+            ],
+        ], 200);
+    }
+
+    public function students( Classroom $classroom )
+    {
+        $this->authorize( 'view', $classroom );
+
+        $data = $this->dataService->getStudents( $classroom );
+
+        return response()->json( $data, 200 );
     }
 }

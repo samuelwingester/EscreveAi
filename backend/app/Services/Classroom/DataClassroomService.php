@@ -21,4 +21,8 @@ class DataClassroomService
     public function generateStats( Classroom $classroom ){
        return $this->repository->getStats( $classroom->id );
     }
+
+    public function getStudents( Classroom $classroom ){
+        return $this->repository->getStudents( $classroom->id );
+    }
 }
