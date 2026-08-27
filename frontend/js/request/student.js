@@ -3,7 +3,15 @@ import * as util from "../helpers/utils.js";
 import * as base from "./base.js";
 
 const selectClassroomElement = document.getElementById( "select-turma-overlay" );
+
 const studentDiv = document.getElementById( 'div-student-cards' );
+
+const studentModalBtn = document.getElementById( 'student-modal-button' );
+const studentModal = document.getElementById( 'student-modal' );
+
+const studentForm = document.getElementById( 'new-student-form' );
+
+const selectClassroomFormElement= document.getElementById( 'input-form-class' );
 
 async function loadStudents( id ) {
   EscreveAiApi.fetchWithAuth( '/classroom/' + id + '/student' )
@@ -23,12 +31,89 @@ async function loadStudents( id ) {
 
         studentDiv.appendChild( newCard );
       });
-    });
+    })
+    .catch(error=>{console.log(error)});
 }
 
 selectClassroomElement.addEventListener( "change", function () {
   loadStudents( selectClassroomElement.value );
 });
+
+studentModalBtn.addEventListener( 'click', function () {
+  const classrooms = util.retrieveJSON( "list-classrooms" );
+
+  if ( !classrooms ) return;
+
+  selectClassroomFormElement.innerHTML = '';
+  // Possivelmente transormar em função
+  Object.entries( classrooms ).forEach( ([ id, name ]) => {
+    const newOption = document.createElement( 'option' );
+
+    newOption.textContent = name;
+    newOption.value = id;
+
+    selectClassroomFormElement.appendChild(newOption);
+  })
+
+  const selected = util.getSelectedClassroom();
+
+  selectClassroomFormElement.value = selected.id;
+  studentModal.showModal();
+})
+
+studentForm.addEventListener( 'submit', function ( e ) {
+  e.preventDefault();
+
+  const formData = new FormData( studentForm );
+
+  const classroom = formData.get( 'classroom' );
+
+  const name = formData.get( 'name' );
+  const date = formData.get( 'birth-date' );
+  const genre = formData.get( 'sexo' );
+  const writing_level = formData.get( 'writing-level' );
+  const observations = formData.get( 'observations' );
+
+  util.clearError();
+  EscreveAiApi.fetchWithAuth( "/classroom/" + classroom + "/student", "POST", {
+    "name":name, "birth_date":date, "genre":genre,
+    "writing_level":writing_level, "observations":observations
+  })
+    .then( response => {
+      if ( !response.ok ) {
+        return response.json().then( body => {
+          const error = new Error();
+          error.status = response.status;
+          error.data = body;
+          throw error;
+        });
+      }
+      return response.json();
+    })
+    .then( data => {
+      studentModal.close();
+
+      //Ineficiente mas suficiente por agora
+      const event = new Event( 'change' );
+      selectClassroomElement.dispatchEvent( event );
+    })
+    .catch( error => {
+      let messages = "";
+
+      if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
+        const data = error.data;
+        for ( const field in data.errors ){
+          data.errors[ field ].forEach( message => {
+            messages += `<p>${message}</p>`;
+          });
+        }
+      } else { messages = "Erro de rede"; console.log(error) }
+
+      util.showError( messages );
+    });
+});
+
+
 
 base.BuildUserName();
 base.BuildSelectClassroom();

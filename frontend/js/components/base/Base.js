@@ -12,7 +12,7 @@ export class Base extends HTMLElement {
                     <div class="atual">
                         <div class="class">
                             <svg><use href="../assets/icons/sprite.svg#icon-users"></use></svg>
-                            <h1 class="turma-titulo" id="turma-titulo">3º A</h1>
+                            <h1 class="turma-titulo" id="turma-titulo">Sem Turma</h1>
                         </div>
 
                         <div class="trocar-turma-wrapper">

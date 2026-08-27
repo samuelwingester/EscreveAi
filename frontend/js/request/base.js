@@ -43,7 +43,6 @@ export async function BuildSelectClassroom(){
     selectClassroomElement.appendChild(newOption);
   })
 
-  const event = new Event( 'change' );
   const selected = util.getSelectedClassroom();
 
   if ( selected ) { selectClassroomElement.value = selected.id; }
@@ -51,6 +50,7 @@ export async function BuildSelectClassroom(){
     selectClassroomElement.value = selectClassroomElement.options[1].value;
   }
 
+  const event = new Event( 'change' );
   selectClassroomElement.dispatchEvent( event );
 }
 
