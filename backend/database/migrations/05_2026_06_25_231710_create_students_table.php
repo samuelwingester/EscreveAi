@@ -31,6 +31,7 @@ return new class extends Migration
                   ->constrained('classes')
                   ->cascadeOnDelete();
 
+            $table->date('birth_date');
             $table->string('name', 150);
             $table->enum('writing_level', WritingLevel::cases())->nullable();
             $table->text('observations')->nullable();
