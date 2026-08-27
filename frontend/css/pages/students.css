@@ -76,14 +76,13 @@ base-body {
                 border-radius: 15px;
                 display: flex;
                 flex-flow: column;
-                background-color: var(--text-white, #ffffff);
+                background-color: var(--text-white);
 
                 header {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
-                    margin-bottom: 16px;
-                    gap: 15px;
+                    gap: 5px;
 
                     svg {
                         width: 20px;
@@ -91,13 +90,19 @@ base-body {
                         cursor: pointer;
                     }
 
-                    h3{
+                    h3 {
                         white-space: nowrap;
+                        color: var(--purple);
                     }
+
                     .line {
                         width: 100%;
                         height: 1px;
-                        background-color: var(--purple);
+                        background-color: var(--purple-soft);
+                    }
+
+                    .line:first-child {
+                        width: 10%;
                     }
                 }
 
@@ -105,7 +110,6 @@ base-body {
                     display: flex;
                     flex-flow: column;
                     width: 100%;
-                    gap: 10px;
 
                     form {
                         display: flex;
@@ -135,8 +139,10 @@ base-body {
                                 svg {
                                     height: 50%;
                                     aspect-ratio: 1/1;
+                                    color: var(--purple-dark);
                                 }
                             }
+
                         }
 
                         .radio-field {
@@ -152,53 +158,37 @@ base-body {
                                     flex: 1;
                                     display: flex;
                                     align-items: center;
-                                    justify-content: center;
-                                    gap: 8px;
-                                    padding: 10px 12px;
-                                    border: 1px solid var(--gray-200, #d1d5db);
-                                    border-radius: 8px;
-                                    background-color: var(--text-white, #ffffff);
-                                    font-size: 0.875rem;
-                                    color: var(--text-color, #374151);
+                                    gap: 5px;
+                                    padding: 10px;
+                                    border: 1px solid var(--gray-200);
+                                    border-radius: 10px;
+                                    background-color: var(--text-white);
+                                    transition: all 0.2s ease;
                                     cursor: pointer;
                                     user-select: none;
-                                    transition: all 0.2s ease;
 
-                                    /* Esconde o rádio padrão feio */
                                     input[type="radio"] {
                                         display: none;
                                     }
 
-                                    /* Desenha o círculo do radio button customizado */
                                     &::before {
                                         content: "";
                                         width: 16px;
                                         height: 16px;
-                                        border: 1.5px solid var(--gray-200, #d1d5db);
+                                        border: 1.5px solid var(--gray-200);
                                         border-radius: 50%;
                                         box-sizing: border-box;
                                         display: flex;
                                         align-items: center;
-                                        justify-content: center;
-                                        flex-shrink: 0;
-                                        transition: all 0.2s ease;
                                     }
 
-                                    /* Ícones SVG */
                                     svg {
                                         width: 16px;
                                         height: 16px;
-                                        fill: none;
-                                        stroke: var(--text-muted, #9ca3af);
-                                        flex-shrink: 0;
-                                        transition: stroke 0.2s ease;
+                                        color: var(--text-primary);
+                                        stroke-width: 2px;
                                     }
 
-                                    &:hover {
-                                        border-color: var(--purple-light, #c084fc);
-                                    }
-
-                                    /* MÁGICA AQUI: ativa o estilo assim que o input for marcado */
                                     &:has(input[type="radio"]:checked) {
                                         border-color: var(--purple);
                                         background-color: var(--purple-light, #faf5ff);
@@ -212,7 +202,7 @@ base-body {
                                         }
 
                                         svg {
-                                            stroke: var(--purple);
+                                            color: var(--purple);
                                         }
                                     }
                                 }
@@ -224,29 +214,24 @@ base-body {
                 .botoes {
                     display: flex;
                     gap: 12px;
-
-                    button {
-                        flex: 1;
-                        padding: 12px;
-                        border-radius: 8px;
-                        font-size: 0.9375rem;
-                        font-weight: 600;
-                        cursor: pointer;
-                        border: none;
-                    }
+                    padding: 10px 0px;
+                    justify-content: flex-end;
 
                     .botao-largo {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 8px;
-                        background: var(--purple);
-                        color: var(--text-white, #ffffff);
-
                         svg {
                             width: 16px;
                             height: 16px;
-                            fill: var(--text-white, #ffffff);
+                            color: var(--text-white);
+                            stroke-width: 1.5px;
+                        }
+                    }
+
+                    .botao-largo:first-child {
+                        background-color: transparent;
+                        border: solid 1px var(--text-primary);
+
+                        p {
+                            color: var(--text-primary);
                         }
                     }
                 }
