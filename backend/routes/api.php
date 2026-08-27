@@ -27,17 +27,9 @@ Route::get('/', function ()
     return response()->json($routes);
 })->name('routes');
 
-
-/*
-Route::apiResource( 'student', StudentController::class )->middleware( 'auth:sanctum' );
-Route::apiResource( 'teacher', TeacherController::class )->middleware( 'auth:sanctum' );
-Route::apiResource( 'classroom', ClassroomController::class )->middleware( 'auth:sanctum' );
-Route::apiResource( 'activity', ActivityController::class )->middleware( 'auth:sanctum' );
-*/
-
 Route::middleware( 'auth:sanctum' )->group( function () {
     Route::apiResources([
-        'student'   => StudentController::class,
+        'classroom/{classroom}/student' => StudentController::class,
         'teacher'   => TeacherController::class,
         'classroom' => ClassroomController::class,
         'activity'  => ActivityController::class
@@ -45,7 +37,6 @@ Route::middleware( 'auth:sanctum' )->group( function () {
 
     Route::controller( ClassroomController::class )->group( function () {
         Route::get( '/classroom/{classroom}/stats', 'stats' );
-        Route::get( '/classroom/{classroom}/student', 'students' );
     });
 });
 
