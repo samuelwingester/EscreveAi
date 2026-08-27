@@ -98,14 +98,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
+        $countClassroom = 10;
         $classrooms = $this->runSeeder(
-            'Turmas Teste User', 10,
-            fn( $bar ) => ClassroomSeeder::seed( $bar, 10, collect([$testUser]) , 10, 10 )
+            'Turmas Teste User', $countClassroom,
+            fn( $bar ) => ClassroomSeeder::seed( $bar, $countClassroom, collect([$testUser]) , $countClassroom, $countClassroom )
         );
 
+        $count = 250;
+        $minmax = $count/$countClassroom;
         $this->runSeeder(
-            'Estudantes Teste User', 200,
-            fn( $bar ) => StudentSeeder::seed( $bar, 200, $classrooms, 200/10, 200/10 )
+            'Estudantes Teste User', $count,
+            fn( $bar ) => StudentSeeder::seed( $bar, $count, $classrooms, $minmax, $minmax  )
+        );
+
+        $count = 80;
+        $minmax = $count/$countClassroom;
+        $this->runSeeder(
+            'Atividades Teste User', $count,
+            fn( $bar ) => ActivitySeeder::seed( $bar, $count, $classrooms, $minmax, $minmax )
         );
     }
 }

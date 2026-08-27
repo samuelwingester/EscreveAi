@@ -1,3 +1,5 @@
+import * as util from "../../helpers/utils.js";
+
 export class Base extends HTMLElement {
     connectedCallback() {
         const content = this.innerHTML;
@@ -10,7 +12,7 @@ export class Base extends HTMLElement {
                     <div class="atual">
                         <div class="class">
                             <svg><use href="../assets/icons/sprite.svg#icon-users"></use></svg>
-                            <h1 class="turma-titulo" id="turma-titulo">3º A</h1>
+                            <h1 class="turma-titulo" id="turma-titulo">Sem Turma</h1>
                         </div>
 
                         <div class="trocar-turma-wrapper">
@@ -38,7 +40,7 @@ export class Base extends HTMLElement {
                 </div>
             </main>
         `;
-
+        /*
         const select = this.querySelector('#select-turma-overlay');
         const aplicarTurma = (nomeTurma) => {
             localStorage.setItem('turmaAtual', nomeTurma);
@@ -51,14 +53,15 @@ export class Base extends HTMLElement {
         if (select) {
             select.addEventListener('change', (e) => aplicarTurma(e.target.value));
         }
+        */
     }
-
+    /*
     sincronizarTurma() {
-        const turmaSalva = localStorage.getItem('turmaAtual');
+        const turmaSalva = util.retrieve( 'selected-classroom' );
         if (!turmaSalva) return;
 
         document.querySelectorAll('.turma-titulo').forEach(el => {
             el.textContent = turmaSalva;
         });
-    }
+    }*/
 }

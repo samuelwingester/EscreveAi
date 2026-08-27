@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) 
+        Schema::create('students', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
-            
+
             $table->id();
 
             /*
@@ -31,9 +31,11 @@ return new class extends Migration
                   ->constrained('classes')
                   ->cascadeOnDelete();
 
-            $table->enum('writing_level', WritingLevel::cases())->nullable(); 
+            $table->date('birth_date');
+            $table->string('name', 150);
+            $table->enum('writing_level', WritingLevel::cases())->nullable();
             $table->text('observations')->nullable();
-            
+
             $table->timestamps();
         });
     }

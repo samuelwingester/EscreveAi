@@ -6,5 +6,7 @@ use App\Repositories\Contracts\RepositoryInterface;
 
 interface ClassroomRepositoryInterface extends RepositoryInterface
 {
-    public function getWithTeacherId( int|string $id );
+    public function getByTeacher( int|string $id );
+
+    public function getStats( int|string $id );
 }

@@ -26,6 +26,7 @@ class UpdateStudentService
 			// Atualização das informações especificas do tipo de usuario
 			// return $success && $student->update([
 			return $student->update([
+                'name' 			=> $data['name'] ?? $student->name,
 				'class_id' 		=> $data['class_id'] ?? $student->class_id,
 				'writing_level' => $data['writing_level'] ?? $student->writing_level,
 				'observations' 	=> $data['observations'] ?? $student->observations

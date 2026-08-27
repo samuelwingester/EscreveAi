@@ -21,7 +21,7 @@ login_form.addEventListener( "submit", function ( e )  {
   .then( response => { // Verifica o status da requisição e monta o error para o catch
     if ( !response.ok ) {
       return response.json().then( body => {
-        const error = new Error("falha");
+        const error = new Error();
         error.status = response.status;
         error.data = body;
         throw error;

@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) 
+        Schema::create('classes', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
-            
+
             $table->id();
-           
+
             $table->foreignId('teacher_id')
                   ->constrained('users')
                   ->cascadeOnDelete();
@@ -26,7 +26,7 @@ return new class extends Migration
                   ->constrained('users')
                   ->cascadeOnDelete();
             */
-            
+
             $table->string('name', 100);
             $table->boolean('active')->default(true);
 
