@@ -58,7 +58,6 @@ export class Student extends HTMLElement {
           </div>
       `;
 
-<<<<<<< HEAD
         this.innerHTML = `
             <div class="card">
                 <div class="student">
@@ -108,11 +107,9 @@ export class Student extends HTMLElement {
                 </div>
             </div>
         `;
-=======
       this.nameElement = this.querySelector( '.title' );
       this.phaseElement = this.querySelector( '.text-phase' );
       this.lastActivityElement = this.querySelector( '.text-last-activity' );
->>>>>>> d935c45490cab19062bba792449719affe88732d
 
       this.renderName();
       this.renderPhase();
