@@ -27,34 +27,51 @@ export class Student extends HTMLElement {
 
   render(){
       this.innerHTML = `
-          <div class="card">
-              <div class="student">
-                  <div class="image">
-                  </div>
-                  <div class="status">
-                      <p class="title"></p>
-                      <div class="phase"><p class="text-phase"></p></div>
-                      <div class="last">
-                          <p>Última Atividade:</p>
-                          <p class="text-last-activity" ></p>
-                      </div>
-                  </div>
+        <div class="card">
+            <div class="student">
+              <div class="image"></div>
+              <div class="status">
+                <p class="title"></p>
+                <div class="phase"><p class="text-phase"></p></div>
+                <div class="last">
+                  <p>Última Atividade:</p>
+                  <p class="text-last-activity"></p>
+                </div>
               </div>
-              <div class="tools">
-                  <div class="report">
-                      <svg>
-                          <use href="../assets/icons/sprite.svg#icon-document"></use>
-                      </svg>
-                      <p>Ver Relatório</p>
-                  </div>
-                  <div class="line"></div>
-                  <div class="edit">
-                      <svg>
-                          <use href="../assets/icons/sprite.svg#icon-pencil"></use>
-                      </svg>
-                      <p>Editar</p>
-                  </div>
-              </div>
+            </div>
+            <div class="tools">
+                <div class="report">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-document"></use>
+                    </svg>
+                    <p>Ver Relatório</p>
+                </div>
+                <div class="line"></div>
+                <details class="menu">
+                    <summary>
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-menu"></use>
+                        </svg>
+                    </summary>
+                    <div class="dropdown">
+                        <button type="button" class="btn_option edit">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                            </svg>
+                            <span>Editar</span>
+                        </button>
+
+                        <div class="line"></div>
+
+                        <button type="button" class="btn_option delete">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                            </svg>
+                            <span>Excluir</span>
+                        </button>
+                    </div>
+                </details>
+            </div>
           </div>
       `;
 

@@ -17,17 +17,17 @@
 O escreveaí é uma plataforma desenvolvida para auxiliar professores e instituições de Educação Infantil no acompanhamento da evolução da escrita dos alunos. O sistema permite registrar atividades, armazenar históricos, gerar relatórios pedagógicos e utilizar inteligência artificial para analisar o desenvolvimento das crianças e sugerir atividades personalizadas.
 
 ## Funcionalidades Implementadas
- * O usuario pode se cadastrar.
+ * O usuario pode se cadastrar. 
  * O usuario pode logar.
- * O usuario pode deslogar.
+ * O usuario pode deslogar. !
  * Criar turmas.
- * Deletar turmas.
+ * Deletar turmas. !
  * Listar turmas.
  * Criar estudantes.
- * Deletar estudantes.
+ * Deletar estudantes. !
  * Listar estudantes.
  * Ver as estatisticas de turmas.
- * Listar atividades.
+ * Listar atividades. !
 
 ## Stack Utilizada
 
