@@ -28,6 +28,9 @@ class UpdateClassroomRequest extends FormRequest
         if ( $this->filled( 'name' ) )
             $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
 
+        if ( $this->filled( 'shift' ) )
+            $normalization['shift'] = Str::squish( $this->shift );
+
         $this->merge( $normalization );
     }
 
@@ -41,7 +44,7 @@ class UpdateClassroomRequest extends FormRequest
         return [
             'name'      => ['sometimes', 'string', 'max:100'],
             'active'    => ['sometimes', 'nullable', 'boolean'],
-            'shift'     => ['nullable', 'string', new Enum( Shift::class )]
+            'shift'     => ['sometimes', 'nullable', 'string', new Enum( Shift::class )]
         ];
     }
 }

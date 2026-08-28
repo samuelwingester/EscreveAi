@@ -57,7 +57,7 @@ export class Student extends HTMLElement {
                         </svg>
                     </summary>
                     <div class="dropdown">
-                        <button type="button" class="btn_option edit" onclick="document.getElementById('edit-student-modal').showModal()">
+                        <button type="button" class="btn_option edit">
                             <svg>
                                 <use href="../assets/icons/sprite.svg#icon-pencil"></use>
                             </svg>
@@ -85,7 +85,9 @@ export class Student extends HTMLElement {
       this.renderName();
       this.renderPhase();
       this.renderLastActivity();
-      this.querySelector('.delete').addEventListener('click', () => this.deleteStudent());
+
+      this.querySelector( '.delete' ).addEventListener( 'click' , () => this.delete() );
+      this.querySelector( '.edit' ).addEventListener( 'click', () => this.edit() )
       /*
       const btnReport = this.querySelector('.btn-report');
       if (btnReport) {
@@ -104,8 +106,12 @@ export class Student extends HTMLElement {
       */
   }
 
-  deleteStudent() {
+  delete() {
     this.dispatchEvent(new CustomEvent('student-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
+  }
+
+  edit() {
+    this.dispatchEvent(new CustomEvent('student-edit', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
   renderName(){ this.nameElement.textContent = this.name; }

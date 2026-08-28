@@ -107,8 +107,9 @@
                         <h3 class="purple">INFORMAÇÕES DA TURMA</h3>
                         <div class="line"></div>
                     </div>
-                    <form action="#" id="new-class-form">
-                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-form-name" size="field" name="name">
+                    <form action="#" id="edit-class-form">
+                        <input type="hidden" name="id" id="input-edit-id" value="">
+                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-edit-name" size="field" name="name">
                         </common-field>
 
                         <!--Não implementarei agora-->
@@ -117,11 +118,11 @@
                         </common-field>-->
 
                         <!--Não implementarei agora-->
-                        <common-field label="Série" placeholder="Escreva a Série" input_id="input-form-grade"
+                        <common-field label="Série" placeholder="Escreva a Série" input_id="input-edit-grade"
                             size="minifield">
                         </common-field>
 
-                        <common-field label="Turno" input_id="input-form-shift" placeholder="Selecione..."
+                        <common-field label="Turno" input_id="input-edit-shift" placeholder="Selecione..."
                             is_select="true" size="minifield" name="shift">
                             <option value="manha">Manhã</option>
                             <option value="tarde">Tarde</option>

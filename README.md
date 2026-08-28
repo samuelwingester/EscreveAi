@@ -20,13 +20,17 @@ O escreveaí é uma plataforma desenvolvida para auxiliar professores e institui
  * O usuario pode se cadastrar. 
  * O usuario pode logar.
  * O usuario pode deslogar. 
+ 
  * Criar turmas.
+ * Editar turmas
  * Deletar turmas. 
  * Listar turmas.
+ * Ver as estatisticas de turmas.
+
  * Criar estudantes.
+ * Editar turmas
  * Deletar estudantes. 
  * Listar estudantes.
- * Ver as estatisticas de turmas.
 
 ## Stack Utilizada
 

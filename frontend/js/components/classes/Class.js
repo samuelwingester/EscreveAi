@@ -48,7 +48,7 @@ export class Class extends HTMLElement {
                             </svg>
                         </summary>
                         <div class="dropdown">
-                            <button type="button" class="btn_option edit" onclick="document.getElementById('edit-class-modal').showmodal()">
+                            <button type="button" class="btn_option edit">
                                 <svg>
                                     <use href="../assets/icons/sprite.svg#icon-pencil"></use>
                                 </svg>
@@ -96,11 +96,16 @@ export class Class extends HTMLElement {
     this.renderStudents();
     this.renderShift();
 
-    this.querySelector('.delete').addEventListener('click', () => this.deleteClass());
+    this.querySelector('.delete').addEventListener('click', () => this.delete());
+    this.querySelector('.edit').addEventListener('click', () => this.edit());
   }
 
-  deleteClass() {
+  delete() {
     this.dispatchEvent(new CustomEvent('classroom-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
+  }
+
+  edit() {
+    this.dispatchEvent(new CustomEvent('classroom-edit', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
   renderName(){ this.nameElement.textContent = this.name; }

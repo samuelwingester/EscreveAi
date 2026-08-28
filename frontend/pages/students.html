@@ -150,7 +150,8 @@
                         <div class="line"></div>
                     </header>
 
-                    <form action="#" id="new-student-form">
+                    <form action="#" id="edit-student-form">
+                        <input type="hidden" name="id" id="input-edit-id" value="">
                         <div class="initial">
                             <div class="photo">
                                 <svg>
@@ -158,22 +159,22 @@
                                 </svg>
                             </div>
                             <common-field label="Nome Completo" placeholder="Digite o nome completo do aluno..."
-                                input_id="input-form-student-name" size="field" name="name">
+                                input_id="input-edit-student-name" size="field" name="name">
                             </common-field>
 
                             <common-field label="Data de Nascimento" placeholder="dd/mm/aaaa"
-                                input_id="input-form-birthdate" icon_id="icon-calendar" type="date" size="field" name="birth-date">
+                                input_id="input-edit-birthdate" icon_id="icon-calendar" type="date" size="field" name="birth-date">
                             </common-field>
                         </div>
-                        <common-field label="Turma" placeholder="Selecione a Turma" input_id="input-form-class"
+                        <!--<common-field label="Turma" placeholder="Selecione a Turma" input_id="input-edit-class"
                             icon_id="icon-users" is_select="true" size="field" name="classroom">
-                        </common-field>
+                        </common-field> Mudança de turma ainda não implementada-->
 
                         <div class="radio-field">
                             <h3>Sexo</h3>
                             <div class="radio_group">
                                 <label class="radio_box">
-                                    <input type="radio" name="sexo" value="man" checked />
+                                    <input type="radio" name="sexo" value="man" id="input-edit-man" />
                                     <svg class="input-icon">
                                         <use href="../assets/icons/sprite.svg#icon-male"></use>
                                     </svg>
@@ -181,7 +182,7 @@
                                 </label>
 
                                 <label class="radio_box">
-                                    <input type="radio" name="sexo" value="woman" />
+                                    <input type="radio" name="sexo" value="woman" id="input-edit-woman" />
                                     <svg class="input-icon">
                                         <use href="../assets/icons/sprite.svg#icon-female"></use>
                                     </svg>
@@ -189,7 +190,7 @@
                                 </label>
 
                                 <label class="radio_box">
-                                    <input type="radio" name="sexo" value="" />
+                                    <input type="radio" name="sexo" value="" id="input-edit-none" />
                                     <svg class="input-icon">
                                         <use href="../assets/icons/sprite.svg#icon-users"></use>
                                     </svg>
@@ -204,7 +205,7 @@
                             <div class="line"></div>
                         </header>
                         <common-field label="Nível Inicial da Escrita"
-                            placeholder="Selecione o nível de escrita inicial" input_id="input-form-writing-level"
+                            placeholder="Selecione o nível de escrita inicial" input_id="input-edit-writing-level"
                             is_select="true" size="field" name="writing-level">
                             <option value="pre-silabico">Pré-Silábico</option>
                             <option value="silabico">Silábico</option>
@@ -213,11 +214,11 @@
                         </common-field>
 
                         <common-field label="Observações (opcional)"
-                            placeholder="Adicione observações pedagógicas sobre o aluno..." input_id="input-form-notes"
+                            placeholder="Adicione observações pedagógicas sobre o aluno..." input_id="input-edit-notes"
                             size="field" name="observations">
                         </common-field>
                         <!-- Temporario, mas e necessario de um definitivo com essa mesma classe em todos os formularios se possivel -->
-                        <div id="login-error" class="error-banner" hidden></div>
+                        <div class="error-banner" hidden></div>
                         <div class="botoes">
                             <button type="button" class="botao-largo" id="vazioBorda2"
                                 onclick="document.getElementById('edit-student-modal').close()">Cancelar</button>
