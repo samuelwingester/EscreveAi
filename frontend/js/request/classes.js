@@ -8,7 +8,7 @@ const classroomCardsContainer = document.getElementById( "classes-cards" );
 const classroomFormElement = document.getElementById( "new-class-form" );
 const classroomEditForm = document.getElementById( "edit-class-form" );
 
-const classModal = document.getElementById( "class-modal" );
+const classModal = document.getElementById( "new-class-modal" );
 const classEditModal = document.getElementById( 'edit-class-modal' );
 
 function loadClassroomCards(){
