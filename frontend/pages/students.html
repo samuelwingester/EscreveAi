@@ -36,11 +36,11 @@
         <!--<input class="search" placeholder="Pesquisar por Turma..."></input> -> acredito que seja desnecessario -->
         <div class="cards" id="div-student-cards">
         </div>
-        <dialog id="student-modal" class="modal">
+        <dialog id="new-student-modal" class="modal">
             <div class="add">
                 <header>
                     <h3>Novo Aluno</h3>
-                    <svg class="icon-close" onclick="document.getElementById('student-modal').close()">
+                    <svg class="icon-close" onclick="document.getElementById('new-student-modal').close()">
                         <use href="../assets/icons/sprite.svg#icon-x"></use>
                     </svg>
                 </header>
@@ -122,7 +122,7 @@
                         <div id="login-error" class="error-banner" hidden></div>
                         <div class="botoes">
                             <button type="button" class="botao-largo" id="vazioBorda2"
-                                onclick="document.getElementById('student-modal').close()">Cancelar</button>
+                                onclick="document.getElementById('new-student-modal').close()">Cancelar</button>
                             <button class="botao-largo" type="submit">
                                 <svg>
                                     <use href="../assets/icons/sprite.svg#icon-save"></use>

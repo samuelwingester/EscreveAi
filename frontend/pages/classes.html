@@ -24,7 +24,7 @@
                     <h3>Turmas -</h3>
                     <p class="title">Gerencie todas as suas turmas cadastradas.</p>
                 </div>
-                <button class="botao-largo" onclick="document.getElementById('class-modal').showModal()">
+                <button class="botao-largo" onclick="document.getElementById('new-class-modal').showModal()">
                     <svg>
                         <use href="../assets/icons/sprite.svg#icon-plus"></use>
                     </svg>
@@ -37,11 +37,11 @@
 
         <div class="classes" id="classes-cards"></div>
 
-        <dialog id="class-modal" class="modal">
+        <dialog id="new-class-modal" class="modal">
             <div class="add">
                 <header>
                     <h2>Nova Turma</h2>
-                    <svg onclick="document.getElementById('class-modal').close()">
+                    <svg onclick="document.getElementById('new-class-modal').close()">
                         <use href="../assets/icons/sprite.svg#icon-x"></use>
                     </svg>
                 </header>
@@ -79,7 +79,7 @@
 
                         <div class="botoes">
                             <button class="botao-largo" id="vazioBorda2" type="button"
-                                onclick="document.getElementById('class-modal').close()">
+                                onclick="document.getElementById('new-class-modal').close()">
                                 <p>Cancelar</p>
                             </button>
                             <button class="botao-largo" type="submit">
