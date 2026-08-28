@@ -10,6 +10,7 @@
 
     <script type="module" src="../js/components/base/load.js"></script>
     <script type="module" src="../js/components/activities/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
 
     <script type="module" src="../js/request/base.js" defer></script>
 </head>
@@ -17,11 +18,11 @@
 <body>
     <base-body active="activities">
         <header>
-            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <h1>Bom Dia, Professor <span id="nome-professor"></span>👋</h1>
             <div class="bottom">
                 <div class="class">
                     <h3>Atividades - Turma:</h3>
-                    <h2 class="turma-titulo">3º A</h2>
+                    <h2 class="turma-titulo">Sem Turmas</h2>
                 </div>
                 <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
                     <svg>
@@ -70,14 +71,14 @@
                         <div class="line"></div>
                     </div>
                     <form action="#">
-                        <div class="field">
-                            <p>Nome da Atividade</p>
-                            <input type="text" id="form-activity-name">
-                        </div>
-                        <div class="field">
-                            <p>Descrição</p>
-                            <input type="text" id="form-activity-description">
-                        </div>
+                        <common-field label="Nome da Atividade" input_id="form-activity-name"
+                            placeholder="Escreva o nome da atividade..." size="field">
+                        </common-field>
+
+                        <common-field label="Descrição" input_id="form-activity-description"
+                            placeholder="Descreva brevemente a atividade..." size="field">
+                        </common-field>
+
                         <div class="upload">
                             <div class="container">
                                 <svg>
@@ -93,23 +94,22 @@
                                 </button>
                             </div>
                         </div>
+
+                        <div class="botoes">
+                            <button type="button"
+                                onclick="document.getElementById('activity-modal').close()">Cancelar</button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Atividade</p>
+                            </button>
+                        </div>
                     </form>
-                    <div class="botoes">
-                        <button>Cancelar</button>
-                        <button class="botao-largo">
-                            <svg>
-                                <use href="../assets/icons/sprite.svg#icon-calendar"></use>
-                            </svg>
-                            <p>Salvar Atividade</p>
-                        </button>
-                    </div>
                 </div>
             </div>
-            </div>
-
         </dialog>
     </base-body>
-
 </body>
 
 </html>

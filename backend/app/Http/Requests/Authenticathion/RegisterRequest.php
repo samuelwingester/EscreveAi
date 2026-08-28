@@ -33,11 +33,11 @@ class RegisterRequest extends FormRequest
         ];
 
         // Optional fields normalization
-        if ( $this->filled( 'gender' ) ) 
+        if ( $this->filled( 'gender' ) )
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
 
         $this->merge( $normalization );
-    }     
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -52,7 +52,7 @@ class RegisterRequest extends FormRequest
             'password'      => ['required', 'confirmed', Password::min(5)],
             'name'          => ['required', 'string', 'max:150'],
             'gender'        => ['nullable', 'string', new Enum( Gender::class )],
-            'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
+            //'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
             //
         ];
     }

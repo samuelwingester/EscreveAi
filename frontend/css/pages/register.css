@@ -34,21 +34,6 @@ main {
       gap: 5px;
       grid-template-columns: 1fr 1fr;
 
-      .error-banner {
-        background-color: var(--red-light);
-        color: var(--red);
-        border: 1px solid var(--red-soft);
-        padding: 10px;
-        border-radius: 5px;
-        font-size: 0.875rem;
-        text-align: center;
-        margin-bottom: 8px;
-
-        p {
-          color: inherit;
-        }
-      }
-
       .confirm {
         grid-column: 1 / -1;
         display: flex;

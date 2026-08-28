@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -10,6 +10,7 @@
 
     <script type="module" src="../js/components/base/load.js"></script>
     <script type="module" src="../js/components/classes/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
 
     <script type="module" src="../js/request/base.js"></script>
 </head>
@@ -17,7 +18,7 @@
 <body>
     <base-body active="classes">
         <header>
-            <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
             <div class="bottom">
                 <div class="class">
                     <h3>Turmas -</h3>
@@ -31,7 +32,9 @@
                 </button>
             </div>
         </header>
-        <input class="search" placeholder="Pesquisar por Turma..."></input>
+
+        <input class="search" placeholder="Pesquisar por Turma...">
+
         <div class="classes">
             <class-card name="1º A" students="22" shift="Manhã" color="purple"></class-card>
             <class-card name="2º A" students="25" shift="Manhã" color="green"></class-card>
@@ -45,6 +48,7 @@
             <class-card name="4º B" students="21" shift="Tarde" color="green"></class-card>
             <class-card name="5º B" students="23" shift="Tarde" color="yellow"></class-card>
         </div>
+
         <dialog id="class-modal" class="modal">
             <div class="add">
                 <header>
@@ -60,45 +64,43 @@
                         <div class="line"></div>
                     </div>
                     <form action="#">
-                        <div class="field">
-                            <p class="title">Nome da Turma</p>
-                            <input type="text" id="input-form-name" placeholder="3º A">
-                        </div>
-                        <div class="field">
-                            <p class="title">Escola</p>
-                            <input type="text" id="input-form-school" placeholder="Escola Municipal João XXIII">
-                        </div>
-                        <div class="minifield">
-                            <p class="title">Série</p>
-                            <input type="text" id="input-form-grade" placeholder="Escreva a Série">
-                        </div>
-                        <div class="minifield">
-                            <p class="title">Turno</p>
-                            <select name="" id="">
-                                <option value="manha">Manhã</option>
-                                <option value="tarde">Tarde</option>
-                                <option value="noite">Noite</option>
-                            </select>
-                        </div>
+                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-form-name" size="field">
+                        </common-field>
+
+                        <common-field label="Escola" placeholder="Escola Municipal João XXIII"
+                            input_id="input-form-school" size="field">
+                        </common-field>
+
+                        <common-field label="Série" placeholder="Escreva a Série" input_id="input-form-grade"
+                            size="minifield">
+                        </common-field>
+
+                        <common-field label="Turno" input_id="input-form-shift" placeholder="Selecione..."
+                            is_select="true" size="minifield">
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noite">Noite</option>
+                        </common-field>
+
                         <div class="line"></div>
+
                         <div class="botoes">
-                            <button class="botao-largo">
+                            <button class="botao-largo" id="vazioBorda2" type="button"
+                                onclick="document.getElementById('class-modal').close()">
                                 <p>Cancelar</p>
                             </button>
                             <button class="botao-largo" type="submit">
                                 <svg>
                                     <use href="../assets/icons/sprite.svg#icon-save"></use>
                                 </svg>
-                                <p>Salvar Atividade</p>
+                                <p>Salvar Turma</p>
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </dialog>
     </base-body>
-
 </body>
 
 </html>

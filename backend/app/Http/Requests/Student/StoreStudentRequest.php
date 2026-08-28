@@ -35,18 +35,18 @@ class StoreStudentRequest extends FormRequest
 
         // Optional fields normalization
         /*
-        if ( $this->filled( 'gender' ) ) 
+        if ( $this->filled( 'gender' ) )
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
         */
 
-        if ( $this->filled( 'writing_level' ) ) 
-            $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '_' );
+        if ( $this->filled( 'writing_level' ) )
+            $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '-' );
 
         if ( $this->filled( 'observations' ) )
             $normalization['observations'] = Str::trim( $this->observations );
 
         $this->merge( $normalization );
-    }       
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -61,15 +61,16 @@ class StoreStudentRequest extends FormRequest
             'email'         => ['required', 'email', 'unique:users,email'],
             'password'      => ['required', 'confirmed', Password::min(8)],
             'name'          => ['required', 'string', 'max:150'],
-            'gender'        => ['nullable', 'string', new Enum( Gender::class )],
-            'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
             //
             */
 
             // Student Class Data
-            'class_id'      => ['required', 'integer', 'exists:classes,id'],
+            'name'          => ['required', 'string', 'max:150'],
+            //'class_id'      => ['required', 'integer', 'exists:classes,id'],
             'writing_level' => ['nullable', 'string', new Enum( WritingLevel::class )],
-            'observations'  => ['nullable', 'string']
+            'observations'  => ['nullable', 'string'],
+            'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
+            'gender'        => ['nullable', 'string', new Enum( Gender::class )],
             //
         ];
     }

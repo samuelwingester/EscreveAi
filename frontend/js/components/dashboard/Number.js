@@ -18,7 +18,7 @@ export class Number extends HTMLElement {
     if ( !this.initialized ) return;
     if ( oldValue === newValue ) return;
 
-    switch (name) {
+    switch ( name ) {
       case 'value': this.renderValue(); break;
       case 'description': this.renderDescription(); break;
       case 'color':  this.renderColor(); break;

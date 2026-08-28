@@ -13,19 +13,19 @@ use App\Http\Requests\Classroom\UpdateClassroomRequest as UpdateRequest;
 
 use App\Services\Classroom\StoreClassroomService as StoreService;
 use App\Services\Classroom\UpdateClassroomService as UpdateService;
-use App\Services\Classroom\ListClassroomService as ListService;
+use App\Services\Classroom\DataClassroomService as DataService;
 
 class ClassroomController extends Controller
 {
     public function __construct(
         protected StoreService $storeService,
         protected UpdateService $updateService,
-        protected ListService $listService
+        protected DataService $dataService
     ) {}
 
     public function index( Request $request )
     {
-        $classrooms = $this->listService->execute( $request->user() );
+        $classrooms = $this->dataService->list( $request->user() );
 
         return response()->json( $classrooms, 200 );
     }
@@ -38,11 +38,15 @@ class ClassroomController extends Controller
 
     public function show( Classroom $classroom )
     {
+        $this->authorize( 'view', $classroom );
+
         return response()->json( $classroom, 200 );
     }
 
     public function update( UpdateRequest $request, Classroom $classroom )
     {
+        $this->authorize( 'update', $classroom );
+
         $this->updateService->execute( $classroom, $request->validated() );
 
         return response()->noContent( 204 );
@@ -50,8 +54,35 @@ class ClassroomController extends Controller
 
     public function destroy( Classroom $classroom )
     {
+        $this->authorize( 'delete', $classroom );
+
         $classroom->deleteOrFail();
 
         return response()->noContent( 204 );
+    }
+
+    public function stats( Classroom $classroom )
+    {
+        $this->authorize( 'view', $classroom );
+
+        $data = $this->dataService->generateStats( $classroom );
+
+        return response()->json([
+            'name' => $classroom->name,
+            'id' => $classroom->id,
+
+            'status' => [
+                'pre-silabico'        => $data->pre_silabico,
+                'silabico'            => $data->silabico,
+                'silabico-alfabetico' => $data->silabico_alfabetico,
+                'alfabetico'          => $data->alfabetico,
+            ],
+
+            'total' => [
+                'students'   => $data->students,
+                'activities' => $data->activities,
+                'reports'    => $data->reports,
+            ],
+        ], 200);
     }
 }
