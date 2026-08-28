@@ -29,35 +29,61 @@ export class Class extends HTMLElement {
   }
 
   render(){
-    this.innerHTML = `
-      <div class="class" style="--card-color: var(--${this.color}); border: solid 1px var(--${this.color}-dark);">
-        <div class="top" style="background-color:var(--${this.color}-dark)">
-            <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="5" cy="5" r="5" fill="var(--${this.color})" />
-            </svg>
-            <h3 class="class-name"></h3>
-        </div>
-        <div class="data">
-          <div class="students">
-            <svg>
-              <use href="../assets/icons/sprite.svg#icon-users"></use>
-            </svg>
-            <p><span class="student-count"></span> Alunos</p>
-          </div>
-          <div class="shift">
-            <svg>
-              <use href="../assets/icons/sprite.svg#icon-calendar"></use>
-            </svg>
-            <p class="shift-name"></p>
-          </div>
-        </div>
-        <div class="join" style="background-color:var(--${this.color}-dark)">
-          <button type="button" class="btn-entrar">
-            <p class="title">Entrar</p>
-          </button>
-        </div>
-      </div>
-    `;
+     this.innerHTML = `
+            <div class="class" style="--card-color: var(--${this.color}); border: solid 1px var(--${this.color}-dark);">
+                <div class="top" style="background-color:var(--${this.color}-dark)">
+                    <div class="head">
+                        <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="5" cy="5" r="5" fill="var(--${this.color}-soft)" />
+                        </svg>
+                        <h3 class="class-name"></h3>
+                    </div>
+                    <details class="menu">
+                        <summary>
+                            <svg color="var(--${this.color}-soft)">
+                                <use href="../assets/icons/sprite.svg#icon-menu"></use>
+                            </svg>
+                        </summary>
+                        <div class="dropdown">
+                            <button type="button" class="btn_option edit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                                </svg>
+                                <span>Editar</span>
+                            </button>
+
+                            <div class="line"></div>
+
+                            <button type="button" class="btn_option delete">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                                </svg>
+                                <span>Excluir</span>
+                            </button>
+                        </div>
+                    </details>
+                </div>
+                <div class="data">
+                    <div class="students">
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-users"></use>
+                        </svg>
+                        <p><span class="student-count"></span> Alunos</p>
+                    </div>
+                    <div class="shift">
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-calendar"></use>
+                        </svg>
+                        <p class="shift-name"></p>
+                    </div>
+                </div>
+                <div class="join" style="background-color:var(--${this.color}-dark)">
+                    <button type="button" class="btn-entrar">
+                        <p class="title">Entrar</p>
+                    </button>
+                </div>
+            </div>
+        `;
 
     this.nameElement = this.querySelector( '.class-name' );
     this.studentsElement = this.querySelector( '.student-count' );

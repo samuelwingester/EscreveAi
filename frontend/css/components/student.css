@@ -8,10 +8,10 @@ student-card {
         width: 100%;
         height: 100%;
         padding-left: 10px;
-        background-color: var(--text-white);
+        background-color: white;
         border-radius: 15px;
         box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
+        /* REMOVIDO: overflow: hidden; (Permite que o dropdown saia da caixa do card) */
 
         .student {
             display: flex;
@@ -57,19 +57,19 @@ student-card {
             flex-flow: column;
             justify-content: center;
             align-items: flex-end;
-            gap: 5px;
+            gap: 10px;
             height: 100%;
             padding: 10px;
             padding-right: 5px;
-            background-color: var(--gray-300);
+            background-color: var(--gray-100);
+            border-top-right-radius: 15px; /* Mantém as pontas arredondadas que o overflow cortava */
+            border-bottom-right-radius: 15px;
 
             .report {
                 display: flex;
                 align-items: center;
                 gap: 5px;
-                svg:first-child {
-                    stroke-width: 1.5px;
-                }
+
                 svg {
                     width: 24px;
                     height: 24px;
@@ -82,14 +82,83 @@ student-card {
                 background-color: var(--gray-400);
             }
 
-            .edit {
+            .menu {
+                position: relative;
                 display: flex;
                 align-items: center;
-                gap: 5px;
+                width: max-content;
+                height: max-content;
 
-                svg {
-                    width: 24px;
-                    height: 24px;
+                summary {
+                    list-style: none;
+                    user-select: none;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+
+                    &::-webkit-details-marker,
+                    &::marker {
+                        display: none;
+                    }
+
+                    svg {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+
+                .dropdown {
+                    position: absolute;
+                    top: calc(100% + 5px);
+                    right: 0;
+                    z-index: 1;
+                    display: flex;
+                    flex-flow: column;
+                    gap: 4px;
+                    background-color: var(--text-white);
+                    padding: 8px;
+                    border-radius: 10px;
+                    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+                    min-width: 120px;
+
+                    .btn_option {
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        width: 100%;
+                        padding: 6px 8px;
+                        border: none;
+                        background: transparent;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-size: 0.875rem;
+                        color: var(--text-color, #374151);
+                        transition: background-color 0.2s ease;
+
+                        svg {
+                            width: 18px;
+                            height: 18px;
+                            stroke: currentColor;
+                            fill: none;
+                        }
+
+                        &:hover {
+                            background-color: var(--purple-soft, #f3e8ff);
+                            color: var(--purple, #7c3aed);
+                        }
+
+                        &.delete:hover {
+                            background-color: #fef2f2;
+                            color: var(--red, #ef4444);
+                        }
+                    }
+
+                    .line {
+                        width: 100%;
+                        height: 1px;
+                        background-color: var(--gray-200, #e5e7eb);
+                        margin: 2px 0;
+                    }
                 }
             }
         }
