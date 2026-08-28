@@ -51,7 +51,7 @@ register_form.addEventListener( "submit", async function ( e )  {
       return;
   }
 
-  EscreveAiApi.fetchWithAuth( "/register", "POST", {
+  EscreveAiApi.fetch( "/register", "POST", {
     "email":email,
     "password":password,
     "password_confirmation":password_confirmation,
@@ -67,13 +67,12 @@ register_form.addEventListener( "submit", async function ( e )  {
           throw error;
       });
     }
-
     return response.json();
   })
   .then( data => { // Cadastro bem sucedido
 
     EscreveAiApi.setTokenBearer( data["token"], remember );
-    util.store( "name", data['user'][name], remember );
+    util.store( "username", data['user']['name'], remember );
     util.store( "remember", remember, remember ); //Verificar depois
 
     window.location.href = "./dashboard.html";
@@ -88,7 +87,7 @@ register_form.addEventListener( "submit", async function ( e )  {
           messages += `<p>${message}</p>`;
         });
       }
-    } else { messages = "Erro de rede"; }
+    } else { messages = "Erro de rede"; console.log(error) }
 
     util.showError( messages );
   });

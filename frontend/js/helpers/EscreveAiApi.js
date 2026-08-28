@@ -62,5 +62,6 @@ export class EscreveAiApi{
     EscreveAiApi.fetchWithAuth( '/logout', 'POST' );
     localStorage.clear();
     sessionStorage.clear();
+    window.location.href = "./home.html";
   }
 }

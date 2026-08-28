@@ -12,6 +12,9 @@ export class Student extends HTMLElement {
   get last_activity(){ return this.getAttribute( 'last-activity' ) || 'Sem registros'; }
   set last_activity( value ){ return this.setAttribute( 'last-activity', value ); }
 
+  get id() { return this.getAttribute('id') || null; }
+  set id(value) { return this.setAttribute('id', value); }
+
   connectedCallback(){ this.render(); this.initialized = true; }
 
   attributeChangedCallback( name, oldValue, newValue ){
@@ -82,7 +85,7 @@ export class Student extends HTMLElement {
       this.renderName();
       this.renderPhase();
       this.renderLastActivity();
-
+      this.querySelector('.delete').addEventListener('click', () => this.deleteStudent());
       /*
       const btnReport = this.querySelector('.btn-report');
       if (btnReport) {
@@ -99,6 +102,10 @@ export class Student extends HTMLElement {
           });
       }
       */
+  }
+
+  deleteStudent() {
+    this.dispatchEvent(new CustomEvent('student-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
   renderName(){ this.nameElement.textContent = this.name; }

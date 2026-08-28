@@ -43,19 +43,21 @@ class StudentController extends Controller
         return response()->json( $student, 201 );
     }
 
-    public function show( Student $student )
+    public function show( Classroom $classroom, Student $student )
     {
         return response()->json( $student, 200 );
     }
 
-    public function update( UpdateRequest $request, Student $student ){
+    public function update( UpdateRequest $request, Classroom $classroom , Student $student ){
         $this->updateService->execute( $request->validated(), $student );
 
         return response()->noContent( 204 );
     }
 
-    public function destroy( Student $student )
+    public function destroy( Classroom $classroom, Student $student )
     {
+        $this->authorize( 'update', $classroom );
+
         $student->deleteOrFail();
 
         return response()->noContent( 204 );

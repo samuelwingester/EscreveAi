@@ -22,12 +22,14 @@ async function loadStudents( id ) {
     .then( data => {
       if ( data == null ) throw new Error();
       base.buildClassName();
+
       studentDiv.innerHTML = '';
       data.forEach( student => {
         const newCard = document.createElement( 'student-card' );
 
         newCard.name = student.name;
         newCard.phase = student.writing_level;
+        newCard.id = student.id;
 
         studentDiv.appendChild( newCard );
       });
@@ -113,6 +115,17 @@ studentForm.addEventListener( 'submit', function ( e ) {
     });
 });
 
+document.addEventListener( 'student-delete', function (e){
+  const { id } = e.detail;
+  const idClass = selectClassroomElement.value;
+
+  EscreveAiApi.fetchWithAuth( '/classroom/' + idClass + "/student/" + id, "DELETE" )
+    .then( response => {
+      if ( !response.ok ) throw response;
+      loadStudents( idClass );
+    })
+    .catch( error => { console.log(error); } );
+});
 
 
 base.BuildUserName();

@@ -18,7 +18,7 @@ class StoreClassroomService
 		return $this->repository->create([
             'name'          => $data['name'],
             'teacher_id'    => $teacher->id,
-            'shift'         => $data['shift'] ?? null
+            'shift'         => $data['shift']
         ]);
 	}
 }

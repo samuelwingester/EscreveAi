@@ -16,6 +16,7 @@ function loadClassroomCards(){
 
       newCard.name = element.name;
       newCard.shift = shift;
+      newCard.id = element.id;
 
       newCard.students = element.students;
 
@@ -66,6 +67,8 @@ classroomFormElement.addEventListener( 'submit', function (e) {
       }
       classModal.close();
       loadClassroomCards();
+      util.remove( 'list-classrooms' );
+      base.BuildSelectClassroom();
     })
     .catch( error => {
       let messages = "";
@@ -82,6 +85,20 @@ classroomFormElement.addEventListener( 'submit', function (e) {
       util.showError( messages );
     });
 });
+
+document.addEventListener( 'classroom-delete', function(e){
+  const {id} = e.detail;
+
+  EscreveAiApi.fetchWithAuth( '/classroom/' + id, "DELETE" )
+    .then( response => {
+      if ( !response.ok ) throw response;
+      loadClassroomCards();
+      util.remove( 'list-classrooms' );
+      base.BuildSelectClassroom();
+    })
+    .catch( error => { console.log(error); } );
+});
+
 
 base.BuildUserName();
 base.BuildSelectClassroom();

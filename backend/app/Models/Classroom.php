@@ -26,7 +26,8 @@ class Classroom extends Model
     protected $fillable = [
         'name',
         'active',
-        'teacher_id'
+        'teacher_id',
+        'shift'
     ];
 
     protected function casts(): array

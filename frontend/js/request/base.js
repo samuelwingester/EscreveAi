@@ -34,6 +34,7 @@ export async function BuildSelectClassroom(){
 
   classrooms = util.retrieveJSON( "list-classrooms" );
 
+  selectClassroomElement.innerHTML = '';
   Object.entries( classrooms ).forEach( ([ id, name ]) => {
     const newOption = document.createElement( 'option' );
 

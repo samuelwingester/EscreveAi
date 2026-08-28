@@ -1,3 +1,5 @@
+import { EscreveAiApi } from "../../helpers/EscreveAiApi.js";
+
 export class HeaderBase extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -15,7 +17,7 @@ export class HeaderBase extends HTMLElement {
               </div>
             </summary>
             <div class="dropdown">
-              <button class="btn_option">
+              <button class="btn_option logout">
                 <svg>
                     <use href="../assets/icons/sprite.svg#icon-logout"></use>
                 </svg>
@@ -24,7 +26,10 @@ export class HeaderBase extends HTMLElement {
             </div>
           </details>
       `;
+
+    this.querySelector('.logout').addEventListener('click', () => EscreveAiApi.logout());
   }
+
 }
 
 // customElements.define('home-header', HeaderPadrao);

@@ -22,7 +22,7 @@ class ClassroomFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'      => fake()->words(2, true),
+            'name'      => fake()->randomLetter(),
             'active'    => fake()->boolean(95),
             'shift'     => fake()->randomElement( Shift::class )
         ];

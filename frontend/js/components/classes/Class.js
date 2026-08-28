@@ -15,6 +15,9 @@ export class Class extends HTMLElement {
   get shift() { return this.getAttribute('shift') || 'Turno não informado'; }
   set shift(value) { this.setAttribute('shift', value); }
 
+  get id() { return this.getAttribute('id') || null; }
+  set id(value) { return this.setAttribute('id', value); }
+
   connectedCallback(){ this.render(); this.initialized = true; }
 
   attributeChangedCallback( name, oldValue, newValue ){
@@ -92,6 +95,12 @@ export class Class extends HTMLElement {
     this.renderName();
     this.renderStudents();
     this.renderShift();
+
+    this.querySelector('.delete').addEventListener('click', () => this.deleteClass());
+  }
+
+  deleteClass() {
+    this.dispatchEvent(new CustomEvent('classroom-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
   renderName(){ this.nameElement.textContent = this.name; }
