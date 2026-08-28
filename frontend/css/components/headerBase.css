@@ -23,34 +23,105 @@ base-header {
         }
     }
 
-    .professor {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 2rem;
-        cursor: pointer;
+    details {
+        position: relative;
 
-        svg {
-            height: 1em;
-            width: 1em;
-            aspect-ratio: 1 / 1;
-            stroke-width: 7px;
+        summary {
+            list-style: none;
+            user-select: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+
+            &::-webkit-details-marker,
+            &::marker {
+                display: none;
+            }
+
+
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .professor {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 2rem;
+                cursor: pointer;
+
+                svg {
+                    height: 1em;
+                    width: 1em;
+                    aspect-ratio: 1 / 1;
+                    stroke-width: 7px;
+                }
+
+                h1 {
+                    font-size: inherit;
+                    position: relative;
+                    z-index: 1;
+                    opacity: 0;
+                    transform: translateX(200%);
+                    transition: transform 0.5s ease, opacity 0.3s ease;
+
+                }
+
+                &:hover h1 {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
         }
 
-        h1 {
-            font-size: inherit;
-            position: relative;
+        .dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            right: 0;
             z-index: 1;
-            opacity: 0;
-            transform: translateX(200%);
-            transition: transform 0.5s ease, opacity 0.3s ease;
+            display: flex;
+            flex-flow: column;
+            gap: 4px;
+            background-color: var(--text-white);
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            min-width: 120px;
 
-        }
+            .btn_option {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+                padding: 6px 8px;
+                border: none;
+                background: transparent;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.875rem;
+                color: var(--text-color, #374151);
+                transition: background-color 0.2s ease;
 
-        &:hover h1{
-            opacity: 1;
-            transform: translateX(0);
+                p {
+                    color: currentColor;
+                }
+
+                svg {
+                    width: 18px;
+                    height: 18px;
+                    stroke: currentColor;
+                    fill: none;
+                }
+
+
+                &:hover {
+                    background-color: #fef2f2;
+                    color: var(--red, #ef4444);
+                }
+
+            }
         }
     }
-
 }

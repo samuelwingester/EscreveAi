@@ -147,7 +147,7 @@ base-body {
 
                         .radio-field {
                             display: flex;
-                            flex-direction: column;
+                            flex-direction: column; 
                             gap: 6px;
 
                             .radio_group {
@@ -223,15 +223,6 @@ base-body {
                             height: 16px;
                             color: var(--text-white);
                             stroke-width: 1.5px;
-                        }
-                    }
-
-                    .botao-largo:first-child {
-                        background-color: transparent;
-                        border: solid 1px var(--text-primary);
-
-                        p {
-                            color: var(--text-primary);
                         }
                     }
                 }

@@ -157,15 +157,6 @@ base-body {
                             }
                         }
 
-                        button:first-child {
-                            background-color: transparent;
-                            border: 1px solid var(--text-primary);
-
-                            p {
-                                color: var(--text-primary);
-                            }
-                        }
-
                         button[type="submit"] {
                             background-color: var(--purple);
 
