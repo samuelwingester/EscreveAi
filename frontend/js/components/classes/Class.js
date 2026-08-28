@@ -48,7 +48,7 @@ export class Class extends HTMLElement {
                             </svg>
                         </summary>
                         <div class="dropdown">
-                            <button type="button" class="btn_option edit">
+                            <button type="button" class="btn_option edit" onclick="document.getElementById('edit-class-modal').showmodal()">
                                 <svg>
                                     <use href="../assets/icons/sprite.svg#icon-pencil"></use>
                                 </svg>
