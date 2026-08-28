@@ -33,12 +33,30 @@ export class Student extends HTMLElement {
                         <p>Ver Relatório</p>
                     </div>
                     <div class="line"></div>
-                    <div class="edit">
-                        <svg>
-                            <use href="../assets/icons/sprite.svg#icon-pencil"></use>
-                        </svg>
-                        <p>Editar</p>
-                    </div>
+                    <details class="menu">
+                        <summary>
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-menu"></use>
+                            </svg>
+                        </summary>
+                        <div class="dropdown">
+                            <button type="button" class="btn_option edit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                                </svg>
+                                <span>Editar</span>
+                            </button>
+
+                            <div class="line"></div>
+
+                            <button type="button" class="btn_option delete">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                                </svg>
+                                <span>Excluir</span>
+                            </button>
+                        </div>
+                    </details>
                 </div>
             </div>
         `;

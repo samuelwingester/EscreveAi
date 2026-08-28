@@ -8,10 +8,36 @@ export class Class extends HTMLElement {
         this.innerHTML = `
             <div class="class" style="--card-color: var(--${color}); border: solid 1px var(--${color}-dark);">
                 <div class="top" style="background-color:var(--${color}-dark)">
-                    <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="5" cy="5" r="5" fill="var(--${color})" />
-                    </svg>
-                    <h3>${name}</h3>
+                    <div class="head">
+                        <svg viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="5" cy="5" r="5" fill="var(--${color}-soft)" />
+                        </svg>
+                        <h3>${name}</h3>
+                    </div>
+                    <details class="menu">
+                        <summary>
+                            <svg color="var(--${color}-soft)">
+                                <use href="../assets/icons/sprite.svg#icon-menu"></use>
+                            </svg>
+                        </summary>
+                        <div class="dropdown">
+                            <button type="button" class="btn_option edit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                                </svg>
+                                <span>Editar</span>
+                            </button>
+
+                            <div class="line"></div>
+
+                            <button type="button" class="btn_option delete">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                                </svg>
+                                <span>Excluir</span>
+                            </button>
+                        </div>
+                    </details>
                 </div>
                 <div class="data">
                     <div class="students">
