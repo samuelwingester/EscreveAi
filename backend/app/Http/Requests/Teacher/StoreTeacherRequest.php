@@ -52,7 +52,7 @@ class StoreTeacherRequest extends FormRequest
             'password'      => ['required', 'confirmed', Password::min(5)],
             'name'          => ['required', 'string', 'max:150'],
             'gender'        => ['nullable', 'string', new Enum( Gender::class )],
-            'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
+            //'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
             //
         ];
     }

@@ -5,6 +5,9 @@ namespace App\Http\Requests\Classroom;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
+
+use App\Enums\Shift;
 
 class StoreClassroomRequest extends FormRequest
 {
@@ -22,10 +25,16 @@ class StoreClassroomRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         // Required fields normalization
-        $this->merge([
-            'name' => Str::ucwords( Str::squish( $this->name ) ),
-        ]);
-    }     
+        $normalization = [];
+
+        if ( $this->filled( 'name' ) )
+            $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
+
+        if ( $this->filled( 'shift' ) )
+            $normalization['shift'] = Str::squish( $this->shift );
+
+        $this->merge( $normalization );// Required fields normalization
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -35,10 +44,8 @@ class StoreClassroomRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // Possivelmente desnecessario
-            'teacher_id' => ['required', 'integer', 'exists:teachers,id'],
-            
-            'name'       => ['required', 'string', 'max:100']
+            'name'  => ['required', 'string', 'max:100'],
+            'shift' => ['nullable', 'string', new Enum( Shift::class )]
         ];
     }
 }

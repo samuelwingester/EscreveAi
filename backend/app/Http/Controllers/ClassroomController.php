@@ -7,67 +7,84 @@ use App\Http\Controllers\Controller;
 use App\Models\Classroom;
 use App\Models\Teacher;
 
-use App\Http\Requests\Classroom\StoreClassroomRequest;
-use App\Http\Requests\Classroom\UpdateClassroomRequest;
+use Illuminate\Http\Request;
+use App\Http\Requests\Classroom\StoreClassroomRequest as StoreRequest;
+use App\Http\Requests\Classroom\UpdateClassroomRequest as UpdateRequest;
 
-use App\Services\Classroom\StoreClassroomService;
-use App\Services\Classroom\UpdateClassroomService;
+use App\Services\Classroom\StoreClassroomService as StoreService;
+use App\Services\Classroom\UpdateClassroomService as UpdateService;
+use App\Services\Classroom\DataClassroomService as DataService;
+
+use Illuminate\Support\Facades\Log;
 
 class ClassroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(
+        protected StoreService $storeService,
+        protected UpdateService $updateService,
+        protected DataService $dataService
+    ) {}
+
+    public function index( Request $request )
     {
-        $classrooms = Classroom::all();
+        $classrooms = $this->dataService->list( $request->user() );
 
         return response()->json( $classrooms, 200 );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store( 
-        StoreClassroomRequest $request, 
-        StoreClassroomService $service 
-    ){
-        // Provavelmente desnecessario mudar futuramente. 
-        $teacher = Teacher::find( $request->validated( 'teacher_id' ), 'id' ); 
+    public function store( StoreRequest $request ){
+        $classroom = $this->storeService->execute( $request->user(), $request->validated() );
 
-        $service->execute( $teacher, $request->validated( 'name' ) );
-        
-        return response()->noContent( 201 );
+        return response()->json( $classroom, 201 );
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show( Classroom $classroom )
     {
+        $this->authorize( 'view', $classroom );
+
         return response()->json( $classroom, 200 );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( 
-        UpdateClassroomRequest $request, 
-        UpdateclassroomService $service, 
-        Classroom $classroom 
-    ){
-        $service->execute( $classroom, $request->validated() );
+    public function update( UpdateRequest $request, Classroom $classroom )
+    {
+        $this->authorize( 'update', $classroom );
+
+        $this->updateService->execute( $classroom, $request->validated() );
 
         return response()->noContent( 204 );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy( Classroom $classroom )
     {
+        $this->authorize( 'delete', $classroom );
+
         $classroom->deleteOrFail();
 
         return response()->noContent( 204 );
+    }
+
+    public function stats( Classroom $classroom )
+    {
+        $this->authorize( 'view', $classroom );
+
+        $data = $this->dataService->generateStats( $classroom );
+
+        return response()->json([
+            'name' => $classroom->name,
+            'id' => $classroom->id,
+
+            'status' => [
+                'pre-silabico'        => $data->pre_silabico,
+                'silabico'            => $data->silabico,
+                'silabico-alfabetico' => $data->silabico_alfabetico,
+                'alfabetico'          => $data->alfabetico,
+            ],
+
+            'total' => [
+                'students'   => $data->students,
+                'activities' => $data->activities,
+                'reports'    => $data->reports,
+            ],
+        ], 200);
     }
 }

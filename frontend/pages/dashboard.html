@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/dashboard.css">
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/dashboard/load.js"></script>
+
+    <script type="module" src="../js/request/dashboard.js" defer></script>
+</head>
+
+<body>
+    <base-body active="dashboard">
+        <header>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
+            <div class="summary">
+                <h3>Resumo da Turma:</h3>
+                <h2 class="turma-titulo">Sem Turmas</h2>
+            </div>
+        </header>
+        <div class="data">
+            <div class="numbers">
+                <dashboard-number description="Alunos" color="blue" id="total-alunos-number"></dashboard-number>
+                <dashboard-number description="Atividades" color="purple" id="total-atividades-number"></dashboard-number>
+                <dashboard-number description="Relatórios" color="yellow" id="total-relatorios-number"></dashboard-number>
+                <dashboard-number description="Evoluções médias" color="green"></dashboard-number>
+            </div>
+            <div class="graphs">
+                <div class="graph" id="graphBarras">
+                    <header>
+                        <div class="circle">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-graphbar"></use>
+                            </svg>
+                        </div>
+                        <div class="text">
+                            <p class="title">Evolução da Turma</p>
+                            <p class="subtitle">Distribuição de alunos por Fase</p>
+                        </div>
+                    </header>
+                    <div class="container">
+                        <div class="values">
+                            <dashboard-value categoria="Pré Silábico" color="purple" id="pre-silabico"></dashboard-value>
+                            <dashboard-value categoria="Silábico" color="blue" id="silabico"></dashboard-value>
+                            <dashboard-value categoria="Silábico-Alfabético" color="green" id="silabico-alfabetico"></dashboard-value>
+                            <dashboard-value categoria="Alfabético" color="yellow" id="alfabetico"></dashboard-value>
+                        </div>
+                        <div class="total">
+                            <svg class="purple">
+                                <use href="../assets/icons/sprite.svg#icon-users"></use>
+                            </svg>
+                            <p class="title">Total de Alunos: <span id="total-alunos" class="purple">29</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="graph" id="graphConquistas">
+                    <header>
+                        <div class="circle">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-bell"></use>
+                            </svg>
+                        </div>
+                        <div class="text">
+                            <p class="title">Conquistas Recentes </p>
+                            <p class="subtitle">Acompanhhe os avanços da sua Turma</p>
+                        </div>
+                    </header>
+                    <div class="container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </base-body>
+
+
+</body>
+</html>

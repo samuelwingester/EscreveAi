@@ -1,55 +1,94 @@
-import { apiHelper } from "./apihelper.js";
-
-// Isaac preciso de uma função para mostrar erros de validação ou outros no html
+import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
+import * as util from "../helpers/utils.js";
 
 const register_form = document.getElementById( "register-form" );
 
-// Esse e o fluxo base de uma requisição
-// NOTA: e necessario do token que e retornado na requisição de login e register 
-// para fazer requisições para o resto da aplicação
 register_form.addEventListener( "submit", async function ( e )  {
-    // Necessario formulario quebra sem essa função
-    e.preventDefault()
+  // Necessario formulario quebra sem essa função
+  e.preventDefault()
 
-    // Use os atributos do formulario para pegar os valores do input e 
-    // melhor fiz assim so pra ser mais rapido, e precisa do atributo { name } nos inputs
-    const email = document.getElementById( "input_email" ).value;
-    const password = document.getElementById( "input_password" ).value;
-    const password_confirmation = document.getElementById( "input_password_confirmation" ).value;
+  const formData = new FormData( register_form );
 
-    const name = document.getElementById( "input_name" ).value;
-    const date = document.getElementById( "input_birth_date" ).value;
-    const gender = document.getElementById( "input_gender" ).value;
+  const email = formData.get( "email" );
+  const password = formData.get( "password" );
+  const password_confirmation = formData.get( "password-confirmation" );
 
-    const remember = document.getElementById( "checkbox_remember" ).value;
+  const name = formData.get( "name" );
+  const date = formData.get( "date" );
+  let gender = formData.get( "gender" );
 
-    // Isaacc faça a validação aqui
+  if ( gender === "other" ) gender = null; // gambiarra rapida
 
-    let data = null;
 
-    try{
-        const response = await apiHelper.fetchApi( "/register", "POST", { 
-            "email":email, 
-            "password":password,
-            "password_confirmation":password_confirmation,
-            "name":name,
-            "birth_date":date,
-            "gender":gender 
-        } );
-        
-        data = await response.json();
+  const remember = (formData.get( "remember" ) !== null);
 
-        if ( !response.ok ) throw { message : "HTTP ERROR ", status : response.status};
+  util.clearError();
 
-        apiHelper.setTokenBearer( data["token"], remember ); //não sei se a checkbox funciona diretamente como booleano
+  // Ta faltando verificação e coloque em funções pelo amor de deus
+  // For fazer algo faz direito. se não souber todas as validações so me perguntar
+  if (!email) {
+      util.showError("Informe seu e-mail.");
+      return;
+  }
 
-        window.location.href = "./testing.html"; // redireciona para a pagina de teste mudar quando tiver a page de home
-    } catch( error ){
-        console.log( error )
-        // Tratamento de erros de requisição aqui
-        if ( error.status === 422 ){
-            console.log(data)
-            // Erros de validação - NOTA: Boa sorte com isso kkkkk
-        }
+  if (!password) {
+      util.showError("Informe sua senha.");
+      return;
+  }
+
+  if (!password_confirmation) {
+      util.showError("Confirme sua senha.");
+      return;
+  }
+
+  if (password !== password_confirmation) {
+      util.showError("As senhas não são iguais.");
+      return;
+  }
+
+  if (!name) {
+      util.showError("Informe seu nome.");
+      return;
+  }
+
+  EscreveAiApi.fetch( "/register", "POST", {
+    "email":email,
+    "password":password,
+    "password_confirmation":password_confirmation,
+    "name":name,
+    "gender":gender
+  })
+  .then( response => {
+    if ( !response.ok ){
+      return response.json().then( body => {
+          const error = new Error("falha");
+          error.status = response.status;
+          error.data = body;
+          throw error;
+      });
     }
+    return response.json();
+  })
+  .then( data => { // Cadastro bem sucedido
+
+    EscreveAiApi.setTokenBearer( data["token"], remember );
+    util.store( "username", data['user']['name'], remember );
+    util.store( "remember", remember, remember ); //Verificar depois
+
+    window.location.href = "./dashboard.html";
+  })
+  .catch( error => {
+    let messages = "";
+
+    if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
+      const data = error.data;
+      for ( const field in data.errors ){
+        data.errors[ field ].forEach( message => {
+          messages += `<p>${message}</p>`;
+        });
+      }
+    } else { messages = "Erro de rede"; console.log(error) }
+
+    util.showError( messages );
+  });
 });

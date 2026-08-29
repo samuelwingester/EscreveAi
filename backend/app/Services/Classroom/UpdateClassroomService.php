@@ -2,19 +2,21 @@
 
 namespace App\Services\Classroom;
 
-use Illuminate\Support\Facades\DB;
+use App\Repositories\Contracts\ClassroomRepositoryInterface;
 
 use App\Models\Classroom;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class UpdateClassroomService
- {
-	public function execute( Classroom $classroom, array $data ) : bool
+{
+	public function __construct(
+		protected ClassroomRepositoryInterface $repository
+	) {}
+
+	/** @throws ModelNotFoundException */
+	public function execute( Classroom $class, array $data ) : Classroom
 	{
-		return DB::transaction( function () use( $data, $classroom ) {
-			return $classroom->update([ 
-				'name' 		=> $data['name'] ?? $classroom->name,
-				'active' 	=> $data['active'] ?? $classroom->active
-			]);
-		}, 2);
+		return $this->repository->updateWithModel( $class, $data );
 	}
 }

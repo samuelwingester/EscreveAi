@@ -24,10 +24,10 @@ class UserFactory extends Factory
     {
         return [
             'email' 		=> fake()->unique()->email(),
-            'password' 		=> Hash::make( fake()->password(5, 25) ),
+            'password' 		=> Hash::make( fake()->password(8, 25) ),
             'name' 			=> fake()->name(),
             'gender' 		=> fake()->randomElement( Gender::class ),
-            'birth_date' 	=> fake()->date()
+            //'birth_date' 	=> fake()->date()
         ];
     }
 /*

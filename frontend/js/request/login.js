@@ -1,42 +1,59 @@
-import { apiHelper } from "./apihelper.js";
-
-// Isaac preciso de uma função para mostrar erros de validação ou outros no html
+import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
+import * as util from "../helpers/utils.js";
 
 const login_form = document.getElementById( "login-form" );
 
-// Esse e o fluxo base de uma requisição
-// NOTE: e necessario do token que e retornado na requisição de login e register 
-// para fazer requisições para o resto da aplicação
-login_form.addEventListener( "submit", async function ( e )  {
-    // Necessario formulario quebra sem essa função
-    e.preventDefault()
+login_form.addEventListener( "submit", function ( e )  {
+  // Necessario formulario quebra sem essa função
+  e.preventDefault();
 
-    const email = document.getElementById( "input_user_email" ).value;
-    const password = document.getElementById( "input_user_password" ).value;
-    const remember = document.getElementById( "checkbox_remember" ).value;
+  const formData = new FormData( login_form );
 
-    // Isaacc faça a validação aqui -> email|password
+  const email = formData.get( "email" );
+  const password = formData.get( "password" );
+  const remember = (formData.get( "remember" ) !== null);
 
-    let data = null;
+  util.clearError();
 
-    try{
-        const response = await apiHelper.fetchApi( "/login", "POST", { "email":email, "password":password } );
-        
-        data = await response.json();
+  // Validação ainda necessaria
 
-        if ( !response.ok ) throw { message : "HTTP ERROR ", status : response.status};
-
-        apiHelper.setTokenBearer( data["token"], remember ); //não sei se a checkbox funciona diretamente como booleano
-
-        window.location.href = "./testing.html"; // redireciona para a pagina de teste mudar quando tiver a page de home
-    } catch( error ){
-        console.log( error )
-        // Tratamento de erros de requisição aqui
-        if ( error.status === 422 ){
-            console.log(data)
-            // Erros de validação - NOTA: Boa sorte com isso kkkkk
-        }
+  EscreveAiApi.fetch( "/login", "POST", { "email":email, "password":password } )
+  .then( response => { // Verifica o status da requisição e monta o error para o catch
+    if ( !response.ok ) {
+      return response.json().then( body => {
+        const error = new Error();
+        error.status = response.status;
+        error.data = body;
+        throw error;
+      });
     }
+
+    return response.json();
+  })
+  .then( data => { // Requisição foi bem sucedida
+
+    EscreveAiApi.setTokenBearer( data.token, remember );
+    util.store( "username", data.user.name, remember );
+    util.store( "remember", remember, remember ); //Verificar depois
+
+    window.location.href = "./dashboard.html";
+  })
+  .catch( error => {
+    let messages = "";
+
+    // ruim melhorar depois
+    if ( error.status === 401 ) {
+      messages = ( "Credenciais Inválidas" );
+    }
+    else if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
+      const data = error.data;
+      for ( const field in data.errors ){
+        data.errors[ field ].forEach( message => {
+          messages += `<p>${message}</p>`;
+        });
+      }
+    } else { messages = "Erro de rede"; }
+
+    util.showError( messages );
+  });
 });
-
-

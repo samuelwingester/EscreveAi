@@ -105,75 +105,42 @@ abstract class RepositoryTestCase extends TestCase
         $this->assertDatabaseMissing( $this->table, [ 'id' => $model->id ]);
     }
 
-    public function test_find_by_id(): void
+    public function test_get_by_id(): void
     {
         $model = $this->createModel();
 
-        $found = $this->repository->findById( $model->id );
+        $found = $this->repository->getById( $model->id );
 
         $this->assertSame( $model->id, $found->id );
 
         $this->assertTrue( $model->is( $found ) );
     }
 
-    public function test_find_by_id_failure(): void
+    public function test_get_by_id_failure(): void
     {
         $this->expectException( ModelNotFoundException::class );
 
-        $this->repository->findById( 1000 );
+        $this->repository->getById( 1000 );
     }
 
-    public function test_find_with_columns(): void
+    public function test_get_with_columns(): void
     {
         $model = $this->createModel();
 
-        $found = $this->repository->findWithColumns( $model->id, [ 'id' ] );
+        $found = $this->repository->getById( $model->id, [ 'id' ] );
 
         $this->assertNotNull( $found );
 
         $this->assertSame( $model->id, $found->id );
     }
 
-    public function test_find_with_columns_returns_null_when_not_found(): void
-    {
-        $found = $this->repository->findWithColumns( 1000, [ 'id' ] );
-
-        $this->assertNull( $found );
-    }
-
-    public function test_get_list(): void
+    public function test_get_all(): void
     {
         $this->createModels( 5 );
 
-        $list = $this->repository->getList();
+        $list = $this->repository->getAll();
 
         $this->assertCount( 5, $list );
-    }
-
-    public function test_get_list_with_filters(): void
-    {
-        $this->createModels( 5 );
-
-        $model = $this->createModel();
-
-        $list = $this->repository->getList( [ 'id' => $model->id ] );
-
-        $this->assertCount( 1, $list );
-
-        $this->assertTrue( $model->is( $list->first() ) );
-    }
-
-    public function test_get_list_paginated(): void
-    {
-        $this->createModels( 5 );
-
-        $list = $this->repository->getList( [], [ '*' ], [], 2 );
-
-        $this->assertInstanceOf( LengthAwarePaginator::class, $list );
-
-        $this->assertCount( 2, $list->items() );
-
-        $this->assertSame( 5, $list->total() );
     }
 
     public function test_get_where(): void
@@ -203,16 +170,16 @@ abstract class RepositoryTestCase extends TestCase
         $this->repository->getFirstWhere( [ 'id' => 1000 ] );
     }
 
-    public function test_get_count_where(): void
+    public function test_get_count_all(): void
     {
         $this->createModels( 10 );
 
-        $count = $this->repository->getCountWhere();
+        $count = $this->repository->getCountAll();
 
         $this->assertSame( 10, $count );
     }
 
-    public function test_get_count_where_with_filters(): void
+    public function test_get_count_where(): void
     {
         $model = $this->createModel();
 
@@ -227,14 +194,14 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $result = $this->repository->exists( 'id', $model->id );
+        $result = $this->repository->exists( [ 'id' => $model->id ] );
 
         $this->assertTrue( $result );
     }
 
     public function test_exists_failure(): void
     {
-        $result = $this->repository->exists( 'id', 1000 );
+        $result = $this->repository->exists( [ 'id' => 1000 ] );
 
         $this->assertFalse( $result );
     }

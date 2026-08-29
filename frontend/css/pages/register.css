@@ -7,6 +7,7 @@ main {
   background-image: url(../../imgs/home/Main.png);
   background-position: center;
   background-size: cover;
+  padding: 2.5% 0;
 
   .container {
     display: flex;
@@ -16,6 +17,7 @@ main {
     padding: 25px 20px;
     background-color: var(--text-white);
     border-radius: 15px;
+    max-height: 95%;
 
     img {
       width: 30%;
@@ -32,13 +34,13 @@ main {
       gap: 5px;
       grid-template-columns: 1fr 1fr;
 
-      /* Área do Checkbox e Esqueceu a Senha */
       .confirm {
         grid-column: 1 / -1;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 10px 0px;
+
         .remember {
           display: flex;
           align-items: center;
@@ -55,7 +57,7 @@ main {
               height: 0;
               opacity: 0;
 
-              &:checked + .checkmark {
+              &:checked+.checkmark {
                 background-color: var(--purple-dark);
                 border-color: var(--purple-dark);
 
@@ -65,7 +67,7 @@ main {
                 }
               }
 
-              &:focus-visible + .checkmark {
+              &:focus-visible+.checkmark {
                 outline: 2px solid var(--purple-dark);
                 outline-offset: 2px;
               }
@@ -96,11 +98,11 @@ main {
       }
 
       .botao-padrao {
-       grid-column: 1 / -1;
+        grid-column: 1 / -1;
         border-radius: 5px;
       }
 
-      .line-between{
+      .line-between {
         grid-column: 1 / -1;
       }
 

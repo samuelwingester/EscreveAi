@@ -2,17 +2,23 @@
 
 namespace App\Services\Classroom;
 
-use Illuminate\Support\Facades\DB;
+use App\Repositories\Contracts\ClassroomRepositoryInterface;
 
 use App\Models\Classroom;
-use App\Models\Teacher;
+use App\Models\User;
 
 class StoreClassroomService
- {
-	public function execute( Teacher $teacher, string $name ) : Classroom
+{
+	public function __construct(
+		protected ClassroomRepositoryInterface $repository
+	) {}
+
+	public function execute( User $teacher, array $data ) : Classroom
 	{
-		return DB::transaction( function () use( $name, $teacher ) {
-			return $teacher->classes()->create( [ 'name' => $name ] );
-		}, 2);
+		return $this->repository->create([
+            'name'          => $data['name'],
+            'teacher_id'    => $teacher->id,
+            'shift'         => $data['shift']
+        ]);
 	}
 }

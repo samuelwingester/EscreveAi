@@ -2,13 +2,10 @@
 
 namespace Tests\Feature\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-
 use Tests\Feature\Repositories\RepositoryTestCase;
 
 use App\Repositories\ClassroomRepository;
 use App\Models\Classroom;
-
 
 class ClassroomRepositoryTest extends RepositoryTestCase
 {
@@ -24,15 +21,15 @@ class ClassroomRepositoryTest extends RepositoryTestCase
 
     protected function getCreateData(): array
     {
-        return Classroom::factory()->withTeacher()->make()->toArray();
+        return Classroom::factory()->withTeacher()->make()->getAttributes();
     }
 
     protected function getUpdateData(): array
     {
-        return [ 'name' => 'teste' ]; //possivelmente mudar
+        return [ 'name' => 'teste' ];
     }
 
-    protected function createModel(): Model
+    protected function createModel(): Classroom
     {
         return Classroom::factory()->withTeacher()->create();
     }

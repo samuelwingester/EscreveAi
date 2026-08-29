@@ -5,6 +5,9 @@ namespace App\Http\Requests\Classroom;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rules\Enum;
+
+use App\Enums\Shift;
 
 class UpdateClassroomRequest extends FormRequest
 {
@@ -22,11 +25,14 @@ class UpdateClassroomRequest extends FormRequest
         $normalization = [];
 
         // optional field normalization
-        if ( $this->filled( 'name' ) ) 
+        if ( $this->filled( 'name' ) )
             $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
-        
+
+        if ( $this->filled( 'shift' ) )
+            $normalization['shift'] = Str::squish( $this->shift );
+
         $this->merge( $normalization );
-    }     
+    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -37,7 +43,8 @@ class UpdateClassroomRequest extends FormRequest
     {
         return [
             'name'      => ['sometimes', 'string', 'max:100'],
-            'active'    => ['sometimes', 'nullable', 'boolean']
+            'active'    => ['sometimes', 'nullable', 'boolean'],
+            'shift'     => ['sometimes', 'nullable', 'string', new Enum( Shift::class )]
         ];
     }
 }

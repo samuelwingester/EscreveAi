@@ -4,20 +4,20 @@ namespace App\Services\Teacher;
 
 use Illuminate\Support\Facades\DB;
 
-use App\Models\Teacher;
+# use App\Models\Teacher;
 use App\Models\User;
 
 class UpdateTeacherService
  {
-	public function execute( array $data, Teacher $teacher ): bool
+	public function execute( User $teacher, array $data )
 	{
 		// Tenta atualizar as informações do usuario
 		return DB::transaction( function () use ( $data, $teacher ) {
-			return $teacher->user()->update([
+			return $teacher->update([
 				'secondary_email' 	=> $data['secondary_email'] ?? $teacher->secondary_email,
 				'name' 				=> $data['name'] ?? $teacher->name,
 				'gender' 			=> $data['gender'] ?? $teacher->gender,
-				'birth_date' 		=> $data['birth_date'] ?? $teacher->birth_date
+				//'birth_date' 		=> $data['birth_date'] ?? $teacher->birth_date
 			]);
 		}, 2);
 	}

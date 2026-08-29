@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Classroom;
 # use App\Models\Teacher;
 use App\Models\User;
+use App\Enums\Shift;
 
 /**
  * @extends Factory<Classroom>
@@ -21,8 +22,9 @@ class ClassroomFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'active' => fake()->boolean(95),
+            'name'      => fake()->randomLetter(),
+            'active'    => fake()->boolean(95),
+            'shift'     => fake()->randomElement( Shift::class )
         ];
     }
 

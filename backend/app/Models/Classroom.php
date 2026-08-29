@@ -4,15 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\UsePolicy;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-use App\Models\Teacher;
+#use App\Models\Teacher;
 use App\Models\Activity;
 use App\Models\Student;
-# use App\Models\User;
+use App\Models\User;
 
+use App\Policies\ClassroomPolicy;
+
+#[UsePolicy(ClassroomPolicy::class)]
 class Classroom extends Model
 {
     use HasFactory;
@@ -22,7 +26,8 @@ class Classroom extends Model
     protected $fillable = [
         'name',
         'active',
-        'teacher_id'
+        'teacher_id',
+        'shift'
     ];
 
     protected function casts(): array
@@ -32,21 +37,22 @@ class Classroom extends Model
             'name' => 'string'
         ];
     }
-    
+
     //--------------------------------------------------------
     // Relacionamentos
     //--------------------------------------------------------
+    /*
     public function teacher(): BelongsTo
     {
-        return $this->belongsTo( Teacher::class, 'teacher_id' );
-    }
+        return $this->belongsTo( User::class, 'teacher_id' );
+    }*/
 
-    /*
+
     public function user(): BelongsTo
     {
         return $this->belongsTo( User::class, 'teacher_id' );
     }
-    */
+
 
     public function activities(): HasMany
     {

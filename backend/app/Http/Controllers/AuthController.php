@@ -15,7 +15,7 @@ class AuthController extends Controller
 {
     public function login( LoginRequest $request, LoginService $service )
     {
-        $user = $service->execute( $request->input( 'email' ), $request->input( 'password' ) ); 
+        $user = $service->execute( $request->input( 'email' ), $request->input( 'password' ) );
 
         // Talvez mover a criação de token para um service proprio
         $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );
@@ -29,13 +29,12 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function register( 
-        // RegisterRequest $request, 
+    public function register(
+        // RegisterRequest $request,
         StoreTeacherRequest $request,
-        StoreTeacherService $service   
+        StoreTeacherService $service
     ){
-        $teacher = $service->execute( $request->validated() );
-        $user = $teacher->user;
+        $user = $service->execute( $request->validated() );
 
         // NT: Talvez passar para um service depois.
         $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );

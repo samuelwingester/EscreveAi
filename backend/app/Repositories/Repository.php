@@ -6,9 +6,8 @@ use App\Repositories\Contracts\RepositoryInterface;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Pagination\LengthAwarePaginator;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use InvalidArgumentException;
 
 abstract class Repository implements RepositoryInterface
@@ -33,77 +32,59 @@ abstract class Repository implements RepositoryInterface
             throw new InvalidArgumentException( 'Model ' . $model::class . ' is not instance of ' . $this->modelClass );
     }
 
-    protected function getQueryBuilder( array $filters = [] ): Builder
+    /** @throws ModelNotFoundException */
+    public function getById( int|string $id, array $columns = ['*'] ): Model
     {
-        $query = $this->modelClass::query();
-
-        foreach ( $filters as $key => $value ) {
-            if ( !is_null( $value ) )
-                $query->where($key, $value);
-        }
-
-        return $query;
+        return $this->modelClass::findOrFail( $id, $columns );
     }
 
-
-    public function findById( int|string $id ): Model
+    public function getAll(array $columns = ['*']): Collection
     {
-        return $this->modelClass::findOrFail( $id );
-    }
-
-    public function findWithColumns( int|string $id, array $columns ): ?Model
-    {
-        return $this->modelClass::select( $columns )->find( $id );
-    }
-
-    /**
-     * @return Collection<int, Model>|LengthAwarePaginator
-     */
-    public function getList( array $filters = [], array $columns = ['*'], array $with = [], ?int $perPage = null ): Mixed
-    {
-        $query = $this->getQueryBuilder( $filters )->with( $with );
-
-        if ( $perPage )
-            return $query->paginate( $perPage, $columns );
-
-        return $query->get( $columns );
+        return $this->modelClass::all( $columns );
     }
 
     public function getWhere( array $filters, array $columns = ['*'] ): Collection
     {
-        return $this->getQueryBuilder( $filters )->get( $columns );
+        return $this->modelClass::where( $filters )->get( $columns );
     }
 
-    public function getFirstWhere( array $filters = [] ): ?Model
+    /** @throws ModelNotFoundException */
+    public function getFirstWhere( array $filters, array $columns = ['*'] ): Model
     {
-        return $this->getQueryBuilder( $filters )->firstOrFail();
+        return $this->modelClass::where( $filters )->firstOrFail( $columns );
     }
 
-    public function getCountWhere( array $filters = [] ): int
+    public function getCountWhere( array $filters ): int
     {
-        return $this->getQueryBuilder( $filters )->count();
+        return $this->modelClass::where( $filters )->count();
     }
 
-    public function exists( string $field, mixed $value ): bool
+    public function getCountAll(): int
     {
-        return $this->modelClass::where($field, $value)->exists();
+        return $this->modelClass::count();
     }
 
+    public function exists( array $filters ): bool
+    {
+        return $this->modelClass::where( $filters )->exists();
+    }
 
     public function create( array $data ): Model
     {
         return $this->modelClass::create( $data );
     }
 
+    /** @throws ModelNotFoundException */
     public function update( int|string $id, array $data ): Model
     {
-        $model = $this->findById( $id );
+        $model = $this->modelClass::findOrFail( $id );
+
         $model->update( $data );
 
         return $model;
     }
 
-    public function updateWithModel( Model $model, array $data ): Model
+    public function updateWithModel( object $model, array $data ): Model
     {
         $this->validateInstanceOfModel( $model );   
     
@@ -112,14 +93,15 @@ abstract class Repository implements RepositoryInterface
         return $model;
     }
 
+    /** @throws ModelNotFoundException */
     public function delete( int|string $id ): bool
     {
-        $model = $this->findById( $id );
+        $model = $this->modelClass::findOrFail( $id );
 
         return $model->deleteOrFail();
     } 
 
-    public function deleteWithModel( Model $model ): bool 
+    public function deleteWithModel( object $model ): bool
     {
         $this->validateInstanceOfModel( $model );   
 

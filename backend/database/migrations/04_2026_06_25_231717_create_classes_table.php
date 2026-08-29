@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\Shift;
+
 return new class extends Migration
 {
     /**
@@ -11,22 +13,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('classes', function (Blueprint $table) 
+        Schema::create('classes', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
-            
-            $table->id();
-           
-            $table->foreignId('teacher_id')
-                  ->constrained('teachers')
-                  ->cascadeOnDelete();
 
-            /*
+            $table->id();
+
             $table->foreignId('teacher_id')
                   ->constrained('users')
                   ->cascadeOnDelete();
-            */
-            
+
+            $table->enum( 'shift', Shift::cases() )->nullable();
             $table->string('name', 100);
             $table->boolean('active')->default(true);
 

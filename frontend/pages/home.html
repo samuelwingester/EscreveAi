@@ -6,11 +6,12 @@
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/home.css">
-    <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/components/home/load.js"></script>
 </head>
 
 <body>
-    <header-padrao></header-padrao>
+    <home-header></home-header>
     <main>
         <div class="container">
             <div class="col">
@@ -45,14 +46,14 @@
             <div class="line"></div>
         </div>
         <div class="steps">
-            <my-step color="purple" icon="users" title="Cadastre Alunos"
-                description="Organize suas turmas e cadastre os alunos de forma rápida e prática"></my-step>
+            <home-step color="purple" icon="users" title="Cadastre Alunos"
+                description="Organize suas turmas e cadastre os alunos de forma rápida e prática"></home-step>
             <div class="line"></div>
-            <my-step color="yellow" icon="atividades" title="Registre Atividades"
-                description="Adicione produções escritas e observações do dia a dia em poucos cliques"></my-step>
+            <home-step color="yellow" icon="atividades" title="Registre Atividades"
+                description="Adicione produções escritas e observações do dia a dia em poucos cliques"></home-step>
             <div class="line"></div>
-            <my-step color="green" icon="grafevo" title="Acompanhe a Evolução"
-                description="Visualize análises, identifique avanços e gere relatórios automaticamente"></my-step>
+            <home-step color="green" icon="graphevo" title="Acompanhe a Evolução"
+                description="Visualize análises, identifique avanços e gere relatórios automaticamente"></home-step>
         </div>
     </section>
     <section id="beneficios">
@@ -61,20 +62,20 @@
             <div class="line"></div>
         </div>
         <div class="benefits">
-            <my-benefit color="purple" icon="clock" title="Economize
+            <home-benefit color="purple" icon="clock" title="Economize
             Tempo"
             description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
-            </my-benefit>
-            <my-benefit color="yellow" icon="folder" title="Organização completa"
+            </home-benefit>
+            <home-benefit color="yellow" icon="folder" title="Organização completa"
             description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
-            </my-benefit>
-            <my-benefit color="green" icon="graf" title="Análises Inteligentes"
+            </home-benefit>
+            <home-benefit color="green" icon="graph" title="Análises Inteligentes"
             description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
-            </my-benefit>
-            <my-benefit color="blue" icon="users" title="Compartilhe
+            </home-benefit>
+            <home-benefit color="blue" icon="users" title="Compartilhe
             fácil"
             description="Automatize registros e relatórios e tenha mais tempo para o que realmente importa.">
-            </my-benefit>
+            </home-benefit>
         </div>
     </section>
 </body>
