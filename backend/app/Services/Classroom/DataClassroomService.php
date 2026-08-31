@@ -13,7 +13,7 @@ class DataClassroomService
 		protected ClassroomRepositoryInterface $repository
 	) {}
 
-	public function list( User $teacher )
+	public function list( User $teacher, int $page = 0, int $perPage = 20, array $collumns = ['*'])
 	{
 		return $this->repository->getByTeacher( $teacher->id );
 	}

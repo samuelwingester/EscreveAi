@@ -9,4 +9,11 @@ interface ClassroomRepositoryInterface extends RepositoryInterface
     public function getByTeacher( int|string $id );
 
     public function getStats( int|string $id );
+
+    public function getByTeacherPaginated(
+        int|string $id,
+        array $collumns = ['*'],
+        int $offset = 0,
+        int $limit = 0
+    );
 }

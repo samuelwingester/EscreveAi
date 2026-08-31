@@ -13,6 +13,23 @@ class ClassroomRepository extends Repository implements ClassroomRepositoryInter
 {
     protected string $modelClass = Classroom::class;
 
+    public function getByTeacherPaginated(
+        int|string $id,
+        array $columns = ['*'],
+        int $offset = 0,
+        int $limit = 0
+    ) {
+        $query = DB::table( 'classes', 'c' )->where( 'c.teacher_id', '=', $id );
+
+        if ( $offset > 0 )
+            $query = $query->offset( $offset );
+
+        if ( $limit > 0 )
+            $query = $query->limit( $limit );
+
+        return $query->get( $columns );
+    }
+
     public function getByTeacher( int|string $id )
     {
         return DB::table('classes')
