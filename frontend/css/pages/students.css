@@ -1,232 +1,298 @@
 base-body {
-    height: calc(90vh - 80px);
-    position: relative;
+  position: relative;
+  height: calc(90vh - 80px);
 
-    .container {
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > header {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .bottom {
         display: flex;
-        flex-flow: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .class {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+
+          h2 {
+            padding: 2px 10px;
+            font-size: 1.25rem;
+            color: var(--purple);
+            background-color: var(--purple-light);
+            border-radius: 6px;
+          }
+        }
+      }
+    }
+
+    > input.search {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      background-color: var(--text-white, #ffffff);
+      outline: none;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        border-color: var(--purple);
+      }
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    dialog {
+      width: 50%;
+      min-width: 320px;
+      max-width: 600px;
+      margin: auto;
+      border: none;
+      border-radius: 15px;
+      background-color: var(--text-white, #ffffff);
+
+      &::backdrop {
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(2px);
+      }
+
+      .add {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 24px;
         gap: 10px;
+        border-radius: 15px;
+        background-color: var(--text-white, #ffffff);
 
-        >header {
+        header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 5px;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+
+          h3 {
+            color: var(--purple);
+            white-space: nowrap;
+          }
+
+          .line {
+            width: 100%;
+            height: 1px;
+            background-color: var(--purple-soft);
+
+            &:first-child {
+              width: 10%;
+            }
+          }
+        }
+
+        .forms {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          form {
             display: flex;
-            flex-flow: column;
+            flex-direction: column;
             gap: 10px;
 
-            .bottom {
+            .initial {
+              display: grid;
+              grid-template-columns: 1fr 2fr;
+              grid-template-rows: 1fr 1fr;
+              align-items: center;
+              justify-items: center;
+
+              .photo {
+                grid-row: 1 / -1;
                 display: flex;
-                justify-content: space-between;
                 align-items: center;
+                justify-content: center;
+                width: 80%;
+                aspect-ratio: 1 / 1;
+                padding: 10px;
+                border: 2px dashed var(--purple-soft);
+                border-radius: 100%;
+                background-color: var(--purple-light);
+                box-sizing: border-box;
 
-                .class {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-
-                    h2 {
-                        color: var(--purple);
-                        background-color: var(--purple-light);
-                        padding: 2px 10px;
-                        border-radius: 6px;
-                        font-size: 1.25rem;
-                    }
+                svg {
+                  height: 50%;
+                  aspect-ratio: 1 / 1;
+                  color: var(--purple-dark);
                 }
-            }
-        }
-
-        >input.search {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 12px;
-            outline: none;
-            border: 1px solid var(--gray-200);
-            background-color: var(--text-white);
-
-            &:focus {
-                border-color: var(--purple);
-            }
-        }
-
-        .cards {
-            width: 100%;
-            height: 100%;
-            gap: 10px;
-            display: flex;
-            flex-flow: column;
-        }
-
-        dialog {
-            width: 50%;
-            max-width: 600px;
-            min-width: 320px;
-            border: none;
-            background-color: var(--text-white, #ffffff);
-            margin: auto;
-            border-radius: 15px;
-
-            &::backdrop {
-                background-color: rgba(0, 0, 0, 0.4);
-                backdrop-filter: blur(2px);
+              }
             }
 
-            .add {
-                width: 100%;
-                height: 100%;
-                padding: 24px;
-                gap: 10px;
-                border-radius: 15px;
+            .radio-field {
+              display: flex;
+              flex-direction: column;
+              gap: 6px;
+
+              .radio_group {
                 display: flex;
-                flex-flow: column;
-                background-color: var(--text-white);
+                gap: 8px;
 
-                header {
+                .radio_box {
+                  flex: 1;
+                  display: flex;
+                  align-items: center;
+                  gap: 5px;
+                  padding: 10px;
+                  border: 1px solid var(--gray-200);
+                  border-radius: 10px;
+                  background-color: var(--text-white, #ffffff);
+                  cursor: pointer;
+                  user-select: none;
+                  transition: all 0.2s ease;
+
+                  input[type="radio"] {
+                    display: none;
+                  }
+
+                  &::before {
+                    content: "";
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
-                    gap: 5px;
+                    width: 16px;
+                    height: 16px;
+                    border: 1.5px solid var(--gray-200);
+                    border-radius: 50%;
+                    box-sizing: border-box;
+                  }
+
+                  svg {
+                    width: 16px;
+                    height: 16px;
+                    color: var(--text-primary);
+                    stroke-width: 2px;
+                  }
+
+                  &:has(input[type="radio"]:checked) {
+                    border-color: var(--purple);
+                    background-color: var(--purple-light, #faf5ff);
+                    color: var(--purple);
+                    font-weight: 500;
+
+                    &::before {
+                      border-color: var(--purple);
+                      background-color: var(--purple);
+                      box-shadow: inset 0 0 0 3px var(--text-white, #ffffff);
+                    }
 
                     svg {
-                        width: 20px;
-                        height: 20px;
-                        cursor: pointer;
+                      color: var(--purple);
                     }
-
-                    h3 {
-                        white-space: nowrap;
-                        color: var(--purple);
-                    }
-
-                    .line {
-                        width: 100%;
-                        height: 1px;
-                        background-color: var(--purple-soft);
-                    }
-
-                    .line:first-child {
-                        width: 10%;
-                    }
+                  }
                 }
-
-                .forms {
-                    display: flex;
-                    flex-flow: column;
-                    width: 100%;
-
-                    form {
-                        display: flex;
-                        flex-flow: column;
-                        gap: 10px;
-
-                        .initial {
-                            display: grid;
-                            grid-template-columns: 1fr 2fr;
-                            grid-template-rows: 1fr 1fr;
-                            justify-items: center;
-                            align-items: center;
-
-                            .photo {
-                                grid-row: 1/-1;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                border-radius: 100%;
-                                background-color: var(--purple-light);
-                                border: 2px dashed var(--purple-soft);
-                                width: 80%;
-                                aspect-ratio: 1/1;
-                                padding: 10px;
-                                box-sizing: border-box;
-
-                                svg {
-                                    height: 50%;
-                                    aspect-ratio: 1/1;
-                                    color: var(--purple-dark);
-                                }
-                            }
-
-                        }
-
-                        .radio-field {
-                            display: flex;
-                            flex-direction: column; 
-                            gap: 6px;
-
-                            .radio_group {
-                                display: flex;
-                                gap: 8px;
-
-                                .radio_box {
-                                    flex: 1;
-                                    display: flex;
-                                    align-items: center;
-                                    gap: 5px;
-                                    padding: 10px;
-                                    border: 1px solid var(--gray-200);
-                                    border-radius: 10px;
-                                    background-color: var(--text-white);
-                                    transition: all 0.2s ease;
-                                    cursor: pointer;
-                                    user-select: none;
-
-                                    input[type="radio"] {
-                                        display: none;
-                                    }
-
-                                    &::before {
-                                        content: "";
-                                        width: 16px;
-                                        height: 16px;
-                                        border: 1.5px solid var(--gray-200);
-                                        border-radius: 50%;
-                                        box-sizing: border-box;
-                                        display: flex;
-                                        align-items: center;
-                                    }
-
-                                    svg {
-                                        width: 16px;
-                                        height: 16px;
-                                        color: var(--text-primary);
-                                        stroke-width: 2px;
-                                    }
-
-                                    &:has(input[type="radio"]:checked) {
-                                        border-color: var(--purple);
-                                        background-color: var(--purple-light, #faf5ff);
-                                        color: var(--purple);
-                                        font-weight: 500;
-
-                                        &::before {
-                                            border-color: var(--purple);
-                                            background-color: var(--purple);
-                                            box-shadow: inset 0 0 0 3px var(--text-white, #ffffff);
-                                        }
-
-                                        svg {
-                                            color: var(--purple);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-
-                .botoes {
-                    display: flex;
-                    gap: 12px;
-                    padding: 10px 0px;
-                    justify-content: flex-end;
-
-                    .botao-largo {
-                        svg {
-                            width: 16px;
-                            height: 16px;
-                            color: var(--text-white);
-                            stroke-width: 1.5px;
-                        }
-                    }
-                }
+              }
             }
+          }
         }
+
+        .botoes {
+          display: flex;
+          justify-content: flex-end;
+          gap: 12px;
+          padding: 10px 0;
+
+          .botao-largo {
+            svg {
+              width: 16px;
+              height: 16px;
+              color: var(--text-white, #ffffff);
+              stroke-width: 1.5px;
+            }
+          }
+        }
+      }
     }
+  }
+}
+
+@media (max-width: 768px) {
+  header .bottom {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  #student-modal-button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  dialog.modal {
+    width: 95vw;
+    max-width: 100%;
+    max-height: 90vh;
+    margin: auto;
+    padding: 1.25rem;
+    overflow-y: auto;
+  }
+
+  .forms .initial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  common-field {
+    width: 100%;
+  }
+
+  .radio_group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .radio_box {
+    width: 100%;
+    justify-content: flex-start;
+    padding: 0.75rem 1rem;
+  }
+
+  .forms .botoes {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .forms .botoes button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
 }
