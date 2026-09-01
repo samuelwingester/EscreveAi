@@ -45,11 +45,15 @@ class StudentController extends Controller
 
     public function show( Classroom $classroom, Student $student )
     {
+        $this->authorize( 'view', $classroom );
+
         return response()->json( $student, 200 );
     }
 
     public function update( UpdateRequest $request, Classroom $classroom , Student $student ){
-        $this->updateService->execute( $request->validated(), $student );
+        $this->authorize( 'update', $classroom );
+
+        $this->updateService->execute( $student, $request->validated() );
 
         return response()->noContent( 204 );
     }

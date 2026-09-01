@@ -1,11 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
   
-  <symbol id="icone-upload" viewBox="0 0 24 24" fill="none">
-    <path d="M12 13V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-    <path d="M8.5 7.5L12 4L15.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M5 15H19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-  </symbol>
-
   <symbol id="icon-resumo" viewBox="0 0 92 92" fill="none">
     <path d="M29.125 1H12.25C6.0368 1 1 6.0368 1 12.25V29.125C1 35.3382 6.0368 40.375 12.25 40.375H29.125C35.3382 40.375 40.375 35.3382 40.375 29.125V12.25C40.375 6.0368 35.3382 1 29.125 1Z" stroke="currentColor" stroke-width="2"/>
     <path d="M79.75 1H62.875C56.6618 1 51.625 6.0368 51.625 12.25C51.625 18.4632 56.6618 23.5 62.875 23.5H79.75C85.9632 23.5 91 18.4632 91 12.25C91 6.0368 85.9632 1 79.75 1Z" stroke="currentColor" stroke-width="2"/>

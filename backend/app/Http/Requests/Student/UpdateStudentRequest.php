@@ -38,13 +38,11 @@ class UpdateStudentRequest extends FormRequest
         if ( $this->filled( 'name' ) )
             $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
 
-        /*
         if ( $this->filled( 'gender' ) )
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
-        */
 
         if ( $this->filled( 'writing_level' ) )
-            $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '_' );
+            $normalization['writing_level'] = Str::slug( Str::squish( $this->writing_level ), '-' );
 
         if ( $this->filled( 'observations' ) )
             $normalization['observations'] = Str::trim( $this->observations );
@@ -69,7 +67,7 @@ class UpdateStudentRequest extends FormRequest
 
             // Student Class Data
             'name'          => ['sometimes', 'string', 'max:150'],
-            'class_id'      => ['sometimes', 'integer', 'exists:classes,id'],
+            //'class_id'      => ['sometimes', 'integer', 'exists:classes,id'],
             'writing_level' => ['sometimes', 'nullable', 'string', new Enum( WritingLevel::class )],
             'observations'  => ['sometimes', 'nullable', 'string'],
             'birth_date'    => ['sometimes', Rule::date()->before(today()->subYears(4))],

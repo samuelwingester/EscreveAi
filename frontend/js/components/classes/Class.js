@@ -96,11 +96,16 @@ export class Class extends HTMLElement {
     this.renderStudents();
     this.renderShift();
 
-    this.querySelector('.delete').addEventListener('click', () => this.deleteClass());
+    this.querySelector('.delete').addEventListener('click', () => this.delete());
+    this.querySelector('.edit').addEventListener('click', () => this.edit());
   }
 
-  deleteClass() {
+  delete() {
     this.dispatchEvent(new CustomEvent('classroom-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
+  }
+
+  edit() {
+    this.dispatchEvent(new CustomEvent('classroom-edit', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
   renderName(){ this.nameElement.textContent = this.name; }

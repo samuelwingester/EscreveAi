@@ -59,9 +59,11 @@ export class EscreveAiApi{
   }
 
   static async logout() {
-    EscreveAiApi.fetchWithAuth( '/logout', 'POST' );
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = "./home.html";
+    EscreveAiApi.fetchWithAuth( '/logout', 'POST' )
+      .then( response => {
+        localStorage.clear();
+        sessionStorage.clear();
+        window.location.href = "./home.html";
+      })
   }
 }

@@ -14,14 +14,15 @@ class UpdateStudentService
 		protected StudentRepositoryInterface $repository
 	) {}
 
-	public function execute( array $data, Student $student ) : object
+	public function execute( Student $student, array $data ) : object
 	{
 		// Tenta atualizar as informações do usuario
 		return $this->repository->updateWithModel( $student, [
             'name' 			=> $data['name'] ?? $student->name,
             'class_id' 		=> $data['class_id'] ?? $student->class_id,
             'writing_level' => $data['writing_level'] ?? $student->writing_level,
-            'observations' 	=> $data['observations'] ?? $student->observations
+            'observations' 	=> $data['observations'] ?? $student->observations,
+            'birth_date' 	=> $data['birth_date'] ?? $student->birth_date,
         ]);
 	}
 }
