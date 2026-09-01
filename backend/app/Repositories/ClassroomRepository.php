@@ -13,13 +13,31 @@ class ClassroomRepository extends Repository implements ClassroomRepositoryInter
 {
     protected string $modelClass = Classroom::class;
 
-    public function getByTeacher( int|string $id )
+    public function getByTeacher(
+        int|string $id,
+        array $filters = [],
+        array $columns = ["*"],
+        string $orderBy = "id",
+        int $limit = 0,
+        int $offset = 0
+    ) {
+        $query = DB::table( "classes" )->where( "teacher_id", "=", $id )->where( $filters )->orderBy( $orderBy );
+
+        if ( $limit > 0 )
+            $query = $query->limit( $limit );
+        if ( $offset > 0 )
+            $query = $query->offset( $offset );
+
+        return $query->get( $columns );
+    }
+
+    public function getByTeacherWithStudents( int|string $id )
     {
-        return DB::table('classes')
-            ->leftJoin('students', 'classes.id', '=', 'students.class_id')
-            ->where('classes.teacher_id', $id)
-            ->groupBy('classes.id', 'classes.name', 'classes.shift')
-            ->get([ 'classes.id', 'classes.name', 'classes.shift', DB::raw('COUNT(students.id) as students') ]);
+        return DB::table( "classes" )
+            ->leftJoin( "students", "classes.id", "=", "students.class_id" )
+            ->where( "classes.teacher_id", $id )
+            ->groupBy( "classes.id", "classes.name", "classes.shift" )
+            ->get([ "classes.id", "classes.name", "classes.shift", DB::raw( "COUNT(students.id) as students" ) ]);
     }
 
     public function getStats( int|string $id )
