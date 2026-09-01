@@ -44,10 +44,12 @@ export class Student extends HTMLElement {
             </div>
             <div class="tools">
                 <div class="report">
-                    <svg>
-                        <use href="../assets/icons/sprite.svg#icon-document"></use>
-                    </svg>
-                    <p>Ver Relatório</p>
+                    <button>
+                        <p>Ver Relatório</p>
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-arrow-right"></use>
+                        </svg>
+                    </button>
                 </div>
                 <div class="line"></div>
                 <details class="menu">
@@ -88,22 +90,6 @@ export class Student extends HTMLElement {
 
       this.querySelector( '.delete' ).addEventListener( 'click' , () => this.delete() );
       this.querySelector( '.edit' ).addEventListener( 'click', () => this.edit() )
-      /*
-      const btnReport = this.querySelector('.btn-report');
-      if (btnReport) {
-          btnReport.addEventListener('click', () => {
-              window.location.href = `relatorio.html?aluno=${encodeURIComponent(name)}`;
-          });
-      }
-
-      const btnEdit = this.querySelector('.btn-edit');
-      if (btnEdit) {
-          btnEdit.addEventListener('click', () => {
-              const modal = document.getElementById('edit-student-modal');
-              if (modal) modal.showModal();
-          });
-      }
-      */
   }
 
   delete() {
