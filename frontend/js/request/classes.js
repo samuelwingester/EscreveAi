@@ -22,7 +22,7 @@ function loadClassroomCards(){
       newCard.shift = shift;
       newCard.id = element.id;
 
-      newCard.students = element.students;
+      //newCard.students = element.students; -> Reimplementar depois
 
       classroomCardsContainer.appendChild( newCard );
     })
@@ -30,14 +30,14 @@ function loadClassroomCards(){
   // Isso ta meio merda poderia aproveitar da requisição do base.js mas teria que mudar la e
   // nao vou fazer isso agora
   classroomCardsContainer.innerHTML = '';
-  EscreveAiApi.fetchWithAuth( '/classroom' )
+  EscreveAiApi.fetchWithAuth( '/classroom?columns=id,name,shift&order_by=created_at&limit=20&direction=desc' )
     .then( response => {
       if ( !response.ok ) throw new Error();
       return response.json();
     })
     .then( data => {
       if ( data === null ) throw Error("nenhuma turma encontrada");
-      makeCards( data );
+      makeCards( data.data );
     })
     .catch( error => { console.log(error); } );
 }
@@ -59,6 +59,7 @@ classroomFormElement.addEventListener( 'submit', function (e) {
   const shift = formData.get( 'shift' );
 
   util.clearError();
+  // Adicionar escola depois implementação nmo back ja concluida
   EscreveAiApi.fetchWithAuth( '/classroom', 'POST', { 'name':name, 'shift':shift })
     .then( response => {
       if ( !response.ok ) {
