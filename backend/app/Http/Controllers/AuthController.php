@@ -2,61 +2,59 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\Authenticathion\LoginRequest;
 use App\Http\Requests\Authenticathion\RegisterRequest;
-use App\Http\Requests\Teacher\StoreTeacherRequest; // Temporario
+use App\Http\Requests\Authenticathion\LoginRequest;
+use App\Http\Resources\UserResource;
 
+use App\Services\Authenticathion\RegisterService;
 use App\Services\Authenticathion\LoginService;
-use App\Services\Teacher\StoreTeacherService;
+use App\Services\Authenticathion\TokenService;
+
+use App\Models\User;
 
 class AuthController extends Controller
 {
-    public function login( LoginRequest $request, LoginService $service )
+    public function __construct(
+        private LoginService $login,
+        private RegisterService $register,
+        private TokenService $token
+    ){}
+
+    public function login( LoginRequest $request ) : UserResource
     {
-        $user = $service->execute( $request->input( 'email' ), $request->input( 'password' ) );
+        $data = $request->validated();
 
-        // Talvez mover a criação de token para um service proprio
-        $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );
+        $user = $this->login->verifyCredentials( $data['email'], $data['password'] );
 
-        return response()->json([
-            'token' => $token->plainTextToken,
-            'user'  => [
-                'name'  => $user->name,
-                'id'    => $user->id
-            ]
-        ], 200);
+        return $this->tokenResponse( $user, $request->header( 'User-Agent' ) );
     }
 
-    public function register(
-        // RegisterRequest $request,
-        StoreTeacherRequest $request,
-        StoreTeacherService $service
-    ){
-        $user = $service->execute( $request->validated() );
+    public function register( RegisterRequest $request ) : UserResource
+    {
+        $user = $this->register->store( $request->validated() );
 
-        // NT: Talvez passar para um service depois.
-        $token = $user->createToken( $request->header( 'User-Agent' ) ?? 'unknown' );
-
-        return response()->json([
-            'token' => $token->plainTextToken,
-            'user'  => [
-                'name'  => $user->name,
-                'id'    => $user->id
-            ]
-        ], 201);
+        return $this->tokenResponse( $user, $request->header( 'User-Agent' ) );
     }
 
-    public function logout( Request $request )
+    public function logout( Request $request ) : Response
     {
-        $request->user()->currentAccessToken()->delete();
+        $this->token->deleteCurrentToken( $request->user() );
 
-        return response()->noContent( 204 );
+        return response()->noContent();
     }
 
-    public function user( Request $request )
+    public function user( Request $request ) : UserResource
     {
-        return response()->json( $request->user(), 200 );
+        return ( new UserResource( $request->user() ) );
+    }
+
+    private function tokenResponse( User $user, string $agent ) : UserResource
+    {
+        $token = $this->token->create( $user, $agent );
+
+        return ( new UserResource( $user ) )->additional( [ 'token' => $token ] );
     }
 }

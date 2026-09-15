@@ -2,89 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+use App\Http\Resources\Classroom\ClassroomStatsResource;
+use App\Http\Resources\Classroom\ClassroomCollection;
+use App\Http\Resources\Classroom\ClassroomResource;
+use App\Http\Requests\Classroom\StoreRequest;
+use App\Http\Requests\Classroom\UpdateRequest;
+use App\Http\Requests\Classroom\ListRequest;
 use App\Http\Controllers\Controller;
 
+use App\Services\Classroom\StoreService;
+use App\Services\Classroom\UpdateService;
+use App\Services\Classroom\DataService;
+
 use App\Models\Classroom;
-use App\Models\Teacher;
-
-use Illuminate\Http\Request;
-use App\Http\Requests\Classroom\StoreClassroomRequest as StoreRequest;
-use App\Http\Requests\Classroom\UpdateClassroomRequest as UpdateRequest;
-
-use App\Services\Classroom\StoreClassroomService as StoreService;
-use App\Services\Classroom\UpdateClassroomService as UpdateService;
-use App\Services\Classroom\DataClassroomService as DataService;
-
-use Illuminate\Support\Facades\Log;
 
 class ClassroomController extends Controller
 {
     public function __construct(
-        protected StoreService $storeService,
-        protected UpdateService $updateService,
-        protected DataService $dataService
+        protected StoreService $store,
+        protected UpdateService $update,
+        protected DataService $data
     ) {}
 
-    public function index( Request $request )
+    public function index( ListRequest $request ) : ClassroomCollection
     {
-        $classrooms = $this->dataService->list( $request->user() );
+        $options = $request->validated();
 
-        return response()->json( $classrooms, 200 );
+        $columns = $options['columns'];
+
+        unset( $options['columns'] ); // Não e necessario, mas e bom fazer isso;
+
+        $data = $this->data->list( $request->user(), $options, $columns );
+
+        return new ClassroomCollection( $data['data'], $data['total'], $data['count'], $options['limit'], $options['offset'] );
     }
 
-    public function store( StoreRequest $request ){
-        $classroom = $this->storeService->execute( $request->user(), $request->validated() );
+    public function store( StoreRequest $request ) : ClassroomResource
+    {
+        $classroom = $this->store->execute( $request->user(), $request->validated() );
 
-        return response()->json( $classroom, 201 );
+        return new ClassroomResource( $classroom );
     }
 
-    public function show( Classroom $classroom )
+    public function show( Request $request, Classroom $classroom ) : ClassroomResource
     {
         $this->authorize( 'view', $classroom );
 
-        return response()->json( $classroom, 200 );
+        return new ClassroomResource( $classroom );
     }
 
-    public function update( UpdateRequest $request, Classroom $classroom )
+    public function update( UpdateRequest $request, Classroom $classroom ) : ClassroomResource
     {
         $this->authorize( 'update', $classroom );
 
-        $this->updateService->execute( $classroom, $request->validated() );
+        $this->update->execute( $classroom, $request->validated() );
 
-        return response()->noContent( 204 );
+        return new ClassroomResource( $classroom );
     }
 
-    public function destroy( Classroom $classroom )
+    public function destroy( Classroom $classroom ) : Response
     {
         $this->authorize( 'delete', $classroom );
 
-        $classroom->deleteOrFail();
+        $classroom->deleteOrFail(); // Mudar depois.
 
         return response()->noContent( 204 );
     }
 
-    public function stats( Classroom $classroom )
+    public function stats( Classroom $classroom ) : ClassroomStatsResource
     {
         $this->authorize( 'view', $classroom );
 
-        $data = $this->dataService->generateStats( $classroom );
+        $data = $this->data->generateStats( $classroom );
 
-        return response()->json([
-            'name' => $classroom->name,
-            'id' => $classroom->id,
-
-            'status' => [
-                'pre-silabico'        => $data->pre_silabico,
-                'silabico'            => $data->silabico,
-                'silabico-alfabetico' => $data->silabico_alfabetico,
-                'alfabetico'          => $data->alfabetico,
-            ],
-
-            'total' => [
-                'students'   => $data->students,
-                'activities' => $data->activities,
-                'reports'    => $data->reports,
-            ],
-        ], 200);
+        return new ClassroomStatsResource( $classroom, $data );
     }
 }
