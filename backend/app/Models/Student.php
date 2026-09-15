@@ -2,55 +2,43 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
 
+use Database\Factories\StudentFactory;
+
+use App\Models\Enums\WritingLevel;
 use App\Models\Classroom;
-# use App\Models\User;
-use App\Models\Record;
 use App\Models\Report;
-
-use App\Enums\WritingLevel;
+use App\Models\Record;
 
 class Student extends Model
 {
+    /** @use HasFactory<StudentFactory> */
     use HasFactory;
 
     protected $table = 'students';
 
     protected $fillable = [
-        //'user_id',
-        'class_id',
+        'classroom_id',
+        'name',
         'writing_level',
         'observations',
-        'name',
-        'birth_date'
     ];
 
-    protected function casts(): array
+     /** @return array<string, string> */
+    protected function casts() : array
     {
         return [
             'writing_level' => WritingLevel::class
         ];
     }
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
-    /*
-    public function user(): BelongsTo
+    public function classroom() : BelongsTo
     {
-        return $this->belongsTo( User::class, 'user_id' );
-    }
-    */
-
-    public function classroom(): BelongsTo
-    {
-        return $this->belongsTo( Classroom::class, 'class_id' );
+        return $this->belongsTo( Classroom::class );
     }
 
     public function records(): HasMany
@@ -62,46 +50,5 @@ class Student extends Model
     {
         return $this->hasMany( Report::class );
     }
-    //--------------------------------------------------------
-
-    //--------------------------------------------------------
-    // Acessors
-    //--------------------------------------------------------
-    /*
-    protected function name(): Attribute
-    {
-        return Attribute::make(
-            get : fn() => $this->user->name
-        );
-    }
-
-    protected function email(): Attribute
-    {
-        return Attribute::make(
-            get : fn() => $this->user->email
-        );
-    }
-
-    protected function birthDate(): Attribute
-    {
-        return Attribute::make(
-            get : fn() => $this->user->birth_date
-        );
-    }
-
-    public function gender(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => $this->user->gender
-        );
-    }
-
-    protected function secondaryEmail(): Attribute
-    {
-        return Attribute::make(
-            get : fn() => $this->user->secondary_email
-        );
-    }
-    */
-    //--------------------------------------------------------
 }
+
