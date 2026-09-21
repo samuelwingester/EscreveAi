@@ -39,9 +39,9 @@ function loadClassroomStats( value ){
     .then( response => { if ( !response.ok ) throw Error(); return response.json(); })
     .then( data => { if ( data === null ) throw Error(); return data; })
     .then( data => {
-      alunosElement.textContent = data.total.students;
-      buildNumbers( data.total );
-      buildStatus( data.status, data.total.students );
+      alunosElement.textContent = data.classroom.total.students;
+      buildNumbers( data.classroom.total );
+      buildStatus( data.classroom.status, data.classroom.total.students );
       base.buildClassName();
     })
     .catch( error => { console.log(error); });

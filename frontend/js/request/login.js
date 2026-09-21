@@ -52,7 +52,7 @@ login_form.addEventListener( "submit", function ( e )  {
           messages += `<p>${message}</p>`;
         });
       }
-    } else { messages = "Erro de rede"; }
+    } else { messages = "Erro de rede"; console.log(error) }
 
     util.showError( messages );
   });

@@ -2,66 +2,57 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Attributes\UsePolicy;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Model;
 
-#use App\Models\Teacher;
+use Database\Factories\ClassroomFactory;
+
+use App\Policies\ClassroomPolicy;
+use App\Models\Enums\Shift;
 use App\Models\Activity;
 use App\Models\Student;
 use App\Models\User;
 
-use App\Policies\ClassroomPolicy;
-
 #[UsePolicy(ClassroomPolicy::class)]
 class Classroom extends Model
 {
+    /** @use HasFactory<ClassroomFactory> */
     use HasFactory;
 
     protected $table = 'classes';
 
     protected $fillable = [
-        'name',
-        'active',
         'teacher_id',
-        'shift'
+        'name',
+        'school',
+        'shift',
+        'active'
     ];
 
-    protected function casts(): array
+    /** @return array<string, string> */
+    protected function casts() : array
     {
         return [
             'active' => 'boolean',
-            'name' => 'string'
+            'shift' => Shift::class
         ];
     }
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
-    /*
-    public function teacher(): BelongsTo
+    public function user() : BelongsTo
     {
-        return $this->belongsTo( User::class, 'teacher_id' );
-    }*/
-
-
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo( User::class, 'teacher_id' );
+        return $this->belongsTo( User::class, 'teacher_id' ); // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     }
 
-
-    public function activities(): HasMany
+    public function students() : HasMany
     {
-        return $this->hasMany( Activity::class, 'class_id' );
+        return $this->hasMany( Student::class );
     }
 
-    public function students(): HasMany
+    public function activities() : HasMany
     {
-        return $this->hasMany( Student::class, 'class_id' );
+        return $this->hasMany( Activity::class );
     }
-    //--------------------------------------------------------
 }

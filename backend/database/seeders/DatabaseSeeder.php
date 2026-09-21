@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Symfony\Component\Console\Helper\ProgressBar;
+
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -11,7 +13,7 @@ use Database\Seeders\ClassroomSeeder;
 use Database\Seeders\StudentSeeder;
 use Database\Seeders\ActivitySeeder;
 
-use App\Services\Teacher\StoreTeacherService;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -92,14 +94,11 @@ class DatabaseSeeder extends Seeder
 
     private function insertTestUserData()
     {
-        $service = new StoreTeacherService();
-
-        $testUser = $service->execute([
-            'email'         => 'teste@teste.teste',
-            'password'      => 'teste',
-            'name'          => 'teste',
+        $testUser = User::factory()->teacher()->create([
+            'name'  => 'Teste',
+            'email' => 'teste@teste.teste',
+            'password'  => Hash::make( 'testeteste' )
         ]);
-
 
         $countClassroom = 10;
         $classrooms = $this->runSeeder(

@@ -3,13 +3,11 @@
 namespace App\Repositories\Contracts;
 
 use App\Repositories\Contracts\RepositoryInterface;
+use App\Repositories\Query\Contracts\QueryOptionsInterface;
 
 interface ClassroomRepositoryInterface extends RepositoryInterface
 {
-    public function getByTeacher(
-        int|string $id, array $filters = [], array $columns = ["*"],
-        string $orderBy = "id", int $limit = 0, int $offset = 0
-    );
+    public function getByTeacher( int|string $id, array $filters = [], array $columns = ["*"], ?QueryOptionsInterface $options = null );
 
     public function getByTeacherWithStudents( int|string $id );
 

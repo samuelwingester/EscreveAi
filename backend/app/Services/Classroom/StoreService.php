@@ -3,11 +3,10 @@
 namespace App\Services\Classroom;
 
 use App\Repositories\Contracts\ClassroomRepositoryInterface;
-
 use App\Models\Classroom;
 use App\Models\User;
 
-class StoreClassroomService
+class StoreService
 {
 	public function __construct(
 		protected ClassroomRepositoryInterface $repository
@@ -18,7 +17,8 @@ class StoreClassroomService
 		return $this->repository->create([
             'name'          => $data['name'],
             'teacher_id'    => $teacher->id,
-            'shift'         => $data['shift']
+            'shift'         => $data['shift'],
+            'school'        => $data['school'] ?? null
         ]);
 	}
 }

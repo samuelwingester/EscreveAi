@@ -5,16 +5,16 @@ namespace Tests\Feature\Repositories;
 use Illuminate\Database\Eloquent\Model;
 
 use Tests\Feature\Repositories\RepositoryTestCase;
-use App\Repositories\TeacherRepository;
+use App\Repositories\UserRepository;
 
 use App\Models\Teacher;
 use App\Models\User;
 
 class TeacherRepositoryTest extends RepositoryTestCase
 {
-    protected function getRepository(): TeacherRepository
+    protected function getRepository(): UserRepository
     {
-        return new TeacherRepository();
+        return new UserRepository();
     }
 
     protected function getTableName(): string

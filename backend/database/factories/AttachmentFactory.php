@@ -2,25 +2,20 @@
 
 namespace Database\Factories;
 
-use App\Models\Attachment;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use App\Models\Activity;
-
-use App\Enums\DiskType;
 use App\Enums\StorageType;
+use App\Enums\DiskType;
+use App\Models\Attachment;
+use App\Models\Activity;
 
 /**
  * @extends Factory<Attachment>
  */
 class AttachmentFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    /** @return array<string, mixed> */
+    public function definition() : array
     {
         return [
             'file_name' => fake()->word() . '.pdf',
@@ -31,14 +26,14 @@ class AttachmentFactory extends Factory
         ];
     }
 
-    public function forActivity(): static
+    public function forActivity() : static
     {
         return $this->for(
             Activity::factory()->withClassroom(),
             'attachable'
         );
-    } 
-    
+    }
+
     // NT: Imlementar funcoes de 'for Model' para as models que tiverem anexos
-    // para quando tiverem su factories
+    // para quando tiverem suas factories
 }
