@@ -11,17 +11,16 @@ student-card {
         background-color: white;
         border-radius: 15px;
         box-shadow: 4px 4px 16px 0px rgba(0, 0, 0, 0.1);
-        /* REMOVIDO: overflow: hidden; (Permite que o dropdown saia da caixa do card) */
 
         .student {
             display: flex;
             align-items: center;
             gap: 10px;
             height: 100%;
-            
+
             .image {
                 display: flex;
-                height: 70%;
+                height: 60%;
                 aspect-ratio: 1/1;
                 background-color: var(--purple-soft);
                 border-radius: 50px;
@@ -40,14 +39,30 @@ student-card {
                     align-items: center;
                     gap: 10px;
                     width: max-content;
-                    padding-left: 5px;
+                    padding: 5px;
                     background-color: var(--blue-soft);
                     border-radius: 5px;
+
+                    p {
+                        font-size: 14px;
+                    }
                 }
 
                 .last {
                     display: flex;
+                    flex-flow: column;
                     gap: 2.5px;
+
+                    p {
+                        font-size: 14px;
+                        font-weight: 600;
+                        white-space: nowrap;
+                    }
+
+                    .text-last-activity {
+                        color: var(--gray-500);
+                        font-weight: 400;
+                    }
                 }
             }
         }
@@ -62,17 +77,28 @@ student-card {
             padding: 10px;
             padding-right: 5px;
             background-color: var(--gray-100);
-            border-top-right-radius: 15px; /* Mantém as pontas arredondadas que o overflow cortava */
+            border-top-right-radius: 15px;
+            /* Mantém as pontas arredondadas que o overflow cortava */
             border-bottom-right-radius: 15px;
 
             .report {
                 display: flex;
-                align-items: center;
+                align-items: right;
                 gap: 5px;
+                width: max-content;
 
-                svg {
-                    width: 24px;
-                    height: 24px;
+                button {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    svg {
+                        width: 16px;
+                        height: 16px;
+                    }
+                    p{
+                        height: 100%;
+                        white-space: wrap;
+                    }
                 }
             }
 
