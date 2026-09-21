@@ -4,9 +4,13 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\Json\JsonResource;
 
-abstract class PaginatedResourceCollection extends ResourceCollection
+abstract class PaginatedCollection extends ResourceCollection
 {
+    /** @var class-string<JsonResource> */
+    abstract public $collects { get; }
+
     public static $wrap = '';
 
     public function __construct(
