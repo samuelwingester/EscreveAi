@@ -236,4 +236,13 @@
     <path d="M24 33.7311C28.338 33.7311 31.8546 30.2145 31.8546 25.8765C31.8546 21.5386 28.338 18.022 24 18.022C19.6621 18.022 16.1455 21.5386 16.1455 25.8765C16.1455 30.2145 19.6621 33.7311 24 33.7311Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
   
+  <symbol id="icon-logout" viewBox="0 0 28 28" fill="none">
+    <path d="M10.5 24.5H5.83333C5.21449 24.5 4.621 24.2542 4.18342 23.8166C3.74583 23.379 3.5 22.7855 3.5 22.1667V5.83333C3.5 5.21449 3.74583 4.621 4.18342 4.18342C4.621 3.74583 5.21449 3.5 5.83333 3.5H10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18.6666 19.8332L24.5 13.9998L18.6666 8.1665" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M24.5 14H10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="icon-dropdown-right" viewBox="0 0 8 14" fill="none">
+    <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
 </svg>
