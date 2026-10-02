@@ -2,72 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
+use App\Http\Resources\Classroom\ClassroomStatsResource;
+use App\Http\Resources\Classroom\ClassroomCollection;
+use App\Http\Resources\Classroom\ClassroomResource;
+use App\Http\Requests\Classroom\StoreRequest;
+use App\Http\Requests\Classroom\UpdateRequest;
+use App\Http\Requests\Classroom\ListRequest;
 use App\Http\Controllers\Controller;
 
+use App\Services\Classroom\StoreService;
+use App\Services\Classroom\UpdateService;
+use App\Services\Classroom\DataService;
+
 use App\Models\Classroom;
-use App\Models\Teacher;
-
-use App\Http\Requests\Classroom\StoreClassroomRequest;
-use App\Http\Requests\Classroom\UpdateClassroomRequest;
-
-use App\Services\Classroom\StoreClassroomService;
-use App\Services\Classroom\UpdateClassroomService;
 
 class ClassroomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(
+        protected StoreService $store,
+        protected UpdateService $update,
+        protected DataService $data
+    ) {}
+
+    public function index( ListRequest $request ) : ClassroomCollection
     {
-        $classrooms = Classroom::all();
+        $options = $request->validated();
 
-        return response()->json( $classrooms, 200 );
+        $columns = $options['columns'];
+
+        unset( $options['columns'] ); // Não e necessario, mas e bom fazer isso;
+
+        $data = $this->data->list( $request->user(), $options, $columns );
+
+        return new ClassroomCollection( $data['data'], $data['total'], $data['count'], $options['limit'], $options['offset'] );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store( 
-        StoreClassroomRequest $request, 
-        StoreClassroomService $service 
-    ){
-        // Provavelmente desnecessario mudar futuramente. 
-        $teacher = Teacher::find( $request->validated( 'teacher_id' ), 'id' ); 
-
-        $service->execute( $teacher, $request->validated( 'name' ) );
-        
-        return response()->noContent( 201 );
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show( Classroom $classroom )
+    public function store( StoreRequest $request ) : ClassroomResource
     {
-        return response()->json( $classroom, 200 );
+        $classroom = $this->store->execute( $request->user(), $request->validated() );
+
+        return new ClassroomResource( $classroom );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( 
-        UpdateClassroomRequest $request, 
-        UpdateclassroomService $service, 
-        Classroom $classroom 
-    ){
-        $service->execute( $classroom, $request->validated() );
+    public function show( Request $request, Classroom $classroom ) : ClassroomResource
+    {
+        $this->authorize( 'view', $classroom );
+
+        return new ClassroomResource( $classroom );
+    }
+
+    public function update( UpdateRequest $request, Classroom $classroom ) : ClassroomResource
+    {
+        $this->authorize( 'update', $classroom );
+
+        $this->update->execute( $classroom, $request->validated() );
+
+        return new ClassroomResource( $classroom );
+    }
+
+    public function destroy( Classroom $classroom ) : Response
+    {
+        $this->authorize( 'delete', $classroom );
+
+        $classroom->deleteOrFail(); // Mudar depois.
 
         return response()->noContent( 204 );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy( Classroom $classroom )
+    public function stats( Classroom $classroom ) : ClassroomStatsResource
     {
-        $classroom->deleteOrFail();
+        $this->authorize( 'view', $classroom );
 
-        return response()->noContent( 204 );
+        $data = $this->data->generateStats( $classroom );
+
+        return new ClassroomStatsResource( $classroom, $data );
     }
 }

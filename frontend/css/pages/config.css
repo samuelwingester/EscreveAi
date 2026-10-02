@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    >header{
+        display: flex;
+        flex-flow: column;
+    }
+    .options{
+        .option{
+            .content{
+                display: flex;
+                flex-flow: column;
+                >header{
+                    
+                }
+            }
+        }
+    }
+}

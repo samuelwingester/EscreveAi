@@ -7,27 +7,35 @@
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/dashboard.css">
-    <script type="module" src="../js/components/main.js"></script>
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/dashboard/load.js"></script>
+
+    <script type="module" src="../js/request/dashboard.js" defer></script>
 </head>
 
 <body>
-    <my-base active="dashboard">
+    <base-body active="dashboard">
         <header>
+<<<<<<< HEAD
             <h1>Bom Dia, Professor <span id="nome-professor">João</span>👋</h1>
+=======
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
+>>>>>>> 45c812ae5b100cbef0194cc7a701073d1823f145
             <div class="summary">
                 <h3>Resumo da Turma:</h3>
-                <h2 class="turma-titulo">3º A</h2>
+                <h2 class="turma-titulo">Sem Turmas</h2>
             </div>
         </header>
         <div class="data">
             <div class="numbers">
-                <my-number title="24" description="Alunos" color="blue"></my-number>
-                <my-number title="18" description="Atividades" color="purple"></my-number>
-                <my-number title="8" description="Relatórios" color="yellow"></my-number>
-                <my-number title="92%" description="Evoluções médias" color="green"></my-number>
+                <dashboard-number description="Alunos" color="blue" id="total-alunos-number"></dashboard-number>
+                <dashboard-number description="Atividades" color="purple" id="total-atividades-number"></dashboard-number>
+                <dashboard-number description="Relatórios" color="yellow" id="total-relatorios-number"></dashboard-number>
+                <dashboard-number description="Evoluções médias" color="green"></dashboard-number>
             </div>
             <div class="graphs">
-                <div class="graph">
+                <div class="graph" id="graphBarras">
                     <header>
                         <div class="circle">
                             <svg>
@@ -35,12 +43,13 @@
                             </svg>
                         </div>
                         <div class="text">
-                            <h1>Evolução da Turma</h1>
+                            <p class="title">Evolução da Turma</p>
                             <p class="subtitle">Distribuição de alunos por Fase</p>
                         </div>
                     </header>
                     <div class="container">
                         <div class="values">
+<<<<<<< HEAD
                             <my-value percentage="12" total="4" color="purple" id="pre-silabico">
                                 Pré Silábico
                             </my-value>
@@ -54,20 +63,31 @@
                                 Alfabético
                             </my-value>
                             
+=======
+                            <dashboard-value categoria="Pré Silábico" color="purple" id="pre-silabico"></dashboard-value>
+                            <dashboard-value categoria="Silábico" color="blue" id="silabico"></dashboard-value>
+                            <dashboard-value categoria="Silábico-Alfabético" color="green" id="silabico-alfabetico"></dashboard-value>
+                            <dashboard-value categoria="Alfabético" color="yellow" id="alfabetico"></dashboard-value>
                         </div>
-                        <div class="total"></div>
+                        <div class="total">
+                            <svg class="purple">
+                                <use href="../assets/icons/sprite.svg#icon-users"></use>
+                            </svg>
+                            <p class="title">Total de Alunos: <span id="total-alunos" class="purple">29</span></p>
+>>>>>>> 45c812ae5b100cbef0194cc7a701073d1823f145
+                        </div>
                     </div>
                 </div>
-                <div class="graph">
+                <div class="graph" id="graphConquistas">
                     <header>
                         <div class="circle">
                             <svg>
-                                <use href="../assets/icons/sprite.svg#icon-graphbar"></use>
+                                <use href="../assets/icons/sprite.svg#icon-bell"></use>
                             </svg>
                         </div>
                         <div class="text">
-                            <h1>Evolução da Turma</h1>
-                            <p class="subtitle">Distribuição de alunos por Fase</p>
+                            <p class="title">Conquistas Recentes </p>
+                            <p class="subtitle">Acompanhhe os avanços da sua Turma</p>
                         </div>
                     </header>
                     <div class="container">
@@ -76,7 +96,8 @@
                 </div>
             </div>
         </div>
-    </my-base>
-</body>
+    </base-body>
 
+
+</body>
 </html>

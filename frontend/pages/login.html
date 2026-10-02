@@ -7,13 +7,14 @@
     <title>Escreve Aí - Login</title>
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/pages/login.css">
-    <script type="module" src="../js/components/main.js"></script>
 
-    <script type="module" src="../js/request/login.js"></script>
+    <script type="module" src="../js/components/home/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
+
+    <script type="module" src="../js/request/login.js" defer></script>
 </head>
-
 <body>
-    <header-padrao></header-padrao>
+    <home-header></home-header>
 
     <main>
         <div class="container">
@@ -25,9 +26,15 @@
             </header>
 
             <form action="#" id="login-form">
+<<<<<<< HEAD
                 <div id="login-error" class="error-banner" hidden><p>aaaaa</p></div>
                 <my-field input_id="input_user_email" name="user_email" type="text" icon="user" stroke="6" placeholder="Nome de Usuário ou email"></my-field>
                 <my-field input_id="input_user_password" name="password" type="password" icon="lock" stroke="1.5" eye="true" placeholder="Digite sua senha aqui..."></my-field>
+=======
+                <div id="login-error" class="error-banner" hidden></div>
+                <icon-field input_id="input_user_email" name="email" type="text" icon="user" stroke="6" placeholder="Nome de Usuário ou email"></icon-field>
+                <icon-field input_id="input_user_password" name="password" type="password" icon="lock" stroke="1.5" eye="true" placeholder="Digite sua senha aqui..."></icon-field>
+>>>>>>> 45c812ae5b100cbef0194cc7a701073d1823f145
 
                 <div class="confirm">
                     <div class="remember">

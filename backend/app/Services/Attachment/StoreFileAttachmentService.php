@@ -16,7 +16,7 @@ use App\Enums\StorageType;
 class StoreFileAttachmentService
 {
 	public function __construct(
-		private StoreAttachmentService $storeService = new StoreAttachmentService
+		private StoreAttachmentService $storeService
 	){}
 
 	public function execute( Model $attachable, UploadedFile $file, DiskType $disk = DiskType::PRIVATE) : Attachment

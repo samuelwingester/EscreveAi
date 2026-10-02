@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/classes.css">
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/classes/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
+
+    <script type="module" src="../js/request/classes.js"></script>
+</head>
+
+<body>
+    <base-body active="classes">
+        <header>
+            <h1>Bom Dia, Professor <span class="nome-professor"></span>👋</h1>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Turmas -</h3>
+                    <p class="title">Gerencie todas as suas turmas cadastradas.</p>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('new-class-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Nova Turma</p>
+                </button>
+            </div>
+        </header>
+
+        <input class="search" placeholder="Pesquisar por Turma...">
+
+        <div class="classes" id="classes-cards"></div>
+
+        <dialog id="new-class-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h2>Nova Turma</h2>
+                    <svg onclick="document.getElementById('new-class-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="forms">
+                    <div class="info">
+                        <div class="line"></div>
+                        <h3 class="purple">INFORMAÇÕES DA TURMA</h3>
+                        <div class="line"></div>
+                    </div>
+                    <form action="#" id="new-class-form">
+                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-form-name" size="field" name="name">
+                        </common-field>
+
+                        <!--Não implementarei agora-->
+                        <!--<common-field label="Escola" placeholder="Escola Municipal João XXIII"
+                            input_id="input-form-school" size="field">
+                        </common-field>-->
+
+                        <!--Não implementarei agora-->
+                        <common-field label="Série" placeholder="Escreva a Série" input_id="input-form-grade"
+                            size="minifield">
+                        </common-field>
+
+                        <common-field label="Turno" input_id="input-form-shift" placeholder="Selecione..."
+                            is_select="true" size="minifield" name="shift">
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noite">Noite</option>
+                        </common-field>
+
+                        <div class="line"></div>
+
+                        <!-- Temporario, mas e necessario de um definitivo com essa mesma classe em todos os formularios se possivel -->
+                        <div id="login-error" class="error-banner" hidden></div>
+
+                        <div class="botoes">
+                            <button class="botao-largo" id="vazioBorda2" type="button"
+                                onclick="document.getElementById('new-class-modal').close()">
+                                <p>Cancelar</p>
+                            </button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Turma</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+        <dialog id="edit-class-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h2>Editar Turma</h2>
+                    <svg onclick="document.getElementById('edit-class-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="forms">
+                    <div class="info">
+                        <div class="line"></div>
+                        <h3 class="purple">INFORMAÇÕES DA TURMA</h3>
+                        <div class="line"></div>
+                    </div>
+                    <form action="#" id="edit-class-form">
+                        <input type="hidden" name="id" id="input-edit-id" value="">
+                        <common-field label="Nome da Turma" placeholder="3º A" input_id="input-edit-name" size="field" name="name">
+                        </common-field>
+
+                        <!--Não implementarei agora-->
+                        <!--<common-field label="Escola" placeholder="Escola Municipal João XXIII"
+                            input_id="input-form-school" size="field">
+                        </common-field>-->
+
+                        <!--Não implementarei agora-->
+                        <common-field label="Série" placeholder="Escreva a Série" input_id="input-edit-grade"
+                            size="minifield">
+                        </common-field>
+
+                        <common-field label="Turno" input_id="input-edit-shift" placeholder="Selecione..."
+                            is_select="true" size="minifield" name="shift">
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                            <option value="noite">Noite</option>
+                        </common-field>
+
+                        <div class="line"></div>
+
+                        <!-- Temporario, mas e necessario de um definitivo com essa mesma classe em todos os formularios se possivel -->
+                        <div id="login-error" class="error-banner" hidden></div>
+
+                        <div class="botoes">
+                            <button class="botao-largo" id="vazioBorda2" type="button"
+                                onclick="document.getElementById('edit-class-modal').close()">
+                                <p>Cancelar</p>
+                            </button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Turma</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </base-body>
+</body>
+
+</html>

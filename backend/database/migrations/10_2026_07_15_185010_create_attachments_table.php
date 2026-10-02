@@ -9,32 +9,23 @@ use App\Enums\StorageType;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('attachments', function (Blueprint $table) {
-            $table->engine = 'InnoDB';    
-        
+            $table->engine = 'InnoDB';
+
             $table->id();
-
-            $table->morphs('attachable');
-
+            $table->timestamps();
             $table->string('file_name')->nullable();
             $table->string('file_mime')->nullable();
             $table->string('file_path');
-
             $table->enum('disk_type', DiskType::cases())->nullable();
             $table->enum('storage_type', StorageType::cases());
 
-            $table->timestamps();
+            $table->morphs('attachable');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('attachments');

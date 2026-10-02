@@ -2,36 +2,29 @@
 
 namespace App\Repositories\Contracts;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\LengthAwarePaginator;
-
 interface RepositoryInterface
 {
-    public function findById( int|string $id ): Model;
+    public function getById( int|string $id, array $columns = ['*'] ): object;
 
-    public function findWithColumns( int|string $id, array $columns ): ?Model;
+    public function getAll( array $columns = ['*'] ): mixed;
 
-    /**
-     * @return Collection<int, Model>|LengthAwarePaginator
-     */
-    public function getList( array $filters = [], array $columns = ['*'], array $with = [], ?int $perPage = null ): Mixed;
+    public function getWhere( array $filters, array $columns = ['*'] ): mixed;
 
-    public function getWhere( array $filters, array $columns = ['*'] ): Collection;
+    public function getFirstWhere( array $filters, array $columns = ['*'] ): object;
 
-    public function getFirstWhere( array $filters = [] ): ?Model;
+    public function getCountAll( ): int;
 
-    public function getCountWhere( array $filters = [] ): int;
+    public function getCountWhere( array $filters ): int;
 
-    public function exists( string $field, mixed $value ): bool;
+    public function exists( array $filters ): bool;
 
-    public function create( array $data ): Model;
+    public function create( array $data ): object;
 
-    public function update( int|string $id, array $data ): Model;
+    public function update( int|string $id, array $data ): object;
 
-    public function updateWithModel( Model $model, array $data ): Model;
+    public function updateWithModel( object $model, array $data ): object;
 
     public function delete( int|string $id ): bool;
 
-    public function deleteWithModel( Model $model ): bool;
+    public function deleteWithModel( object $model ): bool;
 }

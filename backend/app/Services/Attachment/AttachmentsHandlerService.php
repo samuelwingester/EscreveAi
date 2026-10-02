@@ -2,25 +2,25 @@
 
 namespace App\Services\Attachment;
 
-use App\Models\Activity;
+use Illuminate\Database\Eloquent\Model;
 
-use App\Services\Attachment\StoreFileAttachmentService;
-use App\Services\Attachment\StoreUrlAttachmentService;
+use App\Services\Attachment\StoreFileAttachmentService as StoreFile;
+use App\Services\Attachment\StoreUrlAttachmentService as StoreUrl;
 
 class AttachmentsHandlerService
 {
 	public function __construct(
-		private StoreUrlAttachmentService $urlService,
-		private StoreFileAttachmentService $fileService
+		private StoreUrl $urlService,
+		private StoreFile $fileService
 	){}
 
-	public function execute( Activity $activity, array $data ) : void
+	public function execute( Model $model, array $data ) : void
 	{
 		foreach( $data ?? [] as $attachment ){
             if ( !empty($attachment['url']) )
-                $this->urlService->execute( $activity, $attachment['url'] );
+                $this->urlService->execute( $model, $attachment['url'] );
             else if ( !empty($attachment['file']) )
-                $this->fileService->execute( $activity, $attachment['file'] );  	        
+                $this->fileService->execute( $model, $attachment['file'] );  	        
         }
 	}
 }

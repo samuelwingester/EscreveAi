@@ -23,3 +23,8 @@ body{
     background-color: #F6F7FB;
     overflow-x: hidden;
 }
+button{
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+}

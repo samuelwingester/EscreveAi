@@ -23,10 +23,10 @@ class TeacherSeeder extends Seeder
     {
         $buffer = collect();
 
-        for ( $i = 0; $i < $count; $i++ ) 
+        for ( $i = 0; $i < $count; $i++ )
         {
-            $buffer->push( Teacher::factory()->create() );
-        
+            $buffer->push( User::factory()->create() );
+
             $bar->advance();
         }
 

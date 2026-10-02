@@ -4,8 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+use App\Models\Enums\Shift;
 use App\Models\Classroom;
-# use App\Models\Teacher;
 use App\Models\User;
 
 /**
@@ -13,28 +13,21 @@ use App\Models\User;
  */
 class ClassroomFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    /** @return array<string, mixed> */
+    public function definition() : array
     {
         return [
-            'name' => fake()->name(),
-            'active' => fake()->boolean(95),
+            'name'      => fake()->randomLetter(),
+            'school'    => fake()->domainName(),
+            'shift'     => fake()->randomElement( Shift::class ),
+            'active'    => fake()->boolean(),
         ];
     }
 
-    public function withTeacher(): Factory
+    public function withTeacher() : static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                /*
-                'teacher_id' => Teacher::factory()
-                */
-                'teacher_id' => User::factory()
-            ];
-        });
+        return $this->state( fn ( array $attributes ) => [
+            'teacher_id' => User::factory()
+        ]);
     }
 }

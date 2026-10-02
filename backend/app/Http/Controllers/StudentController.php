@@ -6,62 +6,62 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Student;
 
-use App\Http\Requests\Student\StoreStudentRequest;
-use App\Http\Requests\Student\UpdateStudentRequest;
+use App\Http\Requests\Student\StoreStudentRequest as StoreRequest;
+use App\Http\Requests\Student\UpdateStudentRequest as UpdateRequest;
 
-use App\Services\Student\StoreStudentService;
-use App\Services\Student\UpdateStudentService;
+use App\Services\Student\StoreStudentService as StoreService;
+use App\Services\Student\UpdateStudentService as UpdateService;
+use App\Services\Student\DataStudentService as DataService;
+
+use App\Models\Classroom;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function __construct(
+        protected StoreService $storeService,
+        protected UpdateService $updateService,
+        protected DataService $dataService,
+    ) {}
+
+    public function index( Classroom $classroom )
     {
-        $students = Student::all();
+        $this->authorize( 'view', $classroom );
+
+        $students = $this->dataService->getByClassroom( $classroom->id );
 
         return response()->json( $students, 200 );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store( 
-        StoreStudentRequest $request, 
-        StoreStudentService $service 
-    ){
-        $service->execute( $request->validated() );
+    public function store( Classroom $classroom, StoreRequest $request ){
+        $this->authorize( 'update', $classroom ); // Acho que essa e a autorização certa se não for mudo depois
 
-        return response()->noContent( 201 );
+        $data = $request->validated();
+        $data['class_id'] = $classroom->id;
+
+        $student = $this->storeService->execute( $data );
+
+        return response()->json( $student, 201 );
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show( Student $student )
+    public function show( Classroom $classroom, Student $student )
     {
+        $this->authorize( 'view', $classroom );
+
         return response()->json( $student, 200 );
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update( 
-        UpdateStudentRequest $request, 
-        UpdateStudentService $service, 
-        Student $student 
-    ){
-        $service->execute( $request->validated(), $student );
+    public function update( UpdateRequest $request, Classroom $classroom , Student $student ){
+        $this->authorize( 'update', $classroom );
+
+        $this->updateService->execute( $student, $request->validated() );
 
         return response()->noContent( 204 );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy( Student $student )
+    public function destroy( Classroom $classroom, Student $student )
     {
+        $this->authorize( 'update', $classroom );
+
         $student->deleteOrFail();
 
         return response()->noContent( 204 );

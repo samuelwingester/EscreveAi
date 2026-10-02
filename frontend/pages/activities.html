@@ -1,85 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/pages/atividades.css">
-    <script type="module" src="../js/components/main.js"></script>
+    <link rel="stylesheet" href="../css/pages/activities.css">
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/activities/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
+
+    <script type="module" src="../js/request/base.js" defer></script>
 </head>
 
 <body>
-    <my-base active="activities">
-      <main class="atividades-page">
-
-            <h1 class="atividades-page__greeting">
-                Bom dia, Professor João <span class="atividades-page__wave">👋</span>
-            </h1>
-
-            <div class="atividades-page__header">
-                <h2 class="atividades-page__title">
-                    Atividades - Turma: <span class="atividades-page__turma-badge">3ªA</span>
-                </h2>
-                <button class="btn btn--primary">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
+    <base-body active="activities">
+        <header>
+            <h1>Bom Dia, Professor <span id="nome-professor"></span>👋</h1>
+            <div class="bottom">
+                <div class="class">
+                    <h3>Atividades - Turma:</h3>
+                    <h2 class="turma-titulo">Sem Turmas</h2>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
                     </svg>
-                    Nova Atividade
+                    <p>Nova Atividade</p>
                 </button>
             </div>
+        </header>
 
-            <ul class="activity-list">
+        <div class="activities">
+            <activity-card title="Nomaaa da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
+            </activity-card>
+            <activity-card title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="67 de Maio de 2022" img-src="../imgs/activities/IMG.png">
+            </activity-card>
+            <activity-card title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
+            </activity-card>
+            <activity-card title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="12 de Junho de 2026" img-src="../imgs/activities/IMG.png">
+            </activity-card>
+            <activity-card title="Nome da Atividade"
+                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
+                date="2 de Julho de 2025" img-src="../imgs/activities/IMG.png">
+            </activity-card>
+        </div>
 
-                <li class="activity-card">
-                    <img class="" src="" alt="">
-
-                    <div class="activity-card__info">
-                        <h3 class="activity-card__title">Nome da Atividade</h3>
-                        <p class="activity-card__desc">
-                            Os alunos escreveram os nomes das frutas observando as imagens.
-                        </p>
-                        <span class="activity-card__images">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <polyline points="21 15 16 10 5 21" />
-                            </svg>
-                            8 Imagens
-                        </span>
+        <dialog id="activity-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h3>Nova Atividade</h3>
+                    <svg onclick="document.getElementById('activity-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="forms">
+                    <div class="info">
+                        <div class="line"></div>
+                        <h2>INFORMAÇÕES DA ATIVIDADE</h2>
+                        <div class="line"></div>
                     </div>
+                    <form action="#">
+                        <common-field label="Nome da Atividade" input_id="form-activity-name"
+                            placeholder="Escreva o nome da atividade..." size="field">
+                        </common-field>
 
-                    <div class="activity-card__meta">
-                        <span class="activity-card__date">— 20 de Junho de 2026</span>
+                        <common-field label="Descrição" input_id="form-activity-description"
+                            placeholder="Descreva brevemente a atividade..." size="field">
+                        </common-field>
 
-                        <div class="activity-card__actions">
-                            <button class="btn btn--outline">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                                    <circle cx="12" cy="12" r="3" />
+                        <div class="upload">
+                            <div class="container">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-file-upload"></use>
                                 </svg>
-                                Ver Detalhes
-                            </button>
-                            <button class="btn btn--outline">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-                                </svg>
-                                Editar
-                            </button>
-                            <button class="btn btn--icon" aria-label="Mais opções">⋮</button>
+                                <p>Arraste um arquivo ou clique aqui para enviar</p>
+                                <p>PDF, JPG ou PNG • Máx. 10 MB</p>
+                                <button class="botao-largo">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                    </svg>
+                                    <input type="file" name="" id="">
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </li>
 
-              
-
-            </ul>
-
-        </main>
-
-    </my-base>
+                        <div class="botoes">
+                            <button type="button"
+                                onclick="document.getElementById('activity-modal').close()">Cancelar</button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Atividade</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </base-body>
 </body>
 
 </html>
