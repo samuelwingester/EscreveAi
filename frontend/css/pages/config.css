@@ -1,20 +1,105 @@
-.container{
+.screen {
     display: flex;
     flex-flow: column;
     align-items: center;
-    >header{
+    height: 100%;
+
+    >header {
         display: flex;
         flex-flow: column;
+        width: 100%;
     }
-    .options{
-        .option{
-            .content{
+
+    .options {
+        display: grid;
+        width: 100%;
+        height: 100%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 2fr 1fr;
+
+        .option {
+            border: solid 2px var(--gray-400);
+            border-radius: 10px;
+            width: 100%;
+            height: max-content;
+
+            .content {
+                padding: 2.5%;
                 display: flex;
                 flex-flow: column;
-                >header{
+                width: 100%;
+                height: 100%;
+                gap: 10px;
+                >div,header, .left{
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    gap: 10px;
+                    .icon {
+                        display: flex;
+                        aspect-ratio: 1/1;
+                        padding: 10px;
+                        border-radius: 5px;
+
+                        svg {
+                            height: 30px;
+                            width: 30px;
+                            stroke-width: 2px;
+                        }
+                    }
+
+                    .text {
+                        display: flex;
+                        flex-flow: column;
+                        gap: 5px;
+                    }
+                }
+                .left{
+                    .icon{
+                        background-color: var(--gray-200);
+                    }
+                }
+                header{
+                    border-bottom: solid 2px black;
+                    padding-bottom: 10px;
+                    .icon{
+                        background-color: var(--purple-light);
+                        svg{
+                            color: var(--purple-dark);
+                        }
+                    }
                     
                 }
+                .perfil {
+                    justify-content: space-between;
+
+                    .botao-largo{
+                        white-space: nowrap;
+                        border: var(--purple);
+                        height: 80%;
+                    }
+                    
+                }
+                .logout{
+                    border-bottom: solid 2px black;
+                    padding-bottom: 10px;
+                  >svg{
+                    height: 20px;
+                    width: 20px;
+                  }  
+                }
+                .delete{
+                    border: solid 1px var(--red) !important;
+                    background-color: var(--red-soft);
+                    p{
+                        color: var(--red);
+                    }
+                    svg{
+                        color: var(--red);
+                    }
+                }
             }
+
         }
     }
 }

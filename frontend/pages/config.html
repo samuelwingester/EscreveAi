@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escreve Aí</title>
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/pages/students.css">
+    <link rel="stylesheet" href="../css/pages/config.css">
 
     <script type="module" src="../js/components/base/load.js"></script>
     <script type="module" src="../js/components/common/load.js"></script>
@@ -16,7 +16,7 @@
 
 <body>
     <base-body active="config">
-        <div class="container">
+        <div class="screen">
             <header>
                 <h1>Configurações</h1>
                 <h2>Personalize sua experiência</h2>
@@ -25,40 +25,54 @@
                 <div class="option">
                     <div class="content">
                         <header>
-                            <div class="icon">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-user"></use>
-                                </svg>
+                            <div class="left">
+                                <div class="icon">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-user" stroke-width="5px"></use>
+                                    </svg>
+                                </div>
+                                <div class="text">
+                                    <p class="title">Minha Conta</p>
+                                    <p class="subtitle">Gerencie suas informações pessoais e de acesso</p>
+                                </div>
                             </div>
-                            <p class="title">Minha Conta</p>
-                            <p class="subtitle">Gerencie suas informações pessoais e de acesso</p>
                         </header>
                         <div class="perfil">
-                            <div class="icon">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-pencil"></use>
-                                </svg>
+                            <div class="left">
+                                <div class="icon">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                                    </svg>
+                                </div>
+                                <div class="info">
+                                    <p class="title">João Pedro Bosco</p>
+                                    <p class="subtitle">joaopedroprof@gmail.com</p>
+                                </div>
                             </div>
-                            <div class="info">
-                                <p class="title">João Pedro Bosco</p>
-                                <p class="subtitle">joaopedroprof@gmail.com</p>
-                            </div>
-                            <div class="botao-largo">
+                            <div class="botao-largo" id="vazioBorda2">
                                 <p>Editar Perfil</p>
                             </div>
                         </div>
                         <div class="logout">
-                            <div class="icon">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-logout"></use>
-                                </svg>
-                            </div>
-                            <div class="info">
-                                <p class="title">Sair da Conta</p>
+                            <div class="left">
+                                <div class="icon">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-logout"></use>
+                                    </svg>
+                                </div>
+                                <div class="info">
+                                    <p class="title">Sair da Conta</p>
+                                </div>
                             </div>
                             <svg>
-                                <use href="../assets/icons/sprite.svg#icon-dropdown-right"></use>
+                                <use href="../assets/icons/sprite.svg#icon-dropdown-right" stroke-width="1px"></use>
                             </svg>
+                        </div>
+                        <div class="botao-largo delete" id="vazioBorda2">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                            </svg>
+                           <p> Deletar Conta</p>
                         </div>
                     </div>
                 </div>
