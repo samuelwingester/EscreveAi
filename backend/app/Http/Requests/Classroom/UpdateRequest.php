@@ -7,45 +7,33 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 
-use App\Enums\Shift;
+use App\Models\Enums\Shift;
 
-class StoreClassroomRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Prepare the data for validation.
-     */
     protected function prepareForValidation(): void
     {
         // Required fields normalization
         $normalization = [];
 
+        // optional field normalization
         if ( $this->filled( 'name' ) )
             $normalization['name'] = Str::ucwords( Str::squish( $this->name ) );
 
         if ( $this->filled( 'shift' ) )
             $normalization['shift'] = Str::squish( $this->shift );
 
-        $this->merge( $normalization );// Required fields normalization
+        $this->merge( $normalization );
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
+    /** @return array<string, ValidationRule|array<mixed>|string> */
     public function rules(): array
     {
         return [
-            'name'  => ['required', 'string', 'max:100'],
-            'shift' => ['nullable', 'string', new Enum( Shift::class )]
+            'name'      => ['sometimes', 'string', 'max:100'],
+            'school'    => ['sometimes', 'string', 'max:100'],
+            'active'    => ['sometimes', 'nullable', 'boolean'],
+            'shift'     => ['sometimes', 'nullable', 'string', new Enum( Shift::class )]
         ];
     }
 }

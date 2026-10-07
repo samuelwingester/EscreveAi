@@ -7,14 +7,13 @@ use App\Repositories\Contracts\RepositoryInterface;
 use Tests\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 abstract class RepositoryTestCase extends TestCase
 {
     use RefreshDatabase;
 
-    protected RepositoryInterface $repository;
+    protected RepositoryInterface $baseRepository;
 
     protected string $table;
 
@@ -36,7 +35,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         parent::setUp();
 
-        $this->repository = $this->getRepository();
+        $this->baseRepository = $this->getRepository();
         $this->table = $this->getTableName();
         $this->createData = $this->getCreateData();
         $this->updateData = $this->getUpdateData();
@@ -50,7 +49,7 @@ abstract class RepositoryTestCase extends TestCase
 
     public function test_create(): void
     {
-        $model = $this->repository->create( $this->createData ); 
+        $model = $this->baseRepository->create( $this->createData );
 
         $this->assertDatabaseCount( $this->table, 1 );
 
@@ -61,7 +60,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $model = $this->repository->update( $model->id, $this->updateData );
+        $model = $this->baseRepository->update( $model->id, $this->updateData );
 
         $model->refresh();
 
@@ -72,7 +71,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $model = $this->repository->updateWithModel( $model, $this->updateData );
+        $model = $this->baseRepository->updateWithModel( $model, $this->updateData );
 
         $model->refresh();
 
@@ -83,20 +82,20 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $result = $this->repository->delete( $model->id );
+        $result = $this->baseRepository->delete( $model->id );
 
         $this->assertTrue( $result );
 
         $this->assertDatabaseCount( $this->table, 0 );
 
-        $this->assertDatabaseMissing( $this->table, [ 'id' => $model->id ]); 
+        $this->assertDatabaseMissing( $this->table, [ 'id' => $model->id ]);
     }
 
     public function test_delete_with_model(): void
     {
         $model = $this->createModel();
 
-        $result = $this->repository->deleteWithModel( $model );
+        $result = $this->baseRepository->deleteWithModel( $model );
 
         $this->assertTrue( $result );
 
@@ -109,7 +108,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $found = $this->repository->getById( $model->id );
+        $found = $this->baseRepository->getById( $model->id );
 
         $this->assertSame( $model->id, $found->id );
 
@@ -120,14 +119,14 @@ abstract class RepositoryTestCase extends TestCase
     {
         $this->expectException( ModelNotFoundException::class );
 
-        $this->repository->getById( 1000 );
+        $this->baseRepository->getById( 1000 );
     }
 
     public function test_get_with_columns(): void
     {
         $model = $this->createModel();
 
-        $found = $this->repository->getById( $model->id, [ 'id' ] );
+        $found = $this->baseRepository->getById( $model->id, [ 'id' ] );
 
         $this->assertNotNull( $found );
 
@@ -138,7 +137,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         $this->createModels( 5 );
 
-        $list = $this->repository->getAll();
+        $list = $this->baseRepository->getAll();
 
         $this->assertCount( 5, $list );
     }
@@ -147,7 +146,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $result = $this->repository->getWhere( [ 'id' => $model->id ] );
+        $result = $this->baseRepository->getWhere( [ 'id' => $model->id ] );
 
         $this->assertCount( 1, $result );
 
@@ -158,7 +157,7 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $found = $this->repository->getFirstWhere( [ 'id' => $model->id ] );
+        $found = $this->baseRepository->getFirstWhere( [ 'id' => $model->id ] );
 
         $this->assertTrue( $model->is( $found ) );
     }
@@ -167,14 +166,14 @@ abstract class RepositoryTestCase extends TestCase
     {
         $this->expectException( ModelNotFoundException::class );
 
-        $this->repository->getFirstWhere( [ 'id' => 1000 ] );
+        $this->baseRepository->getFirstWhere( [ 'id' => 1000 ] );
     }
 
     public function test_get_count_all(): void
     {
         $this->createModels( 10 );
 
-        $count = $this->repository->getCountAll();
+        $count = $this->baseRepository->getCountAll();
 
         $this->assertSame( 10, $count );
     }
@@ -185,7 +184,7 @@ abstract class RepositoryTestCase extends TestCase
 
         $this->createModels( 5 );
 
-        $count = $this->repository->getCountWhere( [ 'id' => $model->id ] );
+        $count = $this->baseRepository->getCountWhere( [ 'id' => $model->id ] );
 
         $this->assertSame( 1, $count );
     }
@@ -194,14 +193,14 @@ abstract class RepositoryTestCase extends TestCase
     {
         $model = $this->createModel();
 
-        $result = $this->repository->exists( [ 'id' => $model->id ] );
+        $result = $this->baseRepository->exists( [ 'id' => $model->id ] );
 
         $this->assertTrue( $result );
     }
 
     public function test_exists_failure(): void
     {
-        $result = $this->repository->exists( [ 'id' => 1000 ] );
+        $result = $this->baseRepository->exists( [ 'id' => 1000 ] );
 
         $this->assertFalse( $result );
     }

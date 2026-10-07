@@ -2,71 +2,55 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use Laravel\Sanctum\HasApiTokens;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Database\Factories\UserFactory;
 
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Enums\UserType;
+use App\Models\Enums\Gender;
+use App\Models\Classroom;
 
-# use App\Models\Student;
-use App\Models\Teacher;
-
-use App\Enums\UserType;
-use App\Enums\Gender;
 
 class User extends Authenticatable
 {
-    use HasFactory, HasApiTokens, Notifiable;
+    use HasFactory;
+    use HasApiTokens;
+    use Notifiable;
 
     protected $table = 'users';
 
     protected $fillable = [
-        'name',
         'email',
-        'password',
-        //'birth_date',
-        'gender',
         'secondary_email',
-        'type'
-    ];
-
-    # Revisar depois
-    protected $hidden = [
         'password',
-        'remember_token',
+        'name',
+        'type',
+        'gender'
     ];
 
+    protected $hidden = [
+        'remember_token',
+        'password',
+    ];
+
+    /** @return array<string, string> */
     protected function casts(): array
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'type' => UserType::class,
-            'gender' => Gender::class,
+            'password'          => 'hashed',
+            'type'              => UserType::class,
+            'gender'            => Gender::class
         ];
     }
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
-    /*
-    public function student(): HasOne
-    {
-        return $this->hasOne( Student::class );
-    }
-    */
-    public function teacher(): HasOne
-    {
-        return $this->hasOne( Teacher::class );
-    }
-
-    public function classes(): HasMany
+    public function classes() : HasMany
     {
         return $this->hasMany( Classroom::class );
     }
-    //--------------------------------------------------------
 }

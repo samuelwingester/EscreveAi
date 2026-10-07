@@ -13,8 +13,8 @@ use InvalidArgumentException;
 abstract class Repository implements RepositoryInterface
 {
     /**
-     * Model que sera implementada 
-     * 
+     * Model que sera implementada
+     *
      * @var class-string<Model>
      */
     protected string $modelClass;
@@ -38,7 +38,7 @@ abstract class Repository implements RepositoryInterface
         return $this->modelClass::findOrFail( $id, $columns );
     }
 
-    public function getAll(array $columns = ['*']): Collection
+    public function getAll( array $columns = ['*'] ): Collection
     {
         return $this->modelClass::all( $columns );
     }
@@ -86,8 +86,8 @@ abstract class Repository implements RepositoryInterface
 
     public function updateWithModel( object $model, array $data ): Model
     {
-        $this->validateInstanceOfModel( $model );   
-    
+        $this->validateInstanceOfModel( $model );
+
         $model->update( $data );
 
         return $model;
@@ -99,11 +99,11 @@ abstract class Repository implements RepositoryInterface
         $model = $this->modelClass::findOrFail( $id );
 
         return $model->deleteOrFail();
-    } 
+    }
 
     public function deleteWithModel( object $model ): bool
     {
-        $this->validateInstanceOfModel( $model );   
+        $this->validateInstanceOfModel( $model );
 
         return $model->deleteOrFail();
     }

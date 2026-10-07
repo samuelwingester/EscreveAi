@@ -24,33 +24,6 @@ register_form.addEventListener( "submit", async function ( e )  {
 
   util.clearError();
 
-  // Ta faltando verificação e coloque em funções pelo amor de deus
-  // For fazer algo faz direito. se não souber todas as validações so me perguntar
-  if (!email) {
-      util.showError("Informe seu e-mail.");
-      return;
-  }
-
-  if (!password) {
-      util.showError("Informe sua senha.");
-      return;
-  }
-
-  if (!password_confirmation) {
-      util.showError("Confirme sua senha.");
-      return;
-  }
-
-  if (password !== password_confirmation) {
-      util.showError("As senhas não são iguais.");
-      return;
-  }
-
-  if (!name) {
-      util.showError("Informe seu nome.");
-      return;
-  }
-
   EscreveAiApi.fetch( "/register", "POST", {
     "email":email,
     "password":password,
@@ -71,8 +44,8 @@ register_form.addEventListener( "submit", async function ( e )  {
   })
   .then( data => { // Cadastro bem sucedido
 
-    EscreveAiApi.setTokenBearer( data["token"], remember );
-    util.store( "username", data['user']['name'], remember );
+    EscreveAiApi.setTokenBearer( data.token, remember );
+    util.store( "username", data.user.name, remember );
     util.store( "remember", remember, remember ); //Verificar depois
 
     window.location.href = "./dashboard.html";

@@ -20,14 +20,14 @@ export async function BuildSelectClassroom(){
   let classrooms = util.retrieveJSON( "list-classrooms" );
 
   if ( classrooms === null ){
-    await EscreveAiApi.fetchWithAuth( '/classroom' )
+    await EscreveAiApi.fetchWithAuth( '/classroom?columns=id,name&limit=100' )
       .then( response => {
         if ( !response.ok ) throw new Error();
         return response.json()
       })
       .then( data => {
         if ( data === null ) throw Error("nenhuma turma encontrada");
-        util.storeJSON( "list-classrooms", makeList( data ) );
+        util.storeJSON( "list-classrooms", makeList( data.data ) );
       })
       .catch( error => {  console.log(error); });
   }

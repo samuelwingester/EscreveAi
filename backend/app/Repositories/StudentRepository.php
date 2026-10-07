@@ -14,6 +14,6 @@ class StudentRepository extends Repository implements StudentRepositoryInterface
 
     function getByClassroom(int|string $id)
     {
-        return $this->getWhere( [ 'class_id' => $id ], [ 'id', 'name', 'writing_level' ] );
+        return $this->getWhere( [ 'classroom_id' => $id ], [ 'id', 'name', 'writing_level' ] );
     }
 }

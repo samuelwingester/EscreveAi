@@ -4,40 +4,31 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-use App\Enums\UserType;
-use App\Enums\Gender;
+use App\Models\Enums\UserType;
+use App\Models\Enums\Gender;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) 
+        Schema::create('users', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
             $table->id();
-
+            $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->string('email')->unique();
+            $table->string('secondary_email')->unique()->nullable();
             $table->string('password', 255);
             $table->string('name', 150);
-            $table->enum('type', UserType::cases()); 
-            //$table->date('birth_date');
-
-            $table->enum('gender', Gender::cases())->nullable(); 
-            $table->string('secondary_email')->unique()->nullable();
-
-            $table->rememberToken();
-
-            $table->timestamp('email_verified_at')->nullable();
-            $table->timestamps();
+            $table->enum('type', UserType::cases());
+            $table->enum('gender', Gender::cases())->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
             $table->string('email')->primary();
             $table->string('token');
             $table->timestamp('created_at')->nullable();
@@ -45,7 +36,6 @@ return new class extends Migration
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
@@ -55,9 +45,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');
