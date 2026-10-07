@@ -3,37 +3,22 @@
 namespace App\Http\Requests\Student;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Validation\Rules\Enum;
-use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
-use App\Enums\Gender;
-use App\Enums\WritingLevel;
+use App\Models\Enums\WritingLevel;
+//use App\Models\Enums\Gender;
 
-class StoreStudentRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Prepare the data for validation.
-     */
     protected function prepareForValidation(): void
     {
-        // Required fields normalization
         $normalization = [
-            // 'email' => Str::lower( Str::trim( $this->email ) ),
             'name'  => Str::ucwords( Str::squish( $this->name ) ),
         ];
 
-        // Optional fields normalization
         /*
         if ( $this->filled( 'gender' ) )
             $normalization['gender'] = Str::lower( Str::squish( $this->gender ) );
@@ -48,30 +33,15 @@ class StoreStudentRequest extends FormRequest
         $this->merge( $normalization );
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
+    /** @return array<string, ValidationRule|array<mixed>|string> */
     public function rules(): array
     {
         return [
-            /*
-            // User Class Data
-            'email'         => ['required', 'email', 'unique:users,email'],
-            'password'      => ['required', 'confirmed', Password::min(8)],
             'name'          => ['required', 'string', 'max:150'],
-            //
-            */
-
-            // Student Class Data
-            'name'          => ['required', 'string', 'max:150'],
-            //'class_id'      => ['required', 'integer', 'exists:classes,id'],
             'writing_level' => ['nullable', 'string', new Enum( WritingLevel::class )],
             'observations'  => ['nullable', 'string'],
             'birth_date'    => ['required', Rule::date()->before(today()->subYears(4))],
-            'gender'        => ['nullable', 'string', new Enum( Gender::class )],
-            //
+            /*'gender'        => ['nullable', 'string', new Enum( Gender::class )]*/
         ];
     }
 }

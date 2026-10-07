@@ -31,9 +31,9 @@ class ClassroomController extends Controller
     {
         $options = $request->validated();
 
-        $columns = $options['columns'];
+        $columns = $options['fields'];
 
-        unset( $options['columns'] ); // Não e necessario, mas e bom fazer isso;
+        unset( $options['fields'] ); // Não e necessario, mas e bom fazer isso;
 
         $data = $this->data->list( $request->user(), $options, $columns );
 

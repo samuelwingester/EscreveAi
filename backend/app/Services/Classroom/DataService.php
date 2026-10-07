@@ -21,7 +21,7 @@ class DataService
 
         $total = $this->repository->getCountWhere( [[ "teacher_id", "=", $teacher->id ]] );
 
-        $data = $this->repository->getByTeacher( $teacher->id, [], $columns, $this->makeQueryOptions( $options ) );
+        $data = $this->repository->getByTeacher( $teacher->id, [], $columns, new QueryOptions( options:$options ) );
 
         return [ "data" => $data, "total" => $total, "count" => $data->count() ];
 	}
@@ -30,23 +30,5 @@ class DataService
     {
         // Gambiarra
         return (array) $this->repository->getStats( $classroom->id );
-    }
-
-    private function makeQueryOptions( array $options = [] ){
-        $queryOptions = new QueryOptions();
-
-        if ( $options["limit"] )
-            $queryOptions->limit = $options["limit"];
-
-        if ( $options["offset"] )
-            $queryOptions->offset = $options["offset"];
-
-        if ( $options["order_by"] )
-            $queryOptions->orderBy = $options["order_by"];
-
-        if ( $options["direction"] )
-            $queryOptions->direction = $options["direction"];
-
-        return $queryOptions;
     }
 }

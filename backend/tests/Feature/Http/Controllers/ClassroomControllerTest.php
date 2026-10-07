@@ -288,9 +288,7 @@ class ClassroomControllerTest extends TestCase
             'shift'  => Shift::MANHA->value,
         ]);
 
-        $response = $this->getJson( 'api/classroom?columns=id,name' );
-
-        //dd($response);
+        $response = $this->getJson( 'api/classroom?fields=id,name' );
 
         $response->assertOk();
 
@@ -313,7 +311,7 @@ class ClassroomControllerTest extends TestCase
             'shift'  => Shift::MANHA->value,
         ]);
 
-        $response = $this->getJson( 'api/classroom?columns=id,name,school,shift' );
+        $response = $this->getJson( 'api/classroom?fields=id,name,school,shift' );
 
         $response->assertOk();
 
@@ -332,11 +330,11 @@ class ClassroomControllerTest extends TestCase
 
         Classroom::factory()->for($user)->create();
 
-        $response = $this->getJson( 'api/classroom?columns=id,hehehe' );
+        $response = $this->getJson( 'api/classroom?fields=id,hehehe' );
 
         $response->assertUnprocessable();
 
-        $response->assertJsonValidationErrors(['columns.1']);
+        $response->assertJsonValidationErrors(['fields.1']);
     }
 
     public function test_index_route_returns_all_columns_without_columns_parameter()
