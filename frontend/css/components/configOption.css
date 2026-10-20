@@ -1,0 +1,22 @@
+config-option>div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 12px;
+
+    >svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 1px;
+        color: var(--text-muted);
+        cursor: pointer;
+    } 
+
+
+    .disabled{
+        color: var(--text-disabled) !important;
+        font-size: 14px !important;
+        font-weight: 200;
+    }
+}

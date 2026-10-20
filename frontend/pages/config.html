@@ -10,6 +10,7 @@
 
     <script type="module" src="../js/components/base/load.js"></script>
     <script type="module" src="../js/components/common/load.js"></script>
+    <script type="module" src="../js/components/config/load.js"></script>
 
     <script type="module" src="../js/request/config.js" defer></script>
 </head>
@@ -21,20 +22,78 @@
                 <h1>Configurações</h1>
                 <h2>Personalize sua experiência</h2>
             </header>
-            <div class="options">
-                <div class="option">
+            <div class="items">
+                <div class="item" id="account">
                     <div class="content">
                         <header>
-                            <div class="left">
-                                <div class="icon">
-                                    <svg>
-                                        <use href="../assets/icons/sprite.svg#icon-user" stroke-width="5px"></use>
-                                    </svg>
+                            <div class="icon">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-user" stroke-width="8px"></use>
+                                </svg>
+                            </div>
+                            <div class="text">
+                                <p class="subtitle">Minha Conta</p>
+                                <p>Gerencie suas informações pessoais e de acesso</p>
+                            </div>
+                        </header>
+                        <div class="options">
+                            <div class="perfil">
+                                <div class="left">
+                                    <div class="icon">
+                                        <svg>
+                                            <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="info">
+                                        <p><b>João Pedro Bosco</b></p>
+                                        <p class="disabled">joaopedroprof@gmail.com</p>
+                                    </div>
                                 </div>
-                                <div class="text">
-                                    <p class="title">Minha Conta</p>
-                                    <p class="subtitle">Gerencie suas informações pessoais e de acesso</p>
+                                <div class="botao-largo" id="vazioBorda2">
+                                    <p>Editar Perfil</p>
                                 </div>
+                            </div>
+                            <config-option title="Sair da conta" icon="logout" stroke="2"></config-option>
+                        </div>
+                        <div class="botao-largo delete" id="vazioBorda2">
+                            <svg>
+                                <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                            </svg>
+                            <p> Deletar Conta</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" id="privacity">
+                    <div class="content">
+                        <header>
+                            <div class="icon">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-lock" stroke-width="2px"></use>
+                                </svg>
+                            </div>
+                            <div class="text">
+                                <p class="subtitle">Privacidade</p>
+                                <p>Mantenha sua conta segura e protegida</p>
+                            </div>
+                        </header>
+                        <div class="options">
+                            <config-option title="Alterar Senha" icon="key" stroke="2"></config-option>
+                            <config-option title="Autenticação em duas etapas" subtitle="Ultima alteração há 3 meses"
+                                icon="shield" stroke="2"></config-option>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="content">
+                        <header>
+                            <div class="icon">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-user" stroke-width="5px"></use>
+                                </svg>
+                            </div>
+                            <div class="text">
+                                <p class="subtitle">Minha Conta</p>
+                                <p>Gerencie suas informações pessoais e de acesso</p>
                             </div>
                         </header>
                         <div class="perfil">
@@ -45,8 +104,8 @@
                                     </svg>
                                 </div>
                                 <div class="info">
-                                    <p class="title">João Pedro Bosco</p>
-                                    <p class="subtitle">joaopedroprof@gmail.com</p>
+                                    <p class="subtitle">João Pedro Bosco</p>
+                                    <p>joaopedroprof@gmail.com</p>
                                 </div>
                             </div>
                             <div class="botao-largo" id="vazioBorda2">
@@ -72,10 +131,11 @@
                             <svg>
                                 <use href="../assets/icons/sprite.svg#icon-delete"></use>
                             </svg>
-                           <p> Deletar Conta</p>
+                            <p> Deletar Conta</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </base-body>
