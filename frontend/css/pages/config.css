@@ -53,9 +53,6 @@
                     gap: 12px;
                     flex-grow: 1;
                 }
-                >:first-child {
-                    border-bottom: solid 1px var(--gray-400);
-                }
 
                 .subtitle {
                     font-weight: 600;
@@ -101,9 +98,6 @@
                     display: flex;
                     align-items: center;
                     width: 100%;
-                    padding-bottom: 12px;
-                    border-bottom: solid 1px var(--gray-400);
-
                     .icon {
                         background-color: var(--purple-light);
 
@@ -166,9 +160,26 @@
             }
         }
 
-        #privacity, #account {
-            config-option:last-of-type {
+        #privacity, #about{
+            config-option:last-of-type{
                 border-bottom: solid 1px var(--gray-400);
+                padding-bottom: 10px;
+            }
+
+            config-option:first-of-type, .perfil{
+                border-top: solid 1px var(--gray-400);
+                padding-top: 10px;
+            }
+        }
+        #account{
+            config-option:last-of-type{
+                border-bottom: solid 1px var(--gray-400);
+                padding-bottom: 10px;
+            }
+
+            &:first-child, .perfil{
+                border-top: solid 1px var(--gray-400);
+                padding-top: 10px;
             }
         }
 
@@ -181,6 +192,42 @@
                         svg {
                             color: var(--green-dark);
                         }
+                    }
+                }
+
+            }
+        }
+
+        #about{
+            .content {
+                header {
+                    .icon {
+                        background-color: var(--blue-soft);
+
+                        svg {
+                            color: var(--blue-dark);
+                        }
+                    }
+                }
+
+                config-option{
+                    .config-option{
+                        width: max-content;
+                        
+                        >svg{margin-left: 20px;
+                        }
+                        
+                    }
+    
+                    &:last-child{
+                        border-bottom: none;
+                        .config-option{
+                            
+                            >svg{
+                                display: none;
+                            }
+                        }
+                       
                     }
                 }
             }
