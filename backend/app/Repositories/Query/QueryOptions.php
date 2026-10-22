@@ -2,38 +2,22 @@
 
 namespace App\Repositories\Query;
 
-use App\Repositories\Query\Contracts\QueryOptionsInterface;
+/**
+ * TO DO
+ * - Mudar o arquivo de lugar, não faz sentido estar aqui
+ */
 
-class QueryOptions implements QueryOptionsInterface
-{
-    public string $orderBy = "id";
+class QueryOptions {
+    public string $orderBy;
+    public string $direction;
+    public int $limit;
+    public int $offset;
 
-    public string $direction = "asc";
-
-    public int $limit = 0;
-
-    public int $offset = 0;
-
-    public function __construct(
-        ?int $limit = null,
-        ?int $offset = null,
-        ?string $orderBy = null,
-        ?string $direction = null,
-        ?array $options = null,
-    ) {
-        $this->limit     = $limit ?? $this->limit;
-        $this->offset    = $offset ?? $this->offset;
-        $this->orderBy   = $orderBy ?? $this->orderBy;
-        $this->direction = $direction ?? $this->direction;
-
-        if ( $options !== null ) { $this->make($options); }
-    }
-
-    private function make(array $options): void
+    public function __construct(array $options)
     {
-        $this->limit     = $options['limit'] ?? $this->limit;
-        $this->offset    = $options['offset'] ?? $this->offset;
-        $this->orderBy   = $options['order_by'] ?? $this->orderBy;
-        $this->direction = $options['direction'] ?? $this->direction;
+        $this->limit = max(1, (int) ($options['limit'] ?? 20));
+        $this->offset = max(0, (int) ($options['offset'] ?? 0));
+        $this->orderBy = $options['order_by'] ?? 'id';
+        $this->direction = $options['direction'] ?? 'asc' === 'desc' ? 'desc' : 'asc';
     }
 }
