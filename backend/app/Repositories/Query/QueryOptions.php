@@ -2,17 +2,22 @@
 
 namespace App\Repositories\Query;
 
-use App\Repositories\Query\Contracts\QueryOptionsInterface;
+/**
+ * TO DO
+ * - Mudar o arquivo de lugar, não faz sentido estar aqui
+ */
 
-class QueryOptions implements QueryOptionsInterface
-{
-    public string $orderBy = "id";
+class QueryOptions {
+    public string $orderBy;
+    public string $direction;
+    public int $limit;
+    public int $offset;
 
-    public string $direction = "asc";
-
-    public int $limit = 0;
-
-    public int $offset = 0;
-
-    public function __construct() {} // os atributos devem ser atribuidos manualmente nos services
+    public function __construct(array $options)
+    {
+        $this->limit = max(1, (int) ($options['limit'] ?? 20));
+        $this->offset = max(0, (int) ($options['offset'] ?? 0));
+        $this->orderBy = $options['order_by'] ?? 'id';
+        $this->direction = $options['direction'] ?? 'asc' === 'desc' ? 'desc' : 'asc';
+    }
 }

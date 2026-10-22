@@ -3,13 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\StudentController;
-use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ActivityController;
 
 use App\Http\Controllers\AuthController;
-
-use Illuminate\Http\Request;
 
 Route::get('/', function ()
 {
@@ -30,13 +27,13 @@ Route::get('/', function ()
 Route::middleware( 'auth:sanctum' )->group( function () {
     Route::apiResources([
         'classroom/{classroom}/student' => StudentController::class,
-        'teacher'   => TeacherController::class,
-        'classroom' => ClassroomController::class,
-        'activity'  => ActivityController::class
+        'classroom/{classroom}/activity'  => ActivityController::class,
+        'classroom' => ClassroomController::class
     ]);
 
     Route::controller( ClassroomController::class )->group( function () {
         Route::get( '/classroom/{classroom}/stats', 'stats' );
+        // Route::get( '/classroom/stats', 'summary' ); // IMPLEMENTAR
     });
 });
 

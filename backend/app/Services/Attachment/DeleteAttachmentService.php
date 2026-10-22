@@ -5,7 +5,6 @@ namespace App\Services\Attachment;
 use Illuminate\Support\Facades\Storage;
 
 use App\Models\Attachment;
-
 use App\Enums\StorageType;
 
 class DeleteAttachmentService

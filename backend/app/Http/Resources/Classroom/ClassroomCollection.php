@@ -3,9 +3,9 @@
 namespace App\Http\Resources\Classroom;
 
 use App\Http\Resources\Classroom\ClassroomResource;
-use App\Http\Resources\PaginatedResourceCollection;
+use App\Http\Resources\PaginatedCollection;
 
-class ClassroomCollection extends PaginatedResourceCollection
+class ClassroomCollection extends PaginatedCollection
 {
-    public $collects = ClassroomResource::class;
+    public $collects { get => ClassroomResource::class; }
 }
