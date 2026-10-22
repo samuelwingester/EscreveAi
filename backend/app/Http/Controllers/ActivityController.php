@@ -2,51 +2,79 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * TO DO
+ * - Criar um controller de Anexos para visualização e remoção
+ */
+use App\Http\Resources\Activity\ActivityCollection;
+use App\Http\Resources\Activity\ActivityResource;
+
+use App\Http\Requests\Activity\StoreRequest;
+use App\Http\Requests\Activity\UpdateRequest;
+use App\Http\Requests\Activity\ListRequest;
+
 use App\Http\Controllers\Controller;
 
+use App\Services\Activity\StoreService;
+use App\Services\Activity\UpdateService;
+use App\Services\Activity\ListService;
+use App\Services\Activity\DeleteService;
+
 use App\Models\Activity;
-
-use App\Http\Requests\Activity\StoreActivityRequest as StoreRequest;
-use App\Http\Requests\Activity\UpdateActivityRequest as UpdateRequest;
-
-use App\Services\Activity\StoreActivityService as StoreService;
-use App\Services\Activity\UpdateActivityService as UpdateService;
+use App\Models\Classroom;
 
 class ActivityController extends Controller
 {
     public function __construct(
-        protected StoreService $storeService,
-        protected UpdateService $updateService
+        protected StoreService $store,
+        protected UpdateService $update,
+        protected ListService $list,
+        protected DeleteService $delete
     ) { }
-    public function index()
-    {
-        $activities = Activity::all();
 
-        return response()->json( $activities, 200 );
+    public function index( ListRequest $request, Classroom $classroom ) : ActivityCollection
+    {
+        $this->authorize( 'view', $classroom );
+
+        $options = $request->getQueryOptions();
+
+        $columns = $request->safe()->only('fields')['fields'];
+
+        $data = $this->list->execute( $classroom->id, $options, $columns );
+
+        return new ActivityCollection( $data['data'], $data['total'], $data['count'], $options );
     }
 
-    public function store( StoreRequest $request )
-    { 
-        $activity = $this->storeService->execute( $request->validated() ); 
+    public function store( StoreRequest $request, Classroom $classroom ) : ActivityResource
+    {
+        $this->authorize( 'update', $classroom );
 
-        return response()->json( $activity, 201 );
+        $activity = $this->store->execute( $classroom, $request->validated() );
+
+        return new ActivityResource( $activity )->loadAttachments();
     }
 
-    public function show( Activity $activity )
+    public function show( Classroom $classroom, Activity $activity )
     {
-        return response()->json( $activity, 200 );
+        $this->authorize( 'view', $classroom );
+
+        return new ActivityResource( $activity )->loadAttachments();
     }
 
-    public function update( UpdateRequest $request, Activity $activity )
+    public function update( UpdateRequest $request, Classroom $classroom, Activity $activity )
     {
-        $this->updateService->execute( $activity, $request->validated() );
+        $this->authorize( 'update', $classroom );
 
-        return response()->noContent( 204 );
+        $activity = $this->update->execute( $activity, $request->validated() );
+
+        return new ActivityResource( $activity )->loadAttachments();
     }
 
-    public function destroy( Activity $activity )
+    public function destroy( Classroom $classroom, Activity $activity )
     {
-        $activity->deleteOrFail();
+        $this->authorize( 'update', $classroom );
+
+        $this->delete->execute( $activity );
 
         return response()->noContent( 204 );
     }
