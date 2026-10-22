@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Repositories\Query\QueryOptions;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\In;
 use Illuminate\Validation\Rule;
+
+use Illuminate\Support\Arr;
 
 abstract class BaseListRequest extends FormRequest
 {
@@ -47,5 +50,12 @@ abstract class BaseListRequest extends FormRequest
             'fields'    => ['array'],
             'fields.*'  => [$this->getFieldsRule()]
         ];
+    }
+
+    public function getQueryOptions() : QueryOptions
+    {
+        $options = $this->safe()->only([ 'limit', 'offset', 'order_by', 'direction' ]);
+
+        return new QueryOptions( options:$options );
     }
 }
