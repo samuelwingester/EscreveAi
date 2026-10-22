@@ -1,28 +1,14 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Tests\Feature\Http\Controllers\ControllerTestCase;
 
-use App\Models\User;
-use App\Models\Classroom;
-use Laravel\Sanctum\Sanctum;
 use App\Models\Enums\Shift;
+use App\Models\Classroom;
 
-class ClassroomControllerTest extends TestCase
+class ClassroomControllerTest extends ControllerTestCase
 {
-    use RefreshDatabase;
-
-    private function fakeUser() : User
-    {
-        $user = User::factory()->teacher()->create();
-
-        Sanctum::actingAs( $user );
-
-        return $user;
-    }
-
     public function test_store_route_success()
     {
         $user = $this->fakeUser();
@@ -33,7 +19,6 @@ class ClassroomControllerTest extends TestCase
             'shift'     => Shift::MANHA->value,
         ]);
 
-        $response->dump();
         $response->assertStatus( 201 );
 
         $response->assertJsonPath( 'classroom.name', '3A2' );
@@ -106,11 +91,24 @@ class ClassroomControllerTest extends TestCase
         $response->assertStatus( 422 );
     }
 
+    public function test_delete_route_success()
+    {
+        $user = $this->fakeUser();
+
+        $classroom = Classroom::factory()->for( $user )->create();
+
+        $response = $this->deleteJson( '/api/classroom/' . $classroom->id );
+
+        $response->assertStatus( 204 );
+
+        $this->assertDatabaseMissing( 'classes', [ 'id' => $classroom->id ] );
+    }
+
     public function test_index_route_success()
     {
         $user = $this->fakeUser();
 
-        $classrooms = Classroom::factory()->for($user)->count(500)->create();
+        $classrooms = Classroom::factory()->for($user)->count( 50 )->create();
 
         $response = $this->getJson( 'api/classroom?limit=10&offset=0&order_by=name&direction=desc' );
 
