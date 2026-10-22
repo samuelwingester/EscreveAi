@@ -236,4 +236,31 @@
     <path d="M24 33.7311C28.338 33.7311 31.8546 30.2145 31.8546 25.8765C31.8546 21.5386 28.338 18.022 24 18.022C19.6621 18.022 16.1455 21.5386 16.1455 25.8765C16.1455 30.2145 19.6621 33.7311 24 33.7311Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
   </symbol>
   
+  <symbol id="icon-logout" viewBox="0 0 28 28" fill="none">
+    <path d="M10.5 24.5H5.83333C5.21449 24.5 4.621 24.2542 4.18342 23.8166C3.74583 23.379 3.5 22.7855 3.5 22.1667V5.83333C3.5 5.21449 3.74583 4.621 4.18342 4.18342C4.621 3.74583 5.21449 3.5 5.83333 3.5H10.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M18.6666 19.8332L24.5 13.9998L18.6666 8.1665" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M24.5 14H10.5" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="icon-dropdown-right" viewBox="0 0 8 14" fill="none">
+    <path d="M1 13L7 7L1 1" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+  <symbol id="icon-key" viewBox="0 0 24 24" fill="none">
+    <circle cx="7.5" cy="15.5" r="4.5" stroke="currentColor" stroke-width="2"/>
+    <path d="M10.7 12.3L19.5 3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M15.5 7.5L18 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <path d="M18 5L20.5 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </symbol>
+  
+  <symbol id="icon-shield" viewBox="0 0 18 22" fill="none">
+    <path d="M9 21C9 21 17 17 17 11V4L9 1L1 4V11C1 17 9 21 9 21Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M6 11L8 13L12 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+
+<symbol id="icon-wand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21.5 2.5L19.5 0.5C19.38 0.38 19.24 0.29 19.08 0.23C18.93 0.17 18.77 0.14 18.6 0.14C18.44 0.14 18.28 0.17 18.12 0.23C17.97 0.29 17.83 0.38 17.72 0.5L0.5 17.72C0.38 17.83 0.29 17.97 0.23 18.12C0.17 18.28 0.14 18.44 0.14 18.6C0.14 18.77 0.17 18.93 0.23 19.08C0.29 19.24 0.38 19.38 0.5 19.5L2.5 21.5C2.62 21.62 2.76 21.71 2.92 21.77C3.07 21.83 3.23 21.86 3.4 21.86C3.56 21.86 3.72 21.83 3.88 21.77C4.03 21.71 4.17 21.62 4.28 21.5L21.5 4.28C21.62 4.17 21.71 4.03 21.77 3.88C21.83 3.72 21.86 3.56 21.86 3.4C21.86 3.23 21.83 3.07 21.77 2.92C21.71 2.76 21.62 2.62 21.5 2.5Z" />
+  <path d="M13.5 5.5L16.5 8.5" />
+</symbol>
+
 </svg>

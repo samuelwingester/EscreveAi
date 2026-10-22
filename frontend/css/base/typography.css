@@ -123,6 +123,11 @@ select:invalid {
     color: var(--text-secondary)
 }
 
+.disabled {
+    color: var(--text-disabled);
+    font-weight: 200;
+}
+
 input:invalid {
     color: var(--text-secondary);
 }
