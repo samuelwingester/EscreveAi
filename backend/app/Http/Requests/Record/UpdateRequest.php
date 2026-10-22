@@ -6,30 +6,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Validator;
 
-class StoreRecordRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
-    public function authorize(): bool
-    {
-        return true;
-    }
-    
-    protected function prepareForValidation(): void
-    {
-        // Required fields normalization
-        $normalization = [];
-    }       
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'student_id'    => ['required', 'exists:students,id'],      
-            'activity_id'   => ['required', 'exists:activities,id'],         
-
             'attachments'   => ['nullable', 'array'],
             'attachments.*.url'     => ['nullable', 'url'],
             'attachments.*.file'    => ['nullable', 'file', File::types(['png', 'pdf', 'jpg'])]
@@ -39,7 +20,7 @@ class StoreRecordRequest extends FormRequest
     public function after(): array
     {
         return [
-            // Verifiva se somente um dos campos de file e url foram preenchidos
+            // Verifica se somente um dos campos de file e url foram preenchidos
             function ( Validator $validator ) {
                 foreach( $this->attachments ?? [] as $i => $attachment ){
 
