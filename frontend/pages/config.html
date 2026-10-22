@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
@@ -11,7 +11,6 @@
     <script type="module" src="../js/components/base/load.js"></script>
     <script type="module" src="../js/components/common/load.js"></script>
     <script type="module" src="../js/components/config/load.js"></script>
-
     <script type="module" src="../js/request/config.js" defer></script>
 </head>
 
@@ -22,17 +21,17 @@
                 <h1>Configurações</h1>
                 <h2>Personalize sua experiência</h2>
             </header>
+
             <div class="items">
+                <!-- Seção Conta -->
                 <div class="item" id="account">
                     <div class="content">
                         <header>
                             <div class="icon">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-user" stroke-width="8px"></use>
-                                </svg>
+                                <svg><use href="../assets/icons/sprite.svg#icon-user" stroke-width="8px"></use></svg>
                             </div>
                             <div class="text">
-                                <p class="subtitle">Minha Conta</p>
+                                <span class="subtitle">Minha Conta</span>
                                 <p>Gerencie suas informações pessoais e de acesso</p>
                             </div>
                         </header>
@@ -40,59 +39,54 @@
                             <div class="perfil">
                                 <div class="left">
                                     <div class="icon">
-                                        <svg>
-                                            <use href="../assets/icons/sprite.svg#icon-pencil"></use>
-                                        </svg>
+                                        <svg><use href="../assets/icons/sprite.svg#icon-pencil"></use></svg>
                                     </div>
                                     <div class="info">
                                         <p><b>João Pedro Bosco</b></p>
-                                        <p class="disabled">joaopedroprof@gmail.com</p>
+                                        <span class="body-small disabled">joaopedroprof@gmail.com</span>
                                     </div>
                                 </div>
-                                <div class="botao-largo" id="vazioBorda2">
+                                <button class="botao-largo" id="vazioBorda2" onclick="document.getElementById('edit-user-modal').showModal()">
                                     <p>Editar Perfil</p>
-                                </div>
+                                </button>
                             </div>
-                            <config-option title="Sair da conta" icon="logout" stroke="2" modal="edit-user"></config-option>
+                            <config-option title="Sair da conta" icon="logout" stroke="2"></config-option>
                         </div>
-                        <div class="botao-largo delete" id="vazioBorda2">
-                            <svg>
-                                <use href="../assets/icons/sprite.svg#icon-delete"></use>
-                            </svg>
-                            <p> Deletar Conta</p>
+                        <div class="botao-largo delete" onclick="document.getElementById('delete-user-modal').showModal()">
+                            <svg><use href="../assets/icons/sprite.svg#icon-delete"></use></svg>
+                            <p>Deletar Conta</p>
                         </div>
                     </div>
                 </div>
+
+                <!-- Seção Privacidade -->
                 <div class="item" id="privacity">
                     <div class="content">
                         <header>
                             <div class="icon">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-lock" stroke-width="2px"></use>
-                                </svg>
+                                <svg><use href="../assets/icons/sprite.svg#icon-lock" stroke-width="2px"></use></svg>
                             </div>
                             <div class="text">
-                                <p class="subtitle">Privacidade</p>
+                                <span class="subtitle">Privacidade</span>
                                 <p>Mantenha sua conta segura e protegida</p>
                             </div>
                         </header>
                         <div class="options">
-                            <config-option title="Alterar Senha" icon="key" stroke="2"></config-option>
-                            <config-option title="Autenticação em duas etapas" subtitle="Ultima alteração há 3 meses"
-                                icon="shield" stroke="2"></config-option>
+                            <config-option title="Alterar Senha" icon="key" stroke="2" modal="edit-password"></config-option>
+                            <config-option title="Autenticação em duas etapas" subtitle="Ultima alteração há 3 meses" icon="shield" stroke="2"></config-option>
                         </div>
                     </div>
                 </div>
+
+                <!-- Seção Sobre -->
                 <div class="item" id="about">
                     <div class="content">
                         <header>
                             <div class="icon">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-lock" stroke-width="2px"></use>
-                                </svg>
+                                <svg><use href="../assets/icons/sprite.svg#icon-lock" stroke-width="2px"></use></svg>
                             </div>
                             <div class="text">
-                                <p class="subtitle">Sobre</p>
+                                <span class="subtitle">Sobre</span>
                                 <p>Informações sobre o Escreve aí</p>
                             </div>
                         </header>
@@ -105,8 +99,105 @@
                 </div>
             </div>
         </div>
-        <dialog id="edit-user-modal" class="modal"></dialog>
-    </base-body>e4h
+
+        <dialog id="edit-user-modal" class="modal">
+            <div class="modal-body profile-modal">
+                <header class="modal-header-simple">
+                    <h3 class="title">Editar Perfil</h3>
+                    <p class="body-small">Atualize suas informações pessoais e preferências de acesso.</p>
+                </header>
+
+                <div class="avatar-upload">
+                    <div class="avatar-preview">
+                        <div class="camera-btn">
+                            <svg><use href="../assets/icons/sprite.svg#icon-camera"></use></svg>
+                        </div>
+                    </div>
+                    <span class="caption">Clique no ícone para alterar a foto</span>
+                </div>
+
+                <form class="form-grid">
+                    <div class="form-group">
+                        <label class="caption">Nome Completo</label>
+                        <icon-field icon="user" placeholder="Profª. Mariana Silva" value="Profª. Mariana Silva" stroke="6"></icon-field>
+                    </div>
+                    <div class="form-group">
+                        <label class="caption">E-mail</label>
+                        <icon-field icon="mail" placeholder="mariana.silva@escola.edu.br" value="mariana.silva@escola.edu.br"></icon-field>
+                    </div>
+                    <div class="form-group">
+                        <label class="caption">Data de Nascimento</label>
+                        <icon-field icon="calendar" type="date" value="1990-06-15"></icon-field>
+                    </div>
+                    <div class="form-group">
+                        <label class="caption">Gênero</label>
+                        <icon-field icon="gender" placeholder="Feminino" value="Feminino"></icon-field>
+                    </div>
+
+                    <div class="form-actions-stacked">
+                        <button type="submit" class="botao-largo">
+                            <svg><use href="../assets/icons/sprite.svg#icon-check"></use></svg>
+                            <p>Salvar Alterações</p>
+                        </button>
+                        <button type="button" class="btn-link" onclick="document.getElementById('edit-user-modal').close()">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="edit-password-modal" class="modal">
+            <div class="modal-body password-modal">
+                <header class="modal-header-with-close">
+                    <h3 class="title">Alterar Senha</h3>
+                    <button type="button" class="close-btn" onclick="document.getElementById('edit-password-modal').close()">
+                        <svg><use href="../assets/icons/sprite.svg#icon-x"></use></svg>
+                    </button>
+                </header>
+
+                <form class="form-vertical">
+                    <div class="form-group">
+                        <label class="caption">Senha Atual</label>
+                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true"></icon-field>
+                    </div>
+                    <div class="form-group">
+                        <label class="caption">Nova Senha</label>
+                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true"></icon-field>
+                        <span class="caption disabled">A senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número.</span>
+                    </div>
+                    <div class="form-group">
+                        <label class="caption">Confirmar Nova Senha</label>
+                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true"></icon-field>
+                    </div>
+
+                    <div class="modal-actions-inline">
+                        <button type="button" class="botao-largo" id="vazioBorda2" onclick="document.getElementById('edit-password-modal').close()">
+                            <p>Cancelar</p>
+                        </button>
+                        <button type="submit" class="botao-largo">
+                            <p>Salvar Alteração</p>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </dialog>
+
+        <dialog id="delete-user-modal" class="modal-confirmacao">
+            <div class="modal-content">
+                <h3 class="title">Tem certeza?</h3>
+                <p class="body-small">Esta ação não pode ser desfeita. Deseja mesmo continuar?</p>
+                <div class="modal-actions">
+                    <button type="button" class="botao-largo" id="vazioBorda2" onclick="document.getElementById('delete-user-modal').close()">
+                        <p>Cancelar</p>
+                    </button>
+                    <button type="button" id="btn-confirmar-delete" class="btn-danger">
+                        <p>Sim, tenho certeza</p>
+                    </button>
+                </div>
+            </div>
+        </dialog>
+    </base-body>
 </body>
 
 </html>

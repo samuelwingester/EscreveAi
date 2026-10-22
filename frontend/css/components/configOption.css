@@ -4,7 +4,7 @@ config-option>div {
     justify-content: space-between;
     width: 100%;
 
-    >svg {
+    svg {
         width: 20px;
         height: 20px;
         stroke-width: 1px;

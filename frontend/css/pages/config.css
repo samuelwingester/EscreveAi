@@ -5,15 +5,11 @@
     height: 100%;
     gap: 5px;
 
-    >header {
+    > header {
         display: flex;
         flex-direction: column;
         width: 100%;
         gap: 4px;
-
-        h1 {
-            color: var(--text-primary);
-        }
 
         h2 {
             font-weight: 400;
@@ -26,7 +22,7 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1.5fr 1fr;
         width: 100%;
-        gap: 16px;
+        gap: 12px;
         flex-grow: 1;
         height: 0;
 
@@ -38,29 +34,25 @@
             background-color: var(--text-white);
             overflow: hidden;
 
-
             .content {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 width: 100%;
                 height: 100%;
                 padding: 10px;
                 gap: 15px;
 
-                .options{
+                .options {
                     display: flex;
                     flex-flow: column;
                     gap: 12px;
                     flex-grow: 1;
-                }
-
-                .subtitle {
-                    font-weight: 600;
-                    color: var(--text-color);
+                    width: 100%;
                 }
 
                 .left,
-                >header {
+                > header {
                     display: flex;
                     align-items: center;
                     width: 100%;
@@ -87,24 +79,6 @@
                         display: flex;
                         flex-direction: column;
                         gap: 2px;
-                        .disabled{
-                            color: black;
-                            font-size: 14px;
-                        }
-                    }
-                }
-
-                header {
-                    display: flex;
-                    align-items: center;
-                    width: 100%;
-                    .icon {
-                        background-color: var(--purple-light);
-
-                        svg {
-                            color: var(--purple-dark);
-                            stroke: var(--purple-dark);
-                        }
                     }
                 }
 
@@ -116,21 +90,13 @@
                     gap: 12px;
 
                     .botao-largo {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
                         height: 80%;
                         padding: 8px 16px;
                         border: 1px solid var(--purple);
-                        border-radius: 8px;
+                        background-color: transparent;
                         white-space: nowrap;
-                        cursor: pointer;
-                        transition: all 0.2s ease;
-
-                        &:hover {
-                            background-color: var(--gray-200) !important;
-                            transform: none;
-                        }
+                        p { color: var(--purple); }
+                        &:hover { background-color: var(--gray-200) !important; transform: none; }
                     }
                 }
 
@@ -139,16 +105,16 @@
                     align-items: center;
                     justify-content: center;
                     gap: 8px;
-                    width: 100%;
+                    width: 95%;
                     padding: 5px 10px;
                     border: solid 1px var(--red) !important;
                     border-radius: 8px;
                     cursor: pointer;
                     transition: 0.3s;
                     margin-top: auto;
+                    background-color: transparent;
 
-                    p,
-                    svg {
+                    p, svg {
                         color: var(--red) !important;
                         stroke: var(--red);
                     }
@@ -160,75 +126,50 @@
             }
         }
 
-        #privacity, #about{
-            config-option:last-of-type{
+        /* Cores dos ícones dos cards e estrutura específica */
+        #account {
+            config-option:last-of-type {
                 border-bottom: solid 1px var(--gray-400);
                 padding-bottom: 10px;
             }
 
-            config-option:first-of-type, .perfil{
+            &:first-child,
+            .perfil {
                 border-top: solid 1px var(--gray-400);
                 padding-top: 10px;
             }
-        }
-        #account{
-            config-option:last-of-type{
-                border-bottom: solid 1px var(--gray-400);
-                padding-bottom: 10px;
-            }
 
-            &:first-child, .perfil{
-                border-top: solid 1px var(--gray-400);
-                padding-top: 10px;
+            .content header .icon {
+                background-color: var(--purple-light);
+                svg { color: var(--purple-dark); }
             }
         }
 
-        #privacity {
-            .content {
-                header {
-                    .icon {
-                        background-color: var(--green-soft);
+        #privacity .content header .icon { 
+            background-color: var(--green-light); 
+            svg { color: var(--green-dark); } 
+        }
 
-                        svg {
-                            color: var(--green-dark);
-                        }
-                    }
+        #about .content header .icon { 
+            background-color: var(--blue-light); 
+            svg { color: var(--blue-dark); } 
+        }
+
+        /* Bordas entre opções de privacidade e sobre */
+        #privacity, #about {
+            config-option:last-of-type { border-bottom: solid 1px var(--gray-400); padding-bottom: 10px; }
+            config-option:first-of-type { border-top: solid 1px var(--gray-400); padding-top: 10px; }
+        }
+
+        #about {
+            .content config-option {
+                .config-option {
+                    width: max-content;
+                    > svg { margin-left: 20px; }
                 }
-
-            }
-        }
-
-        #about{
-            .content {
-                header {
-                    .icon {
-                        background-color: var(--blue-soft);
-
-                        svg {
-                            color: var(--blue-dark);
-                        }
-                    }
-                }
-
-                config-option{
-                    .config-option{
-                        width: max-content;
-                        
-                        >svg{margin-left: 20px;
-                        }
-                        
-                    }
-    
-                    &:last-child{
-                        border-bottom: none;
-                        .config-option{
-                            
-                            >svg{
-                                display: none;
-                            }
-                        }
-                       
-                    }
+                &:last-child {
+                    border-bottom: none;
+                    .config-option > svg { display: none; }
                 }
             }
         }
@@ -237,9 +178,164 @@
             grid-column: span 2;
         }
     }
-    .modal{
-        background-color: red;
-        width: 100%;
-        height: 100%;
+}
+
+
+dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 50%;
+    min-width: 320px;
+    max-width: 600px;
+    border: none;
+    border-radius: 16px;
+    padding: 0;
+    background-color: var(--text-white, #ffffff);
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.15);
+
+    &::backdrop {
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(2px);
     }
+}
+
+.modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-header-simple {
+    text-align: center;
+    .subtitle-text { margin-top: 4px; }
+}
+
+.modal-header-with-close {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .close-btn {
+        background: none;
+        border: none;
+        cursor: pointer;
+        svg { width: 20px; height: 20px; color: var(--text-muted); }
+    }
+}
+
+/* Upload de Avatar */
+.avatar-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+
+    .avatar-preview {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background-color: var(--purple-soft, #e0d7f5);
+        background-size: cover;
+
+        .camera-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: var(--purple, #6c5ce7);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            svg { width: 14px; height: 14px; color: white; stroke-width: 5px; }
+        }
+    }
+}
+
+/* Formulários nos Modais */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* Ações dos Modais */
+.modal-actions-inline {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.form-actions-stacked {
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+
+    .botao-largo {
+        width: 100%;
+        svg { width: 18px; height: 18px; stroke-width: 10px; }
+    }
+
+    .btn-link {
+        background: none;
+        border: none;
+        color: var(--purple, #6c5ce7);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+
+.modal-confirmacao .modal-content {
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .modal-actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 12px;
+    }
+}
+
+.btn-danger {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: var(--red, #e74c3c);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    p { color: white; margin: 0; }
 }

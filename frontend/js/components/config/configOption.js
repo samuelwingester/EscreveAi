@@ -53,7 +53,7 @@ export class ConfigOption extends HTMLElement {
                         <p class="disabled"></p>
                     </div>
                 </div>
-                <div class="modal-indicator">
+                <div class="modal-indicator" role="button" tabindex="0">
                     <svg>
                         <use href="../assets/icons/sprite.svg#icon-dropdown-right"></use>
                     </svg>
@@ -73,10 +73,19 @@ export class ConfigOption extends HTMLElement {
         this.renderStroke();
         this.renderModal();
 
+        // Clique geral no componente (apenas dispara o CustomEvent)
         this.querySelector('.config-option').addEventListener('click', (event) => this.handleClick(event));
+
+        // Clique exclusivo na seta (abre o modal)
+        if (this.modalElement) {
+            this.modalElement.addEventListener('click', (event) => this.handleArrowClick(event));
+        }
     }
 
-    handleClick(event) {
+    handleArrowClick(event) {
+        // Evita que o evento de clique na seta se propague para o container pai
+        event.stopPropagation();
+
         if (this.modal) {
             const targetModal = document.getElementById(`${this.modal}-modal`);
             if (targetModal && typeof targetModal.showModal === 'function') {
@@ -84,6 +93,14 @@ export class ConfigOption extends HTMLElement {
             }
         }
 
+        this.dispatchEvent(new CustomEvent('config-modal-open', {
+            bubbles: true,
+            composed: true,
+            detail: { id: this.id, modal: this.modal }
+        }));
+    }
+
+    handleClick(event) {
         this.dispatchEvent(new CustomEvent('config-click', {
             bubbles: true,
             composed: true,
@@ -118,7 +135,7 @@ export class ConfigOption extends HTMLElement {
 
     renderModal() {
         if (this.modalElement) {
-            this.modalElement.style.display = this.modal ? 'block' : 'none';
+            this.modalElement.style.display = 'block';
         }
     }
 }
