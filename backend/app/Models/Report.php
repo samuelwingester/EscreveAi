@@ -2,24 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Contracts\HasAttachmentsContract;
+use App\Models\Traits\HasAttachments;
 use App\Models\Student;
-use App\Models\Attachment;
 
-class Report extends Model
+class Report extends Model implements HasAttachmentsContract
 {
     use HasFactory;
+    use HasAttachments;
 
     protected $table = 'reports';
 
     protected $fillable = [
         'student_id',
-        'teacher_id',
         'start_date',
         'end_date',
     ];
@@ -37,17 +37,12 @@ class Report extends Model
     //--------------------------------------------------------
     public function student(): BelongsTo
     {
-        return $this->belongsTo( Student::class, 'student_id' ); 
+        return $this->belongsTo( Student::class, 'student_id' );
     }
 
-    public function analyses()
+    public function analysis()
     {
         return; // implementar depois. um pouco mais chato
-    }
-
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany( Attachment::class, 'attachable' );
     }
     //--------------------------------------------------------
 }

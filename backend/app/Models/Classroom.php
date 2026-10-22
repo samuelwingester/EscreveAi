@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Database\Factories\ClassroomFactory;
 
 use App\Policies\ClassroomPolicy;
+use App\Models\Traits\AppliesQueryOptions;
 use App\Models\Enums\Shift;
 use App\Models\Activity;
 use App\Models\Student;
@@ -21,6 +22,7 @@ class Classroom extends Model
 {
     /** @use HasFactory<ClassroomFactory> */
     use HasFactory;
+    use AppliesQueryOptions;
 
     protected $table = 'classes';
 
@@ -43,7 +45,7 @@ class Classroom extends Model
 
     public function user() : BelongsTo
     {
-        return $this->belongsTo( User::class, 'teacher_id' ); // aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        return $this->belongsTo( User::class, 'teacher_id' ); //???
     }
 
     public function students() : HasMany

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Database\Factories\StudentFactory;
 
+use App\Models\Traits\AppliesQueryOptions;
 use App\Models\Enums\WritingLevel;
 use App\Models\Classroom;
 use App\Models\Report;
@@ -18,6 +19,7 @@ class Student extends Model
 {
     /** @use HasFactory<StudentFactory> */
     use HasFactory;
+    use AppliesQueryOptions;
 
     protected $table = 'students';
 
@@ -26,6 +28,7 @@ class Student extends Model
         'name',
         'writing_level',
         'observations',
+        'birth_date'
     ];
 
      /** @return array<string, string> */

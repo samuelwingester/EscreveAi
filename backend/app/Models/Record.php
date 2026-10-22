@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Contracts\HasAttachmentsContract;
+use App\Models\Traits\HasAttachments;
 use App\Models\Student;
 use App\Models\Activity;
 use App\Models\Analysis;
-use App\Models\Attachment;
 
-class Record extends Model
+class Record extends Model implements HasAttachmentsContract
 {
     use HasFactory;
+    use HasAttachments;
 
     protected $table = 'records';
 
@@ -41,11 +41,6 @@ class Record extends Model
     public function analysis(): HasOne
     {
         return $this->hasOne( Analysis::class );
-    }
-
-    public function attachments(): MorphMany
-    {
-        return $this->morphMany(Attachment::class, 'attachable');
     }
     //--------------------------------------------------------
 }
