@@ -8,7 +8,7 @@ services:
       - "8081:8080"
       - "81:80"
     networks:
-      - dev-network
+      - backend-network
     depends_on:
       php-fpm:
         condition: service_started
@@ -33,10 +33,11 @@ services:
     volumes:
       - ./backend/:/var/www/api
     networks:
-      - dev-network
+      - backend-network
+      - database-network
     depends_on:
       database:
-        condition: service_started  
+        condition: service_started
 
   database:
     image: mysql:9.7
@@ -45,11 +46,11 @@ services:
       - "3307:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=laravel 
+      - MYSQL_DATABASE=laravel
     volumes:
       - database-volume-dev:/var/lib/mysql
     networks:
-      - dev-network
+      - database-network
 
 volumes:
   database-volume-dev:
@@ -57,4 +58,7 @@ volumes:
     external: false
 
 networks:
-  dev-network:
+  database-network:
+    driver: bridge
+  backend-network:
+    driver: bridge
