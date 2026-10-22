@@ -2,9 +2,11 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
+
+use App\Repositories\Query\QueryOptions;
 
 abstract class PaginatedCollection extends ResourceCollection
 {
@@ -13,14 +15,19 @@ abstract class PaginatedCollection extends ResourceCollection
 
     public static $wrap = '';
 
+    protected int $limit;
+    protected int $offset;
+
     public function __construct(
         $resource,
         private int $total,
         private int $count,
-        private int $limit,
-        private int $offset
+        QueryOptions $options,
     ){
         parent::__construct( $resource );
+
+        $this->limit = $options->limit;
+        $this->offset = $options->offset;
     }
 
     /** @return array<string, mixed> */
