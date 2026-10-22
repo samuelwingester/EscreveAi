@@ -21,6 +21,9 @@ export class ConfigOption extends HTMLElement {
     get id() { return this.getAttribute('id') || null; }
     set id(value) { return this.setAttribute('id', value); }
 
+    get arrow() { return this.getAttribute('arrow') || 'dropdown-right'; }
+    set arrow(value) { return this.setAttribute('arrow', value); }
+
     connectedCallback() {
         this.render();
         this.initialized = true;
@@ -55,7 +58,7 @@ export class ConfigOption extends HTMLElement {
                 </div>
                 <div class="modal-indicator" role="button" tabindex="0">
                     <svg>
-                        <use href="../assets/icons/sprite.svg#icon-dropdown-right"></use>
+                        <use href="../assets/icons/sprite.svg#icon-${this.arrow}"></use>
                     </svg>
                 </div>
             </div>
@@ -138,4 +141,5 @@ export class ConfigOption extends HTMLElement {
             this.modalElement.style.display = 'block';
         }
     }
+
 }

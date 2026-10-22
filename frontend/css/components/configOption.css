@@ -18,4 +18,8 @@ config-option>div {
         font-size: 14px !important;
         font-weight: 200;
     }
+    .modal-indicator{
+        display: flex;
+        align-items: center;
+    }
 }

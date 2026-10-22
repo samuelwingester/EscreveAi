@@ -165,11 +165,12 @@
             .content config-option {
                 .config-option {
                     width: max-content;
-                    > svg { margin-left: 20px; }
+                    align-items: center;
+                    .modal-indicator svg { margin-left: 10px; }
                 }
                 &:last-child {
                     border-bottom: none;
-                    .config-option > svg { display: none; }
+                    .config-option .modal-indicator svg { display: none; }
                 }
             }
         }
