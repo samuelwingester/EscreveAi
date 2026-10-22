@@ -51,6 +51,6 @@ class User extends Authenticatable
 
     public function classes() : HasMany
     {
-        return $this->hasMany( Classroom::class );
+        return $this->hasMany( Classroom::class, 'teacher_id' );
     }
 }

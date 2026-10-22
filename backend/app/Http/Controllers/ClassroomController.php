@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/**
+ * TO DO:
+ * - Adicionar rota de sumario -> calcular estatisticas como numero de estudantes,
+ *   atividades, etc. para todas as turmas de um usuario.
+ */
+
 use Illuminate\Http\Response;
 
 use App\Http\Resources\Classroom\ClassroomStatsResource;
 use App\Http\Resources\Classroom\ClassroomCollection;
 use App\Http\Resources\Classroom\ClassroomResource;
+
 use App\Http\Requests\Classroom\StoreRequest;
 use App\Http\Requests\Classroom\UpdateRequest;
 use App\Http\Requests\Classroom\ListRequest;
+
 use App\Http\Controllers\Controller;
 
+use App\Services\Classroom\GenerateStatsService;
 use App\Services\Classroom\StoreService;
 use App\Services\Classroom\UpdateService;
-use App\Services\Classroom\DataService;
+use App\Services\Classroom\DeleteService;
+use App\Services\Classroom\ListService;
 
 use App\Models\Classroom;
 
@@ -24,20 +33,20 @@ class ClassroomController extends Controller
     public function __construct(
         protected StoreService $store,
         protected UpdateService $update,
-        protected DataService $data
+        protected DeleteService $delete,
+        protected ListService $list,
+        protected GenerateStatsService $stats,
     ) {}
 
     public function index( ListRequest $request ) : ClassroomCollection
     {
-        $options = $request->validated();
+        $options = $request->getQueryOptions();
 
-        $columns = $options['columns'];
+        $columns = $request->safe()->only('fields')['fields'];
 
-        unset( $options['columns'] ); // Não e necessario, mas e bom fazer isso;
+        $data = $this->list->execute( $request->user()->id, $options, $columns );
 
-        $data = $this->data->list( $request->user(), $options, $columns );
-
-        return new ClassroomCollection( $data['data'], $data['total'], $data['count'], $options['limit'], $options['offset'] );
+        return new ClassroomCollection( $data['data'], $data['total'], $data['count'], $options );
     }
 
     public function store( StoreRequest $request ) : ClassroomResource
@@ -47,7 +56,7 @@ class ClassroomController extends Controller
         return new ClassroomResource( $classroom );
     }
 
-    public function show( Request $request, Classroom $classroom ) : ClassroomResource
+    public function show( Classroom $classroom ) : ClassroomResource
     {
         $this->authorize( 'view', $classroom );
 
@@ -58,7 +67,7 @@ class ClassroomController extends Controller
     {
         $this->authorize( 'update', $classroom );
 
-        $this->update->execute( $classroom, $request->validated() );
+        $classroom = $this->update->execute( $classroom, $request->validated() );
 
         return new ClassroomResource( $classroom );
     }
@@ -67,7 +76,7 @@ class ClassroomController extends Controller
     {
         $this->authorize( 'delete', $classroom );
 
-        $classroom->deleteOrFail(); // Mudar depois.
+        $this->delete->execute( $classroom );
 
         return response()->noContent( 204 );
     }
@@ -76,7 +85,7 @@ class ClassroomController extends Controller
     {
         $this->authorize( 'view', $classroom );
 
-        $data = $this->data->generateStats( $classroom );
+        $data = $this->stats->generate( $classroom->id );
 
         return new ClassroomStatsResource( $classroom, $data );
     }

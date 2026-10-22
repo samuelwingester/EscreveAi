@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Record;
 
-use App\Http\Requests\Record\StoreRecordRequest as StoreRequest;
-use App\Http\Requests\Record\UpdateRecordRequest as UpdateRequest;
+use App\Http\Requests\Record\StoreRequest;
+use App\Http\Requests\Record\UpdateRequest;
 
 use App\Service\Record\StoreRecordService as StoreService;
 use App\Service\Record\UpdateRecordService as UpdateService;

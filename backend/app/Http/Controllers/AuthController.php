@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * TO DO:
+ * - Adicionar rota de deletar usuario
+ */
+
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
@@ -48,13 +53,13 @@ class AuthController extends Controller
 
     public function user( Request $request ) : UserResource
     {
-        return ( new UserResource( $request->user() ) );
+        return new UserResource( $request->user() );
     }
 
     private function tokenResponse( User $user, string $agent ) : UserResource
     {
         $token = $this->token->create( $user, $agent );
 
-        return ( new UserResource( $user ) )->additional( [ 'token' => $token ] );
+        return new UserResource( $user )->additional( [ 'token' => $token ] );
     }
 }

@@ -2,18 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Repositories\Contracts\StudentRepositoryInterface;
+use Illuminate\Support\Collection;
 
-use App\Repositories\Repository;
-
+use App\Repositories\Query\QueryOptions;
 use App\Models\Student;
 
-class StudentRepository extends Repository implements StudentRepositoryInterface
+class StudentRepository
 {
-    protected string $modelClass = Student::class;
 
-    function getByClassroom(int|string $id)
-    {
-        return $this->getWhere( [ 'classroom_id' => $id ], [ 'id', 'name', 'writing_level' ] );
-    }
 }

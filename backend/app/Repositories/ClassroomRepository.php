@@ -4,37 +4,12 @@ namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
 
-use App\Repositories\Contracts\ClassroomRepositoryInterface;
-use App\Repositories\Query\Contracts\QueryOptionsInterface;
-
-use App\Repositories\Repository;
-use App\Models\Classroom;
-use App\Repositories\Query\QueryOptions;
-
-class ClassroomRepository extends Repository implements ClassroomRepositoryInterface
+class ClassroomRepository
 {
-    protected string $modelClass = Classroom::class;
-
-    public function getByTeacher( int|string $id, array $filters = [], array $columns = ["*"], ?QueryOptionsInterface $options = null )
-    {
-        $filters[] = ["teacher_id", "=", $id];
-
-        if ( !$options ) $options = new QueryOptions();
-
-        $builder = DB::table( "classes" )->where( $filters );
-
-        $builder = $builder->orderBy( $options->orderBy, $options->direction );
-
-        if ( $options->limit > 0 ) $builder = $builder->limit( $options->limit );
-        if ( $options->offset > 0 ) $builder = $builder->offset( $options->offset );
-
-        return $builder->get( $columns );
-    }
-
     public function getByTeacherWithStudents( int|string $id )
     {
         return DB::table( "classes" )
-            ->leftJoin( "students", "classes.id", "=", "students.class_id" )
+            ->leftJoin( "students", "classes.id", "=", "students.classroom_id" )
             ->where( "classes.teacher_id", $id )
             ->groupBy( "classes.id", "classes.name", "classes.shift" )
             ->get([ "classes.id", "classes.name", "classes.shift", DB::raw( "COUNT(students.id) as students" ) ]);
@@ -42,8 +17,7 @@ class ClassroomRepository extends Repository implements ClassroomRepositoryInter
 
     public function getStats( int|string $id )
     {
-        // Melhorar isso depois funciona mas e feio;
-        return DB::selectOne("
+        return (array) DB::selectOne("
             SELECT
                 COUNT( DISTINCT stu.id ) as students,
                 COUNT( DISTINCT act.id ) as activities,
