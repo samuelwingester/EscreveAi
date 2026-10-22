@@ -2,42 +2,26 @@
 
 namespace App\Http\Requests\Activity;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Validator;
+use Illuminate\Support\Str;
 
-class UpdateActivityRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
     protected function prepareForValidation(): void
     {
-        // Required fields normalization
         $normalization = [];
 
-        // optional field normalization
-        if ( $this->filled( 'title' ) ) 
+        if ( $this->filled( 'title' ) )
             $normalization['title'] = Str::ucwords( Str::squish( $this->title ) );
 
-        if ( $this->filled( 'description' ) ) 
+        if ( $this->filled( 'description' ) )
             $normalization['description'] = Str::trim( $this->description );
-        
-        $this->merge( $normalization );
-    }     
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
+        $this->merge( $normalization );
+    }
+
     public function rules(): array
     {
         return [
@@ -55,7 +39,7 @@ class UpdateActivityRequest extends FormRequest
     {
         return [
             // Verifica se somente um dos campos de file e url foram preenchidos
-            // NOTA: Colocar essa validação em uma classe apropriada depois 
+            // NOTA: Colocar essa validação em uma classe apropriada depois
             function ( Validator $validator ) {
                 foreach( $this->attachments ?? [] as $i => $attachment ){
 

@@ -2,25 +2,18 @@
 
 namespace App\Http\Requests\Activity;
 
-use Illuminate\Contracts\Validation\ValidationRule;
+/**
+ * TO DO:
+ * - Criar um Regra separada para anexos
+ */
+
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\File;
 use Illuminate\Validation\Validator;
+use Illuminate\Support\Str;
 
-class StoreActivityRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return true;
-    }
-
-    /**
-     * Prepare the data for validation.
-     */
     protected function prepareForValidation(): void
     {
         // Required fields normalization
@@ -30,17 +23,11 @@ class StoreActivityRequest extends FormRequest
         ];
 
         $this->merge( $normalization );
-    }  
+    }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            'class_id'      => ['required', 'integer', 'exists:classes,id'], //NT: provavelment desnecessario
             'title'         => ['required', 'string', 'max:100'],
             'description'   => ['required', 'string'],
 
@@ -54,7 +41,7 @@ class StoreActivityRequest extends FormRequest
     public function after(): array
     {
         return [
-            // Verifiva se somente um dos campos de file e url foram preenchidos
+            // Verifica se somente um dos campos de file e url foram preenchidos
             function ( Validator $validator ) {
                 foreach( $this->attachments ?? [] as $i => $attachment ){
 
@@ -62,10 +49,10 @@ class StoreActivityRequest extends FormRequest
                     $hasFile = !empty($attachment['file']);
 
                     if ( $hasUrl && $hasFile )
-                        $validator->errors()->add( "attachments.$i", 'envie somente um arquivo o link por anexo' );
+                        $validator->errors()->add( "attachments.$i", 'envie somente um arquivo ou link por anexo' );
 
                     else if ( !$hasUrl && !$hasFile )
-                        $validator->errors()->add( "attachments.$i", 'envie algo no anexo um arquivo ou link' );
+                        $validator->errors()->add( "attachments.$i", 'envie algo no anexo, um arquivo ou link' );
                 }
             }
         ];
