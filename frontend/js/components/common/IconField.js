@@ -26,7 +26,7 @@ export class IconField extends HTMLElement {
             ${hasEye ? `
               <span class="toggle-eye" style="cursor: pointer;">
                 <svg class="eye-icon" style="stroke-width: 2px;">
-                  <use href="../assets/icons/spffffrite.svg#icon-eye"></use>
+                  <use href="../assets/icons/sprite.svg#icon-eye"></use>
                 </svg>
               </span>
             ` : ''}

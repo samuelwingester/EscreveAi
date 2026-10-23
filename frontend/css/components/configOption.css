@@ -4,7 +4,7 @@ config-option>div {
     justify-content: space-between;
     width: 100%;
 
-    >svg {
+    svg {
         width: 20px;
         height: 20px;
         stroke-width: 1px;
@@ -17,5 +17,9 @@ config-option>div {
         color: var(--text-disabled) !important;
         font-size: 14px !important;
         font-weight: 200;
+    }
+    .modal-indicator{
+        display: flex;
+        align-items: center;
     }
 }
