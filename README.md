@@ -32,6 +32,9 @@ O escreveaí é uma plataforma desenvolvida para auxiliar professores e institui
  * Deletar estudantes. 
  * Listar estudantes.
 
+ * Criar Atividades.
+ * Listar Atividades. 
+
 ## Stack Utilizada
 
 ### Frontend
