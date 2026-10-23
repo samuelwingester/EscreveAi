@@ -1,4 +1,4 @@
-export class Class extends HTMLElement {
+export class ClassroomCard extends HTMLElement {
   static observedAttributes = [ 'color', 'name', 'students', 'shift' ];
 
   initialized = false;
@@ -15,8 +15,8 @@ export class Class extends HTMLElement {
   get shift() { return this.getAttribute('shift') || 'Turno não informado'; }
   set shift(value) { this.setAttribute('shift', value); }
 
-  get id() { return this.getAttribute('id') || null; }
-  set id(value) { return this.setAttribute('id', value); }
+  get classroom_id() { return this.getAttribute('classroom_id') || null; }
+  set classroom_id(value) { return this.setAttribute('classroom_id', value); }
 
   connectedCallback(){ this.render(); this.initialized = true; }
 
@@ -101,11 +101,20 @@ export class Class extends HTMLElement {
   }
 
   delete() {
-    this.dispatchEvent(new CustomEvent('classroom-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
+    this.dispatchEvent(
+      new CustomEvent('classroom-delete', {
+        bubbles: true, composed: true, detail: { id: this.classroom_id }
+      })
+    );
   }
 
   edit() {
-    this.dispatchEvent(new CustomEvent('classroom-edit', { bubbles: true, composed: true, detail: { id: this.id } }));
+    console.log(this.classroom_id)
+    this.dispatchEvent(
+      new CustomEvent('classroom-edit', {
+        bubbles: true, composed: true, detail: { id: this.classroom_id }
+      })
+    );
   }
 
   renderName(){ this.nameElement.textContent = this.name; }

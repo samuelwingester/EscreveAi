@@ -45,10 +45,49 @@ export function getSelectedClassroom() {
 
   if ( !data ) { return null; }
 
-  const classroom = Object.entries( data ).find( ([id]) => id == selected );
+  const classroom = Object.entries( data ).find( ([classroom_id]) => classroom_id == selected );
 
   if ( !classroom ) { return null; }
-  
-  const [id, name] = classroom;
-  return {id, name};
+
+  const [classroom_id, name] = classroom;
+  return {classroom_id, name};
+}
+
+export function formatDateLong(date) {
+    if (!date) return "";
+
+    return new Date(date).toLocaleDateString("pt-BR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        timeZone: "America/Sao_Paulo",
+    });
+}
+
+export function formatDateNumeric(date) {
+    if (!date) return "";
+
+    return new Date(date).toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        timeZone: "America/Sao_Paulo",
+    });
+}
+
+// Mostra/limpa o erro no banner do próprio formulário (a página tem vários modais,
+// então o util.showError, que usa o primeiro banner da página, não serve aqui).
+ //codigo kaique, melhor aqui
+export function showFormError( form, html ) {
+  const banner = form.querySelector( '.error-banner' );
+
+  banner.innerHTML = html;
+  banner.hidden = false;
+}
+
+export function clearFormError( form ) {
+  const banner = form.querySelector( '.error-banner' );
+
+  banner.innerHTML = '';
+  banner.hidden = true;
 }

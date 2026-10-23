@@ -11,7 +11,7 @@ class StudentResource extends BaseResource
     public static $wrap = 'student';
 
     /** @return array<string, mixed> */
-    public function toArray( Request $request ): array
+    public function toResource( Request $request ): array
     {
         return [
             'id'            => $this->whenExists('id'),

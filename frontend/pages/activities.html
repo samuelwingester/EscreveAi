@@ -12,7 +12,7 @@
     <script type="module" src="../js/components/activities/load.js"></script>
     <script type="module" src="../js/components/common/load.js"></script>
 
-    <script type="module" src="../js/request/base.js" defer></script>
+    <script type="module" src="../js/request/activities.js" defer></script>
 </head>
 
 <body>
@@ -33,28 +33,7 @@
             </div>
         </header>
 
-        <div class="activities">
-            <activity-card title="Nome da Atividade"
-                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
-                date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
-            </activity-card>
-            <activity-card title="Nome da Atividade"
-                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
-                date="67 de Maio de 2022" img-src="../imgs/activities/IMG.png">
-            </activity-card>
-            <activity-card title="Nome da Atividade"
-                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
-                date="20 de Junho de 2026" img-src="../imgs/activities/IMG.png">
-            </activity-card>
-            <activity-card title="Nome da Atividade"
-                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
-                date="12 de Junho de 2026" img-src="../imgs/activities/IMG.png">
-            </activity-card>
-            <activity-card title="Nome da Atividade"
-                description="Os alunos escreveram os nomes das frutas observando as imagens." img-count="7"
-                date="2 de Julho de 2025" img-src="../imgs/activities/IMG.png">
-            </activity-card>
-        </div>
+        <div class="activities" id="activities-card-container"></div>
 
         <dialog id="activity-modal" class="modal">
             <div class="add">
@@ -70,13 +49,13 @@
                         <h2>INFORMAÇÕES DA ATIVIDADE</h2>
                         <div class="line"></div>
                     </div>
-                    <form action="#">
+                    <form action="#" id="new-activity-form">
                         <common-field label="Nome da Atividade" input_id="form-activity-name"
-                            placeholder="Escreva o nome da atividade..." size="field">
+                            placeholder="Escreva o nome da atividade..." size="field", name="title">
                         </common-field>
 
                         <common-field label="Descrição" input_id="form-activity-description"
-                            placeholder="Descreva brevemente a atividade..." size="field">
+                            placeholder="Descreva brevemente a atividade..." size="field", name="description">
                         </common-field>
 
                         <div class="upload">
@@ -85,19 +64,17 @@
                                     <use href="../assets/icons/sprite.svg#icon-file-upload"></use>
                                 </svg>
                                 <p>Arraste um arquivo ou clique aqui para enviar</p>
-                                <p>PDF, JPG ou PNG • Máx. 10 MB</p>
+                                <p>Documento ou Imagem • Máx. 10 MB</p>
                                 <button class="botao-largo">
                                     <svg>
                                         <use href="../assets/icons/sprite.svg#icon-save"></use>
                                     </svg>
-                                    <input type="file" name="" id="">
+                                    <input id="input-files" type="file" name="attachments" multiple accept=".pdf,.doc,.docx,.pdf,.png,.jpg">
                                 </button>
                             </div>
                         </div>
-
+                        <div id="login-error" class="error-banner" hidden></div>
                         <div class="botoes">
-                            <button type="button"
-                                onclick="document.getElementById('activity-modal').close()">Cancelar</button>
                             <button class="botao-largo" type="submit">
                                 <svg>
                                     <use href="../assets/icons/sprite.svg#icon-save"></use>

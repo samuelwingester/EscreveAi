@@ -20,7 +20,7 @@ class Attachment extends Model
         'file_extension',
         'file_path',
         'disk_type',
-        'storage_type',
+        'storage_type', // Parando pra pensar esse nome e ruim. tenho que trocar
     ];
 
     protected function casts(): array

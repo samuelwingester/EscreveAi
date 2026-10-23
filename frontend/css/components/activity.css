@@ -30,7 +30,7 @@ activity-card {
         max-width: 40%;
         gap: 10px;
 
-        .img-count {
+        .file-count {
           display: flex;
           align-items: center;
           gap: 6px;

@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Resources;
-
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Request;
 
+use Illuminate\Database\Eloquent\Model;
+
+use App\Models\Contracts\HasAttachmentsContract;
 use App\Repositories\Query\QueryOptions;
 
 abstract class PaginatedCollection extends ResourceCollection

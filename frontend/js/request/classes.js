@@ -20,7 +20,7 @@ function loadClassroomCards(){
 
       newCard.name = element.name;
       newCard.shift = shift;
-      newCard.id = element.id;
+      newCard.classroom_id = element.id;
 
       //newCard.students = element.students; -> Reimplementar depois
 
@@ -159,6 +159,7 @@ document.addEventListener( 'classroom-edit', function(e){
       return response.json();
     })
     .then( data => {
+      data = data.classroom;
       nameInput.value = data.name;
       shiftInput.value = data.shift;
       classEditModal.showModal();

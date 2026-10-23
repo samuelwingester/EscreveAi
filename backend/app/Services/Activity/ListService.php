@@ -15,7 +15,8 @@ class ListService
 
         $total = $query->count();
 
-        $data = $query->applyOptions( $options )->get( $columns );
+        // with provavelmente vai ser temporario, devo colocar um if pra decidir se carrega ou não a relação
+        $data = $query->with( 'attachments' )->applyOptions( $options )->get( $columns );
 
         return [ "data" => $data, "total" => $total, "count" => $data->count() ];
 	}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 /**
  * TO DO
  * - Criar um controller de Anexos para visualização e remoção
+ * - adicionar carregamento de relacionamento condicional no ListService
  */
 use App\Http\Resources\Activity\ActivityCollection;
 use App\Http\Resources\Activity\ActivityResource;
@@ -22,6 +23,8 @@ use App\Services\Activity\DeleteService;
 
 use App\Models\Activity;
 use App\Models\Classroom;
+
+use Illuminate\Support\Facades\Log;
 
 class ActivityController extends Controller
 {
@@ -49,16 +52,18 @@ class ActivityController extends Controller
     {
         $this->authorize( 'update', $classroom );
 
+        Log::info($request->validated());
+
         $activity = $this->store->execute( $classroom, $request->validated() );
 
-        return new ActivityResource( $activity )->loadAttachments();
+        return new ActivityResource( $activity->load( 'attachments' ) );
     }
 
     public function show( Classroom $classroom, Activity $activity )
     {
         $this->authorize( 'view', $classroom );
 
-        return new ActivityResource( $activity )->loadAttachments();
+        return new ActivityResource( $activity->load( 'attachments' ) );
     }
 
     public function update( UpdateRequest $request, Classroom $classroom, Activity $activity )
@@ -67,7 +72,7 @@ class ActivityController extends Controller
 
         $activity = $this->update->execute( $activity, $request->validated() );
 
-        return new ActivityResource( $activity )->loadAttachments();
+        return new ActivityResource( $activity->load( 'attachments' ) );
     }
 
     public function destroy( Classroom $classroom, Activity $activity )

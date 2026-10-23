@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->insertTestUserData();
-        $this->command->newLine(4);
+        $this->command->newLine(1);
         //---------------------------------------------------------
         // Teacher Seeding
         //---------------------------------------------------------
@@ -119,5 +119,10 @@ class DatabaseSeeder extends Seeder
             'Atividades Teste User', $count,
             fn( $bar ) => ActivitySeeder::seed( $bar, $count, $classrooms, $minmax, $minmax )
         );
+
+        $this->command->newLine(2);
+        $this->command->info( 'USUARIO DE TESTE CRIADO' );
+        $this->command->info( 'EMAIL = teste@teste.teste' );
+        $this->command->info( 'SENHA = testeteste' );
     }
 }

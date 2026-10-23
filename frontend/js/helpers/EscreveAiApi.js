@@ -36,14 +36,22 @@ export class EscreveAiApi{
 
   static async fetchWithAuth( route, method = "GET", body = null, header = null ){
     const full_route = EscreveAiApi.getBaseUrl() + route;
-    const options = {
-      method : method,
-      headers : !header ? EscreveAiApi.getDefaultAuthHeader() : header
-    };
+    const isFormData = body instanceof FormData;
 
-    if ( body ){ options.body = JSON.stringify( body ); }
+    const headers = { ...(header ?? EscreveAiApi.getDefaultAuthHeader()) };
 
-    return fetch( full_route, options );
+    if (isFormData) {
+        delete headers["Content-Type"];
+    } else if (body !== null && body !== undefined) {
+        headers["Content-Type"] ??= "application/json";
+    }
+
+    const options = { method, headers };
+
+    if (isFormData) { options.body = body; }
+    else if (body !== null && body !== undefined) { options.body = JSON.stringify(body); }
+
+    return fetch(full_route, options);
   }
 
   static async fetch( route, method = "GET", body = null, header = null ){

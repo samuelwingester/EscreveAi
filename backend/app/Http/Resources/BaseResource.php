@@ -6,9 +6,7 @@ use stdClass;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Database\Eloquent\Model;
-
-use App\Http\Resources\Attachment\AttachmentResource;
-use App\Models\Contracts\HasAttachmentsContract;
+use Illuminate\Http\Request;
 
 abstract class BaseResource extends JsonResource
 {
@@ -31,29 +29,19 @@ abstract class BaseResource extends JsonResource
         return $this->when( $exists, data_get( $this->resource, $name ) );
     }
 
-    /** Carrega os anexos dinamicamente de uma model que os possui */
-    public function loadAttachments() : static
+    protected function beforeResolve( $request ) : void
     {
-        if ( $this->resource instanceof Model &&
-             $this->resource instanceof HasAttachmentsContract
-        ){
-            $this->resource->loadMissing('attachments');
-            $this->includeAttachments = true;
-        }
-
-        return $this;
+        // Exemplo: carregar relacionamentos ou logs automáticos
     }
 
-    public function resolve( $request = null ) : array
-    {
-        $data = parent::resolve( $request );
+    final public function toArray( $request ) : array {
+        $data = $this->toResource( $request );
 
-        if ( $this->includeAttachments &&
-             $this->resource instanceof HasAttachmentsContract
-        ) {
-            $data['attachments'] = AttachmentResource::collection( $this->resource->attachments )->resolve( $request );
-        }
+        $data['created_at'] = $this->whenExists('created_at');
+        $data['updated_at'] = $this->whenExists('updated_at');
 
         return $data;
     }
+
+    abstract protected function toResource( Request $request ) : array;
 }

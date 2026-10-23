@@ -15,6 +15,59 @@ const studentEditForm = document.getElementById( 'edit-student-form' );
 
 const selectClassroomFormElement= document.getElementById( 'input-form-class' );
 
+
+// Validações do lado do cliente (espelham as regras do backend)
+
+const GENDERS = [ 'man', 'woman' ];
+const WRITING_LEVELS = [ 'pre-silabico', 'silabico', 'silabico-alfabetico', 'alfabetico' ];
+
+// Retorna a lista de mensagens de erro; lista vazia significa que está tudo certo.
+function validateStudent( { classroom, name, date, genre, writing_level } ) {
+  const errors = [];
+
+  if ( !classroom ) errors.push( 'Informe a turma.' );
+
+  const trimmedName = ( name ?? '' ).trim();
+  if ( !trimmedName ) errors.push( 'Informe o nome.' );
+  else if ( trimmedName.length > 150 ) errors.push( 'O nome deve ter no máximo 150 caracteres.' );
+
+  if ( !date ) errors.push( 'Informe a data de nascimento.' );
+  else {
+    const birth = new Date( date + 'T00:00:00' );
+
+    // O aluno precisa ter mais de 4 anos (o backend exige data anterior a hoje menos 4 anos)
+    const limit = new Date();
+    limit.setHours( 0, 0, 0, 0 );
+    limit.setFullYear( limit.getFullYear() - 4 );
+
+    if ( Number.isNaN( birth.getTime() ) ) errors.push( 'Data de nascimento inválida.' );
+    else if ( birth >= limit ) errors.push( 'O aluno deve ter mais de 4 anos.' );
+  }
+
+  // Sexo "Outro" tem value vazio e o nível de escrita é opcional
+  if ( genre && !GENDERS.includes( genre ) ) errors.push( 'Sexo inválido.' );
+  if ( writing_level && !WRITING_LEVELS.includes( writing_level ) ) errors.push( 'Nível de escrita inválido.' );
+
+  return errors;
+}
+
+// Mostra/limpa o erro no banner do próprio formulário (a página tem vários modais,
+// então o util.showError, que usa o primeiro banner da página, não serve aqui).
+function showFormError( form, html ) {
+  const banner = form.querySelector( '.error-banner' );
+
+  banner.innerHTML = html;
+  banner.hidden = false;
+}
+
+function clearFormError( form ) {
+  const banner = form.querySelector( '.error-banner' );
+
+  banner.innerHTML = '';
+  banner.hidden = true;
+}
+
+
 async function loadStudents( id ) {
   EscreveAiApi.fetchWithAuth( '/classroom/' + id + '/student' )
     .then( response => {
@@ -26,7 +79,7 @@ async function loadStudents( id ) {
       base.buildClassName();
 
       studentDiv.innerHTML = '';
-      data.forEach( student => {
+      data['data'].forEach( student => {
         const newCard = document.createElement( 'student-card' );
 
         newCard.name = student.name;
@@ -60,6 +113,8 @@ studentModalBtn.addEventListener( 'click', function () {
 
   const selected = util.getSelectedClassroom();
 
+  if ( !selected ) return; // nenhuma turma selecionada
+
   selectClassroomFormElement.value = selected.id;
   studentModal.showModal();
 })
@@ -77,7 +132,15 @@ studentForm.addEventListener( 'submit', function ( e ) {
   const writing_level = formData.get( 'writing-level' );
   const observations = formData.get( 'observations' );
 
-  util.clearError();
+  clearFormError( studentForm );
+
+  const errors = validateStudent( { classroom, name, date, genre, writing_level } );
+
+  if ( errors.length ) {
+    showFormError( studentForm, errors.map( message => `<p>${message}</p>` ).join( '' ) );
+    return;
+  }
+
   EscreveAiApi.fetchWithAuth( "/classroom/" + classroom + "/student", "POST", {
     "name":name, "birth_date":date, "genre":genre,
     "writing_level":writing_level, "observations":observations
@@ -115,7 +178,7 @@ studentForm.addEventListener( 'submit', function ( e ) {
         console.log(error);
       }
 
-      util.showError( messages );
+      showFormError( studentForm, messages );
     });
 });
 
@@ -132,6 +195,15 @@ studentEditForm.addEventListener( 'submit', function (e){
   const writing_level = formData.get( 'writing-level' );
   const observations = formData.get( 'observations' );
   const id = formData.get( 'id' );
+
+  clearFormError( studentEditForm );
+
+  const errors = validateStudent( { classroom: idClass, name, date, genre, writing_level } );
+
+  if ( errors.length ) {
+    showFormError( studentEditForm, errors.map( message => `<p>${message}</p>` ).join( '' ) );
+    return;
+  }
 
   EscreveAiApi.fetchWithAuth( "/classroom/" + idClass + "/student/" + id, "PUT", {
     "name":name, "birth_date":date, "genre":genre,
@@ -167,7 +239,7 @@ studentEditForm.addEventListener( 'submit', function (e){
         console.log(error);
       }
 
-      util.showError( messages );
+      showFormError( studentEditForm, messages );
     });
 })
 
@@ -200,6 +272,7 @@ document.addEventListener( 'student-edit', function (e){
       return response.json();
     })
     .then( data => {
+      data = data['student'];
       nameInput.value = data.name;
       dateInput.value = data.birth_date;
       writingInput.value = data.writing_level;

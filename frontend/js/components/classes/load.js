@@ -1,5 +1,5 @@
 //---------------------------------------------------
-import { Class } from "./Class.js";
+import { ClassroomCard } from "./Class.js";
 //---------------------------------------------------
-customElements.define( 'class-card', Class )
+customElements.define( 'class-card', ClassroomCard )
 //---------------------------------------------------

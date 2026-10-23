@@ -34,7 +34,7 @@ class StoreRequest extends FormRequest
             'attachments'   => ['nullable', 'array'],
 
             'attachments.*.url'     => ['nullable', 'url'],
-            'attachments.*.file'    => ['nullable', 'file', File::types(['png', 'pdf', 'jpg'])]
+            'attachments.*.file'    => ['nullable', 'file', File::types(['png', 'pdf', 'jpg', 'doc', 'docx'])->max(100 * 1024)]
         ];
     }
 
