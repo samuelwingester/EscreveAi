@@ -116,22 +116,14 @@
                     <span class="caption">Clique no ícone para alterar a foto</span>
                 </div>
 
-                <form class="form-grid">
+                <form class="form-grid" id="edit-user-form">
                     <div class="form-group">
                         <label class="caption">Nome Completo</label>
-                        <icon-field icon="user" placeholder="Profª. Mariana Silva" value="Profª. Mariana Silva" stroke="6"></icon-field>
-                    </div>
-                    <div class="form-group">
-                        <label class="caption">E-mail</label>
-                        <icon-field icon="mail" placeholder="mariana.silva@escola.edu.br" value="mariana.silva@escola.edu.br"></icon-field>
-                    </div>
-                    <div class="form-group">
-                        <label class="caption">Data de Nascimento</label>
-                        <icon-field icon="calendar" type="date" value="1990-06-15"></icon-field>
+                        <icon-field name='name' icon="user" placeholder="Profª. Mariana Silva" value="Profª. Mariana Silva" stroke="6"></icon-field>
                     </div>
                     <div class="form-group">
                         <label class="caption">Gênero</label>
-                        <icon-field icon="gender" placeholder="Feminino" value="Feminino"></icon-field>
+                        <icon-field icon="gender" name='gender' placeholder="Feminino" value="Feminino"></icon-field>
                     </div>
 
                     <div class="form-actions-stacked">
@@ -156,19 +148,19 @@
                     </button>
                 </header>
 
-                <form class="form-vertical">
+                <form class="form-vertical" id='change-password-form'>
                     <div class="form-group">
                         <label class="caption">Senha Atual</label>
-                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true"></icon-field>
+                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true" name='password'></icon-field>
                     </div>
                     <div class="form-group">
                         <label class="caption">Nova Senha</label>
-                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true"></icon-field>
+                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true" name='new_password'></icon-field>
                         <span class="caption disabled">A senha deve conter no mínimo 8 caracteres, uma letra maiúscula e um número.</span>
                     </div>
                     <div class="form-group">
                         <label class="caption">Confirmar Nova Senha</label>
-                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true"></icon-field>
+                        <icon-field icon="key" type="password" placeholder="••••••••" eye="true" name='new_password_confirmation'></icon-field>
                     </div>
 
                     <div class="modal-actions-inline">
@@ -191,9 +183,11 @@
                     <button type="button" class="botao-largo" id="vazioBorda2" onclick="document.getElementById('delete-user-modal').close()">
                         <p>Cancelar</p>
                     </button>
-                    <button type="button" id="btn-confirmar-delete" class="btn-danger">
-                        <p>Sim, tenho certeza</p>
-                    </button>
+                    <form action="" id="delete-user-form">
+                        <button type="submit" id="btn-confirmar-delete" class="btn-danger">
+                            <p>Sim, tenho certeza</p>
+                        </button>
+                    </form>
                 </div>
             </div>
         </dialog>
