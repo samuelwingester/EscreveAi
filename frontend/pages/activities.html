@@ -24,7 +24,7 @@
                     <h3>Atividades - Turma:</h3>
                     <h2 class="turma-titulo">Sem Turmas</h2>
                 </div>
-                <button class="botao-largo" onclick="document.getElementById('activity-modal').showModal()">
+                <button class="botao-largo" onclick="document.getElementById('add-activity-modal').showModal()">
                     <svg>
                         <use href="../assets/icons/sprite.svg#icon-plus"></use>
                     </svg>
@@ -35,11 +35,12 @@
 
         <div class="activities" id="activities-card-container"></div>
 
-        <dialog id="activity-modal" class="modal">
+        <!-- MODAL: Nova Atividade -->
+        <dialog id="add-activity-modal" class="modal">
             <div class="add">
                 <header>
                     <h3>Nova Atividade</h3>
-                    <svg onclick="document.getElementById('activity-modal').close()">
+                    <svg onclick="document.getElementById('add-activity-modal').close()">
                         <use href="../assets/icons/sprite.svg#icon-x"></use>
                     </svg>
                 </header>
@@ -50,12 +51,13 @@
                         <div class="line"></div>
                     </div>
                     <form action="#" id="new-activity-form">
-                        <common-field label="Nome da Atividade" input_id="form-activity-name"
-                            placeholder="Escreva o nome da atividade..." size="field", name="title">
+                        <common-field label="Nome da Atividade *" input_id="form-activity-name"
+                            placeholder="Produção de texto- Descrição de personagens" size="field" name="title">
                         </common-field>
 
-                        <common-field label="Descrição" input_id="form-activity-description"
-                            placeholder="Descreva brevemente a atividade..." size="field", name="description">
+                        <common-field label="Descrição *" input_id="form-activity-description"
+                            placeholder="Descreva o objetivo ou as instruções da atividade..." size="field"
+                            name="description">
                         </common-field>
 
                         <div class="upload">
@@ -64,17 +66,25 @@
                                     <use href="../assets/icons/sprite.svg#icon-file-upload"></use>
                                 </svg>
                                 <p>Arraste um arquivo ou clique aqui para enviar</p>
-                                <p>Documento ou Imagem • Máx. 10 MB</p>
-                                <button class="botao-largo">
+                                <p>PDF, JPG ou PNG • Máx. 10 MB</p>
+                                <button class="botao-largo" type="button">
                                     <svg>
                                         <use href="../assets/icons/sprite.svg#icon-save"></use>
                                     </svg>
-                                    <input id="input-files" type="file" name="attachments" multiple accept=".pdf,.doc,.docx,.pdf,.png,.jpg">
+                                    <span>Selecionar Arquivo</span>
+                                    <input id="input-edit-files" type="file" name="attachments" multiple
+                                        accept=".pdf,.doc,.docx,.png,.jpg" style="display:none;">
                                 </button>
                             </div>
                         </div>
+
                         <div id="login-error" class="error-banner" hidden></div>
+
                         <div class="botoes">
+                            <button type="button" class="botao-largo" id="vazioBorda2"
+                                onclick="document.getElementById('activity-modal').close()">
+                                <p>Cancelar</p>
+                            </button>
                             <button class="botao-largo" type="submit">
                                 <svg>
                                     <use href="../assets/icons/sprite.svg#icon-save"></use>
@@ -86,6 +96,70 @@
                 </div>
             </div>
         </dialog>
+
+        <dialog id="edit-activity-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h3>Editar Atividade</h3>
+                    <svg onclick="document.getElementById('edit-activity-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="forms">
+                    <div class="info">
+                        <div class="line"></div>
+                        <h2>INFORMAÇÕES DA ATIVIDADE</h2>
+                        <div class="line"></div>
+                    </div>
+                    <form action="#" id="edit-activity-form">
+                        <input type="hidden" name="id" id="input-edit-activity-id" value="">
+
+                        <common-field label="Nome da Atividade *" input_id="input-edit-activity-name"
+                            placeholder="Digite o nome da atividade..." size="field" name="title">
+                        </common-field>
+
+                        <common-field label="Descrição *" input_id="input-edit-activity-description"
+                            placeholder="Descreva o objetivo ou as instruções da atividade..." size="field"
+                            name="description">
+                        </common-field>
+
+                        <div class="upload">
+                            <div class="container">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-file-upload"></use>
+                                </svg>
+                                <p>Arraste um arquivo ou clique aqui para enviar</p>
+                                <p>PDF, JPG ou PNG • Máx. 10 MB</p>
+                                <button class="botao-largo" type="button">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                    </svg>
+                                    <span>Selecionar Arquivo</span>
+                                    <input id="input-edit-files" type="file" name="attachments" multiple
+                                        accept=".pdf,.doc,.docx,.png,.jpg" style="display:none;">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="error-banner" hidden></div>
+
+                        <div class="botoes">
+                            <button type="button" class="botao-largo" id="vazioBorda2"
+                                onclick="document.getElementById('edit-activity-modal').close()">
+                                <p>Cancelar</p>
+                            </button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Salvar Atividade</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+
     </base-body>
 </body>
 

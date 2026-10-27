@@ -43,12 +43,12 @@ export class Activity extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <div class="activity">
-        <div class="info">
-          <div class="image"></div>
-          <div class="desc">
-            <p class="title activity-title"></p>
-            <p class="placeholder activity-description"></p>
+      <div class="activity-card">
+        <div class="info-section">
+          <div class="image-box"></div>
+          <div class="desc-box">
+            <p class="activity-title"></p>
+            <p class="activity-description"></p>
             <div class="file-count">
               <svg aria-hidden="true">
                 <use href="../assets/icons/sprite.svg#icon-image"></use>
@@ -58,32 +58,51 @@ export class Activity extends HTMLElement {
           </div>
         </div>
 
-        <div class="tools">
-          <div class="date">
+        <div class="action-section">
+          <div class="date-badge">
             <svg aria-hidden="true">
               <use href="../assets/icons/sprite.svg#icon-calendar"></use>
             </svg>
             <p class="activity-date"></p>
           </div>
-          <div class="buttons">
-            <button type="button" class="botao-largo btn-view">
+          <div class="controls">
+            <button type="button" class="btn-view">
               <svg aria-hidden="true">
                 <use href="../assets/icons/sprite.svg#icon-eye"></use>
               </svg>
-              <span class="purple">Ver Detalhes</span>
+              <span>Ver Detalhes</span>
             </button>
-            <button type="button" class="botao-largo btn-edit">
-              <svg aria-hidden="true">
-                <use href="../assets/icons/sprite.svg#icon-pencil"></use>
-              </svg>
-              <span class="purple">Editar</span>
-            </button>
+
+            <details class="menu">
+              <summary>
+                <svg>
+                  <use href="../assets/icons/sprite.svg#icon-menu"></use>
+                </svg>
+              </summary>
+              <div class="dropdown">
+                <button type="button" class="btn_option edit" onclick="document.getElementById('edit-activity-modal').showModal()">
+                  <svg>
+                    <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                  </svg>
+                  <span>Editar</span>
+                </button>
+
+                <div class="line"></div>
+
+                <button type="button" class="btn_option delete">
+                  <svg>
+                    <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                  </svg>
+                  <span>Excluir</span>
+                </button>
+              </div>
+            </details>
           </div>
         </div>
       </div>
     `;
 
-    this.imageElement = this.querySelector('.image');
+    this.imageElement = this.querySelector('.image-box');
     this.titleElement = this.querySelector('.activity-title');
     this.descriptionElement = this.querySelector('.activity-description');
     this.fileCountElement = this.querySelector('.file-count-value');
@@ -96,7 +115,8 @@ export class Activity extends HTMLElement {
     this.renderDate();
 
     this.querySelector('.btn-view').addEventListener('click', () => this.view());
-    this.querySelector('.btn-edit').addEventListener('click', () => this.edit());
+    this.querySelector('.edit').addEventListener('click', () => this.edit());
+    this.querySelector('.delete').addEventListener('click', () => this.delete());
   }
 
   view() {
@@ -111,10 +131,18 @@ export class Activity extends HTMLElement {
     }));
   }
 
+  delete() {
+    this.dispatchEvent(new CustomEvent('activity-delete', {
+      bubbles: true, composed: true, detail: { id: this.activity_id },
+    }));
+  }
+
   renderImage() {
-    this.imageElement.style.backgroundImage = this.imgSrc
-      ? `url(${JSON.stringify(this.imgSrc)})`
-      : '';
+    if (this.imgSrc) {
+      this.imageElement.style.backgroundImage = `url(${JSON.stringify(this.imgSrc)})`;
+    } else {
+      this.imageElement.style.backgroundImage = '';
+    }
   }
 
   renderTitle() { this.titleElement.textContent = this.title; }
