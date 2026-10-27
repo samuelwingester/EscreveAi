@@ -80,7 +80,7 @@ export class Activity extends HTMLElement {
                 </svg>
               </summary>
               <div class="dropdown">
-                <button type="button" class="btn_option edit" onclick="document.getElementById('edit-activity-modal').showModal()">
+                <button type="button" class="btn_option edit">
                   <svg>
                     <use href="../assets/icons/sprite.svg#icon-pencil"></use>
                   </svg>
@@ -120,21 +120,27 @@ export class Activity extends HTMLElement {
   }
 
   view() {
-    this.dispatchEvent(new CustomEvent('activity-view', {
-      bubbles: true, composed: true, detail: { id: this.activity_id },
-    }));
+    this.dispatchEvent(
+      new CustomEvent('activity-view', {
+        bubbles: true, composed: true, detail: { id: this.activity_id },
+      })
+    );
   }
 
   edit() {
-    this.dispatchEvent(new CustomEvent('activity-edit', {
-      bubbles: true, composed: true, detail: { id: this.activity_id },
-    }));
+    this.dispatchEvent(
+      new CustomEvent('activity-edit', {
+        bubbles: true, composed: true, detail: { id: this.activity_id },
+      })
+    );
   }
 
   delete() {
-    this.dispatchEvent(new CustomEvent('activity-delete', {
-      bubbles: true, composed: true, detail: { id: this.activity_id },
-    }));
+    this.dispatchEvent(
+      new CustomEvent('activity-delete', {
+        bubbles: true, composed: true, detail: { id: this.activity_id },
+      })
+    );
   }
 
   renderImage() {

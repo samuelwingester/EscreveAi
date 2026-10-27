@@ -46,5 +46,5 @@ Route::controller( AuthController::class )->group( function () {
     Route::post( '/logout', 'logout' )->middleware( 'auth:sanctum' );
     Route::get( '/user', 'user' )->middleware( 'auth:sanctum' );
     Route::delete( '/user', 'delete' )->middleware( 'auth:sanctum' );
-    Route::put( '/user', 'update' )->middleware( 'auth:sanctum' );
+    Route::match( [ 'put', 'patch'], '/user', 'update' )->middleware( 'auth:sanctum' );
 });

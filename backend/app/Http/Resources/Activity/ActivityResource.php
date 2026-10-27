@@ -24,7 +24,7 @@ class ActivityResource extends BaseResource
             'title'         => $this->whenExists('title'),
             'description'   => $this->whenExists('description'),
             'preview_url'   => $this->whenExists('preview_url'), // a implementar
-            'attachments'   => new AttachmentResource( $this->whenLoaded('attachments') )
+            'attachments'   => AttachmentResource::collection( $this->whenLoaded('attachments') )
         ];
     }
 }
