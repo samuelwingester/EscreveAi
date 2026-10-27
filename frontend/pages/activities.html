@@ -160,6 +160,61 @@
             </div>
         </dialog>
 
+        <dialog id="view-activity-modal" class="modal">
+            <div class="add">
+                <header>
+                    <div class="txt">
+                        <h2>Detalhes da Atividade:</h2>
+                        <h3 class="black">Título da Atividade</h3>
+                        <p>Descrição detalhada da atividade aparecerá aqui...</p>
+                    </div>
+                    <svg onclick="document.getElementById('view-activity-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="line"></div>
+                <form>
+                    <div class="view">
+                        <div class="cover"></div>
+                        <div class="actions">
+                            <div class="pdf-cover">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-document"></use>
+                                </svg>
+                            </div>
+                            <div class="buttons">
+                                <button type="button" class="botao-largo" id="vazioBorda2">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-eye"></use>
+                                    </svg>
+                                    <p class="purple">Ver PDF da atividade</p>
+                                </button>
+
+                                <button type="button" class="botao-largo" id="vazioBorda2">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                    </svg>
+                                    <p class="purple">Baixar PDF</p>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="botoes">
+                    <button type="button" class="botao-largo" id="vazioBorda2"
+                        onclick="document.getElementById('view-activity-modal').close()">
+                        <p>Fechar</p>
+                    </button>
+                    <button type="button" class="botao-largo" id="btn-open-edit-from-view">
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                        </svg>
+                        <p>Editar Atividade</p>
+                    </button>
+                </div>
+            </div>
+        </dialog>
+
     </base-body>
 </body>
 

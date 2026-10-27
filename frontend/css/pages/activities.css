@@ -76,11 +76,16 @@ dialog {
         width: 20px;
         height: 20px;
         cursor: pointer;
+        align-self: flex-start;
       }
 
       h3 {
         color: var(--purple);
         white-space: nowrap;
+      }
+      .txt{
+        display: flex;
+        flex-flow: column;
       }
     }
 
@@ -181,5 +186,68 @@ dialog {
         padding: 10px 0;
       }
     }
+  }
+}
+
+#view-activity-modal {
+  header {
+    margin: 0;
+  }
+  .line {
+    width: 100%;
+  }
+  form {
+    .view {
+      width: 100%;
+      .actions {
+        padding: 5px;
+        border-radius: 5px;
+        border: dotted 2px var(--purple-soft);
+        background-color: var(--purple-light);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .pdf-cover {
+          width: 40%;
+          aspect-ratio: 1/1;
+          border: dotted 1px var(--purple);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            width: 40%;
+            aspect-ratio: 1/1;
+            color: var(--purple-dark);
+          }
+        }
+        .buttons {
+          display: flex;
+          flex-flow: column;
+          gap: 10px;
+
+          button {
+            border: solid 1px var(--purple);
+            width: 100%;
+            padding: 6px 8px;
+            svg {
+              width: 14px;
+              height: 14px;
+              color: var(--purple-dark);
+              stroke-width: 3px;
+            }
+            &:last-child svg {
+              stroke-width: 1px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 10px 0;
   }
 }

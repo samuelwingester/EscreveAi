@@ -66,7 +66,7 @@ export class Activity extends HTMLElement {
             <p class="activity-date"></p>
           </div>
           <div class="controls">
-            <button type="button" class="btn-view">
+            <button type="button" class="btn-view" onclick="document.getElementById('view-activity-modal').showModal()">
               <svg aria-hidden="true">
                 <use href="../assets/icons/sprite.svg#icon-eye"></use>
               </svg>
