@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,7 @@ class Attachment extends Model
     protected $table = 'attachments';
 
     protected $fillable = [
+        'user_id',
         'file_name',
         'file_extension',
         'file_path',
@@ -31,12 +33,13 @@ class Attachment extends Model
         ];
     }
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
     public function attachable(): MorphTo
     {
         return $this->morphTo();
     }
-    //--------------------------------------------------------
+
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo( User::class, 'user_id' );
+    }
 }

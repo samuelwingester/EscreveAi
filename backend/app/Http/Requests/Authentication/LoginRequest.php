@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Authenticathion;
+namespace App\Http\Requests\Authentication;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
@@ -13,13 +13,13 @@ class LoginRequest extends FormRequest
     protected function prepareForValidation(): void
     {
         $this->merge([ 'email' => Str::lower( Str::trim( $this->email ) ) ]);
-    } 
+    }
 
     /** @return array<string, ValidationRule|array<mixed>|string> */
     public function rules(): array
     {
         return [
-            'email'     => ['required', 'email'], 
+            'email'     => ['required', 'email'],
             'password'  => ['required', Password::default()],
         ];
     }

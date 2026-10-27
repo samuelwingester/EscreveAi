@@ -10,21 +10,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 
-use App\Http\Requests\Authenticathion\RegisterRequest;
-use App\Http\Requests\Authenticathion\LoginRequest;
+use App\Http\Requests\Authentication\ChangePasswordRequest;
+use App\Http\Requests\Authentication\RegisterRequest;
+use App\Http\Requests\Authentication\LoginRequest;
+use App\Http\Requests\Authentication\UpdateRequest;
 use App\Http\Resources\UserResource;
 
-use App\Services\Authenticathion\RegisterService;
-use App\Services\Authenticathion\LoginService;
-use App\Services\Authenticathion\TokenService;
+use App\Services\Authentication\ChangePasswordService;
+use App\Services\Authentication\RegisterService;
+use App\Services\Authentication\UpdateService;
+use App\Services\Authentication\LoginService;
+use App\Services\Authentication\TokenService;
+use App\Services\Authentication\DeleteService;
 
 use App\Models\User;
 
 class AuthController extends Controller
 {
     public function __construct(
-        private LoginService $login,
+        private ChangePasswordService $change_password,
         private RegisterService $register,
+        private DeleteService $delete,
+        private LoginService $login,
+        private UpdateService $update,
         private TokenService $token
     ){}
 
@@ -54,6 +62,29 @@ class AuthController extends Controller
     public function user( Request $request ) : UserResource
     {
         return new UserResource( $request->user() );
+    }
+
+    public function update( UpdateRequest $request ) : UserResource
+    {
+        $user = $this->update->execute( $request->user(), $request->validated() );
+
+        return new UserResource( $user );
+    }
+
+    public function delete( Request $request ) : Response
+    {
+        $this->delete->execute( $request->user() );
+
+        return response()->noContent();
+    }
+
+    public function change_password( ChangePasswordRequest $request ) : Response
+    {
+        $data = $request->validated();
+
+        $this->change_password->execute( $request->user(), $data['password'], $data['new_password'] );
+
+        return response()->noContent();
     }
 
     private function tokenResponse( User $user, string $agent ) : UserResource

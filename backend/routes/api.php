@@ -41,7 +41,10 @@ Route::middleware( 'auth:sanctum' )->group( function () {
 Route::controller( AuthController::class )->group( function () {
     Route::post( '/login', 'login' );
     Route::post( '/register', 'register' );
+    Route::put( '/change_password', 'change_password' )->middleware( 'auth:sanctum' );
 
     Route::post( '/logout', 'logout' )->middleware( 'auth:sanctum' );
     Route::get( '/user', 'user' )->middleware( 'auth:sanctum' );
+    Route::delete( '/user', 'delete' )->middleware( 'auth:sanctum' );
+    Route::put( '/user', 'update' )->middleware( 'auth:sanctum' );
 });

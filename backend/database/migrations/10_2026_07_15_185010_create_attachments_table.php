@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 use App\Enums\DiskType;
 use App\Enums\StorageType;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->enum('disk_type', DiskType::cases())->nullable();
             $table->enum('storage_type', StorageType::cases());
 
+            $table->foreignIdFor(User::class, 'user_id')->constrained('users');
             $table->morphs('attachable');
         });
     }

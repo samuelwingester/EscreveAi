@@ -4,13 +4,13 @@ namespace App\Services\Attachment;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\UploadedFile;
 
 use App\Services\Attachment\StoreAttachmentService;
-use App\Models\Attachment;
 use App\Enums\DiskType;
 use App\Enums\StorageType;
+use App\Models\Attachment;
+use App\Models\User;
 
 class StoreFileAttachmentService
 {
@@ -18,7 +18,13 @@ class StoreFileAttachmentService
 		private StoreAttachmentService $store
 	){}
 
-	public function execute( Model $attachable, UploadedFile $file, DiskType $disk = DiskType::PRIVATE ) : Attachment
+	public function execute(
+		User $user,
+		Model $attachable,
+		UploadedFile $file,
+		DiskType $disk =
+		DiskType::PRIVATE
+	) : Attachment
 	{
         // Acho que serve?
         $directory = substr(hash('sha256', class_basename($attachable)), 0, 16) . '/' . $attachable->id;
@@ -32,6 +38,7 @@ class StoreFileAttachmentService
 		$data['file_mime'] = $file->getMimeType();
 		$data['file_name'] = $file->getClientOriginalName();
 		$data['file_path'] = $path;
+		$data['user_id'] = $user->id;
 
 		return $this->store->execute( $attachable, $data );
 	}

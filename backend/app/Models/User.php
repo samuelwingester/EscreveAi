@@ -9,12 +9,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use Laravel\Sanctum\HasApiTokens;
 
-use Database\Factories\UserFactory;
-
 use App\Models\Enums\UserType;
 use App\Models\Enums\Gender;
+use App\Models\Attachment;
 use App\Models\Classroom;
-
 
 class User extends Authenticatable
 {
@@ -52,5 +50,10 @@ class User extends Authenticatable
     public function classes() : HasMany
     {
         return $this->hasMany( Classroom::class, 'teacher_id' );
+    }
+
+    public function attachments() : HasMany
+    {
+        return $this->hasMany( Attachment::class, 'user_id' );
     }
 }

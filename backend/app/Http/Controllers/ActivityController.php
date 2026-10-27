@@ -24,8 +24,6 @@ use App\Services\Activity\DeleteService;
 use App\Models\Activity;
 use App\Models\Classroom;
 
-use Illuminate\Support\Facades\Log;
-
 class ActivityController extends Controller
 {
     public function __construct(
@@ -52,9 +50,7 @@ class ActivityController extends Controller
     {
         $this->authorize( 'update', $classroom );
 
-        Log::info($request->validated());
-
-        $activity = $this->store->execute( $classroom, $request->validated() );
+        $activity = $this->store->execute( $request->user(), $classroom, $request->validated() );
 
         return new ActivityResource( $activity->load( 'attachments' ) );
     }
@@ -70,7 +66,7 @@ class ActivityController extends Controller
     {
         $this->authorize( 'update', $classroom );
 
-        $activity = $this->update->execute( $activity, $request->validated() );
+        $activity = $this->update->execute( $request->user(), $activity, $request->validated() );
 
         return new ActivityResource( $activity->load( 'attachments' ) );
     }
