@@ -20,6 +20,9 @@ O escreveaí é uma plataforma desenvolvida para auxiliar professores e institui
  * O usuario pode se cadastrar. 
  * O usuario pode logar.
  * O usuario pode deslogar. 
+ * O usuario pode deletar sua conta
+ * O usuario pode mudar sua senha
+ * O usuario pode atualizar seus dados
  
  * Criar turmas.
  * Editar turmas
