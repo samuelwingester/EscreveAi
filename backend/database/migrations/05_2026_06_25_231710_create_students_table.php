@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('name', 150);
             $table->enum('writing_level', WritingLevel::cases())->nullable();
-            $table->text('observations');
+            $table->text('observations')->nullable();
 
             $table->foreignIdFor(Classroom::class, 'classroom_id')->constrained('classes')->cascadeOnDelete();
         });

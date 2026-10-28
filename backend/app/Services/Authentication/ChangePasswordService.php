@@ -11,7 +11,7 @@ class ChangePasswordService
 {
 	public function execute( User $user, string $password, string $new_password ) : bool
 	{
-		if ( !$user || !Hash::check( $password, $user->password ) )
+		if ( !Hash::check( $password, $user->password ) )
 			throw new InvalidCredentialsException();
 
         $user->password = Hash::make( $new_password );

@@ -136,7 +136,7 @@
                                     </svg>
                                     <span>Selecionar Arquivo</span>
                                     <input id="input-edit-files" type="file" name="attachments" multiple
-                                        accept=".pdf,.doc,.docx,.png,.jpg" style="display:none;">
+                                        accept=".pdf,.doc,.docx,.png,.jpg" style="display:none;opacity: 0;position: absolute;">
                                 </button>
                             </div>
                         </div>
@@ -165,8 +165,8 @@
                 <header>
                     <div class="txt">
                         <h2>Detalhes da Atividade:</h2>
-                        <h3 class="black">Título da Atividade</h3>
-                        <p>Descrição detalhada da atividade aparecerá aqui...</p>
+                        <h3 class="black" id="view-activity-title">Título da Atividade</h3>
+                        <p id="view-activity-description">Descrição detalhada da atividade aparecerá aqui...</p>
                     </div>
                     <svg onclick="document.getElementById('view-activity-modal').close()">
                         <use href="../assets/icons/sprite.svg#icon-x"></use>
@@ -177,25 +177,8 @@
                     <div class="view">
                         <div class="cover"></div>
                         <div class="actions">
-                            <div class="pdf-cover">
-                                <svg>
-                                    <use href="../assets/icons/sprite.svg#icon-document"></use>
-                                </svg>
-                            </div>
-                            <div class="buttons">
-                                <button type="button" class="botao-largo" id="vazioBorda2">
-                                    <svg>
-                                        <use href="../assets/icons/sprite.svg#icon-eye"></use>
-                                    </svg>
-                                    <p class="purple">Ver PDF da atividade</p>
-                                </button>
-
-                                <button type="button" class="botao-largo" id="vazioBorda2">
-                                    <svg>
-                                        <use href="../assets/icons/sprite.svg#icon-save"></use>
-                                    </svg>
-                                    <p class="purple">Baixar PDF</p>
-                                </button>
+                            <div class="buttons" id="view-anexos-container">
+                                <attachment-card filename="teste"></attachment-card>
                             </div>
                         </div>
                     </div>

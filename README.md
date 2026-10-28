@@ -39,6 +39,8 @@ O escreveaí é uma plataforma desenvolvida para auxiliar professores e institui
  * Deletar Atividade.
  * Editar Atividade.
  * Listar Atividades. 
+ * Baixar/Visualizar Anexos.
+ * Deletar Anexos.
 
 ## Stack Utilizada
 
@@ -128,18 +130,18 @@ php artisan serve
 
 ### Rotas
 
-<figcaption align="top"><b>Turma</b></figcaption>
+## Turma
 
 | Método | Rota | Descrição |
 | :---: | :--- | :--- |
-| `GET` | `/api/classroom` | Lista todas as turmas de um usuario |
+| `GET` | `/api/classroom` | Lista todas as turmas do usuário autenticado |
 | `GET` | `/api/classroom/{classroom}` | Busca uma turma por ID |
 | `GET` | `/api/classroom/{classroom}/stats` | Retorna as estatísticas da turma |
 | `POST` | `/api/classroom` | Cria uma nova turma |
 | `PUT` / `PATCH` | `/api/classroom/{classroom}` | Atualiza os dados de uma turma |
 | `DELETE` | `/api/classroom/{classroom}` | Exclui uma turma |
 
-<figcaption align="top"><b>Aluno</b></figcaption>
+## Aluno
 
 | Método | Rota | Descrição |
 | :---: | :--- | :--- |
@@ -149,11 +151,46 @@ php artisan serve
 | `PUT` / `PATCH` | `/api/classroom/{classroom}/student/{student}` | Atualiza os dados de um aluno |
 | `DELETE` | `/api/classroom/{classroom}/student/{student}` | Remove um aluno da turma |
 
-<figcaption align="top"><b>Autenticação</b></figcaption>
+## Atividade
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api/classroom/{classroom}/activity` | Lista as atividades da turma |
+| `GET` | `/api/classroom/{classroom}/activity/{activity}` | Busca uma atividade por ID |
+| `POST` | `/api/classroom/{classroom}/activity` | Cria uma nova atividade |
+| `PUT` / `PATCH` | `/api/classroom/{classroom}/activity/{activity}` | Atualiza os dados de uma atividade |
+| `DELETE` | `/api/classroom/{classroom}/activity/{activity}` | Exclui uma atividade |
+
+## Arquivos e anexos
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api/file/{attachment}` | Exibe ou disponibiliza o arquivo para visualização no navegador |
+| `GET` | `/api/file/{attachment}/download` | Realiza o download do arquivo |
+| `DELETE` | `/api/file/{attachment}` | Exclui um arquivo anexado |
+
+## Autenticação
 
 | Método | Rota | Descrição |
 | :---: | :--- | :--- |
 | `POST` | `/api/login` | Realiza o login do usuário |
 | `POST` | `/api/register` | Registra um novo usuário |
 | `POST` | `/api/logout` | Encerra a sessão do usuário autenticado |
+| `PUT` | `/api/change_password` | Altera a senha do usuário autenticado |
 | `GET` | `/api/user` | Retorna os dados do usuário autenticado |
+| `PUT` / `PATCH` | `/api/user` | Atualiza os dados do usuário autenticado |
+| `DELETE` | `/api/user` | Exclui o usuário autenticado |
+
+## Informações da API
+
+| Método | Rota | Descrição |
+| :---: | :--- | :--- |
+| `GET` | `/api` | Retorna a lista de rotas da API, incluindo os métodos HTTP aceitos e os nomes das rotas, quando disponíveis |
+
+## Observações
+
+- Todas as rotas de turma, aluno, atividade e arquivos exigem autenticação via `auth:sanctum`.
+- As rotas de alteração de senha, login, registro, logout e gerenciamento do usuário utilizam as regras de autenticação definidas individualmente em cada rota.
+- Os parâmetros `{classroom}`, `{student}`, `{activity}` e `{attachment}` representam os identificadores dos respectivos recursos.
+- As rotas de atualização aceitam `PUT` para substituição dos dados e `PATCH` para atualização parcial, conforme a implementação dos controladores.
+- A rota `/api` lista as rotas registradas que possuem o middleware `api`. A listagem inclui URI, métodos HTTP e nome da rota.

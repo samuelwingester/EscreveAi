@@ -29,8 +29,11 @@ EditForm.addEventListener( 'submit', function ( e ) {
   EscreveAiApi.fetchWithAuth( '/user', 'put', data )
     .then( response => {
       if ( !response.ok ) throw response;
-      utils.remove('username');
+      console.log(data);
+      util.remove('username');
+      util.store( 'username', data.get('name') );
       base.BuildUserName();
+      document.getElementById('edit-user-modal').close();
     })
     .catch( error => { console.log(error); } );
 });
@@ -42,9 +45,7 @@ ChangePasswordForm.addEventListener( 'submit', function ( e ) {
 
   EscreveAiApi.fetchWithAuth( '/change_password', 'PUT', data )
     .then( response => {
-       if ( !response.ok ) { console.log( response ); }
+      if ( !response.ok ) { console.log( response ); }
+      document.getElementById('edit-password-modal').close()
     })
 });
-
-base.BuildUserName();
-base.BuildSelectClassroom();

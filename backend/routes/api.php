@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\ClassroomController;
 use App\Http\Controllers\ActivityController;
-
+use App\Http\Controllers\FileAttachmentController;
 use App\Http\Controllers\AuthController;
 
 Route::get('/', function ()
@@ -31,6 +31,12 @@ Route::middleware( 'auth:sanctum' )->group( function () {
         'classroom' => ClassroomController::class
     ]);
 
+    Route::controller( FileAttachmentController::class )->group( function () {
+        Route::get( '/file/{attachment}', 'show' )->name( 'files.show' );
+        Route::get( '/file/{attachment}/download', 'download' )->name( 'files.download' );
+        Route::delete( '/file/{attachment}', 'delete' )->name( 'files.delete' );
+    });
+
     Route::controller( ClassroomController::class )->group( function () {
         Route::get( '/classroom/{classroom}/stats', 'stats' );
         // Route::get( '/classroom/stats', 'summary' ); // IMPLEMENTAR
@@ -41,7 +47,7 @@ Route::middleware( 'auth:sanctum' )->group( function () {
 Route::controller( AuthController::class )->group( function () {
     Route::post( '/login', 'login' );
     Route::post( '/register', 'register' );
-    Route::put( '/change_password', 'change_password' )->middleware( 'auth:sanctum' );
+    Route::match( [ 'put', 'patch'], '/change_password', 'change_password' )->middleware( 'auth:sanctum' );
 
     Route::post( '/logout', 'logout' )->middleware( 'auth:sanctum' );
     Route::get( '/user', 'user' )->middleware( 'auth:sanctum' );

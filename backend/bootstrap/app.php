@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 
 use App\Exceptions\InvalidCredentialsException;
+use Illuminate\Auth\AuthenticationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,7 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
         );
 
         $exceptions->render( function ( InvalidCredentialsException $e, Request $request ){
-            return response()->json([ 'message' => 'invalid credentials' ], 401);
+            return response()->json([ 'message' => 'credenciais invalidas.' ], 401);
         });
-        
+
+        $exceptions->render( function ( AuthenticationException $e, $request ){
+            return response()->json([ 'message' => 'Não autenticado.' ], 401);
+        });
+
     })->create();

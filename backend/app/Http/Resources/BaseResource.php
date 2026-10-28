@@ -29,11 +29,6 @@ abstract class BaseResource extends JsonResource
         return $this->when( $exists, data_get( $this->resource, $name ) );
     }
 
-    protected function beforeResolve( $request ) : void
-    {
-        // Exemplo: carregar relacionamentos ou logs automáticos
-    }
-
     final public function toArray( $request ) : array {
         $data = $this->toResource( $request );
 
