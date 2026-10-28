@@ -97,6 +97,3 @@ NewActivityForm.addEventListener( 'submit', function ( e ) {
     });
 
 });
-
-base.BuildUserName();
-base.BuildSelectClassroom();

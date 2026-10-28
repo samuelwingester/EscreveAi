@@ -287,6 +287,3 @@ document.addEventListener( 'student-edit', function (e){
     .catch( error => { console.log(error); } );
 });
 
-
-base.BuildUserName();
-base.BuildSelectClassroom();

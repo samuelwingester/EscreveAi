@@ -46,7 +46,7 @@ export async function BuildSelectClassroom(){
 
   const selected = util.getSelectedClassroom();
 
-  if ( selected ) { selectClassroomElement.value = selected.id; }
+  if ( selected ) { selectClassroomElement.value = selected.classroom_id; }
   else if ( selectClassroomElement.options.length > 1 ){
     selectClassroomElement.value = selectClassroomElement.options[1].value;
   }
@@ -62,3 +62,6 @@ export async function buildClassName(){
   if ( !data ) { return; }
   classroomElements.forEach( element => element.textContent = data.name );
 }
+
+document.addEventListener('DOMContentLoaded', function () { BuildUserName() });
+document.addEventListener('DOMContentLoaded', function () { BuildSelectClassroom(); buildClassName() });
