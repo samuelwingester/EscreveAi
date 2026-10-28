@@ -51,5 +51,3 @@ selectClassroomElement.addEventListener( "change", function () {
   loadClassroomStats( selectClassroomElement.value );
 });
 
-base.BuildUserName();
-base.BuildSelectClassroom();
