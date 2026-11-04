@@ -71,120 +71,47 @@ student-card {
             display: flex;
             flex-flow: column;
             justify-content: center;
-            align-items: flex-end;
-            gap: 10px;
+            align-items: stretch;
+            gap: 8px;
             height: 100%;
-            padding: 10px;
-            padding-right: 5px;
+            padding: 12px;
             background-color: var(--gray-100);
             border-top-right-radius: 15px;
-            /* Mantém as pontas arredondadas que o overflow cortava */
             border-bottom-right-radius: 15px;
+            min-width: 150px;
 
-            .report {
-                display: flex;
-                align-items: right;
-                gap: 5px;
-                width: max-content;
-
-                button {
-                    display: flex;
-                    align-items: center;
-                    cursor: pointer;
-                    svg {
-                        width: 16px;
-                        height: 16px;
-                    }
-                    p{
-                        height: 100%;
-                        white-space: wrap;
-                    }
-                }
-            }
-
-            .line {
-                width: 100%;
-                height: 1px;
-                background-color: var(--gray-400);
-            }
-
-            .menu {
-                position: relative;
+            .btn-action {
                 display: flex;
                 align-items: center;
-                width: max-content;
-                height: max-content;
+                gap: 8px;
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid var(--gray-300);
+                background: var(--text-white);
+                border-radius: 8px;
+                cursor: pointer;
+                font-size: 0.875rem;
+                font-weight: 500;
+                color: var(--text-primary);
+                transition: all 0.2s ease;
 
-                summary {
-                    list-style: none;
-                    user-select: none;
-                    cursor: pointer;
-                    display: flex;
-                    align-items: center;
-
-                    &::-webkit-details-marker,
-                    &::marker {
-                        display: none;
-                    }
-
-                    svg {
-                        width: 24px;
-                        height: 24px;
-                    }
+                svg {
+                    width: 16px;
+                    height: 16px;
+                    stroke: currentColor;
+                    fill: none;
                 }
 
-                .dropdown {
-                    position: absolute;
-                    top: calc(100% + 5px);
-                    right: 0;
-                    z-index: 1;
-                    display: flex;
-                    flex-flow: column;
-                    gap: 4px;
-                    background-color: var(--text-white);
-                    padding: 8px;
-                    border-radius: 10px;
-                    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
-                    min-width: 120px;
+                &:hover {
+                    background-color: var(--purple-light);
+                    border-color: var(--purple);
+                    color: var(--purple);
+                }
 
-                    .btn_option {
-                        display: flex;
-                        align-items: center;
-                        gap: 8px;
-                        width: 100%;
-                        padding: 6px 8px;
-                        border: none;
-                        background: transparent;
-                        border-radius: 6px;
-                        cursor: pointer;
-                        font-size: 0.875rem;
-                        color: var(--text-color, #374151);
-                        transition: background-color 0.2s ease;
-
-                        svg {
-                            width: 18px;
-                            height: 18px;
-                            stroke: currentColor;
-                            fill: none;
-                        }
-
-                        &:hover {
-                            background-color: var(--purple-soft, #f3e8ff);
-                            color: var(--purple, #7c3aed);
-                        }
-
-                        &.delete:hover {
-                            background-color: #fef2f2;
-                            color: var(--red, #ef4444);
-                        }
-                    }
-
-                    .line {
-                        width: 100%;
-                        height: 1px;
-                        background-color: var(--gray-200, #e5e7eb);
-                        margin: 2px 0;
-                    }
+                &.delete:hover {
+                    background-color: #fef2f2;
+                    border-color: var(--red);
+                    color: var(--red);
                 }
             }
         }

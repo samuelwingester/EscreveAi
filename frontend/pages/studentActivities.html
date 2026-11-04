@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escreve Aí</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/studentActivities.css">
+
+    <script type="module" src="../js/components/base/load.js"></script>
+    <script type="module" src="../js/components/activities/load.js"></script>
+    <script type="module" src="../js/components/common/load.js"></script>
+
+    <script type="module" src="../js/request/activities.js" defer></script>
+</head>
+
+<body>
+    <base-body active="students">
+        <header>
+            <h1>Atividades do Aluno</h1>
+            <div class="bottom">
+                <div class="student-info">
+                    <h3>Aluno: <span id="nome-aluno">Nenhum</span></h3>
+                    <div class="level">
+                        <p class="title">Status de Alfabetização:</p>
+                        <p class="subtitle student-level">Nenhum</p>
+                    </div>
+                </div>
+                <button class="botao-largo" onclick="document.getElementById('assign-activity-modal').showModal()">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-plus"></use>
+                    </svg>
+                    <p>Atribuir Atividade</p>
+                </button>
+            </div>
+        </header>
+
+        <section class="studentActivities">
+            <div class="studentActivity">
+                <div class="cover">
+                    <div class="img"></div>
+                </div>
+                <div class="text">
+                    <div>
+                        <p class="title">Atividade 1 - Letras e Sons</p>
+                        <p>Realizada em: <span class="disabled">Data de Envio</span></p>
+                    </div>
+                    <div class="botao-largo">
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-check"></use>
+                        </svg>
+                        <p>Enviado com sucesso</p>
+                    </div>
+                </div>
+                <button class="botao-largo">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-graf"></use>
+                    </svg>
+                    <p>Ver Relatório</p>
+                </button>
+            </div>
+
+            <div class="studentActivity">
+                <div class="cover">
+                    <div class="img"></div>
+                </div>
+                <div class="text">
+                    <div>
+                        <p class="title">Atividade 1 - Letras e Sons</p>
+                        <p>Realizada em: <span class="disabled">Data de Envio</span></p>
+                    </div>
+                    <div class="botao-largo">
+                        <svg>
+                            <use href="../assets/icons/sprite.svg#icon-check"></use>
+                        </svg>
+                        <p>Enviado com sucesso</p>
+                    </div>
+                </div>
+                <button class="botao-largo">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-graf"></use>
+                    </svg>
+                    <p>Ver Relatório</p>
+                </button>
+            </div>
+        </section>
+
+        <button class="botao-padrao">
+            <p>Relatório Completo</p>
+        </button>
+
+        <!-- MODAL: Atribuir Atividade -->
+        <dialog id="assign-activity-modal" class="modal">
+            <div class="add">
+                <header>
+                    <h3>Atribuir Atividade</h3>
+                    <svg onclick="document.getElementById('assign-activity-modal').close()">
+                        <use href="../assets/icons/sprite.svg#icon-x"></use>
+                    </svg>
+                </header>
+                <div class="forms">
+                    <div class="info">
+                        <div class="line"></div>
+                        <h2>SELECIONAR E ENVIAR</h2>
+                        <div class="line"></div>
+                    </div>
+                    <form action="#" id="assign-activity-form">
+                        <input type="hidden" name="student_id" id="input-assign-student-id" value="">
+
+                        <common-field label="Atividade da Turma *" input_id="select-classroom-activity"
+                            placeholder="Selecione uma atividade..." is_select="true" size="field" name="activity_id">
+                            <option value="" disabled selected>Escolha uma atividade da turma...</option>
+                        </common-field>
+
+                        <div class="upload">
+                            <div class="container">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-file-upload"></use>
+                                </svg>
+                                <p>Arraste um arquivo ou clique aqui para enviar</p>
+                                <p>PDF, JPG ou PNG • Máx. 10 MB</p>
+                                <button class="botao-largo" type="button">
+                                    <svg>
+                                        <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                    </svg>
+                                    <span>Selecionar Arquivo</span>
+                                    <input id="input-edit-files" type="file" name="attachments" multiple
+                                        accept=".pdf,.doc,.docx,.png,.jpg" style="opacity: 0;position: absolute;">
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="error-banner" hidden></div>
+
+                        <div class="botoes">
+                            <button type="button" class="botao-largo" id="vazioBorda2"
+                                onclick="document.getElementById('assign-activity-modal').close()">
+                                <p>Cancelar</p>
+                            </button>
+                            <button class="botao-largo" type="submit">
+                                <svg>
+                                    <use href="../assets/icons/sprite.svg#icon-save"></use>
+                                </svg>
+                                <p>Atribuir Atividade</p>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </dialog>
+    </base-body>
+</body>
+
+</html>

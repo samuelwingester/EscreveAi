@@ -43,39 +43,27 @@ export class Student extends HTMLElement {
               </div>
             </div>
             <div class="tools">
-                <div class="report">
-                    <button>
-                        <p>Ver Relatório</p>
-                        <svg>
-                            <use href="../assets/icons/sprite.svg#icon-arrow-right"></use>
-                        </svg>
-                    </button>
-                </div>
-                <div class="line"></div>
-                <details class="menu">
-                    <summary>
-                        <svg>
-                            <use href="../assets/icons/sprite.svg#icon-menu"></use>
-                        </svg>
-                    </summary>
-                    <div class="dropdown">
-                        <button type="button" class="btn_option edit">
-                            <svg>
-                                <use href="../assets/icons/sprite.svg#icon-pencil"></use>
-                            </svg>
-                            <span>Editar</span>
-                        </button>
+                <a href="studentActivities.html">
+                <button type="button" class="btn-action view-activities">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-eye"></use>
+                    </svg>
+                    <span>Ver Atividades</span>
+                </button>
+                </a>
+                <button type="button" class="btn-action edit">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-pencil"></use>
+                    </svg>
+                    <span>Editar</span>
+                </button>
 
-                        <div class="line"></div>
-
-                        <button type="button" class="btn_option delete">
-                            <svg>
-                                <use href="../assets/icons/sprite.svg#icon-delete"></use>
-                            </svg>
-                            <span>Excluir</span>
-                        </button>
-                    </div>
-                </details>
+                <button type="button" class="btn-action delete">
+                    <svg>
+                        <use href="../assets/icons/sprite.svg#icon-delete"></use>
+                    </svg>
+                    <span>Excluir</span>
+                </button>
             </div>
           </div>
       `;
@@ -88,20 +76,24 @@ export class Student extends HTMLElement {
       this.renderPhase();
       this.renderLastActivity();
 
+      this.querySelector( '.view-activities' ).addEventListener( 'click', () => this.viewActivities() );
+      this.querySelector( '.edit' ).addEventListener( 'click', () => this.edit() );
       this.querySelector( '.delete' ).addEventListener( 'click' , () => this.delete() );
-      this.querySelector( '.edit' ).addEventListener( 'click', () => this.edit() )
   }
 
-  delete() {
-    this.dispatchEvent(new CustomEvent('student-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
+  viewActivities() {
+    this.dispatchEvent(new CustomEvent('student-view-activities', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
   edit() {
     this.dispatchEvent(new CustomEvent('student-edit', { bubbles: true, composed: true, detail: { id: this.id } }));
   }
 
+  delete() {
+    this.dispatchEvent(new CustomEvent('student-delete', { bubbles: true, composed: true, detail: { id: this.id } }));
+  }
+
   renderName(){ this.nameElement.textContent = this.name; }
   renderPhase(){ this.phaseElement.textContent = this.phase; }
   renderLastActivity(){ this.lastActivityElement.textContent = this.last_activity; }
 }
-
