@@ -212,7 +212,7 @@ dialog {
                 gap: 12px;
                 margin-bottom: 20px;
 
-                h2 {
+                p {
                     color: var(--purple);
                     white-space: nowrap;
                 }
