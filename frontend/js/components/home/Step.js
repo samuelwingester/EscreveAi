@@ -6,7 +6,7 @@ export class Step extends HTMLElement {
         const color = this.getAttribute('color') || 'purple'
         this.innerHTML = `
           <div class="step">
-                <div class="circle" style="background-color: var(--${color}-light)">
+                <div class="circle" style="background-color: var(--${color}-soft    )">
                     <svg style = "color: var(--${color}-dark)">
                         <use href="../assets/icons/sprite.svg#icon-${icon}"></use>
                     </svg>
