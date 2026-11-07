@@ -1,6 +1,9 @@
 import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
 import * as util from "../helpers/utils.js";
 import * as base from "./base.js";
+import { buildErrorMessages, httpError } from "../helpers/errors.js";
+import { fillSelect } from "../helpers/dom.js";
+import { validateStudent } from "../helpers/validators.js";
 
 const selectClassroomElement = document.getElementById( "select-turma-overlay" );
 
@@ -13,65 +16,13 @@ const studentEditModal = document.getElementById( 'edit-student-modal' );
 const studentForm = document.getElementById( 'new-student-form' );
 const studentEditForm = document.getElementById( 'edit-student-form' );
 
-const selectClassroomFormElement= document.getElementById( 'input-form-class' );
-
-
-// Validações do lado do cliente (espelham as regras do backend)
-
-const GENDERS = [ 'man', 'woman' ];
-const WRITING_LEVELS = [ 'pre-silabico', 'silabico', 'silabico-alfabetico', 'alfabetico' ];
-
-// Retorna a lista de mensagens de erro; lista vazia significa que está tudo certo.
-function validateStudent( { classroom, name, date, genre, writing_level } ) {
-  const errors = [];
-
-  if ( !classroom ) errors.push( 'Informe a turma.' );
-
-  const trimmedName = ( name ?? '' ).trim();
-  if ( !trimmedName ) errors.push( 'Informe o nome.' );
-  else if ( trimmedName.length > 150 ) errors.push( 'O nome deve ter no máximo 150 caracteres.' );
-
-  if ( !date ) errors.push( 'Informe a data de nascimento.' );
-  else {
-    const birth = new Date( date + 'T00:00:00' );
-
-    // O aluno precisa ter mais de 4 anos (o backend exige data anterior a hoje menos 4 anos)
-    const limit = new Date();
-    limit.setHours( 0, 0, 0, 0 );
-    limit.setFullYear( limit.getFullYear() - 4 );
-
-    if ( Number.isNaN( birth.getTime() ) ) errors.push( 'Data de nascimento inválida.' );
-    else if ( birth >= limit ) errors.push( 'O aluno deve ter mais de 4 anos.' );
-  }
-
-  // Sexo "Outro" tem value vazio e o nível de escrita é opcional
-  if ( genre && !GENDERS.includes( genre ) ) errors.push( 'Sexo inválido.' );
-  if ( writing_level && !WRITING_LEVELS.includes( writing_level ) ) errors.push( 'Nível de escrita inválido.' );
-
-  return errors;
-}
-
-// Mostra/limpa o erro no banner do próprio formulário (a página tem vários modais,
-// então o util.showError, que usa o primeiro banner da página, não serve aqui).
-function showFormError( form, html ) {
-  const banner = form.querySelector( '.error-banner' );
-
-  banner.innerHTML = html;
-  banner.hidden = false;
-}
-
-function clearFormError( form ) {
-  const banner = form.querySelector( '.error-banner' );
-
-  banner.innerHTML = '';
-  banner.hidden = true;
-}
+const selectClassroomFormElement = document.getElementById( 'input-form-class' );
 
 
 async function loadStudents( id ) {
   EscreveAiApi.fetchWithAuth( '/classroom/' + id + '/student' )
     .then( response => {
-      if ( !response.ok ) throw new Error();
+      if ( !response.ok ) throw httpError( response );
       return response.json();
     })
     .then( data => {
@@ -101,21 +52,13 @@ studentModalBtn.addEventListener( 'click', function () {
 
   if ( !classrooms ) return;
 
-  selectClassroomFormElement.innerHTML = '';
-  Object.entries( classrooms ).forEach( ([ id, name ]) => {
-    const newOption = document.createElement( 'option' );
-
-    newOption.textContent = name;
-    newOption.value = id;
-
-    selectClassroomFormElement.appendChild(newOption);
-  })
+  fillSelect( selectClassroomFormElement, classrooms );
 
   const selected = util.getSelectedClassroom();
 
   if ( !selected ) return; // nenhuma turma selecionada
 
-  selectClassroomFormElement.value = selected.id;
+  selectClassroomFormElement.value = selected.classroom_id;
   studentModal.showModal();
 })
 
@@ -132,12 +75,12 @@ studentForm.addEventListener( 'submit', function ( e ) {
   const writing_level = formData.get( 'writing-level' );
   const observations = formData.get( 'observations' );
 
-  clearFormError( studentForm );
+  util.clearFormError( studentForm );
 
   const errors = validateStudent( { classroom, name, date, genre, writing_level } );
 
   if ( errors.length ) {
-    showFormError( studentForm, errors.map( message => `<p>${message}</p>` ).join( '' ) );
+    util.showFormError( studentForm, errors.map( message => `<p>${message}</p>` ).join( '' ) );
     return;
   }
 
@@ -164,21 +107,8 @@ studentForm.addEventListener( 'submit', function ( e ) {
       selectClassroomElement.dispatchEvent( event );
     })
     .catch( error => {
-      let messages = "";
-
-      if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
-        const data = error.data;
-        for ( const field in data.errors ){
-          data.errors[ field ].forEach( message => {
-            messages += `<p>${message}</p>`;
-          });
-        }
-      } else {
-        messages = "Erro de rede";
-        console.log(error);
-      }
-
-      showFormError( studentForm, messages );
+      console.log( error );
+      util.showFormError( studentForm, buildErrorMessages( error ) );
     });
 });
 
@@ -196,12 +126,12 @@ studentEditForm.addEventListener( 'submit', function (e){
   const observations = formData.get( 'observations' );
   const id = formData.get( 'id' );
 
-  clearFormError( studentEditForm );
+  util.clearFormError( studentEditForm );
 
   const errors = validateStudent( { classroom: idClass, name, date, genre, writing_level } );
 
   if ( errors.length ) {
-    showFormError( studentEditForm, errors.map( message => `<p>${message}</p>` ).join( '' ) );
+    util.showFormError( studentEditForm, errors.map( message => `<p>${message}</p>` ).join( '' ) );
     return;
   }
 
@@ -225,21 +155,8 @@ studentEditForm.addEventListener( 'submit', function (e){
       selectClassroomElement.dispatchEvent( event );
     })
     .catch( error => {
-      let messages = "";
-
-      if ( error.status === 422 ) { // Erros de vaildação do lado do servidor
-        const data = error.data;
-        for ( const field in data.errors ){
-          data.errors[ field ].forEach( message => {
-            messages += `<p>${message}</p>`;
-          });
-        }
-      } else {
-        messages = "Erro de rede";
-        console.log(error);
-      }
-
-      showFormError( studentEditForm, messages );
+      console.log( error );
+      util.showFormError( studentEditForm, buildErrorMessages( error ) );
     });
 })
 
@@ -249,7 +166,7 @@ document.addEventListener( 'student-delete', function (e){
 
   EscreveAiApi.fetchWithAuth( '/classroom/' + idClass + "/student/" + id, "DELETE" )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       loadStudents( idClass );
     })
     .catch( error => { console.log(error); } );
@@ -268,7 +185,7 @@ document.addEventListener( 'student-edit', function (e){
 
   EscreveAiApi.fetchWithAuth( '/classroom/' + idClass + "/student/" + id )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       return response.json();
     })
     .then( data => {
@@ -286,4 +203,3 @@ document.addEventListener( 'student-edit', function (e){
     })
     .catch( error => { console.log(error); } );
 });
-

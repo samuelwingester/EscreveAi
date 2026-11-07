@@ -1,6 +1,7 @@
 import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
 import * as util from "../helpers/utils.js";
 import * as base from "./base.js";
+import { buildErrorMessages, httpError } from "../helpers/errors.js";
 
 const selectClassroomElement = document.getElementById( "select-turma-overlay" );
 const classroomCardsContainer = document.getElementById( "classes-cards" );
@@ -27,12 +28,11 @@ function loadClassroomCards(){
       classroomCardsContainer.appendChild( newCard );
     })
   }
-  // Isso ta meio merda poderia aproveitar da requisição do base.js mas teria que mudar la e
-  // nao vou fazer isso agora
+
   classroomCardsContainer.innerHTML = '';
   EscreveAiApi.fetchWithAuth( '/classroom?columns=id,name,shift&order_by=created_at&limit=20&direction=desc' )
     .then( response => {
-      if ( !response.ok ) throw new Error();
+      if ( !response.ok ) throw httpError( response );
       return response.json();
     })
     .then( data => {
@@ -76,18 +76,8 @@ classroomFormElement.addEventListener( 'submit', function (e) {
       base.BuildSelectClassroom();
     })
     .catch( error => {
-      let messages = "";
-
-      if ( error.status === 422 ) { // Erros de validação do lado do servidor
-        const data = error.data;
-        for ( const field in data.errors ){
-          data.errors[ field ].forEach( message => {
-            messages += `<p>${message}</p>`;
-          });
-        }
-      } else { messages = "Erro de rede"; console.log(error) }
-
-      util.showError( messages );
+      console.log( error );
+      util.showError( buildErrorMessages( error ) );
     });
 });
 
@@ -117,18 +107,8 @@ classroomEditForm.addEventListener( 'submit', function (e) {
       base.BuildSelectClassroom();
     })
     .catch( error => {
-      let messages = "";
-
-      if ( error.status === 422 ) { // Erros de validação do lado do servidor
-        const data = error.data;
-        for ( const field in data.errors ){
-          data.errors[ field ].forEach( message => {
-            messages += `<p>${message}</p>`;
-          });
-        }
-      } else { messages = "Erro de rede"; console.log(error) }
-
-      util.showError( messages );
+      console.log( error );
+      util.showError( buildErrorMessages( error ) );
     });
 });
 
@@ -137,7 +117,7 @@ document.addEventListener( 'classroom-delete', function(e){
 
   EscreveAiApi.fetchWithAuth( '/classroom/' + id, "DELETE" )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       loadClassroomCards();
       util.remove( 'list-classrooms' );
       base.BuildSelectClassroom();
@@ -155,7 +135,7 @@ document.addEventListener( 'classroom-edit', function(e){
 
   EscreveAiApi.fetchWithAuth( '/classroom/' + id )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       return response.json();
     })
     .then( data => {

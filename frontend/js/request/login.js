@@ -1,38 +1,9 @@
 import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
 import * as util from "../helpers/utils.js";
+import { buildErrorMessages } from "../helpers/errors.js";
+import { validateLogin } from "../helpers/validators.js";
 
 const login_form = document.getElementById( "login-form" );
-
-
-function isValidEmail( email ) {
-  if ( email.includes( " " ) ) return false;
-
-  const parts = email.split( "@" );
-  if ( parts.length !== 2 ) return false;
-
-  const [ user, domain ] = parts;
-  if ( !user ) return false;
-
-  const domainParts = domain.split( "." );
-  if ( domainParts.length < 2 ) return false;
-  if ( domainParts.some( part => !part ) ) return false;
-
-  return true;
-}
-
-
-function validateLogin( { email, password } ) {
-  const errors = [];
-
-  const trimmedEmail = ( email ?? "" ).trim();
-  if ( !trimmedEmail ) errors.push( "Informe o e-mail." );
-  else if ( !isValidEmail( trimmedEmail ) ) errors.push( "E-mail inválido." );
-
-  // No login só exige que a senha esteja preenchida o tamanho mínimo
-  if ( !password ) errors.push( "Informe a senha." );
-
-  return errors;
-}
 
 login_form.addEventListener( "submit", function ( e )  {
   e.preventDefault();
@@ -74,21 +45,7 @@ login_form.addEventListener( "submit", function ( e )  {
     window.location.href = "./dashboard.html";
   })
   .catch( error => {
-    let messages = "";
-
-    // ruim melhorar depois
-    if ( error.status === 401 ) {
-      messages = ( "Credenciais Inválidas" );
-    }
-    else if ( error.status === 422 ) {
-      const data = error.data;
-      for ( const field in data.errors ){
-        data.errors[ field ].forEach( message => {
-          messages += `<p>${message}</p>`;
-        });
-      }
-    } else { messages = "Erro de rede"; console.log(error) }
-
-    util.showError( messages );
+    console.log( error );
+    util.showError( buildErrorMessages( error ) );
   });
 });

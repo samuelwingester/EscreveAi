@@ -1,5 +1,6 @@
 import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
 import * as util from "../helpers/utils.js";
+import { fillSelect } from "../helpers/dom.js";
 
 export async function BuildUserName() {
   const usernameClasss = document.querySelectorAll( ".nome-professor" );
@@ -34,15 +35,7 @@ export async function BuildSelectClassroom(){
 
   classrooms = util.retrieveJSON( "list-classrooms" );
 
-  selectClassroomElement.innerHTML = '';
-  Object.entries( classrooms ).forEach( ([ id, name ]) => {
-    const newOption = document.createElement( 'option' );
-
-    newOption.textContent = name;
-    newOption.value = id;
-
-    selectClassroomElement.appendChild(newOption);
-  })
+  fillSelect( selectClassroomElement, classrooms );
 
   const selected = util.getSelectedClassroom();
 

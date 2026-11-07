@@ -1,6 +1,7 @@
 import { EscreveAiApi } from "../helpers/EscreveAiApi.js";
 import * as util from "../helpers/utils.js";
 import * as base from "./base.js";
+import { buildErrorMessages, httpError } from "../helpers/errors.js";
 
 const CardsContainer = document.getElementById("activities-card-container");
 const SelectClassroom = document.getElementById( "select-turma-overlay" );
@@ -20,7 +21,6 @@ async function loadActivities( id ){
       base.buildClassName();
 
       CardsContainer.innerHTML = '';
-      console.log(data)
       data.data.forEach( activity => {
         const card = document.createElement( 'activity-card' );
 
@@ -80,21 +80,8 @@ NewActivityForm.addEventListener( 'submit', function ( e ) {
       SelectClassroom.dispatchEvent( event );
     })
     .catch( error => {
-      let messages = "";
-
-      if ( error.status === 422 ) { // Erros de validação do lado do servidor
-        const data = error.data;
-        for ( const field in data.errors ){
-          data.errors[ field ].forEach( message => {
-            messages += `<p>${message}</p>`;
-          });
-        }
-      } else {
-        messages = "Erro de rede";
-        console.log(error);
-      }
-
-      util.showFormError( NewActivityForm, messages );
+      console.log( error );
+      util.showFormError( NewActivityForm, buildErrorMessages( error ) );
     });
 });
 
@@ -103,7 +90,7 @@ document.addEventListener( 'activity-delete', function (e) {
 
   EscreveAiApi.fetchWithAuth( "/classroom/" + SelectClassroom.value + "/activity/" + id, "DELETE" )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       loadActivities( SelectClassroom.value );
       //base.BuildSelectClassroom();
     })
@@ -120,7 +107,7 @@ document.addEventListener( 'activity-edit', function (e) {
 
   EscreveAiApi.fetchWithAuth( "/classroom/" + SelectClassroom.value + "/activity/" + id, "GET" )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       return response.json();
     })
     .then( data => {
@@ -173,21 +160,8 @@ UpdateActivityForm.addEventListener( 'submit', function ( e ) {
       SelectClassroom.dispatchEvent( event );
     })
     .catch( error => {
-      let messages = "";
-
-      if ( error.status === 422 ) { // Erros de validação do lado do servidor
-        const data = error.data;
-        for ( const field in data.errors ){
-          data.errors[ field ].forEach( message => {
-            messages += `<p>${message}</p>`;
-          });
-        }
-      } else {
-        messages = "Erro de rede";
-        console.log(error);
-      }
-
-      util.showFormError( UpdateActivityForm, messages );
+      console.log( error );
+      util.showFormError( UpdateActivityForm, buildErrorMessages( error ) );
     });
 });
 
@@ -202,7 +176,7 @@ document.addEventListener( 'activity-view', function (e){
 
   EscreveAiApi.fetchWithAuth( "/classroom/" + SelectClassroom.value + "/activity/" + id, "GET" )
     .then( response => {
-      if ( !response.ok ) throw response;
+      if ( !response.ok ) throw httpError( response );
       return response.json();
     })
     .then( data => {
@@ -232,12 +206,13 @@ document.addEventListener( 'anexo-delete', function (e) {
 
   EscreveAiApi.fetchWithAuth('/file/' + id, 'DELETE')
     .then(response => {
-      if (!response.ok) { throw new Error(`HTTP ${response.status}`); }
+      if (!response.ok) { throw httpError( response, 'Falha ao deletar anexo' ); }
       document.getElementById('view-activity-modal').close();
       loadActivities( SelectClassroom.value );
     })
     .catch(error => {
       console.error('Falha ao deletar anexo:', error);
+      util.showFormError( UpdateActivityForm, buildErrorMessages( error ) );
     });
 });
 
@@ -246,7 +221,7 @@ document.addEventListener( 'anexo-download', function (e) {
 
   EscreveAiApi.fetchWithAuth('/file/' + id, 'GET')
     .then(response => {
-      if (!response.ok) { throw new Error(`HTTP ${response.status}`); }
+      if (!response.ok) { throw httpError( response, 'Falha ao baixar anexo' ); }
       return response.blob();
     })
     .then(blob => {
@@ -264,6 +239,7 @@ document.addEventListener( 'anexo-download', function (e) {
     })
     .catch(error => {
       console.error('Falha ao baixar anexo:', error);
+      util.showFormError( UpdateActivityForm, buildErrorMessages( error ) );
     });
 });
 
@@ -274,7 +250,7 @@ document.addEventListener( 'anexo-view', function (e) {
 
     EscreveAiApi.fetchWithAuth('/file/' + id + '/download', 'GET')
       .then(response => {
-        if (!response.ok) { throw new Error(`HTTP ${response.status}`); }
+        if (!response.ok) { throw httpError( response, 'Falha ao visualizar anexo' ); }
         return response.blob();
       })
       .then(blob => {
@@ -288,5 +264,6 @@ document.addEventListener( 'anexo-view', function (e) {
       .catch(error => {
         tab?.close();
         console.error('Falha ao visualizar anexo:', error);
+        util.showFormError( UpdateActivityForm, buildErrorMessages( error ) );
       });
 });
