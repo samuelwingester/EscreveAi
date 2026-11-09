@@ -155,3 +155,58 @@ main {
     gap: 20px;
   }
 }
+
+footer {
+  background-color: var(--gray-900);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px;
+
+  .col1 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 300px;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 64px;
+      img {
+        height: 100%;
+      }
+      img:last-child{
+        height: 80%;
+      }
+    }
+
+    p {
+      width: 100%;
+      font-size: 14px;
+    }
+  }
+
+  .topics {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    h3 {
+      color: var(--text-white);
+      margin-bottom:4px;
+    }
+
+    a, p {
+      color: var(--gray-400, #9ca3af);
+      text-decoration: none;
+      margin: 0;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--text-white, #ffffff);
+      }
+    }
+  }
+}
