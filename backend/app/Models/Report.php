@@ -32,9 +32,6 @@ class Report extends Model implements HasAttachmentsContract
         ];
     }
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
     public function student(): BelongsTo
     {
         return $this->belongsTo( Student::class, 'student_id' );
@@ -44,5 +41,4 @@ class Report extends Model implements HasAttachmentsContract
     {
         return; // implementar depois. um pouco mais chato
     }
-    //--------------------------------------------------------
 }

@@ -25,9 +25,6 @@ class Record extends Model implements HasAttachmentsContract
         'activity_id',
     ];
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
     public function student(): BelongsTo
     {
         return $this->belongsTo( Student::class, 'student_id' );
@@ -42,5 +39,4 @@ class Record extends Model implements HasAttachmentsContract
     {
         return $this->hasOne( Analysis::class );
     }
-    //--------------------------------------------------------
 }

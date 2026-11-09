@@ -32,12 +32,8 @@ class Analysis extends Model
         ];
     }
 
-    //--------------------------------------------------------
-    // Relacionamentos
-    //--------------------------------------------------------
     public function record(): BelongsTo
     {
         return $this->belongsTo( Record::class, 'record_id' );
     }
-    //--------------------------------------------------------
 }

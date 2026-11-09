@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-/**
- * TO DO:
- * - Adicionar rota de deletar usuario
- */
-
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 

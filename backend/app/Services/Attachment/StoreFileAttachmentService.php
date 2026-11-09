@@ -22,8 +22,7 @@ class StoreFileAttachmentService
 		User $user,
 		Model $attachable,
 		UploadedFile $file,
-		DiskType $disk =
-		DiskType::PRIVATE
+		DiskType $disk = DiskType::PRIVATE
 	) : Attachment
 	{
         // Acho que serve?

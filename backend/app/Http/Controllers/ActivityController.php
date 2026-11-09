@@ -2,11 +2,6 @@
 
 namespace App\Http\Controllers;
 
-/**
- * TO DO
- * - Criar um controller de Anexos para visualização e remoção
- * - adicionar carregamento de relacionamento condicional no ListService
- */
 use App\Http\Resources\Activity\ActivityCollection;
 use App\Http\Resources\Activity\ActivityResource;
 

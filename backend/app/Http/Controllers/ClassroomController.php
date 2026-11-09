@@ -2,12 +2,6 @@
 
 namespace App\Http\Controllers;
 
-/**
- * TO DO:
- * - Adicionar rota de sumario -> calcular estatisticas como numero de estudantes,
- *   atividades, etc. para todas as turmas de um usuario.
- */
-
 use Illuminate\Http\Response;
 
 use App\Http\Resources\Classroom\ClassroomStatsResource;
