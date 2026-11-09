@@ -7,7 +7,7 @@ base-body {
     flex-direction: column;
     gap: 10px;
 
-    > header {
+    >header {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -33,7 +33,7 @@ base-body {
       }
     }
 
-    > input.search {
+    >input.search {
       width: 100%;
       padding: 12px 16px;
       border: 1px solid var(--gray-200);
@@ -230,69 +230,33 @@ base-body {
   }
 }
 
-@media (max-width: 768px) {
-  header .bottom {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
+@media (min-width: 1024px) {
+  base-body {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
 
-  #student-modal-button {
-    width: 100%;
-    justify-content: center;
-  }
+      .cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+    }
 
-  dialog.modal {
-    width: 95vw;
-    max-width: 100%;
-    max-height: 90vh;
-    margin: auto;
-    padding: 1.25rem;
-    overflow-y: auto;
-  }
 
-  .forms .initial {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  common-field {
-    width: 100%;
-  }
-
-  .radio_group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .radio_box {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 0.75rem 1rem;
-  }
-
-  .forms .botoes {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 0.75rem;
-    width: 100%;
-  }
-
-  .forms .botoes button {
-    width: 100%;
-    justify-content: center;
   }
 }
 
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.5rem;
-  }
+@media (min-width: 1440px) {
+  base-body {
+    .container {
+      max-width: 1360px;
 
-  .cards {
-    grid-template-columns: 1fr;
+      .cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+    }
+
+
   }
 }

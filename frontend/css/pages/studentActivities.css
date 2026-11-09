@@ -238,6 +238,7 @@ dialog {
                 margin-top: 10px;
                 margin-bottom: 20px;
                 cursor: pointer;
+
                 .container {
                     display: flex;
                     flex-direction: column;
@@ -247,7 +248,7 @@ dialog {
                     border-radius: 10px;
                     background: var(--purple-light);
                     text-align: center;
-                    
+
                     svg {
                         width: 32px;
                         height: 32px;
@@ -296,6 +297,29 @@ dialog {
                 justify-content: flex-end;
                 gap: 12px;
                 padding: 10px 0;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    base-body {
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            >header .bottom {
+                padding: 16px 24px;
+            }
+
+            .studentActivities {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(540px, 1fr));
+                gap: 16px;
+
+                .studentActivity {
+                    padding: 16px;
+                }
             }
         }
     }

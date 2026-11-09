@@ -68,7 +68,7 @@ main {
               height: 0;
               opacity: 0;
 
-              &:checked + .checkmark {
+              &:checked+.checkmark {
                 background-color: var(--purple-dark, #6d28d9);
                 border-color: var(--purple-dark, #6d28d9);
 
@@ -136,6 +136,32 @@ main {
           }
         }
       }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+    max-width: 1440px;
+    margin: 0 auto;
+
+    .auth-banner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--purple-light);
+      padding: 40px;
+    }
+
+    .auth-form-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 80px;
     }
   }
 }

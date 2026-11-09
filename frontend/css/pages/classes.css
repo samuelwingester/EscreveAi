@@ -7,7 +7,7 @@ base-body {
     flex-direction: column;
     gap: 16px;
 
-    > header {
+    >header {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -30,7 +30,7 @@ base-body {
       }
     }
 
-    > input.search {
+    >input.search {
       width: 100%;
       padding: 12px 16px;
       border: 1px solid var(--gray-200);
@@ -173,6 +173,22 @@ base-body {
             }
           }
         }
+      }
+    }
+  }
+}
+
+
+@media (min-width: 1024px) {
+  base-body {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .classes-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
       }
     }
   }

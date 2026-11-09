@@ -7,7 +7,7 @@ base-body {
     flex-direction: column;
     gap: 10px;
 
-    > header {
+    >header {
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -83,7 +83,8 @@ dialog {
         color: var(--purple);
         white-space: nowrap;
       }
-      .txt{
+
+      .txt {
         display: flex;
         flex-flow: column;
       }
@@ -107,7 +108,8 @@ dialog {
           color: var(--purple);
           white-space: nowrap;
         }
-        .line{
+
+        .line {
           width: 100%;
         }
       }
@@ -193,12 +195,15 @@ dialog {
   header {
     margin: 0;
   }
+
   .line {
     width: 100%;
   }
+
   form {
     .view {
       width: 100%;
+
       .actions {
         padding: 5px;
         border-radius: 5px;
@@ -207,6 +212,7 @@ dialog {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
         .pdf-cover {
           width: 40%;
           aspect-ratio: 1/1;
@@ -214,12 +220,14 @@ dialog {
           display: flex;
           align-items: center;
           justify-content: center;
+
           svg {
             width: 40%;
             aspect-ratio: 1/1;
             color: var(--purple-dark);
           }
         }
+
         .buttons {
           display: flex;
           flex-flow: column;
@@ -229,12 +237,14 @@ dialog {
             border: solid 1px var(--purple);
             width: 100%;
             padding: 6px 8px;
+
             svg {
               width: 14px;
               height: 14px;
               color: var(--purple-dark);
               stroke-width: 3px;
             }
+
             &:last-child svg {
               stroke-width: 1px;
             }
@@ -249,5 +259,38 @@ dialog {
     justify-content: flex-end;
     gap: 12px;
     padding: 10px 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  base-body {
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+
+      .activities {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+        gap: 20px;
+      }
+    }
+  }
+
+  dialog {
+    max-width: 650px;
+    width: 45vw;
+    .add .forms .upload .container {
+      padding: 40px 24px;
+    }
+  }
+}
+
+@media (min-width: 1440px) {
+  base-body .container {
+    max-width: 1360px;
+    .activities {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
   }
 }

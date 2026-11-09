@@ -1,4 +1,3 @@
-
 .col {
   display: flex;
   flex-direction: column;
@@ -99,13 +98,11 @@ main {
       position: relative;
       width: 90px;
       height: 2px;
-      background: repeating-linear-gradient(
-        to right,
-        var(--gray-400) 0,
-        var(--gray-400) 4px,
-        transparent 4px,
-        transparent 10px
-      );
+      background: repeating-linear-gradient(to right,
+          var(--gray-400) 0,
+          var(--gray-400) 4px,
+          transparent 4px,
+          transparent 10px);
       margin-top: clamp(30px, 5vw, 45px);
 
       &::after {
@@ -174,10 +171,12 @@ footer {
       align-items: center;
       gap: 4px;
       height: 64px;
+
       img {
         height: 100%;
       }
-      img:last-child{
+
+      img:last-child {
         height: 80%;
       }
     }
@@ -195,10 +194,11 @@ footer {
 
     h3 {
       color: var(--text-white);
-      margin-bottom:4px;
+      margin-bottom: 4px;
     }
 
-    a, p {
+    a,
+    p {
       color: var(--gray-400, #9ca3af);
       text-decoration: none;
       margin: 0;
@@ -208,5 +208,42 @@ footer {
         color: var(--text-white, #ffffff);
       }
     }
+  }
+}
+
+@media (min-width: 1024px) {
+  main .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0;
+  }
+
+  #funcionamento,
+  #beneficios {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 0;
+
+    .steps,
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+
+      .line {
+        display: none;
+      }
+    }
+
+    .benefits {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+
+  }
+
+  footer {
+    padding: 60px 100px;
   }
 }

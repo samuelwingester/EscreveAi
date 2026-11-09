@@ -5,7 +5,7 @@
     height: 100%;
     gap: 5px;
 
-    > header {
+    >header {
         display: flex;
         flex-direction: column;
         width: 100%;
@@ -52,7 +52,7 @@
                 }
 
                 .left,
-                > header {
+                >header {
                     display: flex;
                     align-items: center;
                     width: 100%;
@@ -95,8 +95,15 @@
                         border: 1px solid var(--purple);
                         background-color: transparent;
                         white-space: nowrap;
-                        p { color: var(--purple); }
-                        &:hover { background-color: var(--gray-200) !important; transform: none; }
+
+                        p {
+                            color: var(--purple);
+                        }
+
+                        &:hover {
+                            background-color: var(--gray-200) !important;
+                            transform: none;
+                        }
                     }
                 }
 
@@ -114,7 +121,8 @@
                     margin-top: auto;
                     background-color: transparent;
 
-                    p, svg {
+                    p,
+                    svg {
                         color: var(--red) !important;
                         stroke: var(--red);
                     }
@@ -126,7 +134,6 @@
             }
         }
 
-        /* Cores dos ícones dos cards e estrutura específica */
         #account {
             config-option:last-of-type {
                 border-bottom: solid 1px var(--gray-400);
@@ -141,24 +148,40 @@
 
             .content header .icon {
                 background-color: var(--purple-light);
-                svg { color: var(--purple-dark); }
+
+                svg {
+                    color: var(--purple-dark);
+                }
             }
         }
 
-        #privacity .content header .icon { 
-            background-color: var(--green-light); 
-            svg { color: var(--green-dark); } 
+        #privacity .content header .icon {
+            background-color: var(--green-light);
+
+            svg {
+                color: var(--green-dark);
+            }
         }
 
-        #about .content header .icon { 
-            background-color: var(--blue-light); 
-            svg { color: var(--blue-dark); } 
+        #about .content header .icon {
+            background-color: var(--blue-light);
+
+            svg {
+                color: var(--blue-dark);
+            }
         }
 
-        /* Bordas entre opções de privacidade e sobre */
-        #privacity, #about {
-            config-option:last-of-type { border-bottom: solid 1px var(--gray-400); padding-bottom: 10px; }
-            config-option:first-of-type { border-top: solid 1px var(--gray-400); padding-top: 10px; }
+        #privacity,
+        #about {
+            config-option:last-of-type {
+                border-bottom: solid 1px var(--gray-400);
+                padding-bottom: 10px;
+            }
+
+            config-option:first-of-type {
+                border-top: solid 1px var(--gray-400);
+                padding-top: 10px;
+            }
         }
 
         #about {
@@ -166,11 +189,18 @@
                 .config-option {
                     width: max-content;
                     align-items: center;
-                    .modal-indicator svg { margin-left: 10px; }
+
+                    .modal-indicator svg {
+                        margin-left: 10px;
+                    }
                 }
+
                 &:last-child {
                     border-bottom: none;
-                    .config-option .modal-indicator svg { display: none; }
+
+                    .config-option .modal-indicator svg {
+                        display: none;
+                    }
                 }
             }
         }
@@ -212,7 +242,10 @@ dialog {
 
 .modal-header-simple {
     text-align: center;
-    .subtitle-text { margin-top: 4px; }
+
+    .subtitle-text {
+        margin-top: 4px;
+    }
 }
 
 .modal-header-with-close {
@@ -224,11 +257,15 @@ dialog {
         background: none;
         border: none;
         cursor: pointer;
-        svg { width: 20px; height: 20px; color: var(--text-muted); }
+
+        svg {
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+        }
     }
 }
 
-/* Upload de Avatar */
 .avatar-upload {
     display: flex;
     flex-direction: column;
@@ -256,12 +293,16 @@ dialog {
             justify-content: center;
             cursor: pointer;
 
-            svg { width: 14px; height: 14px; color: white; stroke-width: 5px; }
+            svg {
+                width: 14px;
+                height: 14px;
+                color: white;
+                stroke-width: 5px;
+            }
         }
     }
 }
 
-/* Formulários nos Modais */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -280,7 +321,6 @@ dialog {
     gap: 6px;
 }
 
-/* Ações dos Modais */
 .modal-actions-inline {
     display: flex;
     justify-content: flex-end;
@@ -298,7 +338,12 @@ dialog {
 
     .botao-largo {
         width: 100%;
-        svg { width: 18px; height: 18px; stroke-width: 10px; }
+
+        svg {
+            width: 18px;
+            height: 18px;
+            stroke-width: 10px;
+        }
     }
 
     .btn-link {
@@ -338,5 +383,23 @@ dialog {
     align-items: center;
     justify-content: center;
 
-    p { color: white; margin: 0; }
+    p {
+        color: white;
+        margin: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    base-body {
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+
+            .config-sections {
+                display: grid;
+                grid-template-columns: 280px 1fr;
+                gap: 32px;
+            }
+        }
+    }
 }
