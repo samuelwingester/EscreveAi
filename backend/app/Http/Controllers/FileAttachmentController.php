@@ -35,8 +35,7 @@ class FileAttachmentController extends Controller
 
     public function download( Attachment $attachment, Request $request )
     {
-        if ( $this->checkAttachment( $attachment, $request->user() ) )
-            return Response::denyWithStatus( 404 );
+        $this->checkAttachment( $attachment, $request->user() )
 
         return $this->find->download( $attachment );
     }
